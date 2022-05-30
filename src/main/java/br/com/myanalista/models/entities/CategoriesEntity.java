@@ -1,10 +1,10 @@
 package br.com.myanalista.models.entities;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -13,28 +13,29 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Builder
 @Entity
-@Table(name = "teams")
-@Data
+@Table(name = "categories")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TeamEntity implements Serializable {
+public class CategoriesEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String fullName;
-    private String memberCode;
-    private String cpf;
-    private String memberFunction;
-    private String typeOfRegistrationMember;
-    private String memberLink;
     @ManyToOne
-    @JoinColumn(name="customer_id", nullable=false)
-    private CustomerEnity customer;
+    @JoinColumn(name="product_id", nullable=true)
+    private ProductsEntity product;
+    @OneToMany(mappedBy="category")
+    private Set<CategoriesEntity> categories;
+    @ManyToOne
+    @JoinColumn(name="category_id", nullable=true)
+    private CategoriesEntity category;
     @CreationTimestamp
     private LocalDate createdAt;
     @UpdateTimestamp

@@ -3,11 +3,12 @@ package br.com.myanalista.models.entities;
 import br.com.myanalista.models.enums.CompanyTypeEnum;
 import br.com.myanalista.models.enums.CustomerTypeEnum;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -19,20 +20,21 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name = "customers")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerEnity implements Serializable {
+public class CustomersEnity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String cnpjCpj;
+    private String cnpjCpf;
     private CompanyTypeEnum companyType;
-    @JsonIgnoreProperties(value = {"customer"}) // Fix problem cyclic reference
-    @OneToMany(mappedBy = "customer")
-    private Set<NickNameEntity> nickNames;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "nickName_id", referencedColumnName = "id")
+    private NickNamesEntity nickName;
     private String companyName;
     private String fantasyName;
     private String address;
@@ -46,15 +48,19 @@ public class CustomerEnity implements Serializable {
     private CustomerTypeEnum customerType;
     private String typeOfContract;
     private Double ContractValue;
-    private String formOfPayment;
-    private String cluster;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "formOfPayment_id", referencedColumnName = "id")
+    private FormOfPayment formOfPayment;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cluster_id", referencedColumnName = "id")
+    private ClusterEntity cluster;
     // End Financial
     @Lob
     private String observation;
     @OneToMany(mappedBy="customer")
-    private Set<ContactEntity> contacts;
+    private Set<ContactsEntity> contacts;
     @OneToMany(mappedBy="customer")
-    private Set<TeamEntity> teams;
+    private Set<TeamsEntity> teams;
     @CreationTimestamp
     private LocalDate createdAt;
     @UpdateTimestamp

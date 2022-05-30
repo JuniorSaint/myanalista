@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContactEntity implements Serializable {
+public class ContactsEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -27,6 +27,6 @@ public class ContactEntity implements Serializable {
     private String contactPhone;
     @ManyToOne
     @JoinColumn(name="customer_id", nullable=false)
-    private CustomerEnity customer;
+    private CustomersEnity customer;
 
 }

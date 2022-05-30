@@ -8,8 +8,8 @@ import lombok.Getter;
 @Getter
 public enum CustomerTypeEnum {
     BRONZE(1, "bronze"),
-    PRATA(1, "prata"),
-    OURO(1, "ouro");
+    PRATA(2, "prata"),
+    OURO(3, "ouro");
 
     private Integer guid;
     private String descriptionText;

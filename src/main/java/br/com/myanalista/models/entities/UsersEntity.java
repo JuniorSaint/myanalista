@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import br.com.myanalista.models.enums.UserTypeEnum;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -18,7 +20,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserEntity implements Serializable {
+public class UsersEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -26,6 +28,8 @@ public class UserEntity implements Serializable {
     private Long id;
     private String userName;
     private String password;
+    private UserTypeEnum userType;
+    private String userEmail;
     @CreationTimestamp
     private LocalDate createdAt;
     @UpdateTimestamp

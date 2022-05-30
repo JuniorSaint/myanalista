@@ -3,31 +3,40 @@ package br.com.myanalista.models.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 @Builder
 @Entity
-@Table(name = "nick-names")
-@Data
+@Table(name = "teams")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class NickNameEntity implements Serializable {
+public class TeamsEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String nickName;
+    private String fullName;
+    private String memberCode;
+    private String cpf;
+    private String memberFunction;
+    private String typeOfRegistrationMember;
+    private String memberLink;
     @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false)
-    private CustomerEnity customer;
+    @JoinColumn(name="customer_id", nullable=false)
+    private CustomersEnity customer;
     @CreationTimestamp
     private LocalDate createdAt;
     @UpdateTimestamp
