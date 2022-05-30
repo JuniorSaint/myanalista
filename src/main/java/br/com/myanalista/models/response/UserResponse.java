@@ -1,16 +1,17 @@
 package br.com.myanalista.models.response;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import br.com.myanalista.models.enums.UserTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserResponse {
