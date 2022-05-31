@@ -18,12 +18,14 @@ import br.com.myanalista.models.request.ProductRequestPost;
 import br.com.myanalista.models.request.ProductRequestPut;
 import br.com.myanalista.models.response.ProductResponse;
 import br.com.myanalista.services.ProductService;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/products")
 @AllArgsConstructor
+@Api(value = "Products")
 public class ProductsController {
   
   @Autowired

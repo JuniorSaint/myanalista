@@ -18,49 +18,51 @@ import br.com.myanalista.models.request.TeamsRequestPost;
 import br.com.myanalista.models.request.TeamsRequestPut;
 import br.com.myanalista.models.response.TeamsResponse;
 import br.com.myanalista.services.TeamsService;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/teams")
 @AllArgsConstructor
+@Api(value = "Teams")
 public class TeamsController {  
   @Autowired
   private TeamsService service;
 
-  @GetMapping("/{id}")
-  public TeamsResponse findAllWithList(@PathVariable(value = "id") Long id) {
-    TeamsResponse response = service.findById(id);
-    return response;
-  }
+  // @GetMapping("/{id}")
+  // public TeamsResponse findAllWithListTeams(@PathVariable(value = "id") Long id) {
+  //   TeamsResponse response = service.findById(id);
+  //   return response;
+  // }
 
-  @PostMapping
-  public TeamsResponse save(@RequestBody @Valid TeamsRequestPost request) {
-    try {
-      TeamsResponse response = service.save(request);
-      return response;
-    } catch (BusinessException e) {
-      throw new BusinessException(e.getMessage());
-    }
-  }
+  // @PostMapping
+  // public TeamsResponse saveTeams(@RequestBody @Valid TeamsRequestPost request) {
+  //   try {
+  //     TeamsResponse response = service.save(request);
+  //     return response;
+  //   } catch (BusinessException e) {
+  //     throw new BusinessException(e.getMessage());
+  //   }
+  // }
 
-  @DeleteMapping("/{id}")
-  public String delete(@PathVariable(value = "id") Long id) {
-    try {
-      return service.delete(id);
-    } catch (BusinessException e) {
-      throw new BusinessException(e.getMessage());
-    }
-  }
+  // @DeleteMapping("/{id}")
+  // public String deleteTeams(@PathVariable(value = "id") Long id) {
+  //   try {
+  //     return service.delete(id);
+  //   } catch (BusinessException e) {
+  //     throw new BusinessException(e.getMessage());
+  //   }
+  // }
 
-  @PutMapping("/{id}")
-  public TeamsResponse update(@PathVariable(value = "id") Long id,
-      @RequestBody @Valid TeamsRequestPut request) {
-    try {
-      TeamsResponse response = service.update(request);
-      return response;
-    } catch (BusinessException e) {
-     throw new BusinessException(e.getMessage());
-    }
-  }
+  // @PutMapping("/{id}")
+  // public TeamsResponse updateTeams(@PathVariable(value = "id") Long id,
+  //     @RequestBody @Valid TeamsRequestPut request) {
+  //   try {
+  //     TeamsResponse response = service.update(request);
+  //     return response;
+  //   } catch (BusinessException e) {
+  //    throw new BusinessException(e.getMessage());
+  //   }
+  // }
 }

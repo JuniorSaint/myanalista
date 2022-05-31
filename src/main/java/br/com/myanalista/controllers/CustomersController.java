@@ -18,24 +18,26 @@ import br.com.myanalista.models.request.CustomerRequestPost;
 import br.com.myanalista.models.request.CustomerRequestPut;
 import br.com.myanalista.models.response.CustomerResponse;
 import br.com.myanalista.services.CustomerService;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/teams")
 @AllArgsConstructor
+@Api(value = "Customer")
 public class CustomersController {
   @Autowired
   private CustomerService service;
 
   @GetMapping("/{id}")
-  public CustomerResponse findAllWithList(@PathVariable(value = "id") Long id) {
+  public CustomerResponse findAllWithListCustomer(@PathVariable(value = "id") Long id) {
     CustomerResponse response = service.findById(id);
     return response;
   }
 
   @PostMapping
-  public CustomerResponse save(@RequestBody @Valid CustomerRequestPost request) {
+  public CustomerResponse saveCustomer(@RequestBody @Valid CustomerRequestPost request) {
     try {
       CustomerResponse response = service.save(request);
       return response;
@@ -45,7 +47,7 @@ public class CustomersController {
   }
 
   @DeleteMapping("/{id}")
-  public String delete(@PathVariable(value = "id") Long id) {
+  public String deleteCustomer(@PathVariable(value = "id") Long id) {
     try {
       return service.delete(id);
     } catch (BusinessException e) {
@@ -54,7 +56,7 @@ public class CustomersController {
   }
 
   @PutMapping("/{id}")
-  public CustomerResponse update(@PathVariable(value = "id") Long id,
+  public CustomerResponse updateCustomer(@PathVariable(value = "id") Long id,
       @RequestBody @Valid CustomerRequestPut request) {
     try {
       CustomerResponse response = service.update(request);

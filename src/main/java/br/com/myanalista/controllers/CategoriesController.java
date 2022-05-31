@@ -18,12 +18,14 @@ import br.com.myanalista.models.request.CategoryRequestPost;
 import br.com.myanalista.models.request.CategoryRequestPut;
 import br.com.myanalista.models.response.CategoryResponse;
 import br.com.myanalista.services.CategoryService;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/categories")
 @AllArgsConstructor
+@Api(value = "Categories")
 public class CategoriesController {
 
   @Autowired

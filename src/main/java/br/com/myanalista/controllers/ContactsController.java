@@ -18,12 +18,14 @@ import br.com.myanalista.models.request.ContactRequestPost;
 import br.com.myanalista.models.request.ContactRequestPut;
 import br.com.myanalista.models.response.ContactResponse;
 import br.com.myanalista.services.ContactService;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/contacts")
 @AllArgsConstructor
+@Api(value = "Contacts")
 public class ContactsController {
   @Autowired
   private ContactService service;

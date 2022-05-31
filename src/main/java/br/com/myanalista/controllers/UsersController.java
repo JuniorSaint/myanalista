@@ -21,12 +21,14 @@ import br.com.myanalista.models.request.UserRequestPost;
 import br.com.myanalista.models.request.UserRequestPut;
 import br.com.myanalista.models.response.UserResponse;
 import br.com.myanalista.services.UserService;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/users")
 @AllArgsConstructor
+@Api(value = "Users")
 public class UsersController {
 
   @Autowired
