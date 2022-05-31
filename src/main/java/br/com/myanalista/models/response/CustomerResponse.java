@@ -1,34 +1,26 @@
-package br.com.myanalista.models.entities;
+package br.com.myanalista.models.response;
 
-import br.com.myanalista.models.enums.CompanyTypeEnum;
-import br.com.myanalista.models.enums.CustomerTypeEnum;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
-import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
-@Builder
-@Entity
-@Table(name = "customers")
+import br.com.myanalista.models.entities.CategoriesEntity;
+import br.com.myanalista.models.entities.ContactsEntity;
+import br.com.myanalista.models.entities.TeamsEntity;
+import br.com.myanalista.models.enums.CompanyTypeEnum;
+import br.com.myanalista.models.enums.CustomerTypeEnum;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
+@AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-public class CustomersEnity implements Serializable {
-    private static final long serialVersionUID = 1L;
+@SuperBuilder
+public class CustomerResponse {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String cnpjCpf;
     private CompanyTypeEnum companyType;
@@ -49,14 +41,8 @@ public class CustomersEnity implements Serializable {
     private String formOfPayment;
     private String cluster;
     // End Financial
-    @Lob
     private String observation;
-    @OneToMany(mappedBy="customer")
     private Set<ContactsEntity> contacts;
-    @OneToMany(mappedBy="customer")
     private Set<TeamsEntity> teams;
-    @CreationTimestamp
-    private LocalDate createdAt;
-    @UpdateTimestamp
-    private LocalDate updatedAt;
+  
 }

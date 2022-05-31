@@ -1,5 +1,6 @@
 package br.com.myanalista.models.request;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
@@ -23,12 +24,12 @@ public class UserRequestPost {
 
   @NotEmpty(message = "Field 'userEmail' can't be empty")
   @Email(message = "Format field 'userEmail' is wrong")
+  @Column(unique=true)
   private String userEmail;
 
   @NotEmpty(message = "Field 'password' can't be empty")
   private String password;
 
-  @NotEmpty(message = "Field 'userType' can't be empty")
   @JsonDeserialize
   private UserTypeEnum userType;
 }

@@ -28,6 +28,7 @@ public class CategoriesEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String categoryName;
     @ManyToOne
     @JoinColumn(name="product_id", nullable=true)
     private ProductsEntity product;
