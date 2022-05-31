@@ -14,30 +14,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.myanalista.exceptions.BusinessException;
-import br.com.myanalista.models.request.ContactRequestPost;
-import br.com.myanalista.models.request.ContactRequestPut;
-import br.com.myanalista.models.response.ContactResponse;
-import br.com.myanalista.services.ContactService;
+import br.com.myanalista.models.request.CategoryRequestPost;
+import br.com.myanalista.models.request.CategoryRequestPut;
+import br.com.myanalista.models.response.CategoryResponse;
+import br.com.myanalista.services.CategoryService;
 import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
-@RequestMapping("/v1/contacts")
+@RequestMapping("/v1/categories")
 @AllArgsConstructor
-public class ContactsController {
+public class CategoriesController {
+
   @Autowired
-  private ContactService service;
+  private CategoryService service;
 
   @GetMapping("/{id}")
-  public ContactResponse findAllWithList(@PathVariable(value = "id") Long id) {
-    ContactResponse response = service.findById(id);
+  public CategoryResponse findById(@PathVariable(value = "id") Long id) {
+    CategoryResponse response = service.findById(id);
     return response;
   }
 
   @PostMapping
-  public ContactResponse save(@RequestBody @Valid ContactRequestPost request) {
+  public CategoryResponse save(@RequestBody @Valid CategoryRequestPost request) {
     try {
-      ContactResponse response = service.save(request);
+      CategoryResponse response = service.save(request);
       return response;
     } catch (BusinessException e) {
       throw new BusinessException(e.getMessage());
@@ -54,13 +55,14 @@ public class ContactsController {
   }
 
   @PutMapping("/{id}")
-  public ContactResponse update(@PathVariable(value = "id") Long id,
-      @RequestBody @Valid ContactRequestPut request) {
+  public CategoryResponse update(@PathVariable(value = "id") Long id,
+      @RequestBody @Valid CategoryRequestPut request) {
     try {
-      ContactResponse response = service.update(request);
+      CategoryResponse response = service.update(request);
       return response;
     } catch (BusinessException e) {
-     throw new BusinessException(e.getMessage());
+      throw new BusinessException(e.getMessage());
     }
   }
+
 }

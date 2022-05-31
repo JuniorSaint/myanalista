@@ -2,7 +2,6 @@ package br.com.myanalista.controllers;
 
 import javax.validation.Valid;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.myanalista.exceptions.BusinessException;
-import br.com.myanalista.models.entities.UsersEntity;
 import br.com.myanalista.models.request.UserRequestPost;
 import br.com.myanalista.models.request.UserRequestPut;
 import br.com.myanalista.models.response.UserResponse;
@@ -32,22 +30,19 @@ import lombok.AllArgsConstructor;
 public class UsersController {
 
   @Autowired
-  private UserService userService;
-
-  @Autowired
-  private ModelMapper mapper;
+  private UserService service;
 
   @GetMapping("/{term}")
   public Page<UserResponse> findAllWithList(@PageableDefault() Pageable pageable,
       @PathVariable(value = "term") String term) {
-        Page<UserResponse> response = userService.getUserByTerm(term,  pageable);
+        Page<UserResponse> response = service.getUserByTerm(term,  pageable);
     return response;
   }
 
   @PostMapping
-  public UserResponse saveUser(@RequestBody @Valid UserRequestPost userRequestPost) {
+  public UserResponse save(@RequestBody @Valid UserRequestPost userRequestPost) {
     try {
-      UserResponse resp = userService.save(userRequestPost);
+      UserResponse resp = service.save(userRequestPost);
       return resp;
     } catch (BusinessException e) {
       throw new BusinessException(e.getMessage());
@@ -55,23 +50,19 @@ public class UsersController {
   }
 
   @DeleteMapping("/{id}")
-  public String deleteUser(@PathVariable(value = "id") Long id) throws Exception {
+  public String delete(@PathVariable(value = "id") Long id) {
     try {
-      return userService.delete(id);
+      return service.delete(id);
     } catch (BusinessException e) {
       throw new BusinessException(e.getMessage());
     }
   }
 
   @PutMapping("/{id}")
-  public UserResponse updateUser(@PathVariable(value = "id") Long id,
-      @RequestBody @Valid UserRequestPut userRequestPut) {
+  public UserResponse update(@PathVariable(value = "id") Long id,
+      @RequestBody @Valid UserRequestPut request) {
     try {
-      UsersEntity userEntity = new UsersEntity();
-      mapper.map(userRequestPut, userEntity);
-      UserResponse resp = userService.update(userRequestPut);
-      UserResponse response = new UserResponse();
-      mapper.map(resp, response);
+      UserResponse response = service.update(request);
       return response;
     } catch (BusinessException e) {
      throw new BusinessException(e.getMessage());

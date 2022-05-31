@@ -14,30 +14,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.myanalista.exceptions.BusinessException;
-import br.com.myanalista.models.request.ContactRequestPost;
-import br.com.myanalista.models.request.ContactRequestPut;
-import br.com.myanalista.models.response.ContactResponse;
-import br.com.myanalista.services.ContactService;
+import br.com.myanalista.models.request.TeamsRequestPost;
+import br.com.myanalista.models.request.TeamsRequestPut;
+import br.com.myanalista.models.response.TeamsResponse;
+import br.com.myanalista.services.TeamsService;
 import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
-@RequestMapping("/v1/contacts")
+@RequestMapping("/v1/teams")
 @AllArgsConstructor
-public class ContactsController {
+public class TeamsController {  
   @Autowired
-  private ContactService service;
+  private TeamsService service;
 
   @GetMapping("/{id}")
-  public ContactResponse findAllWithList(@PathVariable(value = "id") Long id) {
-    ContactResponse response = service.findById(id);
+  public TeamsResponse findAllWithList(@PathVariable(value = "id") Long id) {
+    TeamsResponse response = service.findById(id);
     return response;
   }
 
   @PostMapping
-  public ContactResponse save(@RequestBody @Valid ContactRequestPost request) {
+  public TeamsResponse save(@RequestBody @Valid TeamsRequestPost request) {
     try {
-      ContactResponse response = service.save(request);
+      TeamsResponse response = service.save(request);
       return response;
     } catch (BusinessException e) {
       throw new BusinessException(e.getMessage());
@@ -54,10 +54,10 @@ public class ContactsController {
   }
 
   @PutMapping("/{id}")
-  public ContactResponse update(@PathVariable(value = "id") Long id,
-      @RequestBody @Valid ContactRequestPut request) {
+  public TeamsResponse update(@PathVariable(value = "id") Long id,
+      @RequestBody @Valid TeamsRequestPut request) {
     try {
-      ContactResponse response = service.update(request);
+      TeamsResponse response = service.update(request);
       return response;
     } catch (BusinessException e) {
      throw new BusinessException(e.getMessage());

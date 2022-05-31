@@ -45,7 +45,7 @@ public class ContactService {
   }
 
   @Transactional
-  public String delete(Long id) throws Exception {
+  public String delete(Long id) {
       Optional<ContactsEntity> contact = repository.findById(id);
       if (!contact.isPresent()) {
         throw new BusinessException("Contact not found with id: " + id);

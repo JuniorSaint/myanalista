@@ -44,7 +44,7 @@ public class ProductService {
   }
 
   @Transactional
-  public String delete(Long id) throws Exception {
+  public String delete(Long id){
       Optional<ProductsEntity> product = repository.findById(id);
       if (!product.isPresent()) {
         throw new BusinessException("Product not found with id: " + id);

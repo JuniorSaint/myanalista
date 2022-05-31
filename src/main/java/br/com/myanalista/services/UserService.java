@@ -57,7 +57,7 @@ public class UserService {
   }
 
   @Transactional
-  public String delete(Long id) throws Exception {
+  public String delete(Long id) {
       Optional<UsersEntity> user = repository.findById(id);
       if (!user.isPresent()) {
         throw new BusinessException("user not found with id: " + id);
