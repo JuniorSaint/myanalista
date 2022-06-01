@@ -23,7 +23,7 @@ import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
-@RequestMapping("/v1/teams")
+@RequestMapping("/v1/customer")
 @AllArgsConstructor
 @Api(value = "Customer")
 public class CustomersController {

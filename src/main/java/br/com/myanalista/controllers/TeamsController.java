@@ -30,39 +30,39 @@ public class TeamsController {
   @Autowired
   private TeamsService service;
 
-  // @GetMapping("/{id}")
-  // public TeamsResponse findAllWithListTeams(@PathVariable(value = "id") Long id) {
-  //   TeamsResponse response = service.findById(id);
-  //   return response;
-  // }
+  @GetMapping("/{id}")
+  public TeamsResponse findAllWithListTeams(@PathVariable(value = "id") Long id) {
+    TeamsResponse response = service.findById(id);
+    return response;
+  }
 
-  // @PostMapping
-  // public TeamsResponse saveTeams(@RequestBody @Valid TeamsRequestPost request) {
-  //   try {
-  //     TeamsResponse response = service.save(request);
-  //     return response;
-  //   } catch (BusinessException e) {
-  //     throw new BusinessException(e.getMessage());
-  //   }
-  // }
+  @PostMapping
+  public TeamsResponse saveTeams(@RequestBody @Valid TeamsRequestPost request) {
+    try {
+      TeamsResponse response = service.save(request);
+      return response;
+    } catch (BusinessException e) {
+      throw new BusinessException(e.getMessage());
+    }
+  }
 
-  // @DeleteMapping("/{id}")
-  // public String deleteTeams(@PathVariable(value = "id") Long id) {
-  //   try {
-  //     return service.delete(id);
-  //   } catch (BusinessException e) {
-  //     throw new BusinessException(e.getMessage());
-  //   }
-  // }
+  @DeleteMapping("/{id}")
+  public String deleteTeams(@PathVariable(value = "id") Long id) {
+    try {
+      return service.delete(id);
+    } catch (BusinessException e) {
+      throw new BusinessException(e.getMessage());
+    }
+  }
 
-  // @PutMapping("/{id}")
-  // public TeamsResponse updateTeams(@PathVariable(value = "id") Long id,
-  //     @RequestBody @Valid TeamsRequestPut request) {
-  //   try {
-  //     TeamsResponse response = service.update(request);
-  //     return response;
-  //   } catch (BusinessException e) {
-  //    throw new BusinessException(e.getMessage());
-  //   }
-  // }
+  @PutMapping("/{id}")
+  public TeamsResponse updateTeams(@PathVariable(value = "id") Long id,
+      @RequestBody @Valid TeamsRequestPut request) {
+    try {
+      TeamsResponse response = service.update(request);
+      return response;
+    } catch (BusinessException e) {
+     throw new BusinessException(e.getMessage());
+    }
+  }
 }
