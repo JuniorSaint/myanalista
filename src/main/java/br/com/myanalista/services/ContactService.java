@@ -60,7 +60,7 @@ public class ContactService {
       throw new BusinessException("It's not possible find contact with id: " + id);
     }
     ContactResponse contactResp = new ContactResponse();
-    mapper.map(contact, contactResp);
+    mapper.map(contact.get(), contactResp);
     return contactResp;
   }  
 }

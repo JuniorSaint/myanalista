@@ -13,7 +13,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 @Builder
 @Entity
@@ -29,7 +29,7 @@ public class ProductsEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @OneToMany(mappedBy="product")
-    private Set<CategoriesEntity> categories;
+    private List<CategoriesEntity> categories;
     private String sku;
     private String productDescription;
     private boolean isActive;

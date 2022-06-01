@@ -13,9 +13,12 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 @Builder
 @Entity
@@ -41,6 +44,8 @@ public class CustomersEnity implements Serializable {
     private String zipCode;
     private String district;
     private String city;
+    @Lob
+    private String observation;
     // Start Financial
     private LocalDate contractDate;
     private CustomerTypeEnum customerType;
@@ -49,12 +54,12 @@ public class CustomersEnity implements Serializable {
     private String formOfPayment;
     private String cluster;
     // End Financial
-    @Lob
-    private String observation;
+    @JsonIgnoreProperties(value = {"customer"}) // Fix problem cyclic reference
     @OneToMany(mappedBy="customer")
-    private Set<ContactsEntity> contacts;
+    private List<ContactsEntity> contacts;
+    @JsonIgnoreProperties(value = {"customer"}) // Fix problem cyclic reference
     @OneToMany(mappedBy="customer")
-    private Set<TeamsEntity> teams;
+    private List<TeamsEntity> teams;
     @CreationTimestamp
     private LocalDate createdAt;
     @UpdateTimestamp

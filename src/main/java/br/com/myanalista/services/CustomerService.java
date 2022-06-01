@@ -59,8 +59,16 @@ public class CustomerService {
       throw new BusinessException("It's not possible find contact with id: " + id);
     }
     CustomerResponse customerResponse = new CustomerResponse();
-    mapper.map(customer, customerResponse);
+    mapper.map(customer.get(), customerResponse);
     return customerResponse;
+  }
+
+  public Long findByIdEntity(Long id){
+    Optional<CustomersEnity> customer = repository.findById(id);
+    if(!customer.isEmpty()){
+      throw new BusinessException("It's not possible find contact with id: " + id);
+    }
+    return customer.get().getId();
   }
 
 }

@@ -22,6 +22,6 @@ public class ProductRequestPost {
   private String sku;
   @NotEmpty(message = "Description of product is mandatory field")
   private String productDescription;
-  @NotEmpty(message = "Product status is mandatory field")
+  // @NotEmpty(message = "Product status is mandatory field")
   private boolean isActive;
 }

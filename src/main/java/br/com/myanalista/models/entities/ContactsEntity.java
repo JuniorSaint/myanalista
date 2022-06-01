@@ -26,7 +26,7 @@ public class ContactsEntity implements Serializable {
     private String contactName;
     private String contactPhone;
     @ManyToOne
-    @JoinColumn(name="customer_id", nullable=false)
+    @JoinColumn(name="customer_id", nullable=true)
     private CustomersEnity customer;
 
 }

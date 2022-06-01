@@ -60,7 +60,7 @@ public class CategoryService {
       throw new BusinessException("It's not possible find category with id: " + id);
     }
     CategoryResponse categoryResp = new CategoryResponse();
-    mapper.map(category, categoryResp);
+    mapper.map(category.get(), categoryResp);
     return categoryResp;
   }
 }

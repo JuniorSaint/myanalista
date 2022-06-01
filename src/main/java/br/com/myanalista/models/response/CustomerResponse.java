@@ -3,7 +3,6 @@ package br.com.myanalista.models.response;
 import java.time.LocalDate;
 import java.util.Set;
 
-import br.com.myanalista.models.entities.CategoriesEntity;
 import br.com.myanalista.models.entities.ContactsEntity;
 import br.com.myanalista.models.entities.TeamsEntity;
 import br.com.myanalista.models.enums.CompanyTypeEnum;

@@ -25,6 +25,10 @@ public class ProductService {
 
   @Transactional
   public ProductResponse save(ProductRequestPost productRequest) {
+    Optional<ProductsEntity> product = repository.findBySku(productRequest.getSku());
+    if(product.isPresent()){
+      throw new BusinessException("There is product register with this sku: " + productRequest.getSku());
+    }
       ProductsEntity productEntity = new ProductsEntity();
       mapper.map(productRequest, productEntity);
       ProductsEntity productCreated = repository.save(productEntity);

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.myanalista.exceptions.BusinessException;
+import br.com.myanalista.models.entities.CustomersEnity;
 import br.com.myanalista.models.entities.TeamsEntity;
 import br.com.myanalista.models.request.TeamsRequestPost;
 import br.com.myanalista.models.request.TeamsRequestPut;
@@ -23,10 +24,15 @@ public class TeamsService {
   @Autowired
   private ModelMapper mapper;
 
+  @Autowired
+  private CustomerService serviceCustomer;
+
   @Transactional
   public TeamsResponse save(TeamsRequestPost teamsRequest) {
+    // CustomersEnity entityCustomer = serviceCustomer.findByIdEntity(teamsRequest.getCustomer());
     TeamsEntity teamsEntity = new TeamsEntity();
     mapper.map(teamsRequest, teamsEntity);
+    // teamsEntity.setCustomer(entityCustomer);
     TeamsEntity teamsCreated = repository.save(teamsEntity);
     TeamsResponse teamsResponse = new TeamsResponse();
     mapper.map(teamsCreated, teamsResponse);

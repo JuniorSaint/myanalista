@@ -6,9 +6,6 @@ import java.util.Set;
 import javax.persistence.Lob;
 import javax.validation.constraints.NotEmpty;
 
-import org.hibernate.validator.constraints.br.CNPJ;
-import org.hibernate.validator.constraints.br.CPF;
-
 import br.com.myanalista.models.entities.ContactsEntity;
 import br.com.myanalista.models.entities.TeamsEntity;
 import br.com.myanalista.models.enums.CompanyTypeEnum;
@@ -25,10 +22,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class CustomerRequestPost {
-  @CPF
-  @CNPJ
   private String cnpjCpf;
-  @NotEmpty(message = "Company type is mandatory field")
   private CompanyTypeEnum companyType;  
   private String nickName;
   @NotEmpty(message = "Company name is mandatory field")
@@ -44,7 +38,7 @@ public class CustomerRequestPost {
   private LocalDate contractDate;
   private CustomerTypeEnum customerType;
   private String typeOfContract;
-  private Double ContractValue;
+  private Double contractValue;
   private String formOfPayment;
   private String cluster;
   // End Financial

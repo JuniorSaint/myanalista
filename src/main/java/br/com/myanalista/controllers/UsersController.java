@@ -34,10 +34,16 @@ public class UsersController {
   @Autowired
   private UserService service;
 
-  @GetMapping("/{term}")
+  @GetMapping("/term/{term}")
   public Page<UserResponse> findAllWithList(@PageableDefault() Pageable pageable,
       @PathVariable(value = "term") String term) {
         Page<UserResponse> response = service.getUserByTerm(term,  pageable);
+    return response;
+  }
+
+  @GetMapping("/{id}")
+  public UserResponse findAllWithListTeams(@PathVariable(value = "id") Long id) {
+    UserResponse response = service.findById(id);
     return response;
   }
 
