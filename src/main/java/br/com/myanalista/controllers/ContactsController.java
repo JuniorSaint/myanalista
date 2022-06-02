@@ -1,7 +1,5 @@
 package br.com.myanalista.controllers;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,14 +16,12 @@ import br.com.myanalista.models.request.ContactRequestPost;
 import br.com.myanalista.models.request.ContactRequestPut;
 import br.com.myanalista.models.response.ContactResponse;
 import br.com.myanalista.services.ContactService;
-import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/contacts")
 @AllArgsConstructor
-@Api(value = "Contacts")
 public class ContactsController {
   @Autowired
   private ContactService service;
@@ -37,7 +33,7 @@ public class ContactsController {
   }
 
   @PostMapping
-  public ContactResponse save(@RequestBody @Valid ContactRequestPost request) {
+  public ContactResponse save(@RequestBody ContactRequestPost request) {
     try {
       ContactResponse response = service.save(request);
       return response;
@@ -57,7 +53,7 @@ public class ContactsController {
 
   @PutMapping("/{id}")
   public ContactResponse update(@PathVariable(value = "id") Long id,
-      @RequestBody @Valid ContactRequestPut request) {
+      @RequestBody ContactRequestPut request) {
     try {
       ContactResponse response = service.update(request);
       return response;

@@ -1,7 +1,5 @@
 package br.com.myanalista.controllers;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,14 +19,13 @@ import br.com.myanalista.models.request.UserRequestPost;
 import br.com.myanalista.models.request.UserRequestPut;
 import br.com.myanalista.models.response.UserResponse;
 import br.com.myanalista.services.UserService;
-import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/users")
 @AllArgsConstructor
-@Api(value = "Users")
+
 public class UsersController {
 
   @Autowired
@@ -48,7 +45,7 @@ public class UsersController {
   }
 
   @PostMapping
-  public UserResponse save(@RequestBody @Valid UserRequestPost userRequestPost) {
+  public UserResponse save(@RequestBody UserRequestPost userRequestPost) {
     try {
       UserResponse resp = service.save(userRequestPost);
       return resp;
@@ -68,7 +65,7 @@ public class UsersController {
 
   @PutMapping("/{id}")
   public UserResponse update(@PathVariable(value = "id") Long id,
-      @RequestBody @Valid UserRequestPut request) {
+      @RequestBody UserRequestPut request) {
     try {
       UserResponse response = service.update(request);
       return response;

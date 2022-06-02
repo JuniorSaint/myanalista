@@ -1,6 +1,6 @@
 package br.com.myanalista.controllers;
 
-import javax.validation.Valid;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,14 +18,14 @@ import br.com.myanalista.models.request.CustomerRequestPost;
 import br.com.myanalista.models.request.CustomerRequestPut;
 import br.com.myanalista.models.response.CustomerResponse;
 import br.com.myanalista.services.CustomerService;
-import io.swagger.annotations.Api;
+
 import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/customer")
 @AllArgsConstructor
-@Api(value = "Customer")
+
 public class CustomersController {
   @Autowired
   private CustomerService service;
@@ -37,7 +37,7 @@ public class CustomersController {
   }
 
   @PostMapping
-  public CustomerResponse saveCustomer(@RequestBody @Valid CustomerRequestPost request) {
+  public CustomerResponse saveCustomer(@RequestBody  CustomerRequestPost request) {
     try {
       CustomerResponse response = service.save(request);
       return response;
@@ -57,7 +57,7 @@ public class CustomersController {
 
   @PutMapping("/{id}")
   public CustomerResponse updateCustomer(@PathVariable(value = "id") Long id,
-      @RequestBody @Valid CustomerRequestPut request) {
+      @RequestBody  CustomerRequestPut request) {
     try {
       CustomerResponse response = service.update(request);
       return response;

@@ -66,4 +66,8 @@ public class ProductService {
     mapper.map(product.get(), contactResp);
     return contactResp;
   }
+  public Products findByIdEntity(Long id){
+    Optional<Products> product = repository.findById(id); 
+    return product.get();
+  }
 }

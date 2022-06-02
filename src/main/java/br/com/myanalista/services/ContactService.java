@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.myanalista.exceptions.BusinessException;
 import br.com.myanalista.models.entities.Contacts;
+import br.com.myanalista.models.entities.Customers;
 import br.com.myanalista.models.request.ContactRequestPost;
 import br.com.myanalista.models.request.ContactRequestPut;
 import br.com.myanalista.models.response.ContactResponse;
@@ -24,10 +25,17 @@ public class ContactService {
   @Autowired
   private ModelMapper mapper;
 
+  @Autowired CustomerService serviceCustomer;
+
   @Transactional
   public ContactResponse save(ContactRequestPost contactRequest) {
+    Customers entityCustomer = serviceCustomer.findByIdEntity(contactRequest.getCustomer().getId());
+    if (entityCustomer == null) {
+      throw new BusinessException("There's not Customer with id: " + contactRequest.getCustomer().getId());
+    }
       Contacts contactEntity = new Contacts();
       mapper.map(contactRequest, contactEntity);
+      contactEntity.setCustomer(entityCustomer);
       Contacts contactCreated = repository.save(contactEntity);
       ContactResponse contactResponse = new ContactResponse();
       mapper.map(contactCreated, contactResponse);
@@ -36,8 +44,13 @@ public class ContactService {
 
   @Transactional
   public ContactResponse update(ContactRequestPut contactRequest) {
+    Customers entityCustomer = serviceCustomer.findByIdEntity(contactRequest.getCustomer().getId());
+    if (entityCustomer == null) {
+      throw new BusinessException("There's not Customer with id: " + contactRequest.getCustomer().getId());
+    }
     Contacts contactEntity = new Contacts();
       mapper.map(contactRequest, contactEntity);
+      contactEntity.setCustomer(entityCustomer);
       Contacts contactUpdate = repository.save(contactEntity);
       ContactResponse contactResponse = new ContactResponse();
       mapper.map(contactUpdate, contactResponse);

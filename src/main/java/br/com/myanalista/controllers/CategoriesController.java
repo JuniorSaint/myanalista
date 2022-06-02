@@ -1,7 +1,5 @@
 package br.com.myanalista.controllers;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,14 +16,12 @@ import br.com.myanalista.models.request.CategoryRequestPost;
 import br.com.myanalista.models.request.CategoryRequestPut;
 import br.com.myanalista.models.response.CategoryResponse;
 import br.com.myanalista.services.CategoryService;
-import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/categories")
 @AllArgsConstructor
-@Api(value = "Categories")
 public class CategoriesController {
 
   @Autowired
@@ -38,7 +34,7 @@ public class CategoriesController {
   }
 
   @PostMapping
-  public CategoryResponse save(@RequestBody @Valid CategoryRequestPost request) {
+  public CategoryResponse save(@RequestBody CategoryRequestPost request) {
     try {
       CategoryResponse response = service.save(request);
       return response;
@@ -58,7 +54,7 @@ public class CategoriesController {
 
   @PutMapping("/{id}")
   public CategoryResponse update(@PathVariable(value = "id") Long id,
-      @RequestBody @Valid CategoryRequestPut request) {
+      @RequestBody CategoryRequestPut request) {
     try {
       CategoryResponse response = service.update(request);
       return response;

@@ -14,7 +14,7 @@ import br.com.myanalista.models.entities.Teams;
 @Repository
 public interface TeamsRepository extends JpaRepository<Teams, Long>{
 
-  @Query(value = "select t from TeamsEntity t where t.fullName = :fullName")
+  @Query(value = "select t from Teams t where t.fullName = :fullName")
   List<Teams> listToFull(@Param(value = "fullName") String fullName);
 
   Optional<Teams> findById(Long id);

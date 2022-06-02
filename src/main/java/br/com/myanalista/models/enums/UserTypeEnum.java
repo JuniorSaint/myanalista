@@ -9,8 +9,7 @@ import lombok.Getter;
 public enum UserTypeEnum {
 
   ADMINISTRATOR(1, "administrator"),
-  SECONDARY(2, "secundary"),
-  VISITOR(3, "visitor");
+  COLLABORATOR(2, "collaborator");
 
   private Integer guid;
   private String descriptionText;

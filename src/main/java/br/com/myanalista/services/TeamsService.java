@@ -30,6 +30,9 @@ public class TeamsService {
   @Transactional
   public TeamsResponse save(TeamsRequestPost teamsRequest) {
     Customers entityCustomer = serviceCustomer.findByIdEntity(teamsRequest.getCustomer().getId());
+    if (entityCustomer == null) {
+      throw new BusinessException("There's not Customer with id: " + teamsRequest.getCustomer().getId());
+    }
     Teams teamsEntity = new Teams();
     mapper.map(teamsRequest, teamsEntity);
     teamsEntity.setCustomer(entityCustomer);
@@ -41,8 +44,13 @@ public class TeamsService {
 
   @Transactional
   public TeamsResponse update(TeamsRequestPut teamsRequest) {
+    Customers entityCustomer = serviceCustomer.findByIdEntity(teamsRequest.getCustomer().getId());
+    if (entityCustomer == null) {
+      throw new BusinessException("There's not Customer with id: " + teamsRequest.getCustomer().getId());
+    }
     Teams teamsEntity = new Teams();
     mapper.map(teamsRequest, teamsEntity);
+    teamsEntity.setCustomer(entityCustomer);
     Teams teamsUpdate = repository.save(teamsEntity);
     TeamsResponse teamsResponse = new TeamsResponse();
     mapper.map(teamsUpdate, teamsResponse);
@@ -59,13 +67,13 @@ public class TeamsService {
     return "Teams deleted with success";
   }
 
-  public TeamsResponse findById(Long id){
+  public TeamsResponse findById(Long id) {
     Optional<Teams> teams = repository.findById(id);
-    if(teams.isEmpty()){
+    if (teams.isEmpty()) {
       throw new BusinessException("It's not possible find Teams with id: " + id);
     }
     TeamsResponse teamsResponse = new TeamsResponse();
     mapper.map(teams.get(), teamsResponse);
     return teamsResponse;
-  }  
+  }
 }

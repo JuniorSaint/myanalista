@@ -1,6 +1,6 @@
 package br.com.myanalista.controllers;
 
-import javax.validation.Valid;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,14 +18,13 @@ import br.com.myanalista.models.request.ProductRequestPost;
 import br.com.myanalista.models.request.ProductRequestPut;
 import br.com.myanalista.models.response.ProductResponse;
 import br.com.myanalista.services.ProductService;
-import io.swagger.annotations.Api;
+
 import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/products")
 @AllArgsConstructor
-@Api(value = "Products")
 public class ProductsController {
   
   @Autowired
@@ -38,7 +37,7 @@ public class ProductsController {
   }
 
   @PostMapping
-  public ProductResponse save(@RequestBody @Valid ProductRequestPost request) {
+  public ProductResponse save(@RequestBody  ProductRequestPost request) {
     try {
       ProductResponse response = service.save(request);
       return response;
@@ -58,7 +57,7 @@ public class ProductsController {
 
   @PutMapping("/{id}")
   public ProductResponse update(@PathVariable(value = "id") Long id,
-      @RequestBody @Valid ProductRequestPut request) {
+      @RequestBody ProductRequestPut request) {
     try {
       ProductResponse response = service.update(request);
       return response;

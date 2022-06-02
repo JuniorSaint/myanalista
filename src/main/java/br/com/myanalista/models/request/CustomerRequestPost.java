@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Set;
 
 import javax.persistence.Lob;
-import javax.validation.constraints.NotEmpty;
+
 
 import br.com.myanalista.models.entities.Contacts;
 import br.com.myanalista.models.entities.Teams;
@@ -25,7 +25,6 @@ public class CustomerRequestPost {
   private String cnpjCpf;
   private CompanyTypeEnum companyType;  
   private String nickName;
-  @NotEmpty(message = "Company name is mandatory field")
   private String companyName;
   private String fantasyName;
   private String address;

@@ -15,7 +15,7 @@ import br.com.myanalista.models.entities.Users;
 @Repository
 public interface UserRepository extends JpaRepository<Users, Long> {
 
-    @Query(value = "select u from UsersEntity u where u.userName = :userName")
+    @Query(value = "select u from Users u where u.userName = :userName")
     List<Users> findAll(@Param(value = "userName") String userName);
 
     Optional<Users> findByUserEmail(String userEmail);

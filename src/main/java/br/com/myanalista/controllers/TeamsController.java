@@ -1,7 +1,5 @@
 package br.com.myanalista.controllers;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,14 +16,13 @@ import br.com.myanalista.models.request.TeamsRequestPost;
 import br.com.myanalista.models.request.TeamsRequestPut;
 import br.com.myanalista.models.response.TeamsResponse;
 import br.com.myanalista.services.TeamsService;
-import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/teams")
 @AllArgsConstructor
-@Api(value = "Teams")
+
 public class TeamsController {  
   @Autowired
   private TeamsService service;
@@ -37,7 +34,7 @@ public class TeamsController {
   }
 
   @PostMapping
-  public TeamsResponse saveTeams(@RequestBody @Valid TeamsRequestPost request) {
+  public TeamsResponse saveTeams(@RequestBody  TeamsRequestPost request) {
     try {
       TeamsResponse response = service.save(request);
       return response;
@@ -57,7 +54,7 @@ public class TeamsController {
 
   @PutMapping("/{id}")
   public TeamsResponse updateTeams(@PathVariable(value = "id") Long id,
-      @RequestBody @Valid TeamsRequestPut request) {
+      @RequestBody TeamsRequestPut request) {
     try {
       TeamsResponse response = service.update(request);
       return response;
