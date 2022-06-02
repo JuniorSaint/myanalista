@@ -2,6 +2,7 @@ package br.com.myanalista.models.request;
 
 import javax.validation.constraints.NotEmpty;
 
+import br.com.myanalista.models.entities.CustomersEnity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,11 +16,10 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 
 public class ContactRequestPost {
-  @NotEmpty(message = "Departament is mandatory field")
+
   private String contactDepartament;
   private String contactEmail;
-  @NotEmpty(message = "Name is mandatory field")
   private String contactName;
-  private String contactPhone;
-  
+  private String contactPhone;  
+  private CustomersEnity customer;
 }

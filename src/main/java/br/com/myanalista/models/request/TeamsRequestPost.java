@@ -25,6 +25,5 @@ public class TeamsRequestPost {
   private String memberFunction;
   private String typeOfRegistrationMember;
   private String memberLink;
-  private CustomersEnity customer;
-  
+  private CustomersEnity customer;  
 }

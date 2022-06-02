@@ -56,7 +56,7 @@ public class ContactService {
 
   public ContactResponse findById(Long id){
     Optional<ContactsEntity> contact = repository.findById(id);
-    if(!contact.isEmpty()){
+    if(contact.isEmpty()){
       throw new BusinessException("It's not possible find contact with id: " + id);
     }
     ContactResponse contactResp = new ContactResponse();

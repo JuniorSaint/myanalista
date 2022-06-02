@@ -56,7 +56,7 @@ public class CategoryService {
 
   public CategoryResponse findById(Long id){
     Optional<CategoriesEntity> category = repository.findById(id);
-    if(!category.isEmpty()){
+    if(category.isEmpty()){
       throw new BusinessException("It's not possible find category with id: " + id);
     }
     CategoryResponse categoryResp = new CategoryResponse();

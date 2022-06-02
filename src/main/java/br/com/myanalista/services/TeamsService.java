@@ -29,10 +29,10 @@ public class TeamsService {
 
   @Transactional
   public TeamsResponse save(TeamsRequestPost teamsRequest) {
-    // CustomersEnity entityCustomer = serviceCustomer.findByIdEntity(teamsRequest.getCustomer());
+    CustomersEnity entityCustomer = serviceCustomer.findByIdEntity(teamsRequest.getCustomer().getId());
     TeamsEntity teamsEntity = new TeamsEntity();
     mapper.map(teamsRequest, teamsEntity);
-    // teamsEntity.setCustomer(entityCustomer);
+    teamsEntity.setCustomer(entityCustomer);
     TeamsEntity teamsCreated = repository.save(teamsEntity);
     TeamsResponse teamsResponse = new TeamsResponse();
     mapper.map(teamsCreated, teamsResponse);
@@ -61,11 +61,11 @@ public class TeamsService {
 
   public TeamsResponse findById(Long id){
     Optional<TeamsEntity> teams = repository.findById(id);
-    if(!teams.isEmpty()){
+    if(teams.isEmpty()){
       throw new BusinessException("It's not possible find Teams with id: " + id);
     }
     TeamsResponse teamsResponse = new TeamsResponse();
-    mapper.map(teams, teamsResponse);
+    mapper.map(teams.get(), teamsResponse);
     return teamsResponse;
   }  
 }

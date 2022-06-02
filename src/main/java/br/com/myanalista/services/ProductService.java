@@ -59,11 +59,11 @@ public class ProductService {
 
   public ProductResponse findById(Long id){
     Optional<ProductsEntity> product = repository.findById(id);
-    if(!product.isEmpty()){
+    if(product.isEmpty()){
       throw new BusinessException("It's not possible find product with id: " + id);
     }
     ProductResponse contactResp = new ProductResponse();
-    mapper.map(product, contactResp);
+    mapper.map(product.get(), contactResp);
     return contactResp;
   }
 }

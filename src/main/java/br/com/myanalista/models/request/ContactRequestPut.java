@@ -13,6 +13,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class ContactRequestPut extends ContactRequestPost {
-  @NotEmpty(message = "ID is mandatory field")
+
   private Long id;
 }

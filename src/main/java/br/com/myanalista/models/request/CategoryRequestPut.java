@@ -13,6 +13,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class CategoryRequestPut extends CategoryRequestPost{
-  @NotEmpty(message = "Id is mandatory field")
+
   private Long id;
 }

@@ -14,6 +14,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class CustomerRequestPut extends CustomerRequestPost{
-  @NotEmpty(message = "Id is mandatory field")
+
   private Long id;
 }
