@@ -1,6 +1,5 @@
 package br.com.myanalista.models.entities;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,29 +13,30 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Builder
 @Entity
-@Table(name = "teams")
+@Table(name = "categories")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TeamsEntity implements Serializable {
+public class Categories implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String fullName;
-    private String memberCode;
-    private String cpf;
-    private String memberFunction;
-    private String typeOfRegistrationMember;
-    private String memberLink;
+    private String categoryName;
     @ManyToOne
-    @JoinColumn(name="customer_id", nullable=true)
-    private CustomersEnity customer;
+    @JoinColumn(name="product_id", nullable=true)
+    private Products product;
+    @OneToMany(mappedBy="category")
+    private Set<Categories> categories;
+    @ManyToOne
+    @JoinColumn(name="category_id", nullable=true)
+    private Categories category;
     @CreationTimestamp
     private LocalDate createdAt;
     @UpdateTimestamp

@@ -1,7 +1,5 @@
 package br.com.myanalista.models.request;
 
-import javax.validation.constraints.NotEmpty;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

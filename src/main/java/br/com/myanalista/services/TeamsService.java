@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.myanalista.exceptions.BusinessException;
-import br.com.myanalista.models.entities.CustomersEnity;
-import br.com.myanalista.models.entities.TeamsEntity;
+import br.com.myanalista.models.entities.Customers;
+import br.com.myanalista.models.entities.Teams;
 import br.com.myanalista.models.request.TeamsRequestPost;
 import br.com.myanalista.models.request.TeamsRequestPut;
 import br.com.myanalista.models.response.TeamsResponse;
@@ -29,11 +29,11 @@ public class TeamsService {
 
   @Transactional
   public TeamsResponse save(TeamsRequestPost teamsRequest) {
-    CustomersEnity entityCustomer = serviceCustomer.findByIdEntity(teamsRequest.getCustomer().getId());
-    TeamsEntity teamsEntity = new TeamsEntity();
+    Customers entityCustomer = serviceCustomer.findByIdEntity(teamsRequest.getCustomer().getId());
+    Teams teamsEntity = new Teams();
     mapper.map(teamsRequest, teamsEntity);
     teamsEntity.setCustomer(entityCustomer);
-    TeamsEntity teamsCreated = repository.save(teamsEntity);
+    Teams teamsCreated = repository.save(teamsEntity);
     TeamsResponse teamsResponse = new TeamsResponse();
     mapper.map(teamsCreated, teamsResponse);
     return teamsResponse;
@@ -41,9 +41,9 @@ public class TeamsService {
 
   @Transactional
   public TeamsResponse update(TeamsRequestPut teamsRequest) {
-    TeamsEntity teamsEntity = new TeamsEntity();
+    Teams teamsEntity = new Teams();
     mapper.map(teamsRequest, teamsEntity);
-    TeamsEntity teamsUpdate = repository.save(teamsEntity);
+    Teams teamsUpdate = repository.save(teamsEntity);
     TeamsResponse teamsResponse = new TeamsResponse();
     mapper.map(teamsUpdate, teamsResponse);
     return teamsResponse;
@@ -51,7 +51,7 @@ public class TeamsService {
 
   @Transactional
   public String delete(Long id) {
-    Optional<TeamsEntity> teams = repository.findById(id);
+    Optional<Teams> teams = repository.findById(id);
     if (!teams.isPresent()) {
       throw new BusinessException("Teams not found with id: " + id);
     }
@@ -60,7 +60,7 @@ public class TeamsService {
   }
 
   public TeamsResponse findById(Long id){
-    Optional<TeamsEntity> teams = repository.findById(id);
+    Optional<Teams> teams = repository.findById(id);
     if(teams.isEmpty()){
       throw new BusinessException("It's not possible find Teams with id: " + id);
     }

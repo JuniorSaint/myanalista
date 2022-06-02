@@ -27,7 +27,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomersEnity implements Serializable {
+public class Customers implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -56,10 +56,10 @@ public class CustomersEnity implements Serializable {
     // End Financial
     @JsonIgnoreProperties(value = {"customer"}) // Fix problem cyclic reference
     @OneToMany(mappedBy="customer")
-    private List<ContactsEntity> contacts;
+    private List<Contacts> contacts;
     @JsonIgnoreProperties(value = {"customer"}) // Fix problem cyclic reference
     @OneToMany(mappedBy="customer")
-    private List<TeamsEntity> teams;
+    private List<Teams> teams;
     @CreationTimestamp
     private LocalDate createdAt;
     @UpdateTimestamp

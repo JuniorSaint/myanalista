@@ -1,7 +1,7 @@
 package br.com.myanalista.models.response;
 
 
-import br.com.myanalista.models.entities.CustomersEnity;
+import br.com.myanalista.models.entities.Customers;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,5 +21,5 @@ public class TeamsResponse {
   private String memberFunction;
   private String typeOfRegistrationMember;
   private String memberLink;
-  private CustomersEnity customer;
+  private Customers customer;
 }

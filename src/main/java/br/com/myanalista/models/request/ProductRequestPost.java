@@ -4,7 +4,7 @@ import java.util.Set;
 
 import javax.validation.constraints.NotEmpty;
 
-import br.com.myanalista.models.entities.CategoriesEntity;
+import br.com.myanalista.models.entities.Categories;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +17,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class ProductRequestPost {
-  private Set<CategoriesEntity> categories;
+  private Set<Categories> categories;
   @NotEmpty(message = "Sku is mandatory field")
   private String sku;
   @NotEmpty(message = "Description of product is mandatory field")

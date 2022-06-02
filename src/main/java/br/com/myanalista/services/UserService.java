@@ -5,7 +5,6 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -14,7 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.myanalista.exceptions.BusinessException;
-import br.com.myanalista.models.entities.UsersEntity;
+import br.com.myanalista.models.entities.Users;
 import br.com.myanalista.models.request.UserRequestPost;
 import br.com.myanalista.models.request.UserRequestPut;
 import br.com.myanalista.models.response.UserResponse;
@@ -33,32 +32,32 @@ public class UserService {
 
   @Transactional
   public UserResponse save(UserRequestPost userRequest) {
-    Optional<UsersEntity> searchForUser = repository.findByUserEmail(userRequest.getUserEmail());
+    Optional<Users> searchForUser = repository.findByUserEmail(userRequest.getUserEmail());
     if (searchForUser.isPresent()) {
       throw new BusinessException(
           "Already exist user with this email: " + userRequest.getUserEmail() + ", try with another one");
     }
-    UsersEntity userEntity = new UsersEntity();
+    Users userEntity = new Users();
     mapper.map(userRequest, userEntity);
-    UsersEntity userCreated = repository.save(userEntity);
+    Users userCreated = repository.save(userEntity);
     return convertEntityToUserResponse(userCreated);
   }
 
   @Transactional
   public UserResponse update(UserRequestPut userRequestPut) {
-    Optional<UsersEntity> user = repository.findById(userRequestPut.getId());
+    Optional<Users> user = repository.findById(userRequestPut.getId());
     if (!user.isPresent()) {
       throw new BusinessException("User not found with id: " + userRequestPut.getId());
     }
-    UsersEntity userEntity = new UsersEntity();
+    Users userEntity = new Users();
     mapper.map(userRequestPut, userEntity);
-    UsersEntity userUpdate = repository.save(userEntity);
+    Users userUpdate = repository.save(userEntity);
     return convertEntityToUserResponse(userUpdate);
   }
 
   @Transactional
   public String delete(Long id) {
-    Optional<UsersEntity> user = repository.findById(id);
+    Optional<Users> user = repository.findById(id);
     if (!user.isPresent()) {
       throw new BusinessException("user not found with id: " + id);
     }
@@ -67,13 +66,11 @@ public class UserService {
   }
 
   public UserResponse findById(Long id) {
-    Optional<UsersEntity> response = repository.findById(id);
+    Optional<Users> response = repository.findById(id);
     if (response.isEmpty()) {
       throw new BusinessException("There isn't user with this id: " + id);
     }
-    // mapper.map(response, userResponse);
-    BeanUtils.copyProperties(response.get(), userResponse);
-
+    mapper.map(response, userResponse);
     return userResponse;
   }
 
@@ -81,13 +78,13 @@ public class UserService {
     ExampleMatcher matcher = ExampleMatcher.matching()
         .withIgnoreCase();
     Example<String> example = Example.of(term, matcher);
-    Page<UsersEntity> respFromRepository = repository.findAll(example, pageable);
+    Page<Users> respFromRepository = repository.findAll(example, pageable);
     Page<UserResponse> response = mapEntityPageIntoDtoPage(respFromRepository, UserResponse.class);
     return response;
   }
 
   // Convert entity to Dto
-  private UserResponse convertEntityToUserResponse(UsersEntity entity) {
+  private UserResponse convertEntityToUserResponse(Users entity) {
     mapper.map(entity, userResponse);
     return userResponse;
   }

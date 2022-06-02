@@ -3,8 +3,8 @@ package br.com.myanalista.models.response;
 import java.time.LocalDate;
 import java.util.Set;
 
-import br.com.myanalista.models.entities.ContactsEntity;
-import br.com.myanalista.models.entities.TeamsEntity;
+import br.com.myanalista.models.entities.Contacts;
+import br.com.myanalista.models.entities.Teams;
 import br.com.myanalista.models.enums.CompanyTypeEnum;
 import br.com.myanalista.models.enums.CustomerTypeEnum;
 import lombok.AllArgsConstructor;
@@ -41,7 +41,7 @@ public class CustomerResponse {
     private String cluster;
     // End Financial
     private String observation;
-    private Set<ContactsEntity> contacts;
-    private Set<TeamsEntity> teams;
+    private Set<Contacts> contacts;
+    private Set<Teams> teams;
   
 }

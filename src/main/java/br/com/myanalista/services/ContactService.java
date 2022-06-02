@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.myanalista.exceptions.BusinessException;
-import br.com.myanalista.models.entities.ContactsEntity;
+import br.com.myanalista.models.entities.Contacts;
 import br.com.myanalista.models.request.ContactRequestPost;
 import br.com.myanalista.models.request.ContactRequestPut;
 import br.com.myanalista.models.response.ContactResponse;
@@ -26,9 +26,9 @@ public class ContactService {
 
   @Transactional
   public ContactResponse save(ContactRequestPost contactRequest) {
-      ContactsEntity contactEntity = new ContactsEntity();
+      Contacts contactEntity = new Contacts();
       mapper.map(contactRequest, contactEntity);
-      ContactsEntity contactCreated = repository.save(contactEntity);
+      Contacts contactCreated = repository.save(contactEntity);
       ContactResponse contactResponse = new ContactResponse();
       mapper.map(contactCreated, contactResponse);
       return contactResponse;    
@@ -36,9 +36,9 @@ public class ContactService {
 
   @Transactional
   public ContactResponse update(ContactRequestPut contactRequest) {
-    ContactsEntity contactEntity = new ContactsEntity();
+    Contacts contactEntity = new Contacts();
       mapper.map(contactRequest, contactEntity);
-      ContactsEntity contactUpdate = repository.save(contactEntity);
+      Contacts contactUpdate = repository.save(contactEntity);
       ContactResponse contactResponse = new ContactResponse();
       mapper.map(contactUpdate, contactResponse);
       return contactResponse;    
@@ -46,7 +46,7 @@ public class ContactService {
 
   @Transactional
   public String delete(Long id) {
-      Optional<ContactsEntity> contact = repository.findById(id);
+      Optional<Contacts> contact = repository.findById(id);
       if (!contact.isPresent()) {
         throw new BusinessException("Contact not found with id: " + id);
       }
@@ -55,7 +55,7 @@ public class ContactService {
   }
 
   public ContactResponse findById(Long id){
-    Optional<ContactsEntity> contact = repository.findById(id);
+    Optional<Contacts> contact = repository.findById(id);
     if(contact.isEmpty()){
       throw new BusinessException("It's not possible find contact with id: " + id);
     }

@@ -1,8 +1,6 @@
 package br.com.myanalista.models.request;
 
-import javax.validation.constraints.NotEmpty;
-
-import br.com.myanalista.models.entities.CustomersEnity;
+import br.com.myanalista.models.entities.Customers;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,5 +19,5 @@ public class ContactRequestPost {
   private String contactEmail;
   private String contactName;
   private String contactPhone;  
-  private CustomersEnity customer;
+  private Customers customer;
 }

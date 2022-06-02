@@ -13,32 +13,28 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 @Builder
 @Entity
-@Table(name = "categories")
+@Table(name = "products")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoriesEntity implements Serializable {
+public class Products implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String categoryName;
-    @ManyToOne
-    @JoinColumn(name="product_id", nullable=true)
-    private ProductsEntity product;
-    @OneToMany(mappedBy="category")
-    private Set<CategoriesEntity> categories;
-    @ManyToOne
-    @JoinColumn(name="category_id", nullable=true)
-    private CategoriesEntity category;
+    @OneToMany(mappedBy="product")
+    private List<Categories> categories;
+    private String sku;
+    private String productDescription;
+    private boolean isActive;
     @CreationTimestamp
     private LocalDate createdAt;
     @UpdateTimestamp
-    private LocalDate updatedAt;
+    private LocalDate updatedAt;  
 }

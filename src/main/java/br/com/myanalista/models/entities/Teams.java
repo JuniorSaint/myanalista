@@ -7,32 +7,36 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import br.com.myanalista.models.enums.UserTypeEnum;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 @Builder
 @Entity
-@Table(name = "users")
+@Table(name = "teams")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UsersEntity implements Serializable {
+public class Teams implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String userName;
-    private String password;
-    private UserTypeEnum userType;
-    private String userEmail;
+    private String fullName;
+    private String memberCode;
+    private String cpf;
+    private String memberFunction;
+    private String typeOfRegistrationMember;
+    private String memberLink;
+    @ManyToOne
+    @JoinColumn(name="customer_id", nullable=true)
+    private Customers customer;
     @CreationTimestamp
     private LocalDate createdAt;
     @UpdateTimestamp

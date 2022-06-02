@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.myanalista.exceptions.BusinessException;
-import br.com.myanalista.models.entities.ProductsEntity;
+import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.request.ProductRequestPost;
 import br.com.myanalista.models.request.ProductRequestPut;
 import br.com.myanalista.models.response.ProductResponse;
@@ -25,13 +25,13 @@ public class ProductService {
 
   @Transactional
   public ProductResponse save(ProductRequestPost productRequest) {
-    Optional<ProductsEntity> product = repository.findBySku(productRequest.getSku());
+    Optional<Products> product = repository.findBySku(productRequest.getSku());
     if(product.isPresent()){
       throw new BusinessException("There is product register with this sku: " + productRequest.getSku());
     }
-      ProductsEntity productEntity = new ProductsEntity();
+      Products productEntity = new Products();
       mapper.map(productRequest, productEntity);
-      ProductsEntity productCreated = repository.save(productEntity);
+      Products productCreated = repository.save(productEntity);
       ProductResponse productResponse = new ProductResponse();
       mapper.map(productCreated, productResponse);
       return productResponse;    
@@ -39,9 +39,9 @@ public class ProductService {
 
   @Transactional
   public ProductResponse update(ProductRequestPut contactRequest) {
-    ProductsEntity productEntity = new ProductsEntity();
+    Products productEntity = new Products();
       mapper.map(contactRequest, productEntity);
-      ProductsEntity productUpdate = repository.save(productEntity);
+      Products productUpdate = repository.save(productEntity);
       ProductResponse productResponse = new ProductResponse();
       mapper.map(productUpdate, productResponse);
       return productResponse;    
@@ -49,7 +49,7 @@ public class ProductService {
 
   @Transactional
   public String delete(Long id){
-      Optional<ProductsEntity> product = repository.findById(id);
+      Optional<Products> product = repository.findById(id);
       if (!product.isPresent()) {
         throw new BusinessException("Product not found with id: " + id);
       }
@@ -58,7 +58,7 @@ public class ProductService {
   }
 
   public ProductResponse findById(Long id){
-    Optional<ProductsEntity> product = repository.findById(id);
+    Optional<Products> product = repository.findById(id);
     if(product.isEmpty()){
       throw new BusinessException("It's not possible find product with id: " + id);
     }

@@ -4,8 +4,8 @@ import java.util.Set;
 
 import javax.validation.constraints.NotEmpty;
 
-import br.com.myanalista.models.entities.CategoriesEntity;
-import br.com.myanalista.models.entities.ProductsEntity;
+import br.com.myanalista.models.entities.Categories;
+import br.com.myanalista.models.entities.Products;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,8 +20,8 @@ import lombok.experimental.SuperBuilder;
 public class CategoryRequestPost {
   @NotEmpty(message = "Category name is mandatory field")
   private String categoryName;
-  private ProductsEntity product;
-  private Set<CategoriesEntity> categories;
-  private CategoriesEntity category;
+  private Products product;
+  private Set<Categories> categories;
+  private Categories category;
 
 }

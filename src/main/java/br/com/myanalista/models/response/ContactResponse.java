@@ -1,7 +1,7 @@
 package br.com.myanalista.models.response;
 
 
-import br.com.myanalista.models.entities.CustomersEnity;
+import br.com.myanalista.models.entities.Customers;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,5 +19,5 @@ public class ContactResponse {
   private String contactEmail;
   private String contactName;
   private String contactPhone;
-  private CustomersEnity customer;
+  private Customers customer;
 }

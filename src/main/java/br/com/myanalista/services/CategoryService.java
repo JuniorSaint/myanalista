@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.myanalista.exceptions.BusinessException;
-import br.com.myanalista.models.entities.CategoriesEntity;
+import br.com.myanalista.models.entities.Categories;
 import br.com.myanalista.models.request.CategoryRequestPost;
 import br.com.myanalista.models.request.CategoryRequestPut;
 import br.com.myanalista.models.response.CategoryResponse;
@@ -26,9 +26,9 @@ public class CategoryService {
 
   @Transactional
   public CategoryResponse save(CategoryRequestPost categorytRequest) {
-      CategoriesEntity categorytEntity = new CategoriesEntity();
+      Categories categorytEntity = new Categories();
       mapper.map(categorytRequest, categorytEntity);
-      CategoriesEntity categoryCreated = repository.save(categorytEntity);
+      Categories categoryCreated = repository.save(categorytEntity);
       CategoryResponse categoryResponse = new CategoryResponse();
       mapper.map(categoryCreated, categoryResponse);
       return categoryResponse;    
@@ -36,9 +36,9 @@ public class CategoryService {
 
   @Transactional
   public CategoryResponse update(CategoryRequestPut contactRequest) {
-    CategoriesEntity categoryEntity = new CategoriesEntity();
+    Categories categoryEntity = new Categories();
       mapper.map(contactRequest, categoryEntity);
-      CategoriesEntity categoryUpdate = repository.save(categoryEntity);
+      Categories categoryUpdate = repository.save(categoryEntity);
       CategoryResponse categoryResponse = new CategoryResponse();
       mapper.map(categoryUpdate, categoryResponse);
       return categoryResponse;    
@@ -46,7 +46,7 @@ public class CategoryService {
 
   @Transactional
   public String delete(Long id)  {
-      Optional<CategoriesEntity> category = repository.findById(id);
+      Optional<Categories> category = repository.findById(id);
       if (!category.isPresent()) {
         throw new BusinessException("Category not found with id: " + id);
       }
@@ -55,7 +55,7 @@ public class CategoryService {
   }
 
   public CategoryResponse findById(Long id){
-    Optional<CategoriesEntity> category = repository.findById(id);
+    Optional<Categories> category = repository.findById(id);
     if(category.isEmpty()){
       throw new BusinessException("It's not possible find category with id: " + id);
     }

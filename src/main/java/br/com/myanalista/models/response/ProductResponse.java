@@ -3,7 +3,7 @@ package br.com.myanalista.models.response;
 
 import java.util.Set;
 
-import br.com.myanalista.models.entities.CategoriesEntity;
+import br.com.myanalista.models.entities.Categories;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +17,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class ProductResponse {
   private Long id;
-  private Set<CategoriesEntity> categories;
+  private Set<Categories> categories;
   private String sku;
   private String productDescription;
   private boolean isActive;

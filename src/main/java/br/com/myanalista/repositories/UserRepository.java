@@ -10,17 +10,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import br.com.myanalista.models.entities.UsersEntity;
+import br.com.myanalista.models.entities.Users;
 
 @Repository
-public interface UserRepository extends JpaRepository<UsersEntity, Long> {
+public interface UserRepository extends JpaRepository<Users, Long> {
 
     @Query(value = "select u from UsersEntity u where u.userName = :userName")
-    List<UsersEntity> findAll(@Param(value = "userName") String userName);
+    List<Users> findAll(@Param(value = "userName") String userName);
 
-    Optional<UsersEntity> findByUserEmail(String userEmail);
+    Optional<Users> findByUserEmail(String userEmail);
 
-    Optional<UsersEntity> findById(Long id);
+    Optional<Users> findById(Long id);
 
-    Page<UsersEntity> findAll(Example example, Pageable pageable);
+    Page<Users> findAll(Example example, Pageable pageable);
 }

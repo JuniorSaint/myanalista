@@ -4,7 +4,7 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.br.CPF;
 
-import br.com.myanalista.models.entities.CustomersEnity;
+import br.com.myanalista.models.entities.Customers;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,5 +25,5 @@ public class TeamsRequestPost {
   private String memberFunction;
   private String typeOfRegistrationMember;
   private String memberLink;
-  private CustomersEnity customer;  
+  private Customers customer;  
 }

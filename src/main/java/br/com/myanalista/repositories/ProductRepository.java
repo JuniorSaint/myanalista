@@ -2,7 +2,7 @@ package br.com.myanalista.repositories;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.myanalista.models.entities.ProductsEntity;
+import br.com.myanalista.models.entities.Products;
 
 import java.util.Optional;
 
@@ -11,9 +11,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 @Repository
-public interface ProductRepository extends JpaRepository<ProductsEntity, Long>{
-  Optional<ProductsEntity> findById(Long id);
+public interface ProductRepository extends JpaRepository<Products, Long>{
+  Optional<Products> findById(Long id);
 
   @Query(value = "select u from ProductsEntity u where u.sku = :sku")
-  Optional<ProductsEntity> findBySku(@Param(value = "sku") String sku);
+  Optional<Products> findBySku(@Param(value = "sku") String sku);
 }
