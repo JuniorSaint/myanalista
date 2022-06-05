@@ -1,5 +1,7 @@
 package br.com.myanalista.controllers;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +18,7 @@ import br.com.myanalista.models.request.CategoryRequestPost;
 import br.com.myanalista.models.request.CategoryRequestPut;
 import br.com.myanalista.models.response.CategoryResponse;
 import br.com.myanalista.services.CategoryService;
+import br.com.myanalista.services.SubChannelService;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -26,6 +29,9 @@ public class CategoriesController {
 
   @Autowired
   private CategoryService service;
+
+  @Autowired
+  private SubChannelService serviceSub;
 
   @GetMapping("/{id}")
   public CategoryResponse findById(@PathVariable(value = "id") Long id) {
@@ -58,6 +64,16 @@ public class CategoriesController {
     try {
       CategoryResponse response = service.update(request);
       return response;
+    } catch (BusinessException e) {
+      throw new BusinessException(e.getMessage());
+    }
+  }
+
+  @PostMapping("/test")
+  public void save() throws IOException {
+    try {
+       serviceSub.recordDataToDb();
+
     } catch (BusinessException e) {
       throw new BusinessException(e.getMessage());
     }
