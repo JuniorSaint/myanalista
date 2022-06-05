@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.myanalista.services.CityIneService;
 import br.com.myanalista.services.ClusterGecService;
+import br.com.myanalista.services.RouteService;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -24,6 +25,9 @@ public class UniqueChargeController {
   @Autowired
   private ClusterGecService serviceCluster;
 
+  @Autowired
+  private RouteService serviceRoute;
+
 
   @PostMapping("/cityine")
   public void chargeCityIne() throws IOException {
@@ -34,6 +38,11 @@ public class UniqueChargeController {
   public void chargeCluster() throws IOException {
         
      serviceCluster.recordDataToDb();
+  }
+  @PostMapping("/route")
+  public void chargeRoute() throws IOException {
+        
+     serviceRoute.recordDataToDb();
   }
   
 }

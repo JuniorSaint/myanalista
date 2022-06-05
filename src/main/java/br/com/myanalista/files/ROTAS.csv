@@ -1,0 +1,58 @@
+Rotatividade,Rota,Dia 1,Dia 2,Dia 3,Dia 4,Dia 5,Dia 6,Quantidade
+2ª Semana Quinzena,"SEG,TER,QUA,QUI,SEX,",2,3,4,5,6,7,6
+Semanal,"SEG,TER,QUA,QUI,SEX,",2,3,4,5,6,7,6
+Semanal,"SEG,TER,QUA,QUI,SEX",2,3,4,5,6,,5
+Semanal,"SEG,TER,QUA,QUI,SAB",2,3,4,5,7,,5
+Semanal,"SEG,TER,QUA,QUI",2,3,4,5,,,4
+Semanal,"SEG,TER,QUA,SEX",2,3,4,6,,,4
+Semanal,"SEG,TER,QUA",2,3,4,,,,3
+Semanal,"SEG,TER,QUI,SEX,SAB",2,3,5,6,7,,5
+Semanal,"SEG,TER,SEX",2,3,6,,,,3
+Semanal,"SEG,TER",2,3,,,,,2
+Semanal,"SEG,QUA,QUI,SEX",2,4,5,6,,,4
+Semanal,"SEG,QUA,QUI",2,4,5,,,,3
+Semanal,"SEG,QUA,SEX",2,4,6,,,,3
+Semanal,"SEG,QUA",2,4,,,,,2
+Semanal,"SEG,QUI,SEX",2,5,6,,,,3
+Semanal,"SEG,QUI,SAB",2,5,7,,,,3
+1ª Semana Quinzena,"SEG,QUI",2,5,,,,,2
+Semanal,"SEG,QUI",2,5,,,,,2
+Semanal,"SEG,SEX",2,6,,,,,2
+Semanal,"SEG,SAB",2,7,,,,,2
+1ª Semana Quinzena,SEG,2,,,,,,1
+2ª Semana Quinzena,SEG,2,,,,,,1
+Semanal,SEG,2,,,,,,1
+Semanal,"TER,QUA,QUI,SEX",3,4,5,6,,,4
+Semanal,"TER,QUA,QUI",3,4,5,,,,3
+Semanal,"TER,QUA,SEX,SAB",3,4,6,7,,,4
+Semanal,"TER,QUA",3,4,,,,,2
+Semanal,"TER,QUI,SEX",3,5,6,,,,3
+Semanal,"TER,QUI",3,5,,,,,2
+Semanal,"TER,SEX,SAB",3,6,7,,,,3
+Semanal,"TER,SEX",3,6,,,,,2
+Semanal,"TER,SAB",3,7,,,,,2
+1ª Semana Quinzena,TER,3,,,,,,1
+2ª Semana Quinzena,TER,3,,,,,,1
+Semanal,TER,3,,,,,,1
+Semanal,"QUA,QUI",4,5,,,,,2
+Semanal,"QUA,SEX",4,6,,,,,2
+Semanal,"QUA,SAB",4,7,,,,,2
+1ª Semana Quinzena,QUA,4,,,,,,1
+2ª Semana Quinzena,QUA,4,,,,,,1
+Semanal,QUA,4,,,,,,1
+Semanal,"QUI,SEX",5,6,,,,,2
+1ª Semana Quinzena,QUI,5,,,,,,1
+2ª Semana Quinzena,QUI,5,,,,,,1
+Semanal,QUI,5,,,,,,1
+1ª Semana Quinzena,SEX,6,,,,,,1
+2ª Semana Quinzena,SEX,6,,,,,,1
+Semanal,SEX,6,,,,,,1
+Semanal,SAB,7,,,,,,1
+1ª Semana Quinzena,BALCAO/NAO DEFINIDO,,,,,,,0
+2ª Semana Quinzena,BALCAO/NAO DEFINIDO,,,,,,,0
+Semanal,BALCAO/NAO DEFINIDO,,,,,,,0
+1ª Semana Quinzena,CLIENTE LIGA,,,,,,,0
+2ª Semana Quinzena,CLIENTE LIGA,,,,,,,0
+Semanal,CLIENTE LIGA,,,,,,,0
+Semanal,VISITAS EVENTUAIS,,,,,,,0
+Semanal,VISITAS QUINZENAIS,,,,,,,0
