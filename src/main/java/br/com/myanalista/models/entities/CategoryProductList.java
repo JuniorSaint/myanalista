@@ -30,7 +30,7 @@ public class CategoryProductList implements Serializable {
     private Long id;
     private Categories category;
     @Nullable
-    private Categories nextCategory;
+    private CategoryProductList nextCategory;
     @CreationTimestamp
     private LocalDate createdAt;
     @UpdateTimestamp

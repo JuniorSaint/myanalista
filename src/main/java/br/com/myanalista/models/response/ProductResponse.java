@@ -20,5 +20,5 @@ public class ProductResponse {
   private Categories category;
   private String sku;
   private String productDescription;
-  private boolean isActive;
+  private boolean active;
 }

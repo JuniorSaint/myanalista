@@ -1,6 +1,7 @@
 package br.com.myanalista.models.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,5 +35,21 @@ public class Lending implements Serializable {
   private String cnpj;
   private String companyName;
   private String fantasyName;
-  private String gec;  
+  private String gec;
+  private String SubChannel;
+  private String city;
+  private String equipmentNumber;
+  private String serie;
+  private Integer amountDoors;
+  private String logo;
+  private String contract;
+  private String productCode;
+  private String product;
+  private Integer amount;
+  private LocalDate dateSend;
+  private LocalDate dueDate;
+  private String sellerCode;
+  private String route;
+  private String nf;
+  private String conservation;
 }

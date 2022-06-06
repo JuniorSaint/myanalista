@@ -13,7 +13,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
 @Builder
 @Entity
@@ -29,10 +28,10 @@ public class Products implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @PrimaryKeyJoinColumn
-    private Categories category;
+    private CategoryProductList category;
     private String sku;
     private String productDescription;
-    private boolean isActive;
+    private boolean active;
     @CreationTimestamp
     private LocalDate createdAt;
     @UpdateTimestamp

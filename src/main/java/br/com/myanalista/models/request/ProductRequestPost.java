@@ -17,5 +17,5 @@ public class ProductRequestPost {
   private Categories category;
   private String sku;
   private String productDescription;
-  private boolean isActive;
+  private boolean active;
 }
