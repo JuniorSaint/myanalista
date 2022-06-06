@@ -17,6 +17,4 @@ import lombok.experimental.SuperBuilder;
 public class CategoryResponse {
   private Long id;
   private String categoryName;
-  private Set<Categories> categories;
-  private Categories category;
 }

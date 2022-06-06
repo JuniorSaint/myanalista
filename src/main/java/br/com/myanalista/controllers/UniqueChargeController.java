@@ -13,6 +13,7 @@ import br.com.myanalista.services.CityIneService;
 import br.com.myanalista.services.ClusterGecService;
 import br.com.myanalista.services.NationalHolidayService;
 import br.com.myanalista.services.RouteService;
+import br.com.myanalista.services.SubChannelService;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -35,6 +36,9 @@ public class UniqueChargeController {
 
    @Autowired
    private NationalHolidayService serviceNational;
+
+   @Autowired
+   private SubChannelService serviceSub;
 
    @PostMapping("/cityine")
    public void chargeCityIne() throws IOException {
@@ -64,6 +68,12 @@ public class UniqueChargeController {
    public void chargeNationalHolidays() throws IOException {
 
       serviceNational.recordDataToDb();
+   }
+
+   @PostMapping("/test")
+   public void save() throws IOException {
+
+        serviceSub.recordDataToDb();
    }
 
 }

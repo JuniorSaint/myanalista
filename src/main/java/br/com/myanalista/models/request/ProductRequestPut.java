@@ -12,6 +12,5 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class ProductRequestPut extends ProductRequestPost{
-
   private Long id;
 }

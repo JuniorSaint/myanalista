@@ -30,12 +30,12 @@ public class CategoryService {
 
   @Transactional
   public CategoryResponse save(CategoryRequestPost categoryRequest) {
-    Products entityProduct = serviceProduct.findByIdEntity(categoryRequest.getProduct().getId());
-    Categories entityCategory = findByIdEntity(categoryRequest.getCategory().getId());
+    // Products entityProduct = serviceProduct.findByIdEntity(categoryRequest.getProduct().getId());
+    // Categories entityCategory = findByIdEntity(categoryRequest.getCategory().getId());
     Categories categoryEntity = new Categories();
     mapper.map(categoryRequest, categoryEntity);
-    categoryEntity.setCategory(entityCategory );
-    categoryEntity.setProduct(entityProduct);
+    // categoryEntity.setCategory(entityCategory );
+    // categoryEntity.setProduct(entityProduct);
     Categories categoryCreated = repository.save(categoryEntity);
     CategoryResponse categoryResponse = new CategoryResponse();
     mapper.map(categoryCreated, categoryResponse);
@@ -44,12 +44,12 @@ public class CategoryService {
 
   @Transactional
   public CategoryResponse update(CategoryRequestPut categoryRequest) {
-    Products entityProduct = serviceProduct.findByIdEntity(categoryRequest.getProduct().getId());
-    Categories entityCategory = findByIdEntity(categoryRequest.getCategory().getId());
+    // Products entityProduct = serviceProduct.findByIdEntity(categoryRequest.getProduct().getId());
+    // Categories entityCategory = findByIdEntity(categoryRequest.getCategory().getId());
     Categories categoryEntity = new Categories();
     mapper.map(categoryRequest, categoryEntity);
-    categoryEntity.setCategory(entityCategory);
-    categoryEntity.setProduct(entityProduct);
+    // categoryEntity.setCategory(entityCategory);
+    // categoryEntity.setProduct(entityProduct);
     Categories categoryUpdate = repository.save(categoryEntity);
     CategoryResponse categoryResponse = new CategoryResponse();
     mapper.map(categoryUpdate, categoryResponse);

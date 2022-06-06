@@ -28,13 +28,13 @@ public class Products implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToMany(mappedBy="product")
-    private List<Categories> categories;
+    @PrimaryKeyJoinColumn
+    private Categories category;
     private String sku;
     private String productDescription;
     private boolean isActive;
     @CreationTimestamp
     private LocalDate createdAt;
     @UpdateTimestamp
-    private LocalDate updatedAt;  
+    private LocalDate updatedAt;
 }

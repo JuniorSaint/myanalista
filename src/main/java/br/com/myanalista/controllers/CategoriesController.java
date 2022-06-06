@@ -18,7 +18,6 @@ import br.com.myanalista.models.request.CategoryRequestPost;
 import br.com.myanalista.models.request.CategoryRequestPut;
 import br.com.myanalista.models.response.CategoryResponse;
 import br.com.myanalista.services.CategoryService;
-import br.com.myanalista.services.SubChannelService;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -29,9 +28,6 @@ public class CategoriesController {
 
   @Autowired
   private CategoryService service;
-
-  @Autowired
-  private SubChannelService serviceSub;
 
   @GetMapping("/{id}")
   public CategoryResponse findById(@PathVariable(value = "id") Long id) {
@@ -68,15 +64,4 @@ public class CategoriesController {
       throw new BusinessException(e.getMessage());
     }
   }
-
-  @PostMapping("/test")
-  public void save() throws IOException {
-    try {
-       serviceSub.recordDataToDb();
-
-    } catch (BusinessException e) {
-      throw new BusinessException(e.getMessage());
-    }
-  }
-
 }

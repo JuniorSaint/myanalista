@@ -12,6 +12,5 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class CategoryRequestPut extends CategoryRequestPost{
-
   private Long id;
 }

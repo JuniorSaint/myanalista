@@ -17,7 +17,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class ProductResponse {
   private Long id;
-  private Set<Categories> categories;
+  private Categories category;
   private String sku;
   private String productDescription;
   private boolean isActive;
