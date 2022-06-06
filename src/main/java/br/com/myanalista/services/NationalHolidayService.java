@@ -3,21 +3,22 @@ package br.com.myanalista.services;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.myanalista.models.entities.Route;
-import br.com.myanalista.repositories.RouteRepository;
+import br.com.myanalista.models.entities.NationalHolidays;
+import br.com.myanalista.repositories.NationalHolidayRepository;
 
 @Service
-public class RouteService {
+public class NationalHolidayService {
   @Autowired
-  private RouteRepository repository;
+  private NationalHolidayRepository repository;
 
   public void recordDataToDb() throws IOException {
 
-    String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/ROTAS.csv";
+    String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/HOLIDAYS.csv";
 
     try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 
@@ -27,16 +28,15 @@ public class RouteService {
 
         String[] vector = line.split(",");
 
-        Route channel = Route.builder()
-            .turnover(vector[0])
-            .route(vector[1])
-            .firstDay(Integer.parseInt(vector[2]))
-            .secondDay(Integer.parseInt(vector[3]))
-            .thirdDay(Integer.parseInt(vector[4]))
-            .fourthDay(Integer.parseInt(vector[5]))
-            .fifthDay(Integer.parseInt(vector[6]))
-            .sixDay(Integer.parseInt(vector[7]))
-            .amount(Integer.parseInt(vector[8]))
+        NationalHolidays channel = NationalHolidays.builder()
+            .date(LocalDate.parse(vector[0]))
+            .dayOfTheWeek(vector[1])
+            .month(vector[2])
+            .description(vector[3])
+            .city(vector[4])
+            .territory(vector[5])
+            .year(vector[6])
+            .fixedDay(vector[7])       
             .build();
 
         repository.save(channel);
