@@ -7,17 +7,17 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.myanalista.models.entities.Route;
-import br.com.myanalista.repositories.RouteRepository;
+import br.com.myanalista.models.entities.Lending;
+import br.com.myanalista.repositories.LendingRepository;
 
 @Service
-public class RouteService {
+public class LendingService {
   @Autowired
-  private RouteRepository repository;
+  private LendingRepository repository;
 
   public void recordDataToDb() throws IOException {
 
-    String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/ROTAS.csv";
+    String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/CIDADES_INE.csv";
 
     try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 
@@ -25,18 +25,11 @@ public class RouteService {
       line = br.readLine();
       while (line != null) {
 
-        String[] vector = line.split(";");
+        String[] vector = line.split(",");
 
-        Route channel = Route.builder()
-            .turnover(vector[0])
-            .route(vector[1])
-            .firstDay(vector[2])
-            .secondDay(vector[3])
-            .thirdDay(vector[4])
-            .fourthDay(vector[5])
-            .fifthDay(vector[6])
-            .sixDay(vector[7])
-            .amount(vector[8])
+        Lending channel = Lending.builder()
+            // .city(vector[0])
+            // .cityIne(vector[1])
             .build();
 
         repository.save(channel);
@@ -47,4 +40,5 @@ public class RouteService {
       throw new IOException("Error to read file " + e.getMessage());
     }
   }
+  
 }

@@ -58,19 +58,19 @@ public class TeamsService {
   }
 
   @Transactional
-  public String delete(Long id) {
-    Optional<Teams> teams = repository.findById(id);
+  public String delete(String code) {
+    Optional<Teams> teams = repository.findByMemberCode(code);
     if (!teams.isPresent()) {
-      throw new BusinessException("Teams not found with id: " + id);
+      throw new BusinessException("Teams not found with code: " + code);
     }
-    repository.deleteById(id);
+    repository.deleteByMemberCode(code);
     return "Teams deleted with success";
   }
 
-  public TeamsResponse findById(Long id) {
-    Optional<Teams> teams = repository.findById(id);
+  public TeamsResponse findByMemberCode(String code) {
+    Optional<Teams> teams = repository.findByMemberCode(code);
     if (teams.isEmpty()) {
-      throw new BusinessException("It's not possible find Teams with id: " + id);
+      throw new BusinessException("It's not possible find Teams with code: " + code);
     }
     TeamsResponse teamsResponse = new TeamsResponse();
     mapper.map(teams.get(), teamsResponse);

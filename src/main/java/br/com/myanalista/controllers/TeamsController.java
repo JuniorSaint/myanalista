@@ -28,8 +28,8 @@ public class TeamsController {
   private TeamsService service;
 
   @GetMapping("/{id}")
-  public TeamsResponse findAllWithListTeams(@PathVariable(value = "id") Long id) {
-    TeamsResponse response = service.findById(id);
+  public TeamsResponse findAllWithListTeams(@PathVariable(value = "id") String id) {
+    TeamsResponse response = service.findByMemberCode(id);
     return response;
   }
 
@@ -44,7 +44,7 @@ public class TeamsController {
   }
 
   @DeleteMapping("/{id}")
-  public String deleteTeams(@PathVariable(value = "id") Long id) {
+  public String deleteTeams(@PathVariable(value = "id") String id) {
     try {
       return service.delete(id);
     } catch (BusinessException e) {

@@ -48,7 +48,7 @@ public class SellOut implements Serializable {
   private Double weight;
   private Double priceSell;
   private Double priceCost;
-  private String table;
+  private String tablePrice;
   private String group;
   private String category;
   private String brand;

@@ -1,27 +1,20 @@
-package br.com.myanalista.models.entities;
+package br.com.myanalista.models.request;
 
-import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.time.LocalDate;
 
+import br.com.myanalista.models.entities.Teams;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
-@Builder
-@Entity
-@Table(name = "customerFromCustomer")
+@AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-public class CustomerFromCustomer implements Serializable {
-  private static final long serialVersionUID = 1L;
-
-  @Id
+@SuperBuilder
+public class CustomerFromCutomerPost {
   private String code;
   private String route;
   private String cnpj;
@@ -35,7 +28,7 @@ public class CustomerFromCustomer implements Serializable {
   private String zipCode;
   private String district;
   private String phoneNumber;
-  private SubChannel subChannel;
+  private String subChannel;
   private String week;
   private String sequence;
   private String email;
@@ -45,22 +38,18 @@ public class CustomerFromCustomer implements Serializable {
   private String supervisor;
   private String area;
   private String originalPaymentMethod;
-  // private Integer maximunDays;
-  private String maximunDays;
+  private Integer maximunDays;
   private String turnover;
   private String regiterDay;
-  // private LocalDate regiterDay;
   private String inactivationDay;
-  // private LocalDate inactivationDay;
   private String status;
-  private ClusterGec clusterGec;
+  private String clusterGec;
   private String refPet;
   private String ls;
   private String rgb;
-  private String lastPurchase;
-  // private LocalDate lastPurchase;
-  private String creditLimit;
-  private String addition;
+  private LocalDate lastPurchase;
+  private Double creditLimit;
+  private Double addition;
   private Teams seller2;
   private String week2;
   private String turnover2;

@@ -17,5 +17,7 @@ public interface TeamsRepository extends JpaRepository<Teams, Long>{
   @Query(value = "select t from Teams t where t.fullName = :fullName")
   List<Teams> listToFull(@Param(value = "fullName") String fullName);
 
-  Optional<Teams> findById(Long id);
+  Optional<Teams> findByMemberCode(String code);
+
+  long deleteByMemberCode(String code);
 }

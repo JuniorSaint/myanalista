@@ -1,6 +1,5 @@
 package br.com.myanalista.models.request;
 
-import java.util.Set;
 import br.com.myanalista.models.entities.Categories;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

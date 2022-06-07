@@ -24,12 +24,12 @@ public class Route implements Serializable {
   private Long id;
   private String turnover;
   private String route;
-  private Integer firstDay;
-  private Integer secondDay;
-  private Integer thirdDay;
-  private Integer fourthDay;
-  private Integer fifthDay;
-  private Integer sixDay;
-  private Integer amount;
+  private String firstDay;
+  private String secondDay;
+  private String thirdDay;
+  private String fourthDay;
+  private String fifthDay;
+  private String sixDay;
+  private String amount;
 
 }
