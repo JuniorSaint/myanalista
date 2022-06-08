@@ -4,10 +4,13 @@ import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.myanalista.models.response.CustomerFromCustomerResponse;
 import br.com.myanalista.services.CalendarService;
 import br.com.myanalista.services.CityIneService;
 import br.com.myanalista.services.ClusterGecService;
@@ -84,6 +87,11 @@ public class UniqueChargeController {
    public void chargeClients() throws IOException {
 
       serviceCustomer.recordDataToDb();
+   }
+
+   @GetMapping("/{code}")
+   public CustomerFromCustomerResponse findByCode(@PathVariable(value = "code") String code){
+      return serviceCustomer.findCustomerByCode(code);
    }
 
 }

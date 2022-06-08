@@ -1,11 +1,8 @@
-package br.com.myanalista.models.entities;
+package br.com.myanalista.models.response;
 
-import java.io.Serializable;
-import java.time.LocalDate;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import br.com.myanalista.models.entities.ClusterGec;
+import br.com.myanalista.models.entities.SubChannel;
+import br.com.myanalista.models.entities.Teams;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,16 +11,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Builder
-@Entity
-@Table(name = "customerFromCustomer")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerFromCustomer implements Serializable {
-  private static final long serialVersionUID = 1L;
-
-  @Id
+public class CustomerFromCustomerResponse {
   private String code;
   private String route;
   private String cnpj;
