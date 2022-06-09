@@ -3,8 +3,6 @@ package br.com.myanalista.services;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +49,7 @@ public class CustomerFromCustomerService {
         String[] vector = line.split(";");
 
         Boolean isExist = ifCustomerExist(vector[0]);
-        SubChannel subChannel = findSubChannelByName(vector[13].trim());
+        SubChannel subChannel  =  findSubChannelBySubChannel(vector[13].trim());
         ClusterGec clusterGec = findClusterByClusterGec(vector[28].trim());
         Teams teams = findTeamsMemberByCode(vector[19]);
         Teams teams2 = findTeamsMemberByCode(vector[35]);
@@ -125,15 +123,15 @@ public class CustomerFromCustomerService {
   }
 
   private boolean ifCustomerExist(String code) {
-    Optional<CustomerFromCustomer> response = repository.findByCode(code);
+    Optional<CustomerFromCustomer> response = repository.findByCode(code.trim());
     if (response.isPresent()) {
       return true;
     }
     return false;
   }
 
-  private SubChannel findSubChannelByName(String name) {
-    Optional<SubChannel> response = repositorySubChannel.findBySubChannel(name.trim());
+  private SubChannel findSubChannelBySubChannel(String name) {
+    Optional<SubChannel> response = repositorySubChannel.findSubChannelBysubChannel(name.trim());
     if (response.isPresent()) {
       return response.get();
     }

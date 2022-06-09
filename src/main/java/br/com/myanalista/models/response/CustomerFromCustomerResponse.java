@@ -1,7 +1,7 @@
 package br.com.myanalista.models.response;
 
 import br.com.myanalista.models.entities.ClusterGec;
-import br.com.myanalista.models.entities.SubChannel;
+import br.com.myanalista.models.entities.Channel;
 import br.com.myanalista.models.entities.Teams;
 
 import lombok.AllArgsConstructor;
@@ -29,7 +29,7 @@ public class CustomerFromCustomerResponse {
   private String zipCode;
   private String district;
   private String phoneNumber;
-  private SubChannel subChannel;
+  private Channel subChannel;
   private String week;
   private String sequence;
   private String email;
@@ -67,6 +67,6 @@ public class CustomerFromCustomerResponse {
   private String phoneNumber4;
   private String promoter;
   private String promoterEq2;
-  private String channel;
+  private Channel channel;
   private String specie;
 }

@@ -1,18 +1,20 @@
 package br.com.myanalista.models.entities;
 
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-
-import java.io.Serializable;
-
 @Builder
 @Entity
-@Table(name = "subchannel")
+@Table(name = "subChannel")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,12 +23,11 @@ public class SubChannel implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long id;
-
+  private String code;
   private String subChannel;
   private String subChannelType;
-  private String refPetFocus;
-  private String dualFocus;
+  private String focusRefPet;
+  private String focusDual;
   private String subChannelIne;
+  private Channel channel;
 }

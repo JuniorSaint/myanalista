@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.myanalista.exceptions.BusinessException;
 import br.com.myanalista.models.entities.Categories;
-import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.request.CategoryRequestPost;
 import br.com.myanalista.models.request.CategoryRequestPut;
 import br.com.myanalista.models.response.CategoryResponse;

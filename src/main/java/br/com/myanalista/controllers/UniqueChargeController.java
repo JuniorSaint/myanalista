@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.myanalista.models.response.CustomerFromCustomerResponse;
 import br.com.myanalista.services.CalendarService;
+import br.com.myanalista.services.ChannelService;
 import br.com.myanalista.services.CityIneService;
 import br.com.myanalista.services.ClusterGecService;
 import br.com.myanalista.services.CustomerFromCustomerService;
@@ -46,6 +47,11 @@ public class UniqueChargeController {
 
    @Autowired
    private CustomerFromCustomerService serviceCustomer;
+
+   @Autowired
+   private ChannelService serviceChannel;
+
+
 
    @PostMapping("/cityine")
    public void chargeCityIne() throws IOException {
@@ -87,6 +93,17 @@ public class UniqueChargeController {
    public void chargeClients() throws IOException {
 
       serviceCustomer.recordDataToDb();
+   }
+   @PostMapping("/channel")
+   public void chargeChannel() throws IOException {
+
+      serviceChannel.recordDataToDb();
+   }
+
+   @PostMapping("/subchannel")
+   public void chargeSubChannel() throws IOException {
+
+      serviceSub.recordDataToDb();
    }
 
    @GetMapping("/{code}")
