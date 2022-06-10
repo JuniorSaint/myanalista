@@ -1,6 +1,5 @@
 package br.com.myanalista.models.entities;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -33,7 +32,7 @@ public class Teams implements Serializable {
     private String typeOfRegistrationMember;
     private String memberLink;
     @ManyToOne
-    @JoinColumn(name="customer_id", nullable=true)
+    @JoinColumn(name = "customer_id", nullable = true)
     private Customers customer;
     @CreationTimestamp
     private LocalDate createdAt;
@@ -48,4 +47,10 @@ public class Teams implements Serializable {
 
     // @OneToOne(mappedBy = "seller2")
     // private SellOut sellOut;
+
+    @OneToOne(mappedBy = "sellerCode")
+    private Lending lending;
+
+    @OneToOne(mappedBy = "seller")
+    private CustomerFromCustomer customerFromCustomer;
 }

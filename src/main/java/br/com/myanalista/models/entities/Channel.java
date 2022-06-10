@@ -9,6 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.Set;
 
 @Builder
 @Entity
@@ -23,4 +24,9 @@ public class Channel implements Serializable {
   @Id
   private String code;
   private String channel;
+  @OneToMany(mappedBy="channel")
+  private Set<SubChannel> subChannels;
+
+  @OneToOne(mappedBy = "channel")
+  private CustomerFromCustomer customer;
 }

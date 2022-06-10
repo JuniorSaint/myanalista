@@ -9,11 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.myanalista.exceptions.BusinessException;
+import br.com.myanalista.models.entities.Channel;
 import br.com.myanalista.models.entities.ClusterGec;
 import br.com.myanalista.models.entities.CustomerFromCustomer;
 import br.com.myanalista.models.entities.SubChannel;
 import br.com.myanalista.models.entities.Teams;
 import br.com.myanalista.models.response.CustomerFromCustomerResponse;
+import br.com.myanalista.repositories.ChannelRepository;
 import br.com.myanalista.repositories.ClusterGecRepository;
 import br.com.myanalista.repositories.CustomerFromCustomerRepository;
 import br.com.myanalista.repositories.SubChannelRepository;
@@ -37,6 +39,9 @@ public class CustomerFromCustomerService {
   @Autowired
   private ModelMapper mapper;
 
+  @Autowired
+  private ChannelRepository repositoryChannel;
+
   public void recordDataToDb() throws IOException {
 
     String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/Clientes.csv";
@@ -49,7 +54,7 @@ public class CustomerFromCustomerService {
         String[] vector = line.split(";");
 
         Boolean isExist = ifCustomerExist(vector[0]);
-        SubChannel subChannel  =  findSubChannelBySubChannel(vector[13].trim());
+        SubChannel subChannel = findSubChannelBySubChannel(vector[13].trim());
         ClusterGec clusterGec = findClusterByClusterGec(vector[28].trim());
         Teams teams = findTeamsMemberByCode(vector[19]);
         Teams teams2 = findTeamsMemberByCode(vector[35]);
@@ -107,7 +112,7 @@ public class CustomerFromCustomerService {
               .phoneNumber4(vector[48].trim())
               .promoter(vector[49].trim())
               .promoterEq2(vector[50].trim())
-              .channel(vector[51].trim())
+              .channel(findChannelByCode(vector[51].trim()))
               .specie(vector[52].trim())
               .build();
 
@@ -148,7 +153,7 @@ public class CustomerFromCustomerService {
 
   private Teams findTeamsMemberByCode(String code) {
     String[] nameCode = code.split("-");
-    if(code.toString().trim().equals("N/D")){
+    if (code.toString().trim().equals("N/D")) {
       return null;
     }
     Integer codeInteger = Integer.parseInt(nameCode[0]);
@@ -161,13 +166,24 @@ public class CustomerFromCustomerService {
     return repositoryTeams.save(teamsBuild);
   }
 
-  public CustomerFromCustomerResponse findCustomerByCode(String code){
+  public CustomerFromCustomerResponse findCustomerByCode(String code) {
     Optional<CustomerFromCustomer> response = repository.findByCode(code);
-    if(response.isEmpty()){
+    if (response.isEmpty()) {
       throw new BusinessException("There isn't customer with code: " + code);
     }
     CustomerFromCustomerResponse customer = new CustomerFromCustomerResponse();
     mapper.map(response.get(), customer);
     return customer;
+  }
+
+  private Channel findChannelByCode(String code) {
+    if (code.isEmpty()) {
+      return null;
+    }
+    Optional<Channel> responseChannel = repositoryChannel.findChannelByCode(code);
+    if(!responseChannel.isPresent()){
+      return null;
+    }
+    return responseChannel.get();
   }
 }

@@ -2,6 +2,7 @@ package br.com.myanalista.models.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -39,12 +40,16 @@ public class CustomerFromCustomer implements Serializable {
   private String zipCode;
   private String district;
   private String phoneNumber;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "subChannel_id")
   private SubChannel subChannel;
   private String week;
   private String sequence;
   private String email;
   private String tablePrice;
   private String groupBusiness;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "seller_id")
   private Teams seller;
   private String supervisor;
   private String area;
@@ -54,6 +59,8 @@ public class CustomerFromCustomer implements Serializable {
   private String regiterDay;
   private String inactivationDay;
   private String status;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "clusterGec_id")
   private ClusterGec clusterGec;
   private String refPet;
   private String ls;
@@ -61,6 +68,8 @@ public class CustomerFromCustomer implements Serializable {
   private String lastPurchase;
   private String creditLimit;
   private String addition;
+  // @OneToOne(cascade = CascadeType.ALL)
+  // @JoinColumn(name = "seller2_id")
   private Teams seller2;
   private String week2;
   private String turnover2;
@@ -77,10 +86,14 @@ public class CustomerFromCustomer implements Serializable {
   private String phoneNumber4;
   private String promoter;
   private String promoterEq2;
-  private String channel;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "channel_id")
+  private Channel channel;
   private String specie;
-
 
   @OneToOne(mappedBy = "customer")
   private SellOut sellOut;
+
+  @OneToOne(mappedBy = "customerRegistration")
+  private Lending lending;
 }

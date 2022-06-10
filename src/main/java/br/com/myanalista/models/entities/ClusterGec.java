@@ -20,10 +20,17 @@ public class ClusterGec implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Id
-  private String code;
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
   private String clusterGec;
   private String gecIne;
 
   @OneToOne(mappedBy = "cluster")
   private SellOut sellOut;
+
+  @OneToOne(mappedBy = "gec")
+  private Lending lending;
+
+  @OneToOne(mappedBy = "clusterGec")
+  private CustomerFromCustomer customer;
 }

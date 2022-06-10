@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -30,8 +32,16 @@ public class SubChannel implements Serializable {
   private String focusRefPet;
   private String focusDual;
   private String subChannelIne;
+  @ManyToOne
+  @JoinColumn(name = "channel_id", nullable = false)
   private Channel channel;
 
   @OneToOne(mappedBy = "channel")
   private SellOut sellOut;
+
+  @OneToOne(mappedBy = "subChannel")
+  private Lending lending;
+
+  @OneToOne(mappedBy = "subChannel")
+  private CustomerFromCustomer customer;
 }

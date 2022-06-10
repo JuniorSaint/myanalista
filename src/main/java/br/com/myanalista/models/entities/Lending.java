@@ -3,10 +3,13 @@ package br.com.myanalista.models.entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -30,26 +33,27 @@ public class Lending implements Serializable {
   private Long id;
   private String territory;
   private String dealer;
-  private String customerRegistration;
-  private String cpf;
-  private String cnpj;
-  private String companyName;
-  private String fantasyName;
-  private String gec;
-  private String SubChannel;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "customerRegistration_id")
+  private CustomerFromCustomer customerRegistration;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "gec_id")
+  private ClusterGec gec;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "SubChannel_id")
+  private SubChannel subChannel;
   private String city;
-  private String equipmentNumber;
-  private String serie;
-  private Integer amountDoors;
-  private String logo;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "equipmentNumber_id")
+  private Equipment equipmentNumber;
   private String contract;
-  private String productCode;
-  private String product;
   private Integer amount;
   private LocalDate dateSend;
   private LocalDate dueDate;
-  private String sellerCode;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "sellerCode_id")
+  private Teams sellerCode;
   private String route;
-  private String nf;
+  private String nfe;
   private String conservation;
 }

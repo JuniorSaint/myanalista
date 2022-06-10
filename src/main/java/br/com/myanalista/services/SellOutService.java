@@ -230,7 +230,7 @@ public class SellOutService {
     Products product = Products.builder().code(splitProd[0]).sku("sku-" + splitProd[0]).productDescription(splitProd[1])
         .active(true).build();
     Optional<Products> responseProd = repositoryProduct.findByCode(splitProd[0]);
-
+Products test = responseProd.get();
     if (!responseProd.isPresent()) {
       return repositoryProduct.save(product);
     }
