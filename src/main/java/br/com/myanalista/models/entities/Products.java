@@ -25,8 +25,7 @@ public class Products implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String code;
     @PrimaryKeyJoinColumn
     private CategoryProductList category;
     private String sku;
@@ -36,4 +35,7 @@ public class Products implements Serializable {
     private LocalDate createdAt;
     @UpdateTimestamp
     private LocalDate updatedAt;
+
+    @OneToOne(mappedBy = "product")
+    private SellOut sellOut;
 }

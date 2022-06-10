@@ -39,4 +39,13 @@ public class Teams implements Serializable {
     private LocalDate createdAt;
     @UpdateTimestamp
     private LocalDate updatedAt;
+
+    @OneToOne(mappedBy = "sellersOrder")
+    private SellOut sellOut;
+
+    // @OneToOne(mappedBy = "sellerRegistration")
+    // private SellOut sellOut;
+
+    // @OneToOne(mappedBy = "seller2")
+    // private SellOut sellOut;
 }

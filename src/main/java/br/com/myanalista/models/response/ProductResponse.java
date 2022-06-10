@@ -16,7 +16,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class ProductResponse {
-  private Long id;
+  private String code;
   private Categories category;
   private String sku;
   private String productDescription;

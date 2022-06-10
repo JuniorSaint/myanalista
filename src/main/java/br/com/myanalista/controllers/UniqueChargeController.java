@@ -18,6 +18,7 @@ import br.com.myanalista.services.ClusterGecService;
 import br.com.myanalista.services.CustomerFromCustomerService;
 import br.com.myanalista.services.NationalHolidayService;
 import br.com.myanalista.services.RouteService;
+import br.com.myanalista.services.SellOutService;
 import br.com.myanalista.services.SubChannelService;
 import lombok.AllArgsConstructor;
 
@@ -50,6 +51,9 @@ public class UniqueChargeController {
 
    @Autowired
    private ChannelService serviceChannel;
+
+   @Autowired
+   private SellOutService serviceSellOut;
 
 
 
@@ -104,6 +108,12 @@ public class UniqueChargeController {
    public void chargeSubChannel() throws IOException {
 
       serviceSub.recordDataToDb();
+   }
+
+   @PostMapping("/sellout")
+   public void chargeSellOut() throws IOException {
+
+      serviceSellOut.recordDataToDb();
    }
 
    @GetMapping("/{code}")

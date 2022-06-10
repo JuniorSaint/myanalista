@@ -32,16 +32,16 @@ public class SubChannelService {
       while (line != null) {
 
         String[] vector = line.split(";");
-        Optional<Channel> response = repositoryChannel.findChannelByCode(vector[7]);
+        Optional<Channel> response = repositoryChannel.findChannelByCode(vector[7].trim());
         Channel channel = response.get();
 
         SubChannel channelResp = SubChannel.builder()
-            .code(vector[1])
-            .subChannel(vector[0])
-            .subChannelType(vector[2])
-            .focusRefPet(vector[3])
-            .focusDual(vector[4])
-            .subChannelIne(vector[5])
+            .code(vector[1].trim())
+            .subChannel(vector[0].trim())
+            .subChannelType(vector[2].trim())
+            .focusRefPet(vector[3].trim())
+            .focusDual(vector[4].trim())
+            .subChannelIne(vector[5].trim())
             .channel(channel)
             .build();            
 

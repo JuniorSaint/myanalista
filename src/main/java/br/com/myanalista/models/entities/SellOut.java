@@ -3,10 +3,13 @@ package br.com.myanalista.models.entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -31,17 +34,25 @@ public class SellOut implements Serializable {
 
   private String distributor;
   private LocalDate date;
-  private String customer;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "customer_id")
+  private CustomerFromCustomer customer;
   private String route;
-  private String sellersOrder;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "sellersOrder_id")
+  private Teams sellersOrder;
   private String supervisorsOrder;
-  private String sellerRegistration;
+  // @OneToOne(cascade = CascadeType.ALL)
+  // @JoinColumn(name = "sellerRegistration_id")
+  private Teams sellerRegistration;
   private String supervisorRegistration;
   private String city;
   private String typeOperation;
   private String nfNumber;
-  private String product;
-  private Integer amount;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "product_id")
+  private Products product;
+  private Double amount;
   private String liter;
   private String physicalBox;
   private String condition;
@@ -49,12 +60,16 @@ public class SellOut implements Serializable {
   private Double priceSell;
   private Double priceCost;
   private String tablePrice;
-  private String group;
-  private String category;
-  private String brand;
-  private String tableSell;
-  private String cluster;
-  private String channel;
+  private String groupR;  // product's group, don't put it;
+  private String category; // categories don't put it;
+  private String brand; // Brand don't need to put it;
+  private Integer tableSell;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "cluster_id")
+  private ClusterGec cluster;  // create register from sellout's table;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "channel_id")
+  private SubChannel channel;  // channel is consider subchannel to  myanlista then put subchannel on channel;
   private Integer averageTerm;
   private String cfop;
   private String fantasy;
@@ -68,42 +83,44 @@ public class SellOut implements Serializable {
   private String comission;
   private String district;
   private Double sellPrice;
-  private Integer amountReturned;
+  private Double amountReturned;
   private Integer literReturned;
   private Integer physicalBoxReturned;
   private Double valueReturned;
-  private Double valueMeta;
+  private Integer valueMeta;
   private Integer amountMeta;
   private Integer physicalBoxMeta;
-  private Integer coverMeta;
-  private Double averageTermMeta;
-  private String seller2;
+  private String coverMeta;
+  private String averageTermMeta;
+  // @OneToOne(cascade = CascadeType.ALL)
+  // @JoinColumn(name = "seller2_id")
+  private Teams seller2;
   private String supervisor2;
   private String route2;
   private String quarter;
   private LocalDate orderDate;
   private Integer unitBox;
   private Integer unitBoxReturned;
-  private Integer unitBoxBox;
+  private Double unitBoxBox;
   private Integer unitBoxRmeta;
   private String register;
   private String area;
-  private Double discountCustomer;
+  private Integer discountCustomer;
   private String uf;
-  private String to;
+  private String toR;
   private String map;
   private String address;
   private String motiveReturn;
   private String productType;
-  private String transaction; 
+  private Integer transaction; 
   private String consumptionType;
   private String year;
-  private Boolean active;
+  private String active;
   private String purchase;
   private String equipment;
   private String gvSup;
-  private String adfFin;
-  private String cobBol;
+  private Double adfFin;
+  private Double cobBol;
   private String companyCategory;
   private String companySubCategory;
   private String companyReturnability;

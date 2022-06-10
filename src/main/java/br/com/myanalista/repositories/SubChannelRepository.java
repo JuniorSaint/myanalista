@@ -10,4 +10,6 @@ import br.com.myanalista.models.entities.SubChannel;
 @Repository
 public interface SubChannelRepository extends JpaRepository<SubChannel, String>{
 Optional<SubChannel>  findSubChannelBysubChannel(String subChannel);
+
+Optional<SubChannel> findSubChannelByCode(String code);
 }

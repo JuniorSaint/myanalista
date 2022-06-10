@@ -28,8 +28,8 @@ public class ChannelService {
         String[] vector = line.split(";");
 
         Channel channel = Channel.builder()
-            .code(vector[1])
-            .channel(vector[0])
+            .code(vector[1].trim())
+            .channel(vector[0].trim())
             .build();
      
         repository.save(channel);
