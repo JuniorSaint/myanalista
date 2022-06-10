@@ -33,7 +33,7 @@ public class SubChannel implements Serializable {
   private String focusDual;
   private String subChannelIne;
   @ManyToOne
-  @JoinColumn(name = "channel_id", nullable = false)
+  @JoinColumn(name = "channel_id")
   private Channel channel;
 
   @OneToOne(mappedBy = "channel")

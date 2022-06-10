@@ -3,7 +3,6 @@ package br.com.myanalista.models.entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,22 +33,22 @@ public class SellOut implements Serializable {
 
   private String distributor;
   private LocalDate date;
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne
   @JoinColumn(name = "customer_id")
   private CustomerFromCustomer customer;
   private String route;
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne()
   @JoinColumn(name = "sellersOrder_id")
   private Teams sellersOrder;
   private String supervisorsOrder;
-  // @OneToOne(cascade = CascadeType.ALL)
-  // @JoinColumn(name = "sellerRegistration_id")
+  @OneToOne()
+  @JoinColumn(name = "sellerRegistration_id")
   private Teams sellerRegistration;
   private String supervisorRegistration;
   private String city;
   private String typeOperation;
   private String nfNumber;
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne()
   @JoinColumn(name = "product_id")
   private Products product;
   private Double amount;
@@ -64,10 +63,10 @@ public class SellOut implements Serializable {
   private String category; // categories don't put it;
   private String brand; // Brand don't need to put it;
   private Integer tableSell;
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne
   @JoinColumn(name = "cluster_id")
   private ClusterGec cluster;  // create register from sellout's table;
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne
   @JoinColumn(name = "channel_id")
   private SubChannel channel;  // channel is consider subchannel to  myanlista then put subchannel on channel;
   private Integer averageTerm;
@@ -92,8 +91,8 @@ public class SellOut implements Serializable {
   private Integer physicalBoxMeta;
   private String coverMeta;
   private String averageTermMeta;
-  // @OneToOne(cascade = CascadeType.ALL)
-  // @JoinColumn(name = "seller2_id")
+  @OneToOne
+  @JoinColumn(name = "seller2_id")
   private Teams seller2;
   private String supervisor2;
   private String route2;

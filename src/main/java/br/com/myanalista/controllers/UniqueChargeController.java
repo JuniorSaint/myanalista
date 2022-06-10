@@ -16,6 +16,7 @@ import br.com.myanalista.services.ChannelService;
 import br.com.myanalista.services.CityIneService;
 import br.com.myanalista.services.ClusterGecService;
 import br.com.myanalista.services.CustomerFromCustomerService;
+import br.com.myanalista.services.LendingService;
 import br.com.myanalista.services.NationalHolidayService;
 import br.com.myanalista.services.RouteService;
 import br.com.myanalista.services.SellOutService;
@@ -54,6 +55,9 @@ public class UniqueChargeController {
 
    @Autowired
    private SellOutService serviceSellOut;
+
+   @Autowired
+   private LendingService serviceLending;
 
 
 
@@ -114,6 +118,12 @@ public class UniqueChargeController {
    public void chargeSellOut() throws IOException {
 
       serviceSellOut.recordDataToDb();
+   }
+
+   @PostMapping("/lending")
+   public void chargeLending() throws IOException {
+
+      serviceLending.recordDataToDb();
    }
 
    @GetMapping("/{code}")
