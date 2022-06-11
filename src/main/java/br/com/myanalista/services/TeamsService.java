@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.myanalista.exceptions.BusinessException;
-import br.com.myanalista.models.entities.Customers;
+import br.com.myanalista.models.entities.Distributor;
 import br.com.myanalista.models.entities.Teams;
 import br.com.myanalista.models.request.TeamsRequestPost;
 import br.com.myanalista.models.request.TeamsRequestPut;
@@ -25,17 +25,17 @@ public class TeamsService {
   private ModelMapper mapper;
 
   @Autowired
-  private CustomerService serviceCustomer;
+  private DistributorService serviceCustomer;
 
   @Transactional
   public TeamsResponse save(TeamsRequestPost teamsRequest) {
-    Customers entityCustomer = serviceCustomer.findByIdEntity(teamsRequest.getCustomer().getId());
+    Distributor entityCustomer = serviceCustomer.findByIdEntity(teamsRequest.getDistributor().getId());
     if (entityCustomer == null) {
-      throw new BusinessException("There's not Customer with id: " + teamsRequest.getCustomer().getId());
+      throw new BusinessException("There's not Customer with id: " + teamsRequest.getDistributor().getId());
     }
     Teams teamsEntity = new Teams();
     mapper.map(teamsRequest, teamsEntity);
-    teamsEntity.setCustomer(entityCustomer);
+    teamsEntity.setDistributor(entityCustomer);
     Teams teamsCreated = repository.save(teamsEntity);
     TeamsResponse teamsResponse = new TeamsResponse();
     mapper.map(teamsCreated, teamsResponse);
@@ -44,13 +44,13 @@ public class TeamsService {
 
   @Transactional
   public TeamsResponse update(TeamsRequestPut teamsRequest) {
-    Customers entityCustomer = serviceCustomer.findByIdEntity(teamsRequest.getCustomer().getId());
+    Distributor entityCustomer = serviceCustomer.findByIdEntity(teamsRequest.getDistributor().getId());
     if (entityCustomer == null) {
-      throw new BusinessException("There's not Customer with id: " + teamsRequest.getCustomer().getId());
+      throw new BusinessException("There's not Customer with id: " + teamsRequest.getDistributor().getId());
     }
     Teams teamsEntity = new Teams();
     mapper.map(teamsRequest, teamsEntity);
-    teamsEntity.setCustomer(entityCustomer);
+    teamsEntity.setDistributor(entityCustomer);
     Teams teamsUpdate = repository.save(teamsEntity);
     TeamsResponse teamsResponse = new TeamsResponse();
     mapper.map(teamsUpdate, teamsResponse);

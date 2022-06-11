@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @NoArgsConstructor
 @SuperBuilder
-public class CustomerRequestPut extends CustomerRequestPost{
+public class DistributorRequestPut extends DistributorRequestPost{
 
   private Long id;
 }

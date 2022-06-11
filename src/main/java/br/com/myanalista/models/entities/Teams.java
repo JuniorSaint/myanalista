@@ -33,7 +33,7 @@ public class Teams implements Serializable {
     private String memberLink;
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = true)
-    private Customers customer;
+    private Distributor distributor;
     @CreationTimestamp
     private LocalDate createdAt;
     @UpdateTimestamp
@@ -52,5 +52,5 @@ public class Teams implements Serializable {
     private Lending lending;
 
     @OneToOne(mappedBy = "seller")
-    private CustomerFromCustomer customerFromCustomer;
+    private Customer customer;
 }

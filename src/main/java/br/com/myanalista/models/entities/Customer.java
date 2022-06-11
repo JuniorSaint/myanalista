@@ -1,20 +1,29 @@
-package br.com.myanalista.models.request;
+package br.com.myanalista.models.entities;
 
-import java.time.LocalDate;
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-import br.com.myanalista.models.entities.Teams;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 
-@AllArgsConstructor
+@Builder
+@Entity
+@Table(name = "customerFromCustomer")
 @Getter
 @Setter
 @NoArgsConstructor
-@SuperBuilder
-public class CustomerFromCutomerPost {
+@AllArgsConstructor
+public class Customer implements Serializable {
+  private static final long serialVersionUID = 1L;
+
+  @Id
   private String code;
   private String route;
   private String cnpj;
@@ -28,28 +37,36 @@ public class CustomerFromCutomerPost {
   private String zipCode;
   private String district;
   private String phoneNumber;
-  private String subChannel;
+  @OneToOne
+  @JoinColumn(name = "subChannel_id")
+  private SubChannel subChannel;
   private String week;
   private String sequence;
   private String email;
   private String tablePrice;
   private String groupBusiness;
+  @OneToOne
+  @JoinColumn(name = "seller_id")
   private Teams seller;
   private String supervisor;
   private String area;
   private String originalPaymentMethod;
-  private Integer maximunDays;
+  private String maximunDays;
   private String turnover;
   private String regiterDay;
   private String inactivationDay;
   private String status;
-  private String clusterGec;
+  @OneToOne
+  @JoinColumn(name = "clusterGec_id")
+  private ClusterGec clusterGec;
   private String refPet;
   private String ls;
   private String rgb;
-  private LocalDate lastPurchase;
-  private Double creditLimit;
-  private Double addition;
+  private String lastPurchase;
+  private String creditLimit;
+  private String addition;
+  @OneToOne
+  @JoinColumn(name = "seller2_id")
   private Teams seller2;
   private String week2;
   private String turnover2;
@@ -66,6 +83,14 @@ public class CustomerFromCutomerPost {
   private String phoneNumber4;
   private String promoter;
   private String promoterEq2;
-  private String channel;
+  @OneToOne
+  @JoinColumn(name = "channel_id")
+  private Channel channel;
   private String specie;
+
+  @OneToOne(mappedBy = "customer")
+  private SellOut sellOut;
+
+  @OneToOne(mappedBy = "customerRegistration")
+  private Lending lending;
 }

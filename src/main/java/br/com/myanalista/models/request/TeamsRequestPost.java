@@ -1,6 +1,6 @@
 package br.com.myanalista.models.request;
 
-import br.com.myanalista.models.entities.Customers;
+import br.com.myanalista.models.entities.Distributor;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,5 +20,5 @@ public class TeamsRequestPost {
   private String memberFunction;
   private String typeOfRegistrationMember;
   private String memberLink;
-  private Customers customer;  
+  private Distributor distributor;  
 }

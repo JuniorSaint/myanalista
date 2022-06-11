@@ -3,7 +3,7 @@ package br.com.myanalista.models.response;
 import java.time.LocalDate;
 
 import br.com.myanalista.models.entities.ClusterGec;
-import br.com.myanalista.models.entities.CustomerFromCustomer;
+import br.com.myanalista.models.entities.Customer;
 import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.entities.SubChannel;
 import br.com.myanalista.models.entities.Teams;
@@ -24,7 +24,7 @@ public class SellOutResponse {
 
   private String distributor;
   private LocalDate date;
-  private CustomerFromCustomer customer;
+  private Customer customer;
   private String route;
   private Teams sellersOrder;
   private String supervisorsOrder;

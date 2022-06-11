@@ -2,8 +2,6 @@ package br.com.myanalista.models.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,24 +31,24 @@ public class Lending implements Serializable {
   private Long id;
   private String territory;
   private String dealer;
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne
   @JoinColumn(name = "customerRegistration_id")
-  private CustomerFromCustomer customerRegistration;
-  @OneToOne(cascade = CascadeType.ALL)
+  private Customer customerRegistration;
+  @OneToOne
   @JoinColumn(name = "gec_id")
   private ClusterGec gec;
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne
   @JoinColumn(name = "SubChannel_id")
   private SubChannel subChannel;
   private String city;
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne
   @JoinColumn(name = "equipmentNumber_id")
   private Equipment equipmentNumber;
   private String contract;
   private Integer amount;
   private LocalDate dateSend;
   private LocalDate dueDate;
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne
   @JoinColumn(name = "sellerCode_id")
   private Teams sellerCode;
   private String route;

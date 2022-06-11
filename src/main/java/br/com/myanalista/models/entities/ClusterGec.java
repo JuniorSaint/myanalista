@@ -32,5 +32,5 @@ public class ClusterGec implements Serializable {
   private Lending lending;
 
   @OneToOne(mappedBy = "clusterGec")
-  private CustomerFromCustomer customer;
+  private Customer customer;
 }

@@ -48,7 +48,7 @@ public class ProductService {
   }
 
   @Transactional
-  public String delete(Long id){
+  public String delete(String id){
       Optional<Products> product = repository.findById(id);
       if (!product.isPresent()) {
         throw new BusinessException("Product not found with id: " + id);
@@ -57,7 +57,7 @@ public class ProductService {
       return "Product deleted with success";    
   }
 
-  public ProductResponse findById(Long id){
+  public ProductResponse findById(String id){
     Optional<Products> product = repository.findById(id);
     if(product.isEmpty()){
       throw new BusinessException("It's not possible find product with id: " + id);
@@ -66,7 +66,7 @@ public class ProductService {
     mapper.map(product.get(), contactResp);
     return contactResp;
   }
-  public Products findByIdEntity(Long id){
+  public Products findByIdEntity(String id){
     Optional<Products> product = repository.findById(id); 
     return product.get();
   }

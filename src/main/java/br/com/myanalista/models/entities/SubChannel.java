@@ -43,5 +43,5 @@ public class SubChannel implements Serializable {
   private Lending lending;
 
   @OneToOne(mappedBy = "subChannel")
-  private CustomerFromCustomer customer;
+  private Customer customer;
 }

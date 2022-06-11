@@ -21,7 +21,7 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @NoArgsConstructor
 @SuperBuilder
-public class CustomerRequestPost {
+public class DistributorRequestPost {
   private String cnpjCpf;
   private CompanyTypeEnum companyType;  
   private String nickName;

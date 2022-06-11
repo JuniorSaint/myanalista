@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.myanalista.exceptions.BusinessException;
-import br.com.myanalista.models.request.CustomerRequestPost;
-import br.com.myanalista.models.request.CustomerRequestPut;
-import br.com.myanalista.models.response.CustomerResponse;
-import br.com.myanalista.services.CustomerService;
+import br.com.myanalista.models.request.DistributorRequestPost;
+import br.com.myanalista.models.request.DistributorRequestPut;
+import br.com.myanalista.models.response.DistributorResponse;
+import br.com.myanalista.services.DistributorService;
 
 import lombok.AllArgsConstructor;
 
@@ -28,18 +28,18 @@ import lombok.AllArgsConstructor;
 
 public class CustomersController {
   @Autowired
-  private CustomerService service;
+  private DistributorService service;
 
   @GetMapping("/{id}")
-  public CustomerResponse findAllWithListCustomer(@PathVariable(value = "id") Long id) {
-    CustomerResponse response = service.findById(id);
+  public DistributorResponse findAllWithListCustomer(@PathVariable(value = "id") Long id) {
+    DistributorResponse response = service.findById(id);
     return response;
   }
 
   @PostMapping
-  public CustomerResponse saveCustomer(@RequestBody  CustomerRequestPost request) {
+  public DistributorResponse saveCustomer(@RequestBody  DistributorRequestPost request) {
     try {
-      CustomerResponse response = service.save(request);
+      DistributorResponse response = service.save(request);
       return response;
     } catch (BusinessException e) {
       throw new BusinessException(e.getMessage());
@@ -56,10 +56,10 @@ public class CustomersController {
   }
 
   @PutMapping("/{id}")
-  public CustomerResponse updateCustomer(@PathVariable(value = "id") Long id,
-      @RequestBody  CustomerRequestPut request) {
+  public DistributorResponse updateCustomer(@PathVariable(value = "id") Long id,
+      @RequestBody  DistributorRequestPut request) {
     try {
-      CustomerResponse response = service.update(request);
+      DistributorResponse response = service.update(request);
       return response;
     } catch (BusinessException e) {
      throw new BusinessException(e.getMessage());

@@ -6,19 +6,17 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import javax.swing.event.MouseInputAdapter;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.myanalista.models.entities.ClusterGec;
-import br.com.myanalista.models.entities.CustomerFromCustomer;
+import br.com.myanalista.models.entities.Customer;
 import br.com.myanalista.models.entities.Equipment;
 import br.com.myanalista.models.entities.Lending;
 import br.com.myanalista.models.entities.SubChannel;
 import br.com.myanalista.models.entities.Teams;
 import br.com.myanalista.repositories.ClusterGecRepository;
-import br.com.myanalista.repositories.CustomerFromCustomerRepository;
+import br.com.myanalista.repositories.CustomerRepository;
 import br.com.myanalista.repositories.EquipmentRepository;
 import br.com.myanalista.repositories.LendingRepository;
 import br.com.myanalista.repositories.SubChannelRepository;
@@ -30,7 +28,7 @@ public class LendingService {
   private LendingRepository repository;
 
   @Autowired
-  private CustomerFromCustomerRepository repositoryCustomer;
+  private CustomerRepository repositoryCustomer;
 
   @Autowired
   private ClusterGecRepository repositoryCluster;
@@ -86,11 +84,11 @@ public class LendingService {
 
   }
 
-  private CustomerFromCustomer findCustomer(String customer) {
+  private Customer findCustomer(String customer) {
     if (customer.isEmpty()) {
       return null;
     }
-    Optional<CustomerFromCustomer> customerResponse = repositoryCustomer.findByCode(customer);
+    Optional<Customer> customerResponse = repositoryCustomer.findByCode(customer);
     if (!customerResponse.isPresent()) {
       return null;
     }

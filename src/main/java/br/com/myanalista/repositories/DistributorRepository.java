@@ -5,9 +5,9 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.myanalista.models.entities.CityIne;
+import br.com.myanalista.models.entities.Distributor;
 
 @Repository
-public interface CityIneRepository extends JpaRepository<CityIne, String> {
-  Optional<CityIne>  findByCode(String code);
+public interface DistributorRepository extends JpaRepository<Distributor, Long> {
+  Optional<Distributor> findById(Long id);
 }

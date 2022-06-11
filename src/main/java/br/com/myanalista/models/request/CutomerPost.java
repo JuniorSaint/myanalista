@@ -1,21 +1,20 @@
-package br.com.myanalista.models.response;
+package br.com.myanalista.models.request;
 
-import br.com.myanalista.models.entities.ClusterGec;
-import br.com.myanalista.models.entities.Channel;
+import java.time.LocalDate;
+
 import br.com.myanalista.models.entities.Teams;
-
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
-@Builder
+@AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-public class CustomerFromCustomerResponse {
+@SuperBuilder
+public class CutomerPost {
   private String code;
   private String route;
   private String cnpj;
@@ -29,7 +28,7 @@ public class CustomerFromCustomerResponse {
   private String zipCode;
   private String district;
   private String phoneNumber;
-  private Channel subChannel;
+  private String subChannel;
   private String week;
   private String sequence;
   private String email;
@@ -39,18 +38,18 @@ public class CustomerFromCustomerResponse {
   private String supervisor;
   private String area;
   private String originalPaymentMethod;
-  private String maximunDays;
+  private Integer maximunDays;
   private String turnover;
   private String regiterDay;
   private String inactivationDay;
   private String status;
-  private ClusterGec clusterGec;
+  private String clusterGec;
   private String refPet;
   private String ls;
   private String rgb;
-  private String lastPurchase;
-  private String creditLimit;
-  private String addition;
+  private LocalDate lastPurchase;
+  private Double creditLimit;
+  private Double addition;
   private Teams seller2;
   private String week2;
   private String turnover2;
@@ -67,6 +66,6 @@ public class CustomerFromCustomerResponse {
   private String phoneNumber4;
   private String promoter;
   private String promoterEq2;
-  private Channel channel;
+  private String channel;
   private String specie;
 }

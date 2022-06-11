@@ -31,7 +31,7 @@ public class ProductsController {
   private ProductService service;
 
   @GetMapping("/{id}")
-  public ProductResponse findAllWithList(@PathVariable(value = "id") Long id) {
+  public ProductResponse findAllWithList(@PathVariable(value = "id") String id) {
     ProductResponse response = service.findById(id);
     return response;
   }
@@ -47,7 +47,7 @@ public class ProductsController {
   }
 
   @DeleteMapping("/{id}")
-  public String delete(@PathVariable(value = "id") Long id) {
+  public String delete(@PathVariable(value = "id") String id) {
     try {
       return service.delete(id);
     } catch (BusinessException e) {

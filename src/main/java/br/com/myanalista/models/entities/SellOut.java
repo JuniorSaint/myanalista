@@ -35,20 +35,20 @@ public class SellOut implements Serializable {
   private LocalDate date;
   @OneToOne
   @JoinColumn(name = "customer_id")
-  private CustomerFromCustomer customer;
+  private Customer customer;
   private String route;
-  @OneToOne()
+  @OneToOne
   @JoinColumn(name = "sellersOrder_id")
   private Teams sellersOrder;
   private String supervisorsOrder;
-  @OneToOne()
+  @OneToOne
   @JoinColumn(name = "sellerRegistration_id")
   private Teams sellerRegistration;
   private String supervisorRegistration;
   private String city;
   private String typeOperation;
   private String nfNumber;
-  @OneToOne()
+  @OneToOne
   @JoinColumn(name = "product_id")
   private Products product;
   private Double amount;

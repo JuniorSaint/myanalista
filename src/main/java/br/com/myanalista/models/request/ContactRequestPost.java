@@ -1,6 +1,6 @@
 package br.com.myanalista.models.request;
 
-import br.com.myanalista.models.entities.Customers;
+import br.com.myanalista.models.entities.Distributor;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,5 +19,5 @@ public class ContactRequestPost {
   private String contactEmail;
   private String contactName;
   private String contactPhone;  
-  private Customers customer;
+  private Distributor distributor;
 }

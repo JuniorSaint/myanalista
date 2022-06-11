@@ -10,13 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.myanalista.models.entities.ClusterGec;
-import br.com.myanalista.models.entities.CustomerFromCustomer;
+import br.com.myanalista.models.entities.Customer;
 import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.entities.SellOut;
 import br.com.myanalista.models.entities.SubChannel;
 import br.com.myanalista.models.entities.Teams;
 import br.com.myanalista.repositories.ClusterGecRepository;
-import br.com.myanalista.repositories.CustomerFromCustomerRepository;
+import br.com.myanalista.repositories.CustomerRepository;
 import br.com.myanalista.repositories.ProductRepository;
 import br.com.myanalista.repositories.SellOutRepository;
 import br.com.myanalista.repositories.SubChannelRepository;
@@ -29,7 +29,7 @@ public class SellOutService {
   private SellOutRepository repository;
 
   @Autowired
-  private CustomerFromCustomerRepository repositoryCustomer;
+  private CustomerRepository repositoryCustomer;
 
   @Autowired
   private TeamsRepository repositoryTeams;
@@ -174,12 +174,12 @@ public class SellOutService {
     return dateConverted;
   }
 
-  private CustomerFromCustomer findCustomer(String customer) {
+  private Customer findCustomer(String customer) {
     if (customer.isEmpty()) {
       return null;
     }
     String[] splitCustomer = customer.split("-");
-    Optional<CustomerFromCustomer> customerResponse = repositoryCustomer.findByCode(splitCustomer[0]);
+    Optional<Customer> customerResponse = repositoryCustomer.findByCode(splitCustomer[0]);
     if (!customerResponse.isPresent()) {
       return null;
     }

@@ -28,5 +28,5 @@ public class Channel implements Serializable {
   private Set<SubChannel> subChannels;
 
   @OneToOne(mappedBy = "channel")
-  private CustomerFromCustomer customer;
+  private Customer customer;
 }
