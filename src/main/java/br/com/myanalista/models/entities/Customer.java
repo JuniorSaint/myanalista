@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -70,7 +71,9 @@ public class Customer implements Serializable {
   private Teams seller2;
   private String week2;
   private String turnover2;
-  private String distributor;
+  @ManyToOne
+  @JoinColumn(name="distributor_id")
+  private Distributor distributor;
   private String latitude;
   private String longitude;
   private String notAllowCurrentRestChange;

@@ -31,19 +31,25 @@ public class SubChannelService {
       line = br.readLine();
       while (line != null) {
 
-        String[] vector = line.split(";");
-        Optional<Channel> response = repositoryChannel.findChannelByCode(vector[7].trim());
-        Channel channel = response.get();
+        int index_1 = line.indexOf(";");
+        int index_2 = line.indexOf(";", index_1 + 1);
+        int index_3 = line.indexOf(";", index_2 + 1);
+        int index_4 = line.indexOf(";", index_3 + 1);
+        int index_5 = line.indexOf(";", index_4 + 1);
+        int index_6 = line.indexOf(";", index_5 + 1);
+        int index_7 = line.indexOf(";", index_6 + 1);
+
+
 
         SubChannel channelResp = SubChannel.builder()
-            .code(vector[1].trim())
-            .subChannel(vector[0].trim())
-            .subChannelType(vector[2].trim())
-            .focusRefPet(vector[3].trim())
-            .focusDual(vector[4].trim())
-            .subChannelIne(vector[5].trim())
-            .channel(channel)
-            .build();            
+            .subChannel(line.substring(0, index_1).trim())
+            .code(line.substring(index_1 + 1, index_2).trim())
+            .subChannelType(line.substring(index_2 + 1, index_3).trim())
+            .focusRefPet(line.substring(index_3 + 1, index_4).trim())
+            .focusDual(line.substring(index_4 + 1, index_5).trim())
+            .subChannelIne(line.substring(index_5 + 1, index_6).trim())
+            .channel(findChannel(line.substring(index_7 + 1).trim()))
+            .build();
 
         repository.save(channelResp);
 
@@ -52,6 +58,11 @@ public class SubChannelService {
     } catch (IOException e) {
       throw new IOException("Error to read file " + e.getMessage());
     }
+  }
+
+  private Channel findChannel(String code) {
+    Optional<Channel> response = repositoryChannel.findChannelByCode(code);
+    return response.get();
   }
 
 }

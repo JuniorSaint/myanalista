@@ -26,20 +26,29 @@ public class CalendarService {
       line = br.readLine();
       while (line != null) {
 
-        String[] vector = line.split(",");
+        int index_1 = line.indexOf(";");
+        int index_2 = line.indexOf(";", index_1 + 1);
+        int index_3 = line.indexOf(";", index_2 + 1);
+        int index_4 = line.indexOf(";", index_3 + 1);
+        int index_5 = line.indexOf(";", index_4 + 1);
+        int index_6 = line.indexOf(";", index_5 + 1);
+        int index_7 = line.indexOf(";", index_6 + 1);
+        int index_8 = line.indexOf(";", index_7 + 1);
+        int index_9 = line.indexOf(";", index_8 + 1);
+        int index_10 = line.indexOf(";", index_9 + 1);
 
         Calendar channel = Calendar.builder()
-            .date(LocalDate.parse(vector[0]))
-            .day(vector[1])
-            .month(vector[2])
-            .year(vector[3])
-            .shortMonth(vector[4])
-            .monthYear(vector[5])
-            .dayOfTheWeek(vector[6])
-            .dayOfTheWeekNumber(vector[7])
-            .nationalHoliday(vector[8])
-            .businessDayFiveDays(vector[9])
-            .businessDaySixDays(vector[10])
+            .date(LocalDate.parse(line.substring(0, index_1)))
+            .day(line.substring(index_1 + 1, index_2))
+            .month(line.substring(index_2 + 1, index_3))
+            .year(line.substring(index_3 + 1, index_4))
+            .shortMonth(line.substring(index_4 + 1, index_5))
+            .monthYear(line.substring(index_5 + 1, index_6))
+            .dayOfTheWeek(line.substring(index_6 + 1, index_7))
+            .dayOfTheWeekNumber(line.substring(index_7 + 1, index_8))
+            .nationalHoliday(line.substring(index_8 + 1, index_9))
+            .businessDayFiveDays(line.substring(index_9 + 1, index_10))
+            .businessDaySixDays(line.substring(index_10 + 1))
             .build();
 
         repository.save(channel);

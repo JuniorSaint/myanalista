@@ -35,12 +35,12 @@ public class VisitDayService {
 
         VisitDay channel = VisitDay.builder()
             .daysOfWeek(line.substring(0, index_1))
-            .firstDay(line.substring(index_1 + 1, index_2))
-            .secondDay(line.substring(index_2 + 1, index_3))
-            .thirdDay(line.substring( index_3 + 1, index_4))
-            .fourthDay(line.substring( index_4 + 1, index_5))
-            .fifthDay(line.substring(index_5 + 1, index_6))
-            .sixDay(line.substring(index_6 + 1))
+            .firstDay(line.substring(index_1 + 1, index_2).trim())
+            .secondDay(line.substring(index_2 + 1, index_3).trim())
+            .thirdDay(line.substring( index_3 + 1, index_4).trim())
+            .fourthDay(line.substring( index_4 + 1, index_5).trim())
+            .fifthDay(line.substring(index_5 + 1, index_6).trim())
+            .sixDay(line.substring(index_6 + 1).trim())
             .build();
 
         repository.save(channel);

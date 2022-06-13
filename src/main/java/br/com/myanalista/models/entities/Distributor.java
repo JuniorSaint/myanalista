@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Builder
 @Entity
@@ -64,4 +65,7 @@ public class Distributor implements Serializable {
     private LocalDate createdAt;
     @UpdateTimestamp
     private LocalDate updatedAt;
+
+    @OneToMany(mappedBy="distributor")
+    private Set<Customer> customers;
 }

@@ -11,8 +11,11 @@ import javax.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import br.com.myanalista.models.enums.TeamTypeEnum;
+
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Builder
 @Entity
@@ -31,6 +34,9 @@ public class Teams implements Serializable {
     private String memberFunction;
     private String typeOfRegistrationMember;
     private String memberLink;
+    private TeamTypeEnum sellerOrSupervisor;
+    // @OneToMany(mappedBy="cart")
+    // private List<Teams> seller;
     @ManyToOne
     @JoinColumn(name = "distributor_id", nullable = true)
     private Distributor distributor;

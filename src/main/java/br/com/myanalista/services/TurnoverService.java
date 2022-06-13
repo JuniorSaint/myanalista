@@ -27,11 +27,11 @@ public class TurnoverService {
       line = br.readLine();
       while (line != null) {
 
-        String[] vector = line.split(";");
+        int index_1 = line.indexOf(";");
 
         Turnover channelResp = Turnover.builder()
-            .calendarDate(convertDate(vector[0].trim()))
-            .turnoverByCalendar(vector[1].trim())
+            .calendarDate(convertDate(line.substring(0, index_1).trim()))
+            .turnoverByCalendar(line.substring(index_1 + 1).trim())
             .build();
 
         repository.save(channelResp);

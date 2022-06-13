@@ -25,11 +25,11 @@ public class ClusterGecService {
       line = br.readLine();
       while (line != null) {
 
-        String[] vector = line.split(",");
+        int index_1 = line.indexOf(",");
 
         ClusterGec channel = ClusterGec.builder()
-            .clusterGec(vector[0])
-            .gecIne(vector[1])
+            .clusterGec(line.substring(0, index_1))
+            .gecIne(line.substring(index_1 + 1))
             .build();
 
         repository.save(channel);
