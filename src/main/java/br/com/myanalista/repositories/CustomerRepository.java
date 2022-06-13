@@ -12,7 +12,7 @@ import br.com.myanalista.models.entities.Customer;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, String>{
 
-  @Query(value = "select c from Customer c where u.code = :code and u.distributor = :distributor ")
+  @Query(value = "select c from Customer c where c.code = :code and c.distributor = :distributor ")
   Optional<Customer> findByCodeByDistributor(@Param("code") String code, @Param("distributor") String distributor);
 
   Optional<Customer> findByCode(String code);

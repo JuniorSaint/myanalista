@@ -22,7 +22,7 @@ import java.util.List;
 
 @Builder
 @Entity
-@Table(name = "customers")
+@Table(name = "distributor")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -54,11 +54,11 @@ public class Distributor implements Serializable {
     private String formOfPayment;
     private String cluster;
     // End Financial
-    @JsonIgnoreProperties(value = {"customer"}) // Fix problem cyclic reference
-    @OneToMany(mappedBy="customer")
+    @JsonIgnoreProperties(value = {"distributor"}) // Fix problem cyclic reference
+    @OneToMany(mappedBy="distributor")
     private List<Contacts> contacts;
-    @JsonIgnoreProperties(value = {"customer"}) // Fix problem cyclic reference
-    @OneToMany(mappedBy="customer")
+    @JsonIgnoreProperties(value = {"distributor"}) // Fix problem cyclic reference
+    @OneToMany(mappedBy="distributor")
     private List<Teams> teams;
     @CreationTimestamp
     private LocalDate createdAt;

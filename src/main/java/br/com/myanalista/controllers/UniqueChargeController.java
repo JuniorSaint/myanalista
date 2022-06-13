@@ -18,9 +18,10 @@ import br.com.myanalista.services.ClusterGecService;
 import br.com.myanalista.services.CustomerService;
 import br.com.myanalista.services.LendingService;
 import br.com.myanalista.services.NationalHolidayService;
-import br.com.myanalista.services.RouteService;
+import br.com.myanalista.services.VisitDayService;
 import br.com.myanalista.services.SellOutService;
 import br.com.myanalista.services.SubChannelService;
+import br.com.myanalista.services.TurnoverService;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -36,7 +37,7 @@ public class UniqueChargeController {
    private ClusterGecService serviceCluster;
 
    @Autowired
-   private RouteService serviceRoute;
+   private VisitDayService serviceVisitDay;
 
    @Autowired
    private CalendarService serviceCalendar;
@@ -59,7 +60,8 @@ public class UniqueChargeController {
    @Autowired
    private LendingService serviceLending;
 
-
+@Autowired
+private TurnoverService serviceTurnover;
 
    @PostMapping("/cityine")
    public void chargeCityIne() throws IOException {
@@ -73,10 +75,10 @@ public class UniqueChargeController {
       serviceCluster.recordDataToDb();
    }
 
-   @PostMapping("/route")
+   @PostMapping("/visitday")
    public void chargeRoute() throws IOException {
 
-      serviceRoute.recordDataToDb();
+      serviceVisitDay.recordDataToDb();
    }
 
    @PostMapping("/calendar")
@@ -91,11 +93,6 @@ public class UniqueChargeController {
       serviceNational.recordDataToDb();
    }
 
-   @PostMapping("/test")
-   public void save() throws IOException {
-
-        serviceSub.recordDataToDb();
-   }
 
    @PostMapping("/clients")
    public void chargeClients() throws IOException {
@@ -124,6 +121,12 @@ public class UniqueChargeController {
    public void chargeLending() throws IOException {
 
       serviceLending.recordDataToDb();
+   }
+
+   @PostMapping("/turnover")
+   public void chargeTurnover() throws IOException {
+
+      serviceTurnover.recordDataToDb();
    }
 
    @GetMapping("/{code}")

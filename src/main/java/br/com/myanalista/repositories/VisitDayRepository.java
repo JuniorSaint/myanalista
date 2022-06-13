@@ -3,9 +3,9 @@ package br.com.myanalista.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.myanalista.models.entities.Route;
+import br.com.myanalista.models.entities.VisitDay;
 
 @Repository
-public interface RouteRepository extends JpaRepository<Route, Long> {
+public interface VisitDayRepository extends JpaRepository<VisitDay, Long> {
   
 }

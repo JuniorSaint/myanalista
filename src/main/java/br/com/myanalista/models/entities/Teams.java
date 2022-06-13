@@ -32,7 +32,7 @@ public class Teams implements Serializable {
     private String typeOfRegistrationMember;
     private String memberLink;
     @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = true)
+    @JoinColumn(name = "distributor_id", nullable = true)
     private Distributor distributor;
     @CreationTimestamp
     private LocalDate createdAt;
