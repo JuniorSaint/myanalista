@@ -25,12 +25,14 @@ public class CityIneService {
       line = br.readLine();
       while (line != null) {
 
-        String[] vector = line.split(";");
+        int index_1 = line.indexOf(";");
+        int index_2 = line.indexOf(";", index_1 + 1);
+
 
         CityIne channel = CityIne.builder()
-            .code(vector[0])
-            .city(vector[1])
-            .cityIne(vector[2])
+            .code(line.substring(0, index_1))
+            .city(line.substring(index_1 + 1, index_2))
+            .cityIne(line.substring(index_2 + 1))
             .build();
 
         repository.save(channel);

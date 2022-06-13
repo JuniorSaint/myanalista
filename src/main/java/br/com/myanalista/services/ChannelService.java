@@ -25,11 +25,11 @@ public class ChannelService {
       line = br.readLine();
       while (line != null) {
 
-        String[] vector = line.split(";");
+        int index_1 = line.indexOf(";");
 
         Channel channel = Channel.builder()
-            .code(vector[1].trim())
-            .channel(vector[0].trim())
+            .code(line.substring(0, index_1))
+            .channel(line.substring(index_1 + 1))
             .build();
      
         repository.save(channel);
