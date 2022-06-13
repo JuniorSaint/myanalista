@@ -25,16 +25,22 @@ public class VisitDayService {
       line = br.readLine();
       while (line != null) {
 
-        String[] vector = line.split(";");
+        int index_1 = line.indexOf(";");
+        int index_2 = line.indexOf(";", index_1 + 1);
+        int index_3 = line.indexOf(";", index_2 + 1);
+        int index_4 = line.indexOf(";", index_3 + 1);
+        int index_5 = line.indexOf(";", index_4 + 1);
+        int index_6 = line.indexOf(";", index_5 + 1);
+        
 
         VisitDay channel = VisitDay.builder()
-            .daysOfWeek(vector[0])
-            .firstDay(vector[1])
-            .secondDay(vector[2])
-            .thirdDay(vector[3])
-            .fourthDay(vector[4])
-            .fifthDay(vector[5])
-            .sixDay(vector[6])
+            .daysOfWeek(line.substring(0, index_1))
+            .firstDay(line.substring(index_1 + 1, index_2))
+            .secondDay(line.substring(index_2 + 1, index_3))
+            .thirdDay(line.substring( index_3 + 1, index_4))
+            .fourthDay(line.substring( index_4 + 1, index_5))
+            .fifthDay(line.substring(index_5 + 1, index_6))
+            .sixDay(line.substring(index_6 + 1))
             .build();
 
         repository.save(channel);
@@ -45,4 +51,6 @@ public class VisitDayService {
       throw new IOException("Error to read file " + e.getMessage());
     }
   }
+
+
 }
