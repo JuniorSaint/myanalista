@@ -45,7 +45,6 @@ public class Distributor implements Serializable {
     private String zipCode;
     private String district;
     private String city;
-    @Lob
     private String observation;
     // Start Financial
     private LocalDate contractDate;
@@ -68,4 +67,8 @@ public class Distributor implements Serializable {
 
     @OneToMany(mappedBy="distributor")
     private Set<Customer> customers;
+
+    @OneToOne(mappedBy = "distributor")
+    @PrimaryKeyJoinColumn
+    private Lending lending;
 }

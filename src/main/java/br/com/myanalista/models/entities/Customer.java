@@ -66,9 +66,9 @@ public class Customer implements Serializable {
   private String lastPurchase;
   private String creditLimit;
   private String addition;
-  @OneToOne
-  @JoinColumn(name = "seller2_id")
-  private Teams seller2;
+  // @OneToOne
+  // @JoinColumn(name = "seller2_id")
+  // private Teams sellerCustomer2;
   private String week2;
   private String turnover2;
   @ManyToOne

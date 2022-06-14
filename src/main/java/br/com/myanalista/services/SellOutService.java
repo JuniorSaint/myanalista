@@ -52,104 +52,195 @@ public class SellOutService {
       line = br.readLine();
       while (line != null) {
 
-        String[] vector = line.split(";");
+        int index_1 = line.indexOf(";");
+        int index_2 = line.indexOf(";", index_1 + 1);
+        int index_3 = line.indexOf(";", index_2 + 1);
+        int index_4 = line.indexOf(";", index_3 + 1);
+        int index_5 = line.indexOf(";", index_4 + 1);
+        int index_6 = line.indexOf(";", index_5 + 1);
+        int index_7 = line.indexOf(";", index_6 + 1);
+        int index_8 = line.indexOf(";", index_7 + 1);
+        int index_9 = line.indexOf(";", index_8 + 1);
+        int index_10 = line.indexOf(";", index_9 + 1);
+        int index_11 = line.indexOf(";", index_10 + 1);
+        int index_12 = line.indexOf(";", index_11 + 1);
+        int index_13 = line.indexOf(";", index_12 + 1);
+        int index_14 = line.indexOf(";", index_13 + 1);
+        int index_15 = line.indexOf(";", index_14 + 1);
+        int index_16 = line.indexOf(";", index_15 + 1);
+        int index_17 = line.indexOf(";", index_16 + 1);
+        int index_18 = line.indexOf(";", index_17 + 1);
+        int index_19 = line.indexOf(";", index_18 + 1);
+        int index_20 = line.indexOf(";", index_19 + 1);
+        int index_21 = line.indexOf(";", index_20 + 1);
+        int index_22 = line.indexOf(";", index_21 + 1);
+        int index_23 = line.indexOf(";", index_22 + 1);
+        int index_24 = line.indexOf(";", index_23 + 1);
+        int index_25 = line.indexOf(";", index_24 + 1);
+        int index_26 = line.indexOf(";", index_25 + 1);
+        int index_27 = line.indexOf(";", index_26 + 1);
+        int index_28 = line.indexOf(";", index_27 + 1);
+        int index_29 = line.indexOf(";", index_28 + 1);
+        int index_30 = line.indexOf(";", index_29 + 1);
+        int index_31 = line.indexOf(";", index_30 + 1);
+        int index_32 = line.indexOf(";", index_31 + 1);
+        int index_33 = line.indexOf(";", index_32 + 1);
+        int index_34 = line.indexOf(";", index_33 + 1);
+        int index_35 = line.indexOf(";", index_34 + 1);
+        int index_36 = line.indexOf(";", index_35 + 1);
+        int index_37 = line.indexOf(";", index_36 + 1);
+        int index_38 = line.indexOf(";", index_37 + 1);
+        int index_39 = line.indexOf(";", index_38 + 1);
+        int index_40 = line.indexOf(";", index_39 + 1);
+        int index_41 = line.indexOf(";", index_40 + 1);
+        int index_42 = line.indexOf(";", index_41 + 1);
+        int index_43 = line.indexOf(";", index_42 + 1);
+        int index_44 = line.indexOf(";", index_43 + 1);
+        int index_45 = line.indexOf(";", index_44 + 1);
+        int index_46 = line.indexOf(";", index_45 + 1);
+        int index_47 = line.indexOf(";", index_46 + 1);
+        int index_48 = line.indexOf(";", index_47 + 1);
+        int index_49 = line.indexOf(";", index_48 + 1);
+        int index_50 = line.indexOf(";", index_49 + 1);
+        int index_51 = line.indexOf(";", index_50 + 1);
+        int index_52 = line.indexOf(";", index_51 + 1);
+        int index_53 = line.indexOf(";", index_52 + 1);
+        int index_54 = line.indexOf(";", index_53 + 1);
+        int index_55 = line.indexOf(";", index_54 + 1);
+        int index_56 = line.indexOf(";", index_55 + 1);
+        int index_57 = line.indexOf(";", index_56 + 1);
+        int index_58 = line.indexOf(";", index_57 + 1);
+        int index_59 = line.indexOf(";", index_58 + 1);
+        int index_60 = line.indexOf(";", index_59 + 1);
+        int index_61 = line.indexOf(";", index_60 + 1);
+        int index_62 = line.indexOf(";", index_61 + 1);
+        int index_63 = line.indexOf(";", index_62 + 1);
+        int index_64 = line.indexOf(";", index_63 + 1);
+        int index_65 = line.indexOf(";", index_64 + 1);
+        int index_66 = line.indexOf(";", index_65+ 1);
+        int index_67 = line.indexOf(";", index_66 + 1);
+        int index_68 = line.indexOf(";", index_67 + 1);
+        int index_69 = line.indexOf(";", index_68 + 1);
+        int index_70 = line.indexOf(";", index_69 + 1);
+        int index_71 = line.indexOf(";", index_70 + 1);
+        int index_72 = line.indexOf(";", index_71 + 1);
+        int index_73 = line.indexOf(";", index_72 + 1);
+        int index_74 = line.indexOf(";", index_73 + 1);
+        int index_75 = line.indexOf(";", index_74 + 1);
+        int index_76 = line.indexOf(";", index_75 + 1);
+        int index_77 = line.indexOf(";", index_76 + 1);
+        int index_78 = line.indexOf(";", index_77 + 1);
+        int index_79 = line.indexOf(";", index_78 + 1);
+        int index_80 = line.indexOf(";", index_79 + 1);
+        int index_81 = line.indexOf(";", index_80 + 1);
+        int index_82 = line.indexOf(";", index_81 + 1);
+        int index_83 = line.indexOf(";", index_82 + 1);
+        int index_84 = line.indexOf(";", index_83 + 1);
+        int index_85 = line.indexOf(";", index_84 + 1);
+        int index_86 = line.indexOf(";", index_85 + 1);
+        int index_87 = line.indexOf(";", index_86 + 1);
+        int index_88 = line.indexOf(";", index_87 + 1);
+        int index_89 = line.indexOf(";", index_88 + 1);
+        int index_90 = line.indexOf(";", index_89 + 1);
+        int index_91 = line.indexOf(";", index_90 + 1);
+        int index_92 = line.indexOf(";", index_91 + 1);
 
         SellOut channel = SellOut.builder()
-            .distributor(vector[0].trim())
-            .date(convertDate(vector[1].trim()))
-            .customer(findCustomer(vector[2].trim()))
-            .route(vector[3].trim())
-            .sellersOrder(findSeller(vector[4].trim()))
-            .supervisorsOrder(vector[5].trim())
-            .sellerRegistration(findSeller(vector[6].trim()))
-            .supervisorRegistration(vector[7].trim())
-            .city(vector[8].trim())
-            .typeOperation(vector[9].trim())
-            .nfNumber(vector[10].trim())
-            .product(findProductByCode(vector[11].trim())) // The product must be fixed, because the object is wrong,
+            .distributor(line.substring(0, index_1).trim())
+            .date(convertDate(line.substring(index_1 + 1, index_2).trim()))
+            .customer(findCustomer(line.substring(index_2 + 1, index_3).trim()))
+            .route(line.substring(index_3 +1, index_4).trim())
+            .sellersOrder(findSeller(line.substring(index_4 + 1, index_5).trim()))
+            .supervisorsOrder(line.substring(index_5 +1 , index_6).trim())
+            .sellerRegistration(findSeller(line.substring(index_6 + 1, index_7).trim()))
+            .supervisorRegistration(line.substring(index_7 + 1, index_8).trim())
+            .city(line.substring(index_8 + 1, index_9).trim().trim())
+            .typeOperation(line.substring(index_9 + 1, index_10).trim())
+            .nfNumber(line.substring(index_10 + 1, index_11))
+            .product(findProductByCode(line.substring(index_11 + 1, index_12).trim())) // The product must be fixed, because the object is wrong,
                                                            // done to be if the import is correct.
-            .amount(Double.parseDouble(vector[12].trim().replaceAll(",", ".")))
-            .liter(vector[13].trim())
-            .physicalBox(vector[14].trim())
-            .condition(vector[15].trim())
-            .weight(Double.parseDouble(vector[16].trim().replaceAll(",", ".")))
-            .priceSell(Double.parseDouble(vector[17].trim().replaceAll(",", ".")))
-            .priceCost(Double.parseDouble(vector[18].trim().replaceAll(",", ".")))
-            .tablePrice(vector[19].trim())
-            .groupR(vector[20].trim()) // product's group, don't put it()
-            .category(vector[21].trim()) // categories don't put it()
-            .brand(vector[22].trim()) // Brand don't need to put it()
-            .tableSell(Integer.parseInt(vector[23].trim()))
-            .cluster(findCluster(vector[24].trim())) // create register from sellout's table()
-            .channel(findSubChannel(vector[25].trim())) // channel is consider subchannel to myanlista then put
+            .amount(Double.parseDouble(line.substring(index_12 + 1, index_13).trim().replaceAll(",", ".")))
+            .liter(line.substring(index_13 + 1, index_14).trim())
+            .physicalBox(line.substring(index_14 + 1, index_15).trim())
+            .condition(line.substring(index_15 + 1, index_16).trim())
+            .weight(Double.parseDouble(line.substring(index_16 + 1, index_17).trim().replaceAll(",", ".")))
+            .priceSell(Double.parseDouble(line.substring(index_17 +1, index_18).trim().replaceAll(",", ".")))
+            .priceCost(Double.parseDouble(line.substring(index_18 + 1, index_19).trim().replaceAll(",", ".")))
+            .tablePrice(line.substring(index_19 + 1, index_20).trim())
+            .groupR(line.substring(index_20 + 1, index_21).trim()) // product's group, don't put it()
+            .category(line.substring(index_21, index_22).trim()) // categories don't put it()
+            .brand(line.substring(index_22 + 1, index_23).trim()) // Brand don't need to put it()
+            .tableSell(Integer.parseInt(line.substring(index_23 + 1, index_24).trim()))
+            .cluster(findCluster(line.substring(index_24 + 1, index_25).trim())) // create register from sellout's table()
+            .channel(findSubChannel(line.substring(index_25 + 1, index_26).trim())) // channel is consider subchannel to myanlista then put
                                                         // subchannel on channel()
-            .averageTerm(Integer.parseInt(vector[26].trim()))
-            .cfop(vector[27].trim())
-            .fantasy(vector[28].trim())
-            .physicalJuridical(vector[29].trim())
-            .packages(vector[30].trim())
-            .ean(vector[31].trim())
-            .ncm(vector[32].trim())
-            .cia(vector[33].trim())
-            .unit(vector[34].trim())
-            .monthYear(vector[35].trim())
-            .comission(vector[36].trim())
-            .district(vector[37].trim())
-            .sellPrice(Double.parseDouble(vector[38].trim().replaceAll(",", ".")))
-            .amountReturned(Double.parseDouble(vector[39].trim().replaceAll(",", ".")))
-            .literReturned(Integer.parseInt(vector[40].trim().replaceAll(",", ".")))
-            .physicalBoxReturned(Integer.parseInt(vector[41].trim()))
-            .valueReturned(Double.parseDouble(vector[42].trim().replaceAll(",", ".")))
-            .valueMeta(Integer.parseInt(vector[43].trim()))
-            .amountMeta(Integer.parseInt(vector[44].trim()))
-            .physicalBoxMeta(Integer.parseInt(vector[45].trim()))
-            .coverMeta(vector[46])
-            .averageTermMeta(vector[47])
-            .seller2(findSeller(vector[48].trim()))
-            .supervisor2(vector[49].trim())
-            .route2(vector[50].trim())
-            .quarter(vector[51].trim())
-            .orderDate(convertDate(vector[52].trim()))
-            .unitBox(Integer.parseInt(vector[53].trim()))
-            .unitBoxReturned(Integer.parseInt(vector[54].trim()))
-            .unitBoxBox(Double.parseDouble(vector[55].trim().replace(",", ".")))
-            .unitBoxRmeta(Integer.parseInt(vector[56].trim()))
-            .register(vector[57].trim())
-            .area(vector[58].trim())
-            .discountCustomer(Integer.parseInt((vector[59].trim())))
-            .uf(vector[60].trim())
-            .toR(vector[61].trim())
-            .map(vector[62].trim())
-            .address(vector[63].trim())
-            .motiveReturn(vector[64].trim())
-            .productType(vector[65].trim())
-            .transaction(Integer.parseInt(vector[66].trim()))
-            .consumptionType(vector[67].trim())
-            .year(vector[68].trim())
-            .active(vector[69].trim())
-            .purchase(vector[70].trim())
-            .equipment(vector[71].trim())
-            .gvSup(vector[72].trim())
-            .adfFin(Double.parseDouble(vector[73].trim().replace(",", ".")))
-            .cobBol(Double.parseDouble(vector[74].trim().replace(",", ".")))
-            .companyCategory(vector[75].trim())
-            .companySubCategory(vector[76].trim())
-            .companyReturnability(vector[77].trim())
-            .companyBrand(vector[78].trim())
-            .flavor(vector[79].trim())
-            .segment(vector[80].trim())
-            .consumptionOccasion(vector[81].trim())
-            .nfeDate(convertDate(vector[82].trim()))
-            .cutted(vector[83].trim())
-            .eliminated(vector[84].trim())
-            .replaced(vector[85].trim())
-            .lastEntryCosts(Double.parseDouble(vector[86].trim().replaceAll(",", ".")))
-            .returnedDate(convertDate(vector[87].trim()))
-            .visitDay(vector[87].trim())
-            .salesPromoter(vector[89].trim())
-            .promoter2(vector[90].trim())
-            .commercialAction(vector[91].trim())
-            .polarizedStaggered(vector[92].trim())
+            .averageTerm(Integer.parseInt(line.substring(index_26 + 1, index_27).trim()))
+            .cfop(line.substring(index_27 + 1, index_28).trim())
+            .fantasy(line.substring(index_28 + 1, index_29).trim())
+            .physicalJuridical(line.substring(index_29 + 1, index_30).trim())
+            .packages(line.substring(index_30 + 1, index_31).trim())
+            .ean(line.substring(index_31 + 1, index_32).trim())
+            .ncm(line.substring(index_32 + 1, index_33).trim())
+            .cia(line.substring(index_33 + 1, index_34).trim())
+            .unit(line.substring(index_34 + 1, index_35).trim())
+            .monthYear(line.substring(index_35 + 1, index_36).trim())
+            .comission(line.substring(index_36 + 1, index_37).trim())
+            .district(line.substring(index_37 + 1, index_38).trim())
+            .sellPrice(Double.parseDouble(line.substring(index_38 + 1, index_39).trim().replaceAll(",", ".")))
+            .amountReturned(Double.parseDouble(line.substring(index_39 + 1, index_40).trim().replaceAll(",", ".")))
+            .literReturned(Integer.parseInt(line.substring(index_40 + 1, index_41).trim().replaceAll(",", ".")))
+            .physicalBoxReturned(Integer.parseInt(line.substring(index_41 + 1, index_42).trim()))
+            .valueReturned(Double.parseDouble(line.substring(index_42 + 1, index_43).trim().replaceAll(",", ".")))
+            .valueMeta(Integer.parseInt(line.substring(index_43 + 1, index_44).trim()))
+            .amountMeta(Integer.parseInt(line.substring(index_44 + 1, index_45).trim()))
+            .physicalBoxMeta(Integer.parseInt(line.substring(index_45 + 1, index_46).trim()))
+            .coverMeta(line.substring(index_46 + 1, index_47).trim())
+            .averageTermMeta(line.substring(index_47 + 1, index_48).trim())
+            .seller2(findSeller(line.substring(index_48 + 1, index_49).trim()))
+            .supervisor2(line.substring(index_49 + 1, index_50).trim())
+            .route2(line.substring(index_50 + 1, index_51).trim())
+            .quarter(line.substring(index_51 + 1, index_52).trim())
+            .orderDate(convertDate(line.substring(index_52 + 1, index_53).trim()))
+            .unitBox(Integer.parseInt(line.substring(index_53 + 1, index_54).trim()))
+            .unitBoxReturned(Integer.parseInt(line.substring(index_54 + 1, index_55).trim()))
+            .unitBoxBox(Double.parseDouble(line.substring(index_55 + 1, index_56).trim().replace(",", ".")))
+            .unitBoxRmeta(Integer.parseInt(line.substring(index_56 + 1, index_57).trim()))
+            .register(line.substring(index_57 + 1, index_58).trim())
+            .area(line.substring(index_58 + 1, index_59).trim())
+            .discountCustomer(Integer.parseInt((line.substring(index_59 + 1, index_60).trim())))
+            .uf(line.substring(index_60 + 1, index_61).trim())
+            .toR(line.substring(index_61 + 1, index_62).trim())
+            .map(line.substring(index_62 + 1, index_63).trim())
+            .address(line.substring(index_63 + 1, index_64).trim())
+            .motiveReturn(line.substring(index_64 + 1, index_65).trim())
+            .productType(line.substring(index_65 + 1, index_66).trim())
+            .transaction(Integer.parseInt(line.substring(index_66 + 1, index_67).trim()))
+            .consumptionType(line.substring(index_67 + 1, index_68).trim())
+            .year(line.substring(index_68 + 1, index_69).trim())
+            .active(line.substring(index_69 + 1, index_70).trim())
+            .purchase(line.substring(index_70 + 1, index_71).trim())
+            .equipment(line.substring(index_71 + 1, index_72).trim())
+            .gvSup(line.substring(index_72 + 1, index_73).trim())
+            .adfFin(Double.parseDouble(line.substring(index_73 + 1, index_74).trim().replace(",", ".")))
+            .cobBol(Double.parseDouble(line.substring(index_74 + 1, index_75).trim().replace(",", ".")))
+            .companyCategory(line.substring(index_75 + 1, index_76).trim())
+            .companySubCategory(line.substring(index_76 + 1, index_77).trim())
+            .companyReturnability(line.substring(index_77 + 1, index_78).trim())
+            .companyBrand(line.substring(index_78 + 1, index_79).trim())
+            .flavor(line.substring(index_79 + 1, index_80).trim())
+            .segment(line.substring(index_80 + 1, index_81).trim())
+            .consumptionOccasion(line.substring(index_81 + 1, index_82).trim())
+            .nfeDate(convertDate(line.substring(index_82 + 1, index_83).trim()))
+            .cutted(line.substring(index_83 + 1, index_84).trim())
+            .eliminated(line.substring(index_84 + 1, index_85).trim())
+            .replaced(line.substring(index_85 + 1, index_86).trim())
+            .lastEntryCosts(Double.parseDouble(line.substring(index_86 + 1, index_87).trim().replaceAll(",", ".")))
+            .returnedDate(convertDate(line.substring(index_87 + 1, index_88).trim()))
+            .visitDay(line.substring(index_88 + 1, index_89).trim())
+            .salesPromoter(line.substring(index_89 + 1, index_90).trim())
+            .promoter2(line.substring(index_90 + 1, index_91).trim())
+            .commercialAction(line.substring(index_91 + 1, index_92).trim())
+            .polarizedStaggered(line.substring(index_92 + 1).trim())
             .build();
 
         repository.save(channel);

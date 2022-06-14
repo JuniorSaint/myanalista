@@ -113,7 +113,7 @@ public class CustomerService {
         SubChannel subChannel = findSubChannelBySubChannel(line.substring(index_13 + 1, index_14).trim());
         ClusterGec clusterGec = findClusterByClusterGec(line.substring(index_28 + 1, index_29));
         Teams teams = findTeamsMemberByCode(line.substring(index_19 + 1, index_20).trim());
-        Teams teams2 = findTeamsMemberByCode(line.substring(index_35 + 1, index_36).trim());
+        // Teams teams2 = findTeamsMemberByCode(line.substring(index_35 + 1, index_36).trim());
         Distributor distributor = findDistributor(line.substring(index_38 + 1, index_39).trim());
 
 
@@ -154,7 +154,7 @@ public class CustomerService {
               .lastPurchase(line.substring(index_32 + 1, index_33).trim())
               .creditLimit(line.substring(index_33 + 1, index_34).trim())
               .addition(line.substring(index_34 + 1, index_35))
-              .seller2(teams2)
+              // .sellerCustomer2(teams2)
               .week2(line.substring(index_36, index_37).trim())
               .turnover2(line.substring(index_37 + 1, index_38).trim())
               .distributor(distributor)

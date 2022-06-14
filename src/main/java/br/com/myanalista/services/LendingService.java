@@ -11,12 +11,14 @@ import org.springframework.stereotype.Service;
 
 import br.com.myanalista.models.entities.ClusterGec;
 import br.com.myanalista.models.entities.Customer;
+import br.com.myanalista.models.entities.Distributor;
 import br.com.myanalista.models.entities.Equipment;
 import br.com.myanalista.models.entities.Lending;
 import br.com.myanalista.models.entities.SubChannel;
 import br.com.myanalista.models.entities.Teams;
 import br.com.myanalista.repositories.ClusterGecRepository;
 import br.com.myanalista.repositories.CustomerRepository;
+import br.com.myanalista.repositories.DistributorRepository;
 import br.com.myanalista.repositories.EquipmentRepository;
 import br.com.myanalista.repositories.LendingRepository;
 import br.com.myanalista.repositories.SubChannelRepository;
@@ -42,9 +44,12 @@ public class LendingService {
   @Autowired
   private TeamsRepository repositoryTeams;
 
+  @Autowired
+  private DistributorRepository repositoryDistributor;
+
   public void recordDataToDb() throws IOException {
 
-    String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/COMODATOS.csv";
+    String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/06187813000119_COMODATOS_RAF.csv";
 
     try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 
@@ -54,24 +59,47 @@ public class LendingService {
       line = br.readLine();
       while (line != null) {
 
-        String[] vector = line.split(";");
+        int index_1 = line.indexOf(";");
+        int index_2 = line.indexOf(";", index_1 + 1);
+        int index_3 = line.indexOf(";", index_2 + 1);
+        int index_4 = line.indexOf(";", index_3 + 1);
+        int index_5 = line.indexOf(";", index_4 + 1);
+        int index_7 = line.indexOf(";", index_5 + 1);
+        int index_8 = line.indexOf(";", index_7 + 1);
+        int index_9 = line.indexOf(";", index_8 + 1);
+        int index_10 = line.indexOf(";", index_9 + 1);
+        int index_11 = line.indexOf(";", index_10 + 1);
+        int index_12 = line.indexOf(";", index_11 + 1);
+        int index_13 = line.indexOf(";", index_12 + 1);
+        int index_14 = line.indexOf(";", index_13 + 1);
+        int index_15 = line.indexOf(";", index_14 + 1);
+        int index_16 = line.indexOf(";", index_14 + 1);
+        int index_17 = line.indexOf(";", index_16 + 1);
+        int index_18 = line.indexOf(";", index_17 + 1);
+        int index_19 = line.indexOf(";", index_18 + 1);
+        int index_20 = line.indexOf(";", index_19 + 1);
+        int index_21 = line.indexOf(";", index_20 + 1);
+        int index_22 = line.indexOf(";", index_21 + 1);
+        int index_23 = line.indexOf(";", index_22 + 1);
+        int index_24 = line.indexOf(";", index_23 + 1);
+        int index_25 = line.indexOf(";", index_24 + 1);
 
         Lending channel = Lending.builder()
-            .territory(vector[0])
-            .dealer(vector[1])
-            .customerRegistration(findCustomer(vector[2]))
-            .gec(findCluster(vector[7]))
-            .subChannel(findSubChannel(vector[8]))
-            .city(vector[9])
-            .equipmentNumber(findEquipmentByCode(vector[10]))
-            .contract(vector[14])
-            .amount(Integer.parseInt(vector[17]))
-            .dateSend(convertDate(vector[18]))
-            .dueDate(convertDate(vector[19]))
-            .sellerCode(findSeller(vector[20]))
-            .route(vector[21])
-            .nfe(vector[22])
-            .conservation(vector[23])
+            .territory(line.substring(0, index_1).trim())
+            .distributor(findDistributor(line.substring(index_1 + 1, index_2).trim()))
+            .customerRegistration(findCustomer(line.substring(index_2 + 1, index_3).trim()))
+            .gec(findCluster(line.substring(index_8 + 1, index_9).trim()))
+            .subChannel(findSubChannel(line.substring(index_9 + 1, index_10).trim()))
+            .city(line.substring(index_10 + 1, index_11).trim())
+            .equipmentNumber(findEquipmentByCode(line.substring(index_11 + 1, index_12).trim()))
+            .contract(line.substring(index_16 + 1, index_17).trim())
+            .amount(Integer.parseInt(line.substring(index_17 + 1, index_18).trim()))
+            .dateSend(convertDate(line.substring(index_20 + 1, index_21).trim()))
+            .dueDate(convertDate(line.substring(index_21 + 1, index_22).trim()))
+            // .sellerCode(findSeller(line.substring(index_22 + 1, index_23).trim()))
+            .route(line.substring(index_23 + 1, index_24).trim())
+            .nfe(line.substring(index_24 + 1, index_25).trim())
+            .conservation(line.substring(index_25 + 1).trim())
             .build();
 
         repository.save(channel);
@@ -104,6 +132,17 @@ public class LendingService {
       return null;
     }
     return clusterResponse.get();
+  }
+
+  private Distributor findDistributor(String cnpj) {
+    if (cnpj.isEmpty()) {
+      return null;
+    }
+    Optional<Distributor> response = repositoryDistributor.findDistributorByCnpj(cnpj);
+    if (!response.isPresent()) {
+      return null;
+    }
+    return response.get();
   }
 
   private SubChannel findSubChannel(String sub) {
@@ -164,7 +203,3 @@ public class LendingService {
     return sellerResponse.get();
   }
 }
-
-// }Território;Distribuidor;Matrícula Cliente;CPF;CNPJ;Razão Social;Nome
-// Fantasia;GEC;SubCanal;Cidade;Nr Equipamento;Série;Quant.
-// Portas;Logomarca;Contrato;Código;Produto;Qtde;Emissão;Vencimento;Vendedor;Rota;NFe;Conservação

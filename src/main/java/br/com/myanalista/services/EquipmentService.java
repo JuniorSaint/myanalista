@@ -3,21 +3,22 @@ package br.com.myanalista.services;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.myanalista.models.entities.VisitDay;
-import br.com.myanalista.repositories.VisitDayRepository;
+import br.com.myanalista.models.entities.Equipment;
+import br.com.myanalista.repositories.EquipmentRepository;
 
 @Service
-public class VisitDayService {
+public class EquipmentService {
   @Autowired
-  private VisitDayRepository repository;
+  private EquipmentRepository repository;
 
   public void recordDataToDb() throws IOException {
 
-    String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/DIA_VISITA.csv";
+    String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/06187813000119_EQUIPAMENTOS_RAF.TXT";
 
     try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 
@@ -33,14 +34,17 @@ public class VisitDayService {
         int index_6 = line.indexOf(";", index_5 + 1);
         
 
-        VisitDay channel = VisitDay.builder()
-            .daysOfWeek(line.substring(0, index_1).trim())
-            .firstDay(line.substring(index_1 + 1, index_2).trim())
-            .secondDay(line.substring(index_2 + 1, index_3).trim())
-            .thirdDay(line.substring( index_3 + 1, index_4).trim())
-            .fourthDay(line.substring( index_4 + 1, index_5).trim())
-            .fifthDay(line.substring(index_5 + 1, index_6).trim())
-            .sixDay(line.substring(index_6 + 1).trim())
+        Equipment channel = Equipment.builder()
+            .patrimony(line.substring(0, index_1))
+            .code(line.substring(index_1 + 1, index_2).trim())
+            .description(line.substring(index_1 + 1, index_2).trim())
+            .power(line.substring(index_1 + 1, index_2).trim())
+            // .manufacturingDate(line.substring( index_3 + 1, index_4).trim())
+            .serie(line.substring( index_4 + 1, index_5).trim())
+            .prop(line.substring(index_5 + 1, index_6).trim())
+            .situation(line.substring(index_6 + 1).trim())
+            .doors(Integer.parseInt(line.substring(index_6 + 1).trim()))
+            .observation(line.substring(index_6 + 1).trim())
             .build();
 
         repository.save(channel);

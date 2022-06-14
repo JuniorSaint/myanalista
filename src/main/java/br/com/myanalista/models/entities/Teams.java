@@ -15,7 +15,6 @@ import br.com.myanalista.models.enums.TeamTypeEnum;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
 @Builder
 @Entity
@@ -59,4 +58,7 @@ public class Teams implements Serializable {
 
     @OneToOne(mappedBy = "seller")
     private Customer customer;
+
+    // @OneToOne(mappedBy = "sellerCustomer2")
+    // private Customer customerSeller2;
 }

@@ -30,7 +30,9 @@ public class Lending implements Serializable {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
   private String territory;
-  private String dealer;
+  @OneToOne
+  @JoinColumn(name = "distributor_id")
+  private Distributor distributor;
   @OneToOne
   @JoinColumn(name = "customerRegistration_id")
   private Customer customerRegistration;
