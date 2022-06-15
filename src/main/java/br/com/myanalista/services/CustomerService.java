@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.myanalista.exceptions.BusinessException;
 import br.com.myanalista.models.entities.Channel;
-import br.com.myanalista.models.entities.ClusterGec;
 import br.com.myanalista.models.entities.Customer;
 import br.com.myanalista.models.entities.Distributor;
 import br.com.myanalista.models.entities.SubChannel;
@@ -110,12 +109,6 @@ public class CustomerService {
         int index_52 = line.indexOf(";", index_51 + 1);
 
         Boolean isExist = ifCustomerExist(line.substring(0, index_1).trim(), line.substring(index_38 + 1, index_39 ).trim());
-        SubChannel subChannel = findSubChannelBySubChannel(line.substring(index_13 + 1, index_14).trim());
-        ClusterGec clusterGec = findClusterByClusterGec(line.substring(index_28 + 1, index_29));
-        Teams teams = findTeamsMemberByCode(line.substring(index_19 + 1, index_20).trim());
-        // Teams teams2 = findTeamsMemberByCode(line.substring(index_35 + 1, index_36).trim());
-        Distributor distributor = findDistributor(line.substring(index_38 + 1, index_39).trim());
-
 
         if (!isExist) {
           Customer channel = Customer.builder()
@@ -132,13 +125,13 @@ public class CustomerService {
               .zipCode(line.substring(index_10 + 1, index_11).trim())
               .district(line.substring(index_11 + 1, index_12).trim())
               .phoneNumber(line.substring(index_12 + 1, index_13).trim())
-              .subChannel(subChannel)
+              .subChannel(findSubChannelBySubChannel(line.substring(index_13 + 1, index_14).trim()))
               .week(line.substring(index_14 + 1, index_15).trim())
               .sequence(line.substring(index_15 + 1, index_16).trim())
               .email(line.substring(index_16 + 1, index_17).trim())
               .tablePrice(line.substring(index_17 + 1, index_18).trim())
               .groupBusiness(line.substring(index_18 + 1, index_19).trim())
-              .seller(teams)
+              .seller(findTeamsMemberByCode(line.substring(index_19 + 1, index_20).trim()))
               .supervisor(line.substring(index_20 + 1, index_21))
               .area(line.substring(index_21 + 1, index_22).trim())
               .originalPaymentMethod(line.substring(index_22 + 1, index_23).trim())
@@ -147,17 +140,17 @@ public class CustomerService {
               .regiterDay(line.substring(index_25 + 1, index_26).trim())
               .inactivationDay(line.substring(index_26 + 1, index_27).trim())
               .status(line.substring(index_27 + 1, index_28).trim())
-              .clusterGec(clusterGec)
+              .clusterGec(line.substring(index_28 + 1, index_29).trim())
               .refPet(line.substring(index_29 + 1, index_30).trim())
               .ls(line.substring(index_30 + 1, index_31).trim())
               .rgb(line.substring(index_31 + 1, index_32).trim())
               .lastPurchase(line.substring(index_32 + 1, index_33).trim())
               .creditLimit(line.substring(index_33 + 1, index_34).trim())
               .addition(line.substring(index_34 + 1, index_35))
-              // .sellerCustomer2(teams2)
+              .sellerCustomer2(findTeamsMemberByCode(line.substring(index_35 + 1, index_36).trim()))
               .week2(line.substring(index_36 + 1, index_37).trim())
               .turnover2(line.substring(index_37 + 1, index_38).trim())
-              .distributor(distributor)
+              .distributor(findDistributor(line.substring(index_38 + 1, index_39).trim()))
               .latitude(line.substring(index_39 + 1, index_40).trim())
               .longitude(line.substring(index_40 + 1, index_41).trim())
               .notAllowCurrentRestChange(line.substring(index_41 + 1, index_42).trim())
@@ -211,15 +204,10 @@ public class CustomerService {
     return null;
   }
 
-  private ClusterGec findClusterByClusterGec(String clusterGec) {
-    Optional<ClusterGec> response = repositoryCluster.findByClusterGec(clusterGec.trim());
-    if (response.isPresent()) {
-      return response.get();
-    }
-    return null;
-  }
-
   private Teams findTeamsMemberByCode(String code) {
+    if(code.isEmpty()){
+      return null;
+    }
     String[] nameCode = code.split("-");
     if (code.toString().trim().equals("N/D")) {
       return null;
@@ -235,6 +223,9 @@ public class CustomerService {
   }
 
   public CustomerResponse findCustomerByCode(String code) {
+    if(code.isEmpty()){
+      return null;
+    }
     Optional<Customer> response = repository.findByCode(code);
     if (response.isEmpty()) {
       throw new BusinessException("There isn't customer with code: " + code);

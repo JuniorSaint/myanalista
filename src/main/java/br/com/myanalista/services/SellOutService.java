@@ -167,7 +167,8 @@ public class SellOutService {
             .condition(line.substring(index_15 + 1, index_16).trim())
             .weight(Double.parseDouble(line.substring(index_16 + 1, index_17).trim().replaceAll(",", ".")))
             .priceSell(Double.parseDouble(line.substring(index_17 + 1, index_18).trim().replaceAll(",", ".")))
-            .priceCost(String.format("%.3f", Double.parseDouble(line.substring(index_18 + 1, index_19).trim().replaceAll(",", "."))))
+            .priceCost(String.format("%.3f",
+                Double.parseDouble(line.substring(index_18 + 1, index_19).trim().replaceAll(",", "."))))
             .tablePrice(Double.parseDouble(line.substring(index_19 + 1, index_20).trim().replace(",", ".")))
             .groupR(line.substring(index_20 + 1, index_21).trim()) // product's group, don't put it()
             .category(line.substring(index_21, index_22).trim()) // categories don't put it()
@@ -178,7 +179,8 @@ public class SellOutService {
             .channel(findSubChannel(line.substring(index_25 + 1, index_26).trim())) // channel is consider subchannel to
                                                                                     // myanlista then put
             // subchannel on channel()
-            .averageTerm(line.substring(index_26 + 1, index_27).trim().isEmpty() ? 0 : Integer.parseInt(line.substring(index_26 + 1, index_27).trim()))
+            .averageTerm(line.substring(index_26 + 1, index_27).trim().isEmpty() ? 0
+                : Integer.parseInt(line.substring(index_26 + 1, index_27).trim()))
             .cfop(line.substring(index_27 + 1, index_28).trim())
             .fantasy(line.substring(index_28 + 1, index_29).trim())
             .physicalJuridical(line.substring(index_29 + 1, index_30).trim())
@@ -190,28 +192,36 @@ public class SellOutService {
             .monthYear(line.substring(index_35 + 1, index_36).trim())
             .comission(line.substring(index_36 + 1, index_37).trim().replace(",", "."))
             .district(line.substring(index_37 + 1, index_38).trim())
-            .sellPrice(String.format("%.3f",  Double.parseDouble(line.substring(index_38 + 1, index_39).trim().replaceAll(",", "."))))
+            .sellPrice(String.format("%.3f",
+                Double.parseDouble(line.substring(index_38 + 1, index_39).trim().replaceAll(",", "."))))
             .amountReturned(Double.parseDouble(line.substring(index_39 + 1, index_40).trim().replaceAll(",", ".")))
             .literReturned(Double.parseDouble(line.substring(index_40 + 1, index_41).trim().replaceAll(",", ".")))
-            .physicalBoxReturned(line.substring(index_41 + 1, index_42).trim().isEmpty() ? 0 : Integer.parseInt(line.substring(index_45 + 1, index_46).trim().replace(",", ".")))
-            .valueReturned(Double.parseDouble( line.substring(index_42 + 1, index_43).trim().replaceAll(",", ".")))
+            .physicalBoxReturned(line.substring(index_41 + 1, index_42).trim().isEmpty() ? 0
+                : Integer.parseInt(line.substring(index_45 + 1, index_46).trim().replace(",", ".")))
+            .valueReturned(Double.parseDouble(line.substring(index_42 + 1, index_43).trim().replaceAll(",", ".")))
             .valueMeta(Double.parseDouble(line.substring(index_43 + 1, index_44).trim()))
             .amountMeta(Integer.parseInt(line.substring(index_44 + 1, index_45).trim()))
-            .physicalBoxMeta(line.substring(index_45 + 1, index_46).trim().isEmpty() ? 0 : Integer.parseInt(line.substring(index_45 + 1, index_46).trim().replace(",", ".")))
+            .physicalBoxMeta(line.substring(index_45 + 1, index_46).trim().isEmpty() ? 0
+                : Integer.parseInt(line.substring(index_45 + 1, index_46).trim().replace(",", ".")))
             .coverMeta(line.substring(index_46 + 1, index_47).trim())
-            .averageTermMeta(line.substring(index_47 + 1, index_48).trim() )
+            .averageTermMeta(line.substring(index_47 + 1, index_48).trim())
             .seller2(findSeller(line.substring(index_48 + 1, index_49).trim()))
             .supervisor2(line.substring(index_49 + 1, index_50).trim())
             .route2(line.substring(index_50 + 1, index_51).trim())
             .quarter(line.substring(index_51 + 1, index_52).trim())
             .orderDate(convertDate(line.substring(index_52 + 1, index_53).trim()))
-            .unitBox(String.format("%.3f", Double.parseDouble(line.substring(index_53 + 1, index_54).trim().replace(",", "."))))
-            .unitBoxReturned(String.format("%.3f",Double.parseDouble(line.substring(index_54 + 1, index_55).trim().replace(",", "."))))
-            .unitBoxBox(String.format("%.3f", Double.parseDouble(line.substring(index_55 + 1, index_56).trim().replace(",", "."))))
-            .unitBoxRmeta(String.format("%.3f", Double.parseDouble(line.substring(index_56 + 1, index_57).trim().replace(",", "."))))
+            .unitBox(String.format("%.3f",
+                Double.parseDouble(line.substring(index_53 + 1, index_54).trim().replace(",", "."))))
+            .unitBoxReturned(String.format("%.3f",
+                Double.parseDouble(line.substring(index_54 + 1, index_55).trim().replace(",", "."))))
+            .unitBoxBox(String.format("%.3f",
+                Double.parseDouble(line.substring(index_55 + 1, index_56).trim().replace(",", "."))))
+            .unitBoxRmeta(String.format("%.3f",
+                Double.parseDouble(line.substring(index_56 + 1, index_57).trim().replace(",", "."))))
             .register(line.substring(index_57 + 1, index_58).trim())
             .area(line.substring(index_58 + 1, index_59).trim())
-            .discountCustomer((line.substring(index_59 + 1, index_60).trim()).isEmpty() ? 0.00 : Double.parseDouble(line.substring(index_59 + 1, index_60).trim().replace(",", ".")))
+            .discountCustomer((line.substring(index_59 + 1, index_60).trim()).isEmpty() ? 0.00
+                : Double.parseDouble(line.substring(index_59 + 1, index_60).trim().replace(",", ".")))
             .uf(line.substring(index_60 + 1, index_61).trim())
             .toR(line.substring(index_61 + 1, index_62).trim())
             .map(line.substring(index_62 + 1, index_63).trim())

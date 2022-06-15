@@ -60,6 +60,6 @@ public class Teams implements Serializable {
     @OneToMany(mappedBy = "seller")
     private List<Customer> customers;
 
-    // @OneToOne(mappedBy = "sellerCustomer2")
-    // private Customer customerSeller2;
+    @OneToOne(mappedBy = "sellerCustomer2")
+    private Customer customerSeller2;
 }

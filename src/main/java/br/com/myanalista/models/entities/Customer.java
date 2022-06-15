@@ -1,10 +1,13 @@
 package br.com.myanalista.models.entities;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -57,18 +60,16 @@ public class Customer implements Serializable {
   private String regiterDay;
   private String inactivationDay;
   private String status;
-  @OneToOne
-  @JoinColumn(name = "clusterGec_id")
-  private ClusterGec clusterGec;
+  private String clusterGec;
   private String refPet;
   private String ls;
   private String rgb;
   private String lastPurchase;
   private String creditLimit;
   private String addition;
-  // @OneToOne
-  // @JoinColumn(name = "seller2_id")
-  // private Teams sellerCustomer2;
+  @OneToOne
+  @JoinColumn(name = "seller2_id")
+  private Teams sellerCustomer2;
   private String week2;
   private String turnover2;
   @ManyToOne
@@ -91,8 +92,8 @@ public class Customer implements Serializable {
   private Channel channel;
   private String specie;
 
-  @OneToOne(mappedBy = "customer")
-  private SellOut sellOut;
+  @OneToMany(mappedBy="customer")
+  private List<SellOut> sellOuts;
 
   @OneToOne(mappedBy = "customerRegistration")
   private Lending lending;

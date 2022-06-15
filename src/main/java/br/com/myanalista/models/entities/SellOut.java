@@ -2,12 +2,15 @@ package br.com.myanalista.models.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -33,8 +36,8 @@ public class SellOut implements Serializable {
 
   private String distributor;
   private LocalDate date;
-  @OneToOne
-  @JoinColumn(name = "customer_id")
+  @ManyToOne
+  @JoinColumn(name="customer_id")
   private Customer customer;
   private String route;
   @OneToOne
@@ -59,16 +62,16 @@ public class SellOut implements Serializable {
   private Double priceSell;
   private String priceCost;
   private Double tablePrice;
-  private String groupR;  // product's group, don't put it;
+  private String groupR; // product's group, don't put it;
   private String category; // categories don't put it;
   private String brand; // Brand don't need to put it;
   private Integer tableSell;
   @OneToOne
   @JoinColumn(name = "cluster_id")
-  private ClusterGec cluster;  // create register from sellout's table;
+  private ClusterGec cluster; // create register from sellout's table;
   @OneToOne
   @JoinColumn(name = "channel_id")
-  private SubChannel channel;  // channel is consider subchannel to  myanlista then put subchannel on channel;
+  private SubChannel channel; // channel is consider subchannel to myanlista then put subchannel on channel;
   private Integer averageTerm;
   private String cfop;
   private String fantasy;
@@ -111,7 +114,7 @@ public class SellOut implements Serializable {
   private String address;
   private String motiveReturn;
   private String productType;
-  private Integer transaction; 
+  private Integer transaction;
   private String consumptionType;
   private String year;
   private String active;
@@ -132,7 +135,7 @@ public class SellOut implements Serializable {
   private String eliminated;
   private String replaced;
   private Double lastEntryCosts;
-  private LocalDate  returnedDate;
+  private LocalDate returnedDate;
   private String visitDay;
   private String salesPromoter;
   private String promoter2;
