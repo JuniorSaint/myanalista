@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Builder
 @Entity
@@ -31,6 +32,6 @@ public class ClusterGec implements Serializable {
   @OneToOne(mappedBy = "gec")
   private Lending lending;
 
-  @OneToOne(mappedBy = "clusterGec")
-  private Customer customer;
+  @OneToMany(mappedBy = "clusterGec")
+  private List<Customer> customers;
 }

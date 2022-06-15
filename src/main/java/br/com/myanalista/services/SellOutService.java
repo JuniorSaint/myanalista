@@ -3,6 +3,7 @@ package br.com.myanalista.services;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.Format;
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -117,7 +118,7 @@ public class SellOutService {
         int index_63 = line.indexOf(";", index_62 + 1);
         int index_64 = line.indexOf(";", index_63 + 1);
         int index_65 = line.indexOf(";", index_64 + 1);
-        int index_66 = line.indexOf(";", index_65+ 1);
+        int index_66 = line.indexOf(";", index_65 + 1);
         int index_67 = line.indexOf(";", index_66 + 1);
         int index_68 = line.indexOf(";", index_67 + 1);
         int index_69 = line.indexOf(";", index_68 + 1);
@@ -149,32 +150,35 @@ public class SellOutService {
             .distributor(line.substring(0, index_1).trim())
             .date(convertDate(line.substring(index_1 + 1, index_2).trim()))
             .customer(findCustomer(line.substring(index_2 + 1, index_3).trim()))
-            .route(line.substring(index_3 +1, index_4).trim())
+            .route(line.substring(index_3 + 1, index_4).trim())
             .sellersOrder(findSeller(line.substring(index_4 + 1, index_5).trim()))
-            .supervisorsOrder(line.substring(index_5 +1 , index_6).trim())
+            .supervisorsOrder(line.substring(index_5 + 1, index_6).trim())
             .sellerRegistration(findSeller(line.substring(index_6 + 1, index_7).trim()))
             .supervisorRegistration(line.substring(index_7 + 1, index_8).trim())
             .city(line.substring(index_8 + 1, index_9).trim().trim())
             .typeOperation(line.substring(index_9 + 1, index_10).trim())
             .nfNumber(line.substring(index_10 + 1, index_11))
-            .product(findProductByCode(line.substring(index_11 + 1, index_12).trim())) // The product must be fixed, because the object is wrong,
-                                                           // done to be if the import is correct.
+            .product(findProductByCode(line.substring(index_11 + 1, index_12).trim())) // The product must be fixed,
+                                                                                       // because the object is wrong,
+            // done to be if the import is correct.
             .amount(Double.parseDouble(line.substring(index_12 + 1, index_13).trim().replaceAll(",", ".")))
-            .liter(line.substring(index_13 + 1, index_14).trim())
+            .liter(line.substring(index_13 + 1, index_14).trim().replace(",", ";"))
             .physicalBox(line.substring(index_14 + 1, index_15).trim())
             .condition(line.substring(index_15 + 1, index_16).trim())
             .weight(Double.parseDouble(line.substring(index_16 + 1, index_17).trim().replaceAll(",", ".")))
-            .priceSell(Double.parseDouble(line.substring(index_17 +1, index_18).trim().replaceAll(",", ".")))
-            .priceCost(Double.parseDouble(line.substring(index_18 + 1, index_19).trim().replaceAll(",", ".")))
-            .tablePrice(line.substring(index_19 + 1, index_20).trim())
+            .priceSell(Double.parseDouble(line.substring(index_17 + 1, index_18).trim().replaceAll(",", ".")))
+            .priceCost(String.format("%.3f", Double.parseDouble(line.substring(index_18 + 1, index_19).trim().replaceAll(",", "."))))
+            .tablePrice(Double.parseDouble(line.substring(index_19 + 1, index_20).trim().replace(",", ".")))
             .groupR(line.substring(index_20 + 1, index_21).trim()) // product's group, don't put it()
             .category(line.substring(index_21, index_22).trim()) // categories don't put it()
             .brand(line.substring(index_22 + 1, index_23).trim()) // Brand don't need to put it()
             .tableSell(Integer.parseInt(line.substring(index_23 + 1, index_24).trim()))
-            .cluster(findCluster(line.substring(index_24 + 1, index_25).trim())) // create register from sellout's table()
-            .channel(findSubChannel(line.substring(index_25 + 1, index_26).trim())) // channel is consider subchannel to myanlista then put
-                                                        // subchannel on channel()
-            .averageTerm(Integer.parseInt(line.substring(index_26 + 1, index_27).trim()))
+            .cluster(findCluster(line.substring(index_24 + 1, index_25).trim())) // create register from sellout's
+                                                                                 // table()
+            .channel(findSubChannel(line.substring(index_25 + 1, index_26).trim())) // channel is consider subchannel to
+                                                                                    // myanlista then put
+            // subchannel on channel()
+            .averageTerm(line.substring(index_26 + 1, index_27).trim().isEmpty() ? 0 : Integer.parseInt(line.substring(index_26 + 1, index_27).trim()))
             .cfop(line.substring(index_27 + 1, index_28).trim())
             .fantasy(line.substring(index_28 + 1, index_29).trim())
             .physicalJuridical(line.substring(index_29 + 1, index_30).trim())
@@ -184,30 +188,30 @@ public class SellOutService {
             .cia(line.substring(index_33 + 1, index_34).trim())
             .unit(line.substring(index_34 + 1, index_35).trim())
             .monthYear(line.substring(index_35 + 1, index_36).trim())
-            .comission(line.substring(index_36 + 1, index_37).trim())
+            .comission(line.substring(index_36 + 1, index_37).trim().replace(",", "."))
             .district(line.substring(index_37 + 1, index_38).trim())
-            .sellPrice(Double.parseDouble(line.substring(index_38 + 1, index_39).trim().replaceAll(",", ".")))
+            .sellPrice(String.format("%.3f",  Double.parseDouble(line.substring(index_38 + 1, index_39).trim().replaceAll(",", "."))))
             .amountReturned(Double.parseDouble(line.substring(index_39 + 1, index_40).trim().replaceAll(",", ".")))
-            .literReturned(Integer.parseInt(line.substring(index_40 + 1, index_41).trim().replaceAll(",", ".")))
-            .physicalBoxReturned(Integer.parseInt(line.substring(index_41 + 1, index_42).trim()))
-            .valueReturned(Double.parseDouble(line.substring(index_42 + 1, index_43).trim().replaceAll(",", ".")))
-            .valueMeta(Integer.parseInt(line.substring(index_43 + 1, index_44).trim()))
+            .literReturned(Double.parseDouble(line.substring(index_40 + 1, index_41).trim().replaceAll(",", ".")))
+            .physicalBoxReturned(line.substring(index_41 + 1, index_42).trim().isEmpty() ? 0 : Integer.parseInt(line.substring(index_45 + 1, index_46).trim().replace(",", ".")))
+            .valueReturned(Double.parseDouble( line.substring(index_42 + 1, index_43).trim().replaceAll(",", ".")))
+            .valueMeta(Double.parseDouble(line.substring(index_43 + 1, index_44).trim()))
             .amountMeta(Integer.parseInt(line.substring(index_44 + 1, index_45).trim()))
-            .physicalBoxMeta(Integer.parseInt(line.substring(index_45 + 1, index_46).trim()))
+            .physicalBoxMeta(line.substring(index_45 + 1, index_46).trim().isEmpty() ? 0 : Integer.parseInt(line.substring(index_45 + 1, index_46).trim().replace(",", ".")))
             .coverMeta(line.substring(index_46 + 1, index_47).trim())
-            .averageTermMeta(line.substring(index_47 + 1, index_48).trim())
+            .averageTermMeta(line.substring(index_47 + 1, index_48).trim() )
             .seller2(findSeller(line.substring(index_48 + 1, index_49).trim()))
             .supervisor2(line.substring(index_49 + 1, index_50).trim())
             .route2(line.substring(index_50 + 1, index_51).trim())
             .quarter(line.substring(index_51 + 1, index_52).trim())
             .orderDate(convertDate(line.substring(index_52 + 1, index_53).trim()))
-            .unitBox(Integer.parseInt(line.substring(index_53 + 1, index_54).trim()))
-            .unitBoxReturned(Integer.parseInt(line.substring(index_54 + 1, index_55).trim()))
-            .unitBoxBox(Double.parseDouble(line.substring(index_55 + 1, index_56).trim().replace(",", ".")))
-            .unitBoxRmeta(Integer.parseInt(line.substring(index_56 + 1, index_57).trim()))
+            .unitBox(String.format("%.3f", Double.parseDouble(line.substring(index_53 + 1, index_54).trim().replace(",", "."))))
+            .unitBoxReturned(String.format("%.3f",Double.parseDouble(line.substring(index_54 + 1, index_55).trim().replace(",", "."))))
+            .unitBoxBox(String.format("%.3f", Double.parseDouble(line.substring(index_55 + 1, index_56).trim().replace(",", "."))))
+            .unitBoxRmeta(String.format("%.3f", Double.parseDouble(line.substring(index_56 + 1, index_57).trim().replace(",", "."))))
             .register(line.substring(index_57 + 1, index_58).trim())
             .area(line.substring(index_58 + 1, index_59).trim())
-            .discountCustomer(Integer.parseInt((line.substring(index_59 + 1, index_60).trim())))
+            .discountCustomer((line.substring(index_59 + 1, index_60).trim()).isEmpty() ? 0.00 : Double.parseDouble(line.substring(index_59 + 1, index_60).trim().replace(",", ".")))
             .uf(line.substring(index_60 + 1, index_61).trim())
             .toR(line.substring(index_61 + 1, index_62).trim())
             .map(line.substring(index_62 + 1, index_63).trim())
@@ -231,8 +235,8 @@ public class SellOutService {
             .segment(line.substring(index_80 + 1, index_81).trim())
             .consumptionOccasion(line.substring(index_81 + 1, index_82).trim())
             .nfeDate(convertDate(line.substring(index_82 + 1, index_83).trim()))
-            .cutted(line.substring(index_83 + 1, index_84).trim())
-            .eliminated(line.substring(index_84 + 1, index_85).trim())
+            .cutted(line.substring(index_83 + 1, index_84).trim().replace(",", "."))
+            .eliminated(line.substring(index_84 + 1, index_85).trim().replace(",", "."))
             .replaced(line.substring(index_85 + 1, index_86).trim())
             .lastEntryCosts(Double.parseDouble(line.substring(index_86 + 1, index_87).trim().replaceAll(",", ".")))
             .returnedDate(convertDate(line.substring(index_87 + 1, index_88).trim()))
@@ -318,14 +322,10 @@ public class SellOutService {
       return null;
     }
     String[] splitProd = prod.split("-");
-    Products product = Products.builder().code(splitProd[0]).sku("sku-" + splitProd[0]).productDescription(splitProd[1])
-        .active(true).build();
     Optional<Products> responseProd = repositoryProduct.findByCode(splitProd[0]);
-    Products test = responseProd.get();
     if (!responseProd.isPresent()) {
-      return repositoryProduct.save(product);
+      return null;
     }
-
     return responseProd.get();
   }
 

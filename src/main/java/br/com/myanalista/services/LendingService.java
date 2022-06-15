@@ -73,7 +73,7 @@ public class LendingService {
         int index_13 = line.indexOf(";", index_12 + 1);
         int index_14 = line.indexOf(";", index_13 + 1);
         int index_15 = line.indexOf(";", index_14 + 1);
-        int index_16 = line.indexOf(";", index_14 + 1);
+        int index_16 = line.indexOf(";", index_15 + 1);
         int index_17 = line.indexOf(";", index_16 + 1);
         int index_18 = line.indexOf(";", index_17 + 1);
         int index_19 = line.indexOf(";", index_18 + 1);
@@ -88,7 +88,7 @@ public class LendingService {
             .territory(line.substring(0, index_1).trim())
             .distributor(findDistributor(line.substring(index_1 + 1, index_2).trim()))
             .customerRegistration(findCustomer(line.substring(index_2 + 1, index_3).trim()))
-            .gec(findCluster(line.substring(index_8 + 1, index_9).trim()))
+            // .gec(findCluster(line.substring(index_8 + 1, index_9).trim()))
             .subChannel(findSubChannel(line.substring(index_9 + 1, index_10).trim()))
             .city(line.substring(index_10 + 1, index_11).trim())
             .equipmentNumber(findEquipmentByCode(line.substring(index_11 + 1, index_12).trim()))
