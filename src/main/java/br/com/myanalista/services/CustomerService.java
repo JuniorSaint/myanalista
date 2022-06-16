@@ -189,7 +189,8 @@ public class CustomerService {
 
   private boolean ifCustomerExist(String code, String distributor) {
     String[] distri = distributor.split(":");
-    Optional<Customer> response = repository.findByCodeByDistributor(code.trim(),findDistributor(distri[0]));
+    Optional<Distributor> dis = repositoryDistributor.findDistributorByCnpj(distri[0]);
+    Optional<Customer> response = repository.findByCodeByDistributor(code.trim(), dis.get());
     if (response.isPresent()) {
       return true;
     }

@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -33,14 +34,12 @@ public class Lending implements Serializable {
   @OneToOne
   @JoinColumn(name = "distributor_id")
   private Distributor distributor;
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "customerRegistration_id")
   private Customer customerRegistration;
-  @OneToOne
-  @JoinColumn(name = "gec_id")
-  private ClusterGec gec;
-  @OneToOne
-  @JoinColumn(name = "SubChannel_id")
+  private String gec;
+  @ManyToOne
+  @JoinColumn(name="subChannel_id")
   private SubChannel subChannel;
   private String city;
   @OneToOne
@@ -50,7 +49,7 @@ public class Lending implements Serializable {
   private Integer amount;
   private LocalDate dateSend;
   private LocalDate dueDate;
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "sellerCode_id")
   private Teams sellerCode;
   private String route;

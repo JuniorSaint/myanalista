@@ -54,8 +54,8 @@ public class Teams implements Serializable {
     @OneToOne(mappedBy = "seller2")
     private SellOut sellOutSeller;
 
-    @OneToOne(mappedBy = "sellerCode")
-    private Lending lending;
+    @OneToMany(mappedBy = "sellerCode")
+    private List<Lending> lending;
 
     @OneToMany(mappedBy = "seller")
     private List<Customer> customers;

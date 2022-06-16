@@ -11,8 +11,6 @@ import br.com.myanalista.models.entities.Distributor;
 
 @Repository
 public interface DistributorRepository extends JpaRepository<Distributor, Long> {
-  Optional<Distributor> findById(Long id);
-
   @Query(value = "select d from Distributor d where d.cnpjCpf = :cnpjCpf")
   Optional<Distributor> findDistributorByCnpj(@Param("cnpjCpf") String cnpjCpf);
 }

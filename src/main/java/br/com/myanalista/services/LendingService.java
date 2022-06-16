@@ -9,14 +9,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.myanalista.models.entities.ClusterGec;
 import br.com.myanalista.models.entities.Customer;
 import br.com.myanalista.models.entities.Distributor;
 import br.com.myanalista.models.entities.Equipment;
 import br.com.myanalista.models.entities.Lending;
 import br.com.myanalista.models.entities.SubChannel;
 import br.com.myanalista.models.entities.Teams;
-import br.com.myanalista.repositories.ClusterGecRepository;
 import br.com.myanalista.repositories.CustomerRepository;
 import br.com.myanalista.repositories.DistributorRepository;
 import br.com.myanalista.repositories.EquipmentRepository;
@@ -31,9 +29,6 @@ public class LendingService {
 
   @Autowired
   private CustomerRepository repositoryCustomer;
-
-  @Autowired
-  private ClusterGecRepository repositoryCluster;
 
   @Autowired
   private SubChannelRepository repositorySub;
@@ -82,24 +77,23 @@ public class LendingService {
         int index_22 = line.indexOf(";", index_21 + 1);
         int index_23 = line.indexOf(";", index_22 + 1);
         int index_24 = line.indexOf(";", index_23 + 1);
-        int index_25 = line.indexOf(";", index_24 + 1);
 
         Lending channel = Lending.builder()
             .territory(line.substring(0, index_1).trim())
             .distributor(findDistributor(line.substring(index_1 + 1, index_2).trim()))
             .customerRegistration(findCustomer(line.substring(index_2 + 1, index_3).trim()))
-            // .gec(findCluster(line.substring(index_8 + 1, index_9).trim()))
+            .gec(line.substring(index_8 + 1, index_9).trim())
             .subChannel(findSubChannel(line.substring(index_9 + 1, index_10).trim()))
             .city(line.substring(index_10 + 1, index_11).trim())
             .equipmentNumber(findEquipmentByCode(line.substring(index_11 + 1, index_12).trim()))
-            .contract(line.substring(index_16 + 1, index_17).trim())
-            .amount(Integer.parseInt(line.substring(index_17 + 1, index_18).trim()))
-            .dateSend(convertDate(line.substring(index_20 + 1, index_21).trim()))
-            .dueDate(convertDate(line.substring(index_21 + 1, index_22).trim()))
-            // .sellerCode(findSeller(line.substring(index_22 + 1, index_23).trim()))
-            .route(line.substring(index_23 + 1, index_24).trim())
-            .nfe(line.substring(index_24 + 1, index_25).trim())
-            .conservation(line.substring(index_25 + 1).trim())
+            .contract(line.substring(index_15 + 1, index_16).trim())
+            .amount(Integer.parseInt(line.substring(index_18 + 1, index_19).trim()))
+            .dateSend(convertDate(line.substring(index_19 + 1, index_20).trim()))
+            .dueDate(convertDate(line.substring(index_20 + 1, index_21).trim()))
+            .sellerCode(findSeller(line.substring(index_21 + 1, index_22).trim()))
+            .route(line.substring(index_22 + 1, index_23).trim())
+            .nfe(line.substring(index_23 + 1, index_24).trim())
+            .conservation(line.substring(index_24 + 1).trim())
             .build();
 
         repository.save(channel);
@@ -121,17 +115,6 @@ public class LendingService {
       return null;
     }
     return customerResponse.get();
-  }
-
-  private ClusterGec findCluster(String cluster) {
-    if (cluster.isEmpty()) {
-      return null;
-    }
-    Optional<ClusterGec> clusterResponse = repositoryCluster.findByClusterGec(cluster);
-    if (!clusterResponse.isPresent()) {
-      return null;
-    }
-    return clusterResponse.get();
   }
 
   private Distributor findDistributor(String cnpj) {

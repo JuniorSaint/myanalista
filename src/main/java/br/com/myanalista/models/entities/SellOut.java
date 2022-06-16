@@ -2,7 +2,6 @@ package br.com.myanalista.models.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -65,11 +63,10 @@ public class SellOut implements Serializable {
   private String groupR; // product's group, don't put it;
   private String category; // categories don't put it;
   private String brand; // Brand don't need to put it;
-  private Integer tableSell;
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "cluster_id")
   private ClusterGec cluster; // create register from sellout's table;
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "channel_id")
   private SubChannel channel; // channel is consider subchannel to myanlista then put subchannel on channel;
   private Integer averageTerm;

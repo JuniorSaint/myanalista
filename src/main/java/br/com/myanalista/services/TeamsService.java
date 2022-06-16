@@ -14,6 +14,7 @@ import br.com.myanalista.models.entities.Teams;
 import br.com.myanalista.models.request.TeamsRequestPost;
 import br.com.myanalista.models.request.TeamsRequestPut;
 import br.com.myanalista.models.response.TeamsResponse;
+import br.com.myanalista.repositories.DistributorRepository;
 import br.com.myanalista.repositories.TeamsRepository;
 
 @Service
@@ -25,17 +26,17 @@ public class TeamsService {
   private ModelMapper mapper;
 
   @Autowired
-  private DistributorService serviceCustomer;
+  private DistributorRepository  repositoryDistributor;
 
   @Transactional
   public TeamsResponse save(TeamsRequestPost teamsRequest) {
-    Distributor entityCustomer = serviceCustomer.findByIdEntity(teamsRequest.getDistributor().getId());
-    if (entityCustomer == null) {
-      throw new BusinessException("There's not Customer with id: " + teamsRequest.getDistributor().getId());
+   Optional<Distributor> distributor = repositoryDistributor.findDistributorByCnpj(teamsRequest.getDistributor().getCnpjCpf());
+    if (!distributor.isPresent()) {
+      throw new BusinessException("There's not Customer with id: " + teamsRequest.getDistributor().getCnpjCpf());
     }
     Teams teamsEntity = new Teams();
     mapper.map(teamsRequest, teamsEntity);
-    teamsEntity.setDistributor(entityCustomer);
+    teamsEntity.setDistributor(distributor.get());
     Teams teamsCreated = repository.save(teamsEntity);
     TeamsResponse teamsResponse = new TeamsResponse();
     mapper.map(teamsCreated, teamsResponse);
@@ -44,13 +45,13 @@ public class TeamsService {
 
   @Transactional
   public TeamsResponse update(TeamsRequestPut teamsRequest) {
-    Distributor entityCustomer = serviceCustomer.findByIdEntity(teamsRequest.getDistributor().getId());
-    if (entityCustomer == null) {
-      throw new BusinessException("There's not Customer with id: " + teamsRequest.getDistributor().getId());
+   Optional<Distributor> distributor = repositoryDistributor.findDistributorByCnpj(teamsRequest.getDistributor().getCnpjCpf());
+    if (!distributor.isPresent()) {
+      throw new BusinessException("There's not Customer with id: " + teamsRequest.getDistributor().getCnpjCpf());
     }
     Teams teamsEntity = new Teams();
     mapper.map(teamsRequest, teamsEntity);
-    teamsEntity.setDistributor(entityCustomer);
+    teamsEntity.setDistributor(distributor.get());
     Teams teamsUpdate = repository.save(teamsEntity);
     TeamsResponse teamsResponse = new TeamsResponse();
     mapper.map(teamsUpdate, teamsResponse);

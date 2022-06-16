@@ -26,9 +26,6 @@ public class ClusterGec implements Serializable {
   private String clusterGec;
   private String gecIne;
 
-  @OneToOne(mappedBy = "cluster")
-  private SellOut sellOut;
-
-  @OneToOne(mappedBy = "gec")
-  private Lending lending;
+  @OneToMany(mappedBy="cluster")
+  private List<SellOut> sellOuts;
 }

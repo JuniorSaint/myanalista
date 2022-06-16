@@ -1,11 +1,13 @@
 package br.com.myanalista.models.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -36,12 +38,12 @@ public class SubChannel implements Serializable {
   @JoinColumn(name = "channel_id")
   private Channel channel;
 
-  @OneToOne(mappedBy = "channel")
-  private SellOut sellOut;
+  @OneToMany(mappedBy = "channel")
+  private List<SellOut> sellOuts;
 
-  @OneToOne(mappedBy = "subChannel")
-  private Lending lending;
+  @OneToMany(mappedBy = "subChannel")
+  private List<Lending> lending;
 
-  @OneToOne(mappedBy = "subChannel")
-  private Customer customer;
+  @OneToMany(mappedBy = "subChannel")
+  private List<Customer> customer;
 }

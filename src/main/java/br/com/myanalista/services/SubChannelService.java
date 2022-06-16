@@ -61,7 +61,13 @@ public class SubChannelService {
   }
 
   private Channel findChannel(String code) {
+    if(code.isEmpty()){
+      return null;
+    }
     Optional<Channel> response = repositoryChannel.findChannelByCode(code);
+    if(!response.isPresent()){
+      return null;
+    }
     return response.get();
   }
 

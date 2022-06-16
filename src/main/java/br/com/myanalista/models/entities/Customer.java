@@ -41,7 +41,7 @@ public class Customer implements Serializable {
   private String zipCode;
   private String district;
   private String phoneNumber;
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "subChannel_id")
   private SubChannel subChannel;
   private String week;
@@ -95,6 +95,6 @@ public class Customer implements Serializable {
   @OneToMany(mappedBy="customer")
   private List<SellOut> sellOuts;
 
-  @OneToOne(mappedBy = "customerRegistration")
-  private Lending lending;
+  @OneToMany(mappedBy = "customerRegistration")
+  private List<Lending> lending;
 }

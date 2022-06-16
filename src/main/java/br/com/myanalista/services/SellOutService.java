@@ -149,7 +149,7 @@ public class SellOutService {
         SellOut channel = SellOut.builder()
             .distributor(line.substring(0, index_1).trim())
             .date(convertDate(line.substring(index_1 + 1, index_2).trim()))
-            .customer(findCustomer(line.substring(index_2 + 1, index_3).trim()))
+            .customer( findCustomer(line.substring(index_2 + 1, index_3).trim()))
             .route(line.substring(index_3 + 1, index_4).trim())
             .sellersOrder(findSeller(line.substring(index_4 + 1, index_5).trim()))
             .supervisorsOrder(line.substring(index_5 + 1, index_6).trim())
@@ -171,9 +171,9 @@ public class SellOutService {
                 Double.parseDouble(line.substring(index_18 + 1, index_19).trim().replaceAll(",", "."))))
             .tablePrice(Double.parseDouble(line.substring(index_19 + 1, index_20).trim().replace(",", ".")))
             .groupR(line.substring(index_20 + 1, index_21).trim()) // product's group, don't put it()
-            .category(line.substring(index_21, index_22).trim()) // categories don't put it()
+            .category(line.substring(index_21 + 1, index_22).trim()) // categories don't put it()
             .brand(line.substring(index_22 + 1, index_23).trim()) // Brand don't need to put it()
-            .tableSell(Integer.parseInt(line.substring(index_23 + 1, index_24).trim()))
+            // .tableSell(Integer.parseInt(line.substring(index_23 + 1, index_24).trim()))
             .cluster(findCluster(line.substring(index_24 + 1, index_25).trim())) // create register from sellout's
                                                                                  // table()
             .channel(findSubChannel(line.substring(index_25 + 1, index_26).trim())) // channel is consider subchannel to

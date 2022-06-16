@@ -15,6 +15,7 @@ import br.com.myanalista.models.request.ContactRequestPost;
 import br.com.myanalista.models.request.ContactRequestPut;
 import br.com.myanalista.models.response.ContactResponse;
 import br.com.myanalista.repositories.ContactRepository;
+import br.com.myanalista.repositories.DistributorRepository;
 
 @Service
 public class ContactService {
@@ -25,17 +26,17 @@ public class ContactService {
   @Autowired
   private ModelMapper mapper;
 
-  @Autowired DistributorService serviceCustomer;
+  @Autowired DistributorRepository repositoryDistributor;
 
   @Transactional
   public ContactResponse save(ContactRequestPost contactRequest) {
-    Distributor entityCustomer = serviceCustomer.findByIdEntity(contactRequest.getDistributor().getId());
-    if (entityCustomer == null) {
-      throw new BusinessException("There's not Customer with id: " + contactRequest.getDistributor().getId());
+   Optional<Distributor> distributor = repositoryDistributor.findDistributorByCnpj(contactRequest.getDistributor().getCnpjCpf());
+    if (!distributor.isPresent()) {
+      throw new BusinessException("There's not Customer with id: " + contactRequest.getDistributor().getCnpjCpf());
     }
       Contacts contactEntity = new Contacts();
       mapper.map(contactRequest, contactEntity);
-      contactEntity.setDistributor(entityCustomer);
+      contactEntity.setDistributor(distributor.get());
       Contacts contactCreated = repository.save(contactEntity);
       ContactResponse contactResponse = new ContactResponse();
       mapper.map(contactCreated, contactResponse);
@@ -44,13 +45,13 @@ public class ContactService {
 
   @Transactional
   public ContactResponse update(ContactRequestPut contactRequest) {
-    Distributor entityCustomer = serviceCustomer.findByIdEntity(contactRequest.getDistributor().getId());
-    if (entityCustomer == null) {
-      throw new BusinessException("There's not Customer with id: " + contactRequest.getDistributor().getId());
+   Optional<Distributor> distributor = repositoryDistributor.findDistributorByCnpj(contactRequest.getDistributor().getCnpjCpf());
+    if (!distributor.isPresent()) {
+      throw new BusinessException("There's not Customer with id: " + contactRequest.getDistributor().getCnpjCpf());
     }
     Contacts contactEntity = new Contacts();
       mapper.map(contactRequest, contactEntity);
-      contactEntity.setDistributor(entityCustomer);
+      contactEntity.setDistributor(distributor.get());
       Contacts contactUpdate = repository.save(contactEntity);
       ContactResponse contactResponse = new ContactResponse();
       mapper.map(contactUpdate, contactResponse);
