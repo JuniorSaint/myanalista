@@ -13,6 +13,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Builder
 @Entity
@@ -36,6 +37,6 @@ public class Products implements Serializable {
     @UpdateTimestamp
     private LocalDate updatedAt;
 
-    @OneToOne(mappedBy = "product")
-    private SellOut sellOut;
+    @OneToMany(mappedBy="product")
+    private List<SellOut> sellOuts;
 }

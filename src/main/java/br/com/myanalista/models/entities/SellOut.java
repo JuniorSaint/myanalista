@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -38,19 +37,19 @@ public class SellOut implements Serializable {
   @JoinColumn(name="customer_id")
   private Customer customer;
   private String route;
-  @OneToOne
-  @JoinColumn(name = "sellersOrder_id")
+  @ManyToOne
+  @JoinColumn(name="sellersOrder_id")
   private Teams sellersOrder;
   private String supervisorsOrder;
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "sellerRegistration_id")
   private Teams sellerRegistration;
   private String supervisorRegistration;
   private String city;
   private String typeOperation;
   private String nfNumber;
-  @OneToOne
-  @JoinColumn(name = "product_id")
+  @ManyToOne
+  @JoinColumn(name="product_id")
   private Products product;
   private Double amount;
   private String liter;
@@ -91,7 +90,7 @@ public class SellOut implements Serializable {
   private Integer physicalBoxMeta;
   private String coverMeta;
   private String averageTermMeta;
-  @OneToOne
+ @ManyToOne
   @JoinColumn(name = "seller2_id")
   private Teams seller2;
   private String supervisor2;

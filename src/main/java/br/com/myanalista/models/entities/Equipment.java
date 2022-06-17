@@ -29,7 +29,7 @@ public class Equipment implements Serializable {
   private String code;
   private String description;
   private String power;
-  private LocalDate manufacturingDate;
+  private String manufacturingDate;
   private String serie;
   private String prop;
   private String situation;

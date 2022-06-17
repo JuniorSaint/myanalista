@@ -16,11 +16,14 @@ import br.com.myanalista.services.ChannelService;
 import br.com.myanalista.services.CityIneService;
 import br.com.myanalista.services.ClusterGecService;
 import br.com.myanalista.services.CustomerService;
+import br.com.myanalista.services.DistributorService;
+import br.com.myanalista.services.EquipmentService;
 import br.com.myanalista.services.LendingService;
 import br.com.myanalista.services.NationalHolidayService;
 import br.com.myanalista.services.VisitDayService;
 import br.com.myanalista.services.SellOutService;
 import br.com.myanalista.services.SubChannelService;
+import br.com.myanalista.services.TeamsService;
 import br.com.myanalista.services.TurnoverService;
 import lombok.AllArgsConstructor;
 
@@ -59,6 +62,15 @@ public class UniqueChargeController {
 
    @Autowired
    private LendingService serviceLending;
+
+   @Autowired
+   private EquipmentService serviceEquipment;
+
+   @Autowired
+   private DistributorService serviceDistributor;
+
+   @Autowired
+   private TeamsService serviceTeams;
 
 @Autowired
 private TurnoverService serviceTurnover;
@@ -129,9 +141,26 @@ private TurnoverService serviceTurnover;
       serviceTurnover.recordDataToDb();
    }
 
+   @PostMapping("/equipment")
+   public void chargeEquipment() throws IOException {
+
+      serviceEquipment.recordDataToDb();
+   }
+
+   @PostMapping("/seller")
+   public void chargeSeller() throws IOException {
+
+      serviceTeams.recordDataToDb();
+   }
+
+   @PostMapping("/distributor")
+   public void chargeDistributor() throws IOException {
+
+      serviceDistributor.recordDataToDb();
+   }
+
    @GetMapping("/{code}")
    public CustomerResponse findByCode(@PathVariable(value = "code") String code){
       return serviceCustomer.findCustomerByCode(code);
    }
-
 }

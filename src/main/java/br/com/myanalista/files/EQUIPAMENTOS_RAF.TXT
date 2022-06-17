@@ -10,7 +10,7 @@
     GEKO032191         969 GE METALFRIO VN 44C                   00/00/00                  FAB   EMPRESTADO
     GEKO033865         968 GELT METALFRIO VN43               25  00/00/00                  FAB   EMPRESTADO
     GEKO035107         983 GE METALFRIO VN 44R                   00/00/00                  FAB   EMPRESTADO
-    GEKO036475         970 GE METALFRIO VB 43                    00/00/00                  FAB   BAIXADO        0
+    GEKO036475         970 GE METALFRIO VB 43                    00/00/00                  FAB   BAIXADO        0 
     GEKO043099         970 GE METALFRIO VB 43                25  00/00/00                  FAB   EMPRESTADO
     GEKO043116         970 GE METALFRIO VB 43                25  00/00/00                  FAB   BAIXADO        0
     GEKO043117         970 GE METALFRIO VB 43                25  00/00/00                  FAB   EMPRESTADO

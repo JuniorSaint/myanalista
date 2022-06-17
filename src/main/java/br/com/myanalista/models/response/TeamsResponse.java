@@ -21,5 +21,5 @@ public class TeamsResponse {
   private String memberFunction;
   private String typeOfRegistrationMember;
   private String memberLink;
-  private Distributor customer;
+  private Distributor distributor;
 }

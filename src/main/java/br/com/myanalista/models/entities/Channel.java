@@ -27,6 +27,6 @@ public class Channel implements Serializable {
   @OneToMany(mappedBy="channel")
   private List<SubChannel> subChannels;
 
-  @OneToOne(mappedBy = "channel")
-  private Customer customer;
+  @OneToMany(mappedBy = "channel")
+  private List<Customer> customer;
 }

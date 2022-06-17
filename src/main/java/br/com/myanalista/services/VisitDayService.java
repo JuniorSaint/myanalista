@@ -23,6 +23,7 @@ public class VisitDayService {
 
       String line = br.readLine(); // this first line will be discarted, because is the header.
       line = br.readLine();
+      
       while (line != null) {
 
         int index_1 = line.indexOf(";");
@@ -51,6 +52,4 @@ public class VisitDayService {
       throw new IOException("Error to read file " + e.getMessage());
     }
   }
-
-
 }

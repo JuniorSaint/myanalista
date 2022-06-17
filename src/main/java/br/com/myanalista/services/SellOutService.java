@@ -3,7 +3,6 @@ package br.com.myanalista.services;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.Format;
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -162,7 +161,7 @@ public class SellOutService {
                                                                                        // because the object is wrong,
             // done to be if the import is correct.
             .amount(Double.parseDouble(line.substring(index_12 + 1, index_13).trim().replaceAll(",", ".")))
-            .liter(line.substring(index_13 + 1, index_14).trim().replace(",", ";"))
+            .liter(line.substring(index_13 + 1, index_14).trim().replace(",", "."))
             .physicalBox(line.substring(index_14 + 1, index_15).trim())
             .condition(line.substring(index_15 + 1, index_16).trim())
             .weight(Double.parseDouble(line.substring(index_16 + 1, index_17).trim().replaceAll(",", ".")))

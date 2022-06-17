@@ -18,7 +18,6 @@ public class ChannelService {
   public void recordDataToDb() throws IOException {
     String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/CANAIS.csv";
 
-
     try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 
       String line = br.readLine(); // this first line will be discarted, because is the header.
@@ -28,14 +27,14 @@ public class ChannelService {
         int index_1 = line.indexOf(";");
 
         Channel channel = Channel.builder()
-            .code(line.substring(0, index_1))
-            .channel(line.substring(index_1 + 1))
+            .channel(line.substring(0, index_1))
+            .code(line.substring(index_1 + 1))
             .build();
-     
+
         repository.save(channel);
 
         line = br.readLine();
-      }   
+      }
     } catch (IOException e) {
       throw new IOException("Error to read file " + e.getMessage());
     }

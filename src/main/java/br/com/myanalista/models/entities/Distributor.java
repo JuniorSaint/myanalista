@@ -1,6 +1,5 @@
 package br.com.myanalista.models.entities;
 
-import br.com.myanalista.models.enums.CompanyTypeEnum;
 import br.com.myanalista.models.enums.CustomerTypeEnum;
 
 import lombok.AllArgsConstructor;
@@ -33,7 +32,7 @@ public class Distributor implements Serializable {
 
     @Id
     private String cnpjCpf;
-    private CompanyTypeEnum companyType;
+    private String companyType;
     private String nickName;
     private String companyName;
     private String fantasyName;
@@ -43,6 +42,7 @@ public class Distributor implements Serializable {
     private String zipCode;
     private String district;
     private String city;
+    private String state;
     private String observation;
     // Start Financial
     private LocalDate contractDate;

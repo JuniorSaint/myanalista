@@ -10,9 +10,6 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
-import br.com.myanalista.models.enums.TeamTypeEnum;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
@@ -28,15 +25,14 @@ public class Teams implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    private Long id;
     private String memberCode;
     private String fullName;
     private String cpf;
     private String memberFunction;
     private String typeOfRegistrationMember;
-    private String memberLink;
-    private TeamTypeEnum sellerOrSupervisor;
-    // @OneToMany(mappedBy="cart")
-    // private List<Teams> seller;
+    private Integer memberLink;
+    private String sellerOrSupervisor;
     @ManyToOne
     @JoinColumn(name = "distributor_id", nullable = true)
     private Distributor distributor;
@@ -45,21 +41,21 @@ public class Teams implements Serializable {
     @UpdateTimestamp
     private LocalDate updatedAt;
 
-    @OneToOne(mappedBy = "sellersOrder")
-    private SellOut sellOutSellerOrder;
+    @OneToMany(mappedBy="sellersOrder")
+    private List<SellOut> sellOutSellerOrders;
 
-    @OneToOne(mappedBy = "sellerRegistration")
-    private SellOut sellOutSellerRegistration;
+    @OneToMany(mappedBy="sellerRegistration")
+    private List<SellOut> sellOutSellerRegistrations;
 
-    @OneToOne(mappedBy = "seller2")
-    private SellOut sellOutSeller;
+    @OneToMany(mappedBy = "seller2")
+    private List<SellOut> sellOutSellers;
 
     @OneToMany(mappedBy = "sellerCode")
-    private List<Lending> lending;
+    private List<Lending> lendings;
 
     @OneToMany(mappedBy = "seller")
     private List<Customer> customers;
 
-    @OneToOne(mappedBy = "sellerCustomer2")
-    private Customer customerSeller2;
+    @OneToMany(mappedBy = "sellerCustomer2")
+    private List<Customer> customerSeller2;
 }

@@ -1,5 +1,8 @@
 package br.com.myanalista.services;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -26,13 +29,14 @@ public class TeamsService {
   private ModelMapper mapper;
 
   @Autowired
-  private DistributorRepository  repositoryDistributor;
+  private DistributorRepository repositoryDistributor;
 
   @Transactional
   public TeamsResponse save(TeamsRequestPost teamsRequest) {
-   Optional<Distributor> distributor = repositoryDistributor.findDistributorByCnpj(teamsRequest.getDistributor().getCnpjCpf());
+    Optional<Distributor> distributor = repositoryDistributor
+        .findDistributorByCnpj(teamsRequest.getDistributor().getCnpjCpf());
     if (!distributor.isPresent()) {
-      throw new BusinessException("There's not Customer with id: " + teamsRequest.getDistributor().getCnpjCpf());
+      throw new BusinessException("There's not distributor with id: " + teamsRequest.getDistributor().getCnpjCpf());
     }
     Teams teamsEntity = new Teams();
     mapper.map(teamsRequest, teamsEntity);
@@ -45,7 +49,8 @@ public class TeamsService {
 
   @Transactional
   public TeamsResponse update(TeamsRequestPut teamsRequest) {
-   Optional<Distributor> distributor = repositoryDistributor.findDistributorByCnpj(teamsRequest.getDistributor().getCnpjCpf());
+    Optional<Distributor> distributor = repositoryDistributor
+        .findDistributorByCnpj(teamsRequest.getDistributor().getCnpjCpf());
     if (!distributor.isPresent()) {
       throw new BusinessException("There's not Customer with id: " + teamsRequest.getDistributor().getCnpjCpf());
     }
@@ -76,5 +81,69 @@ public class TeamsService {
     TeamsResponse teamsResponse = new TeamsResponse();
     mapper.map(teams.get(), teamsResponse);
     return teamsResponse;
+  }
+
+  public void recordDataToDb() throws IOException {
+    String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/VENDEDORES.csv";
+
+    try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+
+      String line = br.readLine(); // this first line will be discarted, because is the header.
+      line = br.readLine();
+      while (line != null) {
+
+        int index_1 = line.indexOf(";");
+        int index_2 = line.indexOf(";", index_1 + 1);
+        int index_3 = line.indexOf(";", index_2 + 1);
+        int index_4 = line.indexOf(";", index_3 + 1);
+
+
+        boolean isExist = ifTeamsRegistered(line.substring(index_1 + 1, index_2).trim(),
+            line.substring(0, index_1).trim());
+
+        if (!isExist) {
+
+          Teams channelResp = Teams.builder()
+              .distributor(findDistributorByCnpj(line.substring(0, index_1).trim()))
+              .memberCode(line.substring(index_1 + 1, index_2).trim())
+              .fullName(line.substring(index_2 + 1, index_3).trim())
+              .memberFunction(line.substring(index_3 + 1, index_4).trim())
+              .sellerOrSupervisor("vendedor")
+              .build();
+
+          repository.save(channelResp);
+        }
+        line = br.readLine();
+      }
+    } catch (IOException e) {
+      throw new IOException("Error to read file " + e.getMessage());
+    }
+  }
+
+  private boolean ifTeamsRegistered(String code, String cnpj) {
+      if (code.isEmpty() && cnpj.isEmpty()) {
+      throw new BusinessException("Field code and cnpj is mandatory");
+    }
+    String test = cnpj;
+    Optional<Distributor> responseDistributor = repositoryDistributor.findDistributorByCnpj(cnpj);
+    if (!responseDistributor.isPresent()) {
+      throw new BusinessException("Distributor not found with cnpj: " + cnpj);
+    }
+    Optional<Teams> responseTeam = repository.findByDistributorAndMemberCode(responseDistributor.get(), code);
+    if (responseTeam.isPresent()) {
+      return true;
+    }
+    return false;
+  }
+
+  private Distributor findDistributorByCnpj(String cnpj) {
+    if (cnpj.isEmpty()) {
+      return null;
+    }
+    Optional<Distributor> responseDistributor = repositoryDistributor.findDistributorByCnpj(cnpj);
+    if (!responseDistributor.isPresent()) {
+      return null;
+    }
+    return responseDistributor.get();
   }
 }

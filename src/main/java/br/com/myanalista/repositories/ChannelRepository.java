@@ -12,5 +12,5 @@ import br.com.myanalista.models.entities.Channel;
 @Repository
 public interface ChannelRepository extends JpaRepository<Channel, String>{
   @Query(value = "select c from Channel c where c.code = :code")
- Optional<Channel> findChannelByCode(@Param(value = "code")String code);
+ Optional<Channel> findChannelByChannel(@Param(value = "code")String code);
 }

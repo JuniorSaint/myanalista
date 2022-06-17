@@ -110,7 +110,12 @@ public class LendingService {
     if (customer.isEmpty()) {
       return null;
     }
-    Optional<Customer> customerResponse = repositoryCustomer.findByCode(customer);
+    String zeros = "";
+    for (int x = 0; x < (5 - customer.length()); x++) {
+      zeros += "0";
+    }
+    String code = zeros + customer;
+    Optional<Customer> customerResponse = repositoryCustomer.findByCode(code);
     if (!customerResponse.isPresent()) {
       return null;
     }

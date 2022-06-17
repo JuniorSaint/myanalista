@@ -16,7 +16,6 @@ import br.com.myanalista.models.entities.SubChannel;
 import br.com.myanalista.models.entities.Teams;
 import br.com.myanalista.models.response.CustomerResponse;
 import br.com.myanalista.repositories.ChannelRepository;
-import br.com.myanalista.repositories.ClusterGecRepository;
 import br.com.myanalista.repositories.CustomerRepository;
 import br.com.myanalista.repositories.DistributorRepository;
 import br.com.myanalista.repositories.SubChannelRepository;
@@ -30,9 +29,6 @@ public class CustomerService {
 
   @Autowired
   private SubChannelRepository repositorySubChannel;
-
-  @Autowired
-  private ClusterGecRepository repositoryCluster;
 
   @Autowired
   private TeamsRepository repositoryTeams;
@@ -162,8 +158,8 @@ public class CustomerService {
               .phoneNumber3(line.substring(index_47 + 1, index_48).trim())
               .phoneNumber4(line.substring(index_48 + 1, index_49).trim())
               .promoter(line.substring(index_49 + 1, index_50).trim())
-              .promoterEq2(line.substring(index_50, index_51).trim())
-              .channel(findChannelByCode(line.substring(index_51 + 1, index_52)))
+              .promoterEq2(line.substring(index_50 + 1, index_51).trim())
+              .channel(findChannelByCode(line.substring(index_51 + 1, index_52).trim()))
               .specie(line.substring(index_52 + 1))
               .build();
 
@@ -236,11 +232,11 @@ public class CustomerService {
     return customer;
   }
 
-  private Channel findChannelByCode(String code) {
-    if (code.isEmpty()) {
+  private Channel findChannelByCode(String channel) {
+      if (channel.isEmpty()) {
       return null;
     }
-    Optional<Channel> responseChannel = repositoryChannel.findChannelByCode(code);
+    Optional<Channel> responseChannel = repositoryChannel.findChannelByChannel(channel);
     if(!responseChannel.isPresent()){
       return null;
     }
