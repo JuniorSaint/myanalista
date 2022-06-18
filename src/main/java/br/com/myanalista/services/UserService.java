@@ -10,6 +10,10 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.myanalista.exceptions.BusinessException;
@@ -18,15 +22,19 @@ import br.com.myanalista.models.request.UserRequestPost;
 import br.com.myanalista.models.request.UserRequestPut;
 import br.com.myanalista.models.response.UserResponse;
 import br.com.myanalista.repositories.UserRepository;
+import org.springframework.security.core.userdetails.User;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
   @Autowired
   private UserRepository repository;
 
   @Autowired
   private ModelMapper mapper;
+
+  @Autowired
+  private PasswordEncoder encoder;
 
   UserResponse userResponse = new UserResponse();
 
@@ -37,6 +45,7 @@ public class UserService {
       throw new BusinessException(
           "Already exist user with this email: " + userRequest.getUserEmail() + ", try with another one");
     }
+    userRequest.setPassword(encoder.encode(userRequest.getPassword()));
     Users userEntity = new Users();
     mapper.map(userRequest, userEntity);
     Users userCreated = repository.save(userEntity);
@@ -49,6 +58,7 @@ public class UserService {
     if (!user.isPresent()) {
       throw new BusinessException("User not found with id: " + userRequestPut.getId());
     }
+    userRequestPut.setPassword(encoder.encode(userRequestPut.getPassword()));
     Users userEntity = new Users();
     mapper.map(userRequestPut, userEntity);
     Users userUpdate = repository.save(userEntity);
@@ -92,6 +102,23 @@ public class UserService {
   // Generic convertion Page<Entity> to Page<Dto>
   private <D, T> Page<D> mapEntityPageIntoDtoPage(Page<T> entities, Class<D> dtoClass) {
     return entities.map(objectEntity -> mapper.map(objectEntity, dtoClass));
+  }
+
+  @Override
+  public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    Optional<Users> responseUser = repository.findByUserEmail(email);
+    if (responseUser.isEmpty()) {
+      throw new BusinessException("It's not found user with email: " + email);
+    }
+
+    String[] roles = responseUser.get().isAdministrator() ? new String[] { "ADMINISTRATOR", "COLLABORATOR" } : new String[] { "COLLABORATOR" };
+
+    return User
+        .builder()
+        .username(responseUser.get().getUserName())
+        .password(responseUser.get().getPassword())        
+        .roles(roles)
+        .build();
   }
 
 }

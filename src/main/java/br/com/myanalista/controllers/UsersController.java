@@ -1,5 +1,7 @@
 package br.com.myanalista.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -45,7 +47,7 @@ public class UsersController {
   }
 
   @PostMapping
-  public UserResponse save(@RequestBody UserRequestPost userRequestPost) {
+  public UserResponse save(@RequestBody @Valid UserRequestPost userRequestPost) {
     try {
       UserResponse resp = service.save(userRequestPost);
       return resp;

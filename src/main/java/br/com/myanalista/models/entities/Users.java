@@ -1,6 +1,5 @@
 package br.com.myanalista.models.entities;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,10 +8,9 @@ import lombok.Setter;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
-import br.com.myanalista.models.enums.UserTypeEnum;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -30,8 +28,11 @@ public class Users implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String userName;
+    @NotEmpty(message = "Password is mandatory field")
     private String password;
-    private UserTypeEnum userType;
+    @NotEmpty(message = "Administrator is mandatory field")
+    private boolean administrator;
+    @NotEmpty(message = "Email is mandatory field")
     private String userEmail;
     @CreationTimestamp
     private LocalDate createdAt;
