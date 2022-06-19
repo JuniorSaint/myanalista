@@ -11,16 +11,18 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import br.com.myanalista.services.UserService;
 
+@Component
 public class JwtAuthFilter extends OncePerRequestFilter {
 
   private JwtService jwtService;
   private UserService userService;
 
-  private JwtAuthFilter(JwtService jwtService, UserService userService) {
+  public JwtAuthFilter(JwtService jwtService, UserService userService) {
     this.jwtService = jwtService;
     this.userService = userService;
   }

@@ -26,7 +26,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/v1/customer")
 @AllArgsConstructor
 
-public class CustomersController {
+public class DistributorsController {
   @Autowired
   private DistributorService service;
 

@@ -18,7 +18,6 @@ import br.com.myanalista.models.request.DistributorRequestPut;
 import br.com.myanalista.models.response.DistributorResponse;
 import br.com.myanalista.repositories.DistributorRepository;
 
-
 @Service
 public class DistributorService {
   @Autowired
@@ -40,26 +39,26 @@ public class DistributorService {
   @Transactional
   public DistributorResponse update(DistributorRequestPut contactRequest) {
     Distributor distributorEntity = new Distributor();
-      mapper.map(contactRequest, distributorEntity);
-      Distributor customerUpdate = repository.save(distributorEntity);
-      DistributorResponse distributorResponse = new DistributorResponse();
-      mapper.map(customerUpdate, distributorResponse);
-      return distributorResponse;    
+    mapper.map(contactRequest, distributorEntity);
+    Distributor customerUpdate = repository.save(distributorEntity);
+    DistributorResponse distributorResponse = new DistributorResponse();
+    mapper.map(customerUpdate, distributorResponse);
+    return distributorResponse;
   }
 
   @Transactional
   public String delete(Long id) {
-      Optional<Distributor> contact = repository.findById(id);
-      if (!contact.isPresent()) {
-        throw new BusinessException("Customer not found with id: " + id);
-      }
-      repository.deleteById(id);
-      return "Customer deleted with success";    
+    Optional<Distributor> contact = repository.findById(id);
+    if (!contact.isPresent()) {
+      throw new BusinessException("Customer not found with id: " + id);
+    }
+    repository.deleteById(id);
+    return "Customer deleted with success";
   }
 
-  public DistributorResponse findById(Long id){
+  public DistributorResponse findById(Long id) {
     Optional<Distributor> distributor = repository.findById(id);
-    if(distributor.isEmpty()){
+    if (distributor.isEmpty()) {
       throw new BusinessException("It's not possible find customer with id: " + id);
     }
     DistributorResponse distributorResponse = new DistributorResponse();
@@ -67,13 +66,21 @@ public class DistributorService {
     return distributorResponse;
   }
 
-  public Distributor findByIdEntity(Long id){
+  public Distributor findByIdEntity(Long id) {
     Optional<Distributor> distributor = repository.findById(id);
-    if(distributor.isEmpty()){
+    if (distributor.isEmpty()) {
       throw new BusinessException("It's not possible find customer with id: " + id);
     }
     return distributor.get();
   }
+
+  // public List<DistributorSearchResponse> findByExample(Distributor search) {
+  //   ExampleMatcher exampleMatcher = ExampleMatcher.matching().withIgnoreCase();
+  //   Example<Distributor> exampleResult = Example.of(search, exampleMatcher);
+  //   List<Distributor> response =  repository.findAll(exampleResult);
+
+  //   return response;
+  // }
 
   public void recordDataToDb() throws IOException {
 
@@ -83,7 +90,7 @@ public class DistributorService {
 
       String line = br.readLine(); // this first line will be discarted, because is the header.
       line = br.readLine();
-      
+
       while (line != null) {
 
         int index_1 = line.indexOf(";");
@@ -92,14 +99,13 @@ public class DistributorService {
         int index_4 = line.indexOf(";", index_3 + 1);
         int index_5 = line.indexOf(";", index_4 + 1);
         int index_6 = line.indexOf(";", index_5 + 1);
-        
 
         Distributor channel = Distributor.builder()
             .cnpjCpf(line.substring(0, index_1).trim())
             .companyType(line.substring(index_1 + 1, index_2).trim())
             .companyName(line.substring(index_2 + 1, index_3).trim())
-            .fantasyName(line.substring( index_3 + 1, index_4).trim())
-            .nickName(line.substring( index_4 + 1, index_5).trim())
+            .fantasyName(line.substring(index_3 + 1, index_4).trim())
+            .nickName(line.substring(index_4 + 1, index_5).trim())
             .city(line.substring(index_5 + 1, index_6).trim())
             .state(line.substring(index_6 + 1).trim())
             .build();
