@@ -1,5 +1,6 @@
 package br.com.myanalista.models.entities;
 
+import br.com.myanalista.models.enums.UserTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,7 +32,7 @@ public class Users implements Serializable {
     @NotEmpty(message = "Password is mandatory field")
     private String password;
     @NotEmpty(message = "Administrator is mandatory field")
-    private boolean administrator;
+    private UserTypeEnum userType;
     @NotEmpty(message = "Email is mandatory field")
     private String userEmail;
     @CreationTimestamp

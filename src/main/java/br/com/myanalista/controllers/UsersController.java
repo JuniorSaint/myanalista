@@ -67,12 +67,12 @@ public class UsersController {
 
   @PutMapping("/{id}")
   public UserResponse update(@PathVariable(value = "id") Long id,
-      @RequestBody UserRequestPut request) {
+                             @RequestBody UserRequestPut request) {
     try {
       UserResponse response = service.update(request);
       return response;
     } catch (BusinessException e) {
-     throw new BusinessException(e.getMessage());
+      throw new BusinessException(e.getMessage());
     }
   }
 

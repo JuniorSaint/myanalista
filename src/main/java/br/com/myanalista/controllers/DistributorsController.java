@@ -3,6 +3,7 @@ package br.com.myanalista.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,8 @@ import br.com.myanalista.services.DistributorService;
 
 import lombok.AllArgsConstructor;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/customer")
@@ -35,6 +38,12 @@ public class DistributorsController {
     DistributorResponse response = service.findById(id);
     return response;
   }
+
+//  @GetMapping("/listSearch")
+//  public DistributorResponse findForSearchWithPageable() {
+//  Page<DistributorResponse> response = service.listOfDistributor(id);
+//    return response;
+//  }
 
   @PostMapping
   public DistributorResponse saveCustomer(@RequestBody  DistributorRequestPost request) {

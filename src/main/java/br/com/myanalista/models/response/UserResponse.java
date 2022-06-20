@@ -18,7 +18,7 @@ public class UserResponse {
   private Long id;
   private String userName;
   private String userEmail;
-  private boolean administrator;
+  private UserTypeEnum userType;
   private LocalDate createdAt;
   private LocalDate updatedAt;
 }

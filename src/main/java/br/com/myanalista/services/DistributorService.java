@@ -3,12 +3,15 @@ package br.com.myanalista.services;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import br.com.myanalista.models.response.DistributorSearchResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import br.com.myanalista.exceptions.BusinessException;
@@ -20,103 +23,103 @@ import br.com.myanalista.repositories.DistributorRepository;
 
 @Service
 public class DistributorService {
-  @Autowired
-  private DistributorRepository repository;
+    @Autowired
+    private DistributorRepository repository;
 
-  @Autowired
-  private ModelMapper mapper;
+    @Autowired
+    private ModelMapper mapper;
 
-  @Transactional
-  public DistributorResponse save(DistributorRequestPost customerRequest) {
-    Distributor distributorEntity = new Distributor();
-    mapper.map(customerRequest, distributorEntity);
-    Distributor customerCreated = repository.save(distributorEntity);
-    DistributorResponse distributorResponse = new DistributorResponse();
-    mapper.map(customerCreated, distributorResponse);
-    return distributorResponse;
-  }
-
-  @Transactional
-  public DistributorResponse update(DistributorRequestPut contactRequest) {
-    Distributor distributorEntity = new Distributor();
-    mapper.map(contactRequest, distributorEntity);
-    Distributor customerUpdate = repository.save(distributorEntity);
-    DistributorResponse distributorResponse = new DistributorResponse();
-    mapper.map(customerUpdate, distributorResponse);
-    return distributorResponse;
-  }
-
-  @Transactional
-  public String delete(Long id) {
-    Optional<Distributor> contact = repository.findById(id);
-    if (!contact.isPresent()) {
-      throw new BusinessException("Customer not found with id: " + id);
+    @Transactional
+    public DistributorResponse save(DistributorRequestPost customerRequest) {
+        Distributor distributorEntity = new Distributor();
+        mapper.map(customerRequest, distributorEntity);
+        Distributor customerCreated = repository.save(distributorEntity);
+        DistributorResponse distributorResponse = new DistributorResponse();
+        mapper.map(customerCreated, distributorResponse);
+        return distributorResponse;
     }
-    repository.deleteById(id);
-    return "Customer deleted with success";
-  }
 
-  public DistributorResponse findById(Long id) {
-    Optional<Distributor> distributor = repository.findById(id);
-    if (distributor.isEmpty()) {
-      throw new BusinessException("It's not possible find customer with id: " + id);
+    @Transactional
+    public DistributorResponse update(DistributorRequestPut contactRequest) {
+        Distributor distributorEntity = new Distributor();
+        mapper.map(contactRequest, distributorEntity);
+        Distributor customerUpdate = repository.save(distributorEntity);
+        DistributorResponse distributorResponse = new DistributorResponse();
+        mapper.map(customerUpdate, distributorResponse);
+        return distributorResponse;
     }
-    DistributorResponse distributorResponse = new DistributorResponse();
-    mapper.map(distributor.get(), distributorResponse);
-    return distributorResponse;
-  }
 
-  public Distributor findByIdEntity(Long id) {
-    Optional<Distributor> distributor = repository.findById(id);
-    if (distributor.isEmpty()) {
-      throw new BusinessException("It's not possible find customer with id: " + id);
+    @Transactional
+    public String delete(Long id) {
+        Optional<Distributor> contact = repository.findById(id);
+        if (!contact.isPresent()) {
+            throw new BusinessException("Customer not found with id: " + id);
+        }
+        repository.deleteById(id);
+        return "Customer deleted with success";
     }
-    return distributor.get();
-  }
 
-  // public List<DistributorSearchResponse> findByExample(Distributor search) {
-  //   ExampleMatcher exampleMatcher = ExampleMatcher.matching().withIgnoreCase();
-  //   Example<Distributor> exampleResult = Example.of(search, exampleMatcher);
-  //   List<Distributor> response =  repository.findAll(exampleResult);
-
-  //   return response;
-  // }
-
-  public void recordDataToDb() throws IOException {
-
-    String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/DISTRIBUIDORAS.csv";
-
-    try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-
-      String line = br.readLine(); // this first line will be discarted, because is the header.
-      line = br.readLine();
-
-      while (line != null) {
-
-        int index_1 = line.indexOf(";");
-        int index_2 = line.indexOf(";", index_1 + 1);
-        int index_3 = line.indexOf(";", index_2 + 1);
-        int index_4 = line.indexOf(";", index_3 + 1);
-        int index_5 = line.indexOf(";", index_4 + 1);
-        int index_6 = line.indexOf(";", index_5 + 1);
-
-        Distributor channel = Distributor.builder()
-            .cnpjCpf(line.substring(0, index_1).trim())
-            .companyType(line.substring(index_1 + 1, index_2).trim())
-            .companyName(line.substring(index_2 + 1, index_3).trim())
-            .fantasyName(line.substring(index_3 + 1, index_4).trim())
-            .nickName(line.substring(index_4 + 1, index_5).trim())
-            .city(line.substring(index_5 + 1, index_6).trim())
-            .state(line.substring(index_6 + 1).trim())
-            .build();
-
-        repository.save(channel);
-
-        line = br.readLine();
-      }
-    } catch (IOException e) {
-      throw new IOException("Error to read file " + e.getMessage());
+    public DistributorResponse findById(Long id) {
+        Optional<Distributor> distributor = repository.findById(id);
+        if (distributor.isEmpty()) {
+            throw new BusinessException("It's not possible find customer with id: " + id);
+        }
+        DistributorResponse distributorResponse = new DistributorResponse();
+        mapper.map(distributor.get(), distributorResponse);
+        return distributorResponse;
     }
-  }
+
+    public Distributor findByIdEntity(Long id) {
+        Optional<Distributor> distributor = repository.findById(id);
+        if (distributor.isEmpty()) {
+            throw new BusinessException("It's not possible find customer with id: " + id);
+        }
+        return distributor.get();
+    }
+
+    public Page<DistributorSearchResponse> listOfDistributor(Distributor distributor, Pageable pageable, Distributor search) {
+        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase();
+        Example<Distributor> example = Example.of(distributor, matcher);
+
+        Page<DistributorSearchResponse> response = repository.findAllPageableAndSort(pageable, Sort.by("companyName"), example);
+        return response;
+    }
+
+    public void recordDataToDb() throws IOException {
+
+        String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/DISTRIBUIDORAS.csv";
+
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+
+            String line = br.readLine(); // this first line will be discarted, because is the header.
+            line = br.readLine();
+
+            while (line != null) {
+
+                int index_1 = line.indexOf(";");
+                int index_2 = line.indexOf(";", index_1 + 1);
+                int index_3 = line.indexOf(";", index_2 + 1);
+                int index_4 = line.indexOf(";", index_3 + 1);
+                int index_5 = line.indexOf(";", index_4 + 1);
+                int index_6 = line.indexOf(";", index_5 + 1);
+
+                Distributor channel = Distributor.builder()
+                        .cnpjCpf(line.substring(0, index_1).trim())
+                        .companyType(line.substring(index_1 + 1, index_2).trim())
+                        .companyName(line.substring(index_2 + 1, index_3).trim())
+                        .fantasyName(line.substring(index_3 + 1, index_4).trim())
+                        .nickName(line.substring(index_4 + 1, index_5).trim())
+                        .city(line.substring(index_5 + 1, index_6).trim())
+                        .state(line.substring(index_6 + 1).trim())
+                        .build();
+
+                repository.save(channel);
+
+                line = br.readLine();
+            }
+        } catch (IOException e) {
+            throw new IOException("Error to read file " + e.getMessage());
+        }
+    }
 
 }

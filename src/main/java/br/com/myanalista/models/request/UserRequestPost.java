@@ -1,6 +1,8 @@
 package br.com.myanalista.models.request;
 
 import javax.persistence.Column;
+
+import br.com.myanalista.models.enums.UserTypeEnum;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,5 +22,5 @@ public class UserRequestPost {
   private String userEmail;
   private String password;
   @JsonDeserialize
-  private boolean administrator;
+  private UserTypeEnum userType;
 }
