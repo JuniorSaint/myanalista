@@ -20,5 +20,5 @@ public interface DistributorRepository extends JpaRepository<Distributor, Long> 
     List<Distributor> findAll(Example example);
 
     @Query(value = "select d.cnpjCpf, d.nickName, d.companyName, d.customerType from Distributor d")
-    Page<DistributorSearchResponse> findAllPageableAndSort(Pageable pageable, Sort sort, Example example);
+    Page<DistributorSearchResponse> findAllPageableAndSort(Pageable pageable,  Example example);
 }

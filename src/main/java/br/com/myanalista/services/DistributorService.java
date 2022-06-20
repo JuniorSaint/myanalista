@@ -81,7 +81,7 @@ public class DistributorService {
         ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase();
         Example<Distributor> example = Example.of(distributor, matcher);
 
-        Page<DistributorSearchResponse> response = repository.findAllPageableAndSort(pageable, Sort.by("companyName"), example);
+        Page<DistributorSearchResponse> response = repository.findAllPageableAndSort(pageable, example);
         return response;
     }
 
