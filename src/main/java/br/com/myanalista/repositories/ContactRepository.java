@@ -17,7 +17,7 @@ public interface ContactRepository extends JpaRepository<Contacts, Long>{
   
   Optional<Contacts> findById(Long id);
 
-  @Query(value = "select c.id, c.contactEmail, c.contactName, c.contactPhone, c.contactDepartament from Contacts c ")
+  @Query(value = "select new br.com.myanalista.models.response.ContactSearchResponse(id,contactDepartament,contactEmail,contactName,contactPhone) from Contacts")
   Page<ContactSearchResponse> findAllPageableAndSort(Pageable pageable, Example example);
 
 }

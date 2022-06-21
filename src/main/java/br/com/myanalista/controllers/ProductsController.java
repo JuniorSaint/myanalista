@@ -2,6 +2,7 @@ package br.com.myanalista.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,12 @@ public class ProductsController {
   public ProductResponse findAllWithList(@PathVariable(value = "id") Long id) {
     ProductResponse response = service.findById(id);
     return response;
+  }
+
+  @GetMapping
+  public Page<ProductResponse> findAllWithPage(Pageable pageable){
+    Page<ProductResponse> responses = service.findAllWithPage(pageable);
+    return responses;
   }
 
   @PostMapping

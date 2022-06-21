@@ -25,6 +25,8 @@ public class PageableJsonResponse {
       jsonGenerator.writeObjectField("items", page.getContent());
       jsonGenerator.writeNumberField("totalPage", page.getTotalPages());
       jsonGenerator.writeNumberField("totalElements", page.getTotalElements());
+      jsonGenerator.writeNumberField("currentPage",  page.getNumber());
+
       jsonGenerator.writeEndObject();
     }
   }
