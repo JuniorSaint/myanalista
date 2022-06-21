@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import br.com.myanalista.models.entities.CityIne;
 
 @Repository
-public interface CityIneRepository extends JpaRepository<CityIne, String> {
-  Optional<CityIne>  findByCode(String code);
+public interface CityIneRepository extends JpaRepository<CityIne, Long> {
+  Optional<CityIne>  findById(Long id);
 }

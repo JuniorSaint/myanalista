@@ -6,12 +6,16 @@ import br.com.myanalista.models.request.UserRequestPost;
 import br.com.myanalista.models.request.UserRequestPut;
 import br.com.myanalista.models.response.UserResponse;
 import br.com.myanalista.repositories.UserRepository;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +24,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class UserService  {
+public class UserService {
 
     @Autowired
     private UserRepository repository;
@@ -75,14 +79,16 @@ public class UserService  {
         if (response.isEmpty()) {
             throw new BusinessException("There isn't user with this id: " + id);
         }
-        mapper.map(response, userResponse);
-        return userResponse;
+        return convertEntityToUserResponse(response.get());
     }
 
-    public Page<UserResponse> getUserByTerm(String term, Pageable pageable) {
+    public Page<UserResponse> getUserByTerm(Users users, Integer page) {
+        Sort sort = Sort.by("userName").descending();
+        Pageable pageable = PageRequest.of(page, 20, sort);
         ExampleMatcher matcher = ExampleMatcher.matching()
+                .withStringMatcher(StringMatcher.STARTING)
                 .withIgnoreCase();
-        Example<String> example = Example.of(term, matcher);
+        Example<Users> example = Example.of(users, matcher);
         Page<Users> respFromRepository = repository.findAll(example, pageable);
         Page<UserResponse> response = mapEntityPageIntoDtoPage(respFromRepository, UserResponse.class);
         return response;

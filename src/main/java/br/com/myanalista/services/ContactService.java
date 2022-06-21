@@ -4,8 +4,14 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import br.com.myanalista.models.response.ContactSearchResponse;
+import br.com.myanalista.models.response.DistributorSearchResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.myanalista.exceptions.BusinessException;
@@ -76,5 +82,13 @@ public class ContactService {
     ContactResponse contactResp = new ContactResponse();
     mapper.map(contact.get(), contactResp);
     return contactResp;
-  }  
+  }
+
+    public Page<ContactSearchResponse> listOfDistributor(Contacts contacts, Pageable pageable) {
+        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase();
+        Example<Contacts> example = Example.of(contacts, matcher);
+
+        Page<ContactSearchResponse> response = repository.findAllPageableAndSort(pageable, example);
+        return response;
+    }
 }

@@ -1,8 +1,7 @@
 package br.com.myanalista.controllers;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.myanalista.exceptions.BusinessException;
+import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.request.ProductRequestPost;
 import br.com.myanalista.models.request.ProductRequestPut;
 import br.com.myanalista.models.response.ProductResponse;
@@ -26,18 +26,18 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/v1/products")
 @AllArgsConstructor
 public class ProductsController {
-  
+
   @Autowired
   private ProductService service;
 
   @GetMapping("/{id}")
-  public ProductResponse findAllWithList(@PathVariable(value = "id") String id) {
+  public ProductResponse findAllWithList(@PathVariable(value = "id") Long id) {
     ProductResponse response = service.findById(id);
     return response;
   }
 
   @PostMapping
-  public ProductResponse save(@RequestBody  ProductRequestPost request) {
+  public ProductResponse save(@RequestBody ProductRequestPost request) {
     try {
       ProductResponse response = service.save(request);
       return response;
@@ -47,7 +47,7 @@ public class ProductsController {
   }
 
   @DeleteMapping("/{id}")
-  public String delete(@PathVariable(value = "id") String id) {
+  public String delete(@PathVariable(value = "id") Long id) {
     try {
       return service.delete(id);
     } catch (BusinessException e) {
@@ -62,7 +62,7 @@ public class ProductsController {
       ProductResponse response = service.update(request);
       return response;
     } catch (BusinessException e) {
-     throw new BusinessException(e.getMessage());
+      throw new BusinessException(e.getMessage());
     }
   }
 }

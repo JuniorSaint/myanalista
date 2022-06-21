@@ -7,8 +7,14 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import br.com.myanalista.models.response.DistributorSearchResponse;
+import br.com.myanalista.models.response.TeamsSearchResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.myanalista.exceptions.BusinessException;
@@ -81,6 +87,14 @@ public class TeamsService {
     TeamsResponse teamsResponse = new TeamsResponse();
     mapper.map(teams.get(), teamsResponse);
     return teamsResponse;
+  }
+
+  public Page<TeamsSearchResponse> listOfDistributor(Teams teams, Pageable pageable) {
+    ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase();
+    Example<Teams> example = Example.of(teams, matcher);
+
+    Page<TeamsSearchResponse> response = repository.findAllPageableAndSort(pageable, example);
+    return response;
   }
 
   public void recordDataToDb() throws IOException {

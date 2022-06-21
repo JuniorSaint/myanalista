@@ -77,7 +77,7 @@ public class DistributorService {
         return distributor.get();
     }
 
-    public Page<DistributorSearchResponse> listOfDistributor(Distributor distributor, Pageable pageable, Distributor search) {
+    public Page<DistributorSearchResponse> listOfDistributor(Distributor distributor, Pageable pageable) {
         ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase();
         Example<Distributor> example = Example.of(distributor, matcher);
 

@@ -25,6 +25,7 @@ public class Teams implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String memberCode;
     private String fullName;

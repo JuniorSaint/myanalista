@@ -331,7 +331,7 @@ public class SellOutService {
       return null;
     }
     String[] splitProd = prod.split("-");
-    Optional<Products> responseProd = repositoryProduct.findByCode(splitProd[0]);
+    Optional<Products> responseProd = repositoryProduct.findBySku(splitProd[0]);
     if (!responseProd.isPresent()) {
       return null;
     }

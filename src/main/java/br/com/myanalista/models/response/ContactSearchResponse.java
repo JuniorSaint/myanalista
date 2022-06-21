@@ -1,8 +1,5 @@
 package br.com.myanalista.models.response;
 
-import java.util.List;
-
-import br.com.myanalista.models.entities.ProductCategory;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,9 +11,10 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @NoArgsConstructor
 @SuperBuilder
-public class ProductResponse {
-  private String sku;
-  private String productDescription;
-  private boolean active;
-  private List<ProductCategory> categories;
+public class ContactSearchResponse {
+  private Long id;
+  private String contactDepartament;
+  private String contactEmail;
+  private String contactName;
+  private String contactPhone;
 }

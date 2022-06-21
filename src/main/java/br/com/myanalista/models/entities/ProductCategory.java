@@ -14,6 +14,7 @@ import org.springframework.lang.Nullable;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Builder
 @Entity
@@ -22,18 +23,17 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoryProductList implements Serializable {
+public class ProductCategory implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Categories category;
-    @Nullable
-    private CategoryProductList nextCategory;
+    @ManyToMany
+    private List<Products> products;
     @CreationTimestamp
     private LocalDate createdAt;
     @UpdateTimestamp
     private LocalDate updatedAt;
 }
-

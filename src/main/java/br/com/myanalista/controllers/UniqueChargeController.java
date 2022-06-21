@@ -20,6 +20,7 @@ import br.com.myanalista.services.DistributorService;
 import br.com.myanalista.services.EquipmentService;
 import br.com.myanalista.services.LendingService;
 import br.com.myanalista.services.NationalHolidayService;
+import br.com.myanalista.services.ProductService;
 import br.com.myanalista.services.VisitDayService;
 import br.com.myanalista.services.SellOutService;
 import br.com.myanalista.services.SubChannelService;
@@ -72,8 +73,11 @@ public class UniqueChargeController {
    @Autowired
    private TeamsService serviceTeams;
 
-@Autowired
-private TurnoverService serviceTurnover;
+   @Autowired
+   private ProductService serviceProduct;
+
+   @Autowired
+   private TurnoverService serviceTurnover;
 
    @PostMapping("/cityine")
    public void chargeCityIne() throws IOException {
@@ -105,12 +109,12 @@ private TurnoverService serviceTurnover;
       serviceNational.recordDataToDb();
    }
 
-
    @PostMapping("/clients")
    public void chargeClients() throws IOException {
 
       serviceCustomer.recordDataToDb();
    }
+
    @PostMapping("/channel")
    public void chargeChannel() throws IOException {
 
@@ -159,8 +163,14 @@ private TurnoverService serviceTurnover;
       serviceDistributor.recordDataToDb();
    }
 
+   @PostMapping("/product")
+   public void chargeProduct() throws IOException {
+
+      serviceProduct.recordDataToDb();
+   }
+
    @GetMapping("/{code}")
-   public CustomerResponse findByCode(@PathVariable(value = "code") String code){
+   public CustomerResponse findByCode(@PathVariable(value = "code") String code) {
       return serviceCustomer.findCustomerByCode(code);
    }
 }

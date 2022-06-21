@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.myanalista.exceptions.BusinessException;
+import br.com.myanalista.models.entities.Users;
 import br.com.myanalista.models.request.UserRequestPost;
 import br.com.myanalista.models.request.UserRequestPut;
 import br.com.myanalista.models.response.UserResponse;
@@ -33,15 +34,15 @@ public class UsersController {
   @Autowired
   private UserService service;
 
-  @GetMapping("/term/{term}")
-  public Page<UserResponse> findAllWithList(@PageableDefault() Pageable pageable,
-      @PathVariable(value = "term") String term) {
-        Page<UserResponse> response = service.getUserByTerm(term,  pageable);
+  @GetMapping("/term/{term}/{page}")
+  public Page<UserResponse> findAllWithList(@PathVariable(value = "page") Integer page,
+      @PathVariable(value = "term") Users users) {
+        Page<UserResponse> response = service.getUserByTerm(users,  page);
     return response;
   }
 
   @GetMapping("/{id}")
-  public UserResponse findAllWithListTeams(@PathVariable(value = "id") Long id) {
+  public UserResponse findById(@PathVariable(value = "id") Long id) {
     UserResponse response = service.findById(id);
     return response;
   }

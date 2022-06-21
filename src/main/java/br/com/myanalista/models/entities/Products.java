@@ -26,9 +26,9 @@ public class Products implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    private String code;
-    @PrimaryKeyJoinColumn
-    private CategoryProductList category;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @Column(unique = true)
     private String sku;
     private String productDescription;
     private boolean active;
@@ -39,4 +39,7 @@ public class Products implements Serializable {
 
     @OneToMany(mappedBy="product")
     private List<SellOut> sellOuts;
+
+    @ManyToMany
+    private List<ProductCategory> categories;
 }

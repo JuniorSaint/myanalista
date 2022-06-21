@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import br.com.myanalista.models.entities.Equipment;
 
 @Repository
-public interface EquipmentRepository extends JpaRepository<Equipment, String>{
+public interface EquipmentRepository extends JpaRepository<Equipment, Long>{
   Optional<Equipment> findByCode(String code);
 }

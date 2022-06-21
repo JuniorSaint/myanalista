@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import br.com.myanalista.models.entities.SubChannel;
 
 @Repository
-public interface SubChannelRepository extends JpaRepository<SubChannel, String>{
+public interface SubChannelRepository extends JpaRepository<SubChannel, Long>{
   @Query(value = "select s from SubChannel s where s.subChannel = :subChannel")
 Optional<SubChannel>  findSubChannelBysubChannel(@Param(value = "subChannel")String subChannel);
 

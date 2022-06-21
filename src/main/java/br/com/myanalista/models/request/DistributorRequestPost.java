@@ -5,7 +5,6 @@ import java.util.Set;
 
 import javax.persistence.Lob;
 
-
 import br.com.myanalista.models.entities.Contacts;
 import br.com.myanalista.models.entities.Teams;
 import br.com.myanalista.models.enums.CompanyTypeEnum;
@@ -22,6 +21,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class DistributorRequestPost {
+ 
   private String cnpjCpf;
   private CompanyTypeEnum companyType;  
   private String nickName;

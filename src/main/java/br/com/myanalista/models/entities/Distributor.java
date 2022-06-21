@@ -31,6 +31,9 @@ public class Distributor implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @Column(unique=true)
     private String cnpjCpf;
     private String companyType;
     private String nickName;

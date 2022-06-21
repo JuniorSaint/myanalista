@@ -1,11 +1,21 @@
 package br.com.myanalista.services;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.stereotype.Service;
 
 import br.com.myanalista.exceptions.BusinessException;
@@ -48,7 +58,7 @@ public class ProductService {
   }
 
   @Transactional
-  public String delete(String id){
+  public String delete(Long id){
       Optional<Products> product = repository.findById(id);
       if (!product.isPresent()) {
         throw new BusinessException("Product not found with id: " + id);
@@ -57,7 +67,7 @@ public class ProductService {
       return "Product deleted with success";    
   }
 
-  public ProductResponse findById(String id){
+  public ProductResponse findById(Long id){
     Optional<Products> product = repository.findById(id);
     if(product.isEmpty()){
       throw new BusinessException("It's not possible find product with id: " + id);
@@ -66,8 +76,42 @@ public class ProductService {
     mapper.map(product.get(), contactResp);
     return contactResp;
   }
-  public Products findByIdEntity(String id){
+  public Products findByIdEntity(Long id){
     Optional<Products> product = repository.findById(id); 
     return product.get();
   }
+
+
+
+
+  public void recordDataToDb() throws IOException {
+    String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/PRODUTOS.csv";
+
+    try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+
+      String line = br.readLine(); // this first line will be discarted, because is the header.
+      line = br.readLine();
+      while (line != null) {
+
+        int index_1 = line.indexOf(";");
+
+        Products channelResp = Products.builder()
+            .sku(line.substring(0, index_1).trim())
+            .productDescription(line.substring(index_1 + 1).trim())
+            .active(true) 
+            .build();
+
+        repository.save(channelResp);
+
+        line = br.readLine();
+      }
+    } catch (IOException e) {
+      throw new IOException("Error to read file " + e.getMessage());
+    }
+  }
+
+      // Generic convertion Page<Entity> to Page<Dto>
+      private <D, T> Page<D> mapEntityPageIntoDtoPage(Page<T> entities, Class<D> dtoClass) {
+        return entities.map(objectEntity -> mapper.map(objectEntity, dtoClass));
+    }
 }
