@@ -80,6 +80,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/v1/users/**").permitAll()
                 .antMatchers("/v1/chargeunique/**").permitAll()
                 .antMatchers("/v1/teams/**").permitAll()
+                .antMatchers("/v1/cate/**").permitAll()
+                .antMatchers("/v1/teams/**").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

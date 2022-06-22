@@ -2,7 +2,7 @@ package br.com.myanalista.models.request;
 
 import java.util.List;
 
-import br.com.myanalista.models.entities.ProductCategory;
+import br.com.myanalista.models.entities.CategorySon;
 import br.com.myanalista.models.entities.SellOut;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,5 +21,5 @@ public class ProductRequestPost {
   private String productDescription;
   private boolean active;
   private List<SellOut> sellOuts;
-  private List<ProductCategory> categories;
+  private List<CategorySon> categories;
 }

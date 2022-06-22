@@ -40,7 +40,7 @@ public class TeamsService {
   @Transactional
   public TeamsResponse save(TeamsRequestPost teamsRequest) {
     Optional<Distributor> distributor = repositoryDistributor
-        .findDistributorByCnpj(teamsRequest.getDistributor().getCnpjCpf());
+        .findDistributorById(teamsRequest.getDistributor().getId());
     if (!distributor.isPresent()) {
       throw new BusinessException("There's not distributor with id: " + teamsRequest.getDistributor().getCnpjCpf());
     }
@@ -56,7 +56,7 @@ public class TeamsService {
   @Transactional
   public TeamsResponse update(TeamsRequestPut teamsRequest) {
     Optional<Distributor> distributor = repositoryDistributor
-        .findDistributorByCnpj(teamsRequest.getDistributor().getCnpjCpf());
+        .findDistributorById(teamsRequest.getDistributor().getId());
     if (!distributor.isPresent()) {
       throw new BusinessException("There's not Customer with id: " + teamsRequest.getDistributor().getCnpjCpf());
     }

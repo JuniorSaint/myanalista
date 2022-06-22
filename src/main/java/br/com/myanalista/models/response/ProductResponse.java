@@ -2,7 +2,7 @@ package br.com.myanalista.models.response;
 
 import java.util.List;
 
-import br.com.myanalista.models.entities.ProductCategory;
+import br.com.myanalista.models.entities.CategorySon;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,5 +18,5 @@ public class ProductResponse {
   private String sku;
   private String productDescription;
   private boolean active;
-  private List<ProductCategory> categories;
+  private List<CategorySon> categories;
 }

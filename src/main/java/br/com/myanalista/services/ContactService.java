@@ -36,9 +36,9 @@ public class ContactService {
 
   @Transactional
   public ContactResponse save(ContactRequestPost contactRequest) {
-   Optional<Distributor> distributor = repositoryDistributor.findDistributorByCnpj(contactRequest.getDistributor().getCnpjCpf());
+   Optional<Distributor> distributor = repositoryDistributor.findDistributorById(contactRequest.getDistributor().getId());
     if (!distributor.isPresent()) {
-      throw new BusinessException("There's not Customer with id: " + contactRequest.getDistributor().getCnpjCpf());
+      throw new BusinessException("There's not Customer with id: " + contactRequest.getDistributor().getId());
     }
       Contacts contactEntity = new Contacts();
       mapper.map(contactRequest, contactEntity);
@@ -51,9 +51,9 @@ public class ContactService {
 
   @Transactional
   public ContactResponse update(ContactRequestPut contactRequest) {
-   Optional<Distributor> distributor = repositoryDistributor.findDistributorByCnpj(contactRequest.getDistributor().getCnpjCpf());
+   Optional<Distributor> distributor = repositoryDistributor.findDistributorById(contactRequest.getDistributor().getId());
     if (!distributor.isPresent()) {
-      throw new BusinessException("There's not Customer with id: " + contactRequest.getDistributor().getCnpjCpf());
+      throw new BusinessException("There's not Customer with id: " + contactRequest.getDistributor().getId());
     }
     Contacts contactEntity = new Contacts();
       mapper.map(contactRequest, contactEntity);

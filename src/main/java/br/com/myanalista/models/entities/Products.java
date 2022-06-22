@@ -37,9 +37,9 @@ public class Products implements Serializable {
     @UpdateTimestamp
     private LocalDate updatedAt;
 
-    @OneToMany(mappedBy="product")
+    @OneToMany(mappedBy = "product")
     private List<SellOut> sellOuts;
 
-    @ManyToMany
-    private List<ProductCategory> categories;
+    @OneToMany(mappedBy="products")
+    private List<CategorySon> categories;
 }

@@ -13,6 +13,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Builder
 @Entity
@@ -32,4 +33,14 @@ public class Categories implements Serializable {
     private LocalDate createdAt;
     @UpdateTimestamp
     private LocalDate updatedAt;
+
+    @OneToOne(mappedBy = "categorySon")
+    @PrimaryKeyJoinColumn
+    private CategorySon categorySon;
+
+    @OneToMany(mappedBy="categoryFather")
+    private List<CategoryFather> categoryFathers;
+
+    @OneToMany(mappedBy="categoryGrand")
+    private List<CategoryGrand> categoryGrands;
 }
