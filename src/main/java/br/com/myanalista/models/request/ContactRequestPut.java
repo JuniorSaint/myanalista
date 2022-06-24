@@ -10,7 +10,6 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @NoArgsConstructor
-@SuperBuilder
 public class ContactRequestPut extends ContactRequestPost {
 
   private Long id;

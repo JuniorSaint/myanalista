@@ -25,18 +25,11 @@ public class VisitDay implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
-  @Nullable
   private String daysOfWeek;
-  @Nullable
   private String firstDay;
-  @Nullable
   private String secondDay;
-  @Nullable
   private String thirdDay;
-  @Nullable
   private String fourthDay;
-  @Nullable
   private String fifthDay;
-  @Nullable
   private String sixDay;
 }

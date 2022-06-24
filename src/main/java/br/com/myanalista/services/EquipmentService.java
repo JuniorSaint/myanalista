@@ -3,8 +3,11 @@ package br.com.myanalista.services;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.Scanner;
 
+import br.com.myanalista.models.entities.Distributor;
+import br.com.myanalista.repositories.DistributorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,37 +17,60 @@ import br.com.myanalista.repositories.EquipmentRepository;
 
 @Service
 public class EquipmentService {
-  @Autowired
-  private EquipmentRepository repository;
+    @Autowired
+    private EquipmentRepository repository;
 
-  public void recordDataToDb() throws IOException {  
+    @Autowired
+    private DistributorRepository repositoryDistributor;
+    public void recordDataToDb() throws IOException {
 
-    File myObj = new File("/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/06187813000119_EQUIPAMENTOS_RAF.TXT");
-    
-    try( Scanner myReader = new Scanner(myObj)) {
+        File myObj = new File("/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/06187813000119_EQUIPAMENTOS_RAF.TXT");
 
-      while (myReader.hasNextLine()) {
-        String line = myReader.nextLine();     
+        String cnpj = myObj.getName().split("_")[0];
 
-        Equipment channel = Equipment.builder()
-            .patrimony(line.substring(6, 18).trim())
-            .code(line.substring(21, 28).trim())
-            .description(line.substring(29, 59).trim())
-            .power(line.substring(60, 65).trim())
-            .manufacturingDate(line.substring( 66, 75).trim())
-            .serie(line.substring( 76, 91).trim())
-            .prop(line.substring(92, 97).trim())
-            .situation(line.substring(98, 109).trim())
-            .doors(Integer.parseInt(line.substring(110, 115).trim()))
-            .observation(line.substring(116, 136).trim())
-            .build();
 
-        repository.save(channel);
-      }
-    }catch(
 
-  BusinessException e)
-  {
-    throw new BusinessException("Error to read file " + e.getMessage());
-  }
-}}
+
+        try (Scanner myReader = new Scanner(myObj)) {
+
+            while (myReader.hasNextLine()) {
+                String line = myReader.nextLine();
+                if (line.length() > 4) {
+                    String testInclude = line.substring(4, 18).trim();
+                    if (!testInclude.contains("RAF") && !testInclude.contains("PATRIMONIO") && line.length() > 75) {
+
+                        Equipment channel = Equipment.builder()
+                                .patrimony(line.substring(4, 18).trim())
+                                .code(line.substring(21, 27).trim())
+                                .description(line.substring(27, 59).trim())
+                                .power(line.substring(60, 65).trim())
+                                .manufacturingDate(line.substring(65, 75).trim())
+                                .serie(line.substring(76, 91).trim())
+                                .prop(line.substring(90, 97).trim())
+                                .situation(line.substring(97, 107).trim())
+                                .doors(Integer.parseInt(line.length() > 108 ? line.substring(110, 113).trim() : "0"))
+                                .observation(line.length() >  114 ?line.substring(116, line.length()).trim() : null)
+                                .distributor(findDistributorById(cnpj))
+                                .build();
+                        repository.save(channel);
+                    }
+                }
+            }
+        } catch (
+
+                BusinessException e) {
+            throw new BusinessException("Error to read file " + e.getMessage());
+        }
+    }
+
+    private Distributor findDistributorById(String cnpj){
+        if(cnpj.equals("")){
+            return null;
+        }
+        Optional<Distributor> response = repositoryDistributor.findDistributorByCnpj(cnpj);
+        if(response.isPresent()){
+            return  response.get();
+        }
+        return null;
+    }
+}

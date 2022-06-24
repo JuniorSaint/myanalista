@@ -104,7 +104,7 @@ public class DistributorService {
                 int index_6 = line.indexOf(";", index_5 + 1);
 
                 Distributor channel = Distributor.builder()
-                        .cnpjCpf(line.substring(0, index_1).trim())
+                        .cnpjCpf(verifySizeOfCnpj(line.substring(0, index_1).trim()))
                         .companyType(line.substring(index_1 + 1, index_2).trim())
                         .companyName(line.substring(index_2 + 1, index_3).trim())
                         .fantasyName(line.substring(index_3 + 1, index_4).trim())
@@ -120,6 +120,13 @@ public class DistributorService {
         } catch (IOException e) {
             throw new IOException("Error to read file " + e.getMessage());
         }
+    }
+
+    private String verifySizeOfCnpj(String cnpj) {
+        if (cnpj.length() < 14) {
+            return "0" + cnpj;
+        }
+        return cnpj;
     }
 
 }

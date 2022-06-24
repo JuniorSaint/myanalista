@@ -1,10 +1,6 @@
 package br.com.myanalista.models.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -37,9 +33,9 @@ public class Products implements Serializable {
     @UpdateTimestamp
     private LocalDate updatedAt;
 
+    @Singular
     @OneToMany(mappedBy = "product")
     private List<SellOut> sellOuts;
 
-    @OneToMany(mappedBy="products")
-    private List<CategorySon> categories;
+
 }

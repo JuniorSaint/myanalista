@@ -8,6 +8,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import br.com.myanalista.models.entities.*;
+import br.com.myanalista.models.request.CategoryImportFileRequest;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,12 +33,8 @@ public class CategoryService {
 
     @Transactional
     public CategoryResponse save(CategoryRequestPost categoryRequest) {
-        // Products entityProduct = serviceProduct.findByIdEntity(categoryRequest.getProduct().getId());
-        // Categories entityCategory = findByIdEntity(categoryRequest.getCategory().getId());
         Categories categoryEntity = new Categories();
         mapper.map(categoryRequest, categoryEntity);
-        // categoryEntity.setCategory(entityCategory );
-        // categoryEntity.setProduct(entityProduct);
         Categories categoryCreated = repository.save(categoryEntity);
         CategoryResponse categoryResponse = new CategoryResponse();
         mapper.map(categoryCreated, categoryResponse);
@@ -46,12 +43,8 @@ public class CategoryService {
 
     @Transactional
     public CategoryResponse update(CategoryRequestPut categoryRequest) {
-        // Products entityProduct = serviceProduct.findByIdEntity(categoryRequest.getProduct().getId());
-        // Categories entityCategory = findByIdEntity(categoryRequest.getCategory().getId());
         Categories categoryEntity = new Categories();
         mapper.map(categoryRequest, categoryEntity);
-        // categoryEntity.setCategory(entityCategory);
-        // categoryEntity.setProduct(entityProduct);
         Categories categoryUpdate = repository.save(categoryEntity);
         CategoryResponse categoryResponse = new CategoryResponse();
         mapper.map(categoryUpdate, categoryResponse);
@@ -98,13 +91,9 @@ public class CategoryService {
                 int index_1 = line.indexOf(";");
                 int index_2 = line.indexOf(";", index_1 + 1);
 
-                CategorySon categorySon = CategorySon.builder()
+                CategoryImportFileRequest categorySon = CategoryImportFileRequest.builder()
                         .categorySon(seekAndSave(line.substring(0, index_1).trim()))
-                        .build();
-                CategoryFather categoryFather = CategoryFather.builder()
                         .categoryFather(seekAndSave(line.substring(index_1 + 1, index_2).trim()))
-                        .build();
-                CategoryGrand categoryGrand = CategoryGrand.builder()
                         .categoryGrand(seekAndSave(line.substring(index_2 + 1).trim()))
                         .build();
                 line = br.readLine();
@@ -114,13 +103,14 @@ public class CategoryService {
         }
     }
 
-    private Categories seekAndSave(String cat) {
-        Optional<Categories> response = repository.findCategoryByCategoryName(cat);
+    private String seekAndSave(String cat) {
+        Optional<Categories> response = repository.findCategoryByName(cat);
         Categories categories = new Categories();
-        categories.setCategoryName(cat);
         if (!response.isPresent()) {
-          return repository.save(categories);
+            categories.setName(cat);
+            Categories responseSave =  repository.save(categories);
+            return responseSave.getName();
         }
-        return response.get();
+        return response.get().getName();
     }
 }

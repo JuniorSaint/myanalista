@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import br.com.myanalista.models.request.ProductRequestPost;
+import br.com.myanalista.models.response.ProductRequestPut;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,8 +17,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.myanalista.exceptions.BusinessException;
 import br.com.myanalista.models.entities.Products;
-import br.com.myanalista.models.request.ProductRequestPost;
-import br.com.myanalista.models.request.ProductRequestPut;
 import br.com.myanalista.models.response.ProductResponse;
 import br.com.myanalista.repositories.ProductRepository;
 

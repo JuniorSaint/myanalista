@@ -2,6 +2,7 @@ package br.com.myanalista.controllers;
 
 import java.io.IOException;
 
+import br.com.myanalista.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,21 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.myanalista.models.response.CustomerResponse;
-import br.com.myanalista.services.CalendarService;
-import br.com.myanalista.services.ChannelService;
-import br.com.myanalista.services.CityIneService;
-import br.com.myanalista.services.ClusterGecService;
-import br.com.myanalista.services.CustomerService;
-import br.com.myanalista.services.DistributorService;
-import br.com.myanalista.services.EquipmentService;
-import br.com.myanalista.services.LendingService;
-import br.com.myanalista.services.NationalHolidayService;
-import br.com.myanalista.services.ProductService;
-import br.com.myanalista.services.VisitDayService;
-import br.com.myanalista.services.SellOutService;
-import br.com.myanalista.services.SubChannelService;
-import br.com.myanalista.services.TeamsService;
-import br.com.myanalista.services.TurnoverService;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -79,10 +65,19 @@ public class UniqueChargeController {
    @Autowired
    private TurnoverService serviceTurnover;
 
+   @Autowired
+   private CategoryService serviceCategory;
+
+
+
+
    @PostMapping("/cityine")
    public void chargeCityIne() throws IOException {
-
       serviceCity.recordDataToDb();
+   }
+   @PostMapping("/category")
+   public void chargeCategory() throws IOException {
+      serviceCategory.recordDataToDb();
    }
 
    @PostMapping("/clustergec")
@@ -101,6 +96,7 @@ public class UniqueChargeController {
    public void chargeCalendar() throws IOException {
 
       serviceCalendar.recordDataToDb();
+
    }
 
    @PostMapping("/nationalholidays")

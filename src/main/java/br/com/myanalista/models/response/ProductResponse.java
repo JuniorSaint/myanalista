@@ -2,7 +2,7 @@ package br.com.myanalista.models.response;
 
 import java.util.List;
 
-import br.com.myanalista.models.entities.CategorySon;
+import br.com.myanalista.models.entities.Categories;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,8 +15,9 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class ProductResponse {
+  private Long id;
   private String sku;
   private String productDescription;
   private boolean active;
-  private List<CategorySon> categories;
+  private List<Categories> categories;
 }

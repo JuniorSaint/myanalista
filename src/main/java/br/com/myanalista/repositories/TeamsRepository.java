@@ -23,8 +23,8 @@ public interface TeamsRepository extends JpaRepository<Teams, Long>{
 
   Optional<Teams> findByMemberCode(String code);
 
-  @Query(value = "select t from Teams t where t.memberCode = :code")
-  Teams findMemberCode(@Param("code") String code);
+  @Query(value = "select t from Teams t where t.memberCode = :code and t.distributor = :distributor")
+  Teams findMemberCodeAndDistributor(@Param(value = "code") String code, @Param(value = "distributor") Distributor distributor);
 
   long deleteByMemberCode(String code);
 

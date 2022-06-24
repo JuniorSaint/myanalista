@@ -13,11 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Builder
 @Entity
@@ -64,13 +60,15 @@ public class Customer implements Serializable {
   private String regiterDay;
   private String inactivationDay;
   private String status;
-  private String clusterGec;
   private String refPet;
   private String ls;
   private String rgb;
   private String lastPurchase;
   private String creditLimit;
   private String addition;
+  @ManyToOne
+  @JoinColumn(name = "clusterGec_id")
+  private ClusterGec clusterGec;
   @ManyToOne
   @JoinColumn(name = "seller2_id")
   private Teams sellerCustomer2;
@@ -96,6 +94,7 @@ public class Customer implements Serializable {
   private Channel channel;
   private String specie;
 
+  @Singular
   @OneToMany(mappedBy="customer")
   private List<SellOut> sellOuts;
 

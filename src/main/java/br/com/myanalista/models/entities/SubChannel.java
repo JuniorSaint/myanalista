@@ -12,11 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Builder
 @Entity
@@ -41,6 +37,7 @@ public class SubChannel implements Serializable {
   @JoinColumn(name = "channel_id")
   private Channel channel;
 
+  @Singular
   @OneToMany(mappedBy = "channel")
   private List<SellOut> sellOuts;
 

@@ -28,19 +28,13 @@ public class Categories implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String categoryName;
-    @CreationTimestamp
-    private LocalDate createdAt;
-    @UpdateTimestamp
-    private LocalDate updatedAt;
+    private String name;
 
-    @OneToOne(mappedBy = "categorySon")
-    @PrimaryKeyJoinColumn
-    private CategorySon categorySon;
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "father_id", nullable = true)
+    private Categories father;
 
-    @OneToMany(mappedBy="categoryFather")
-    private List<CategoryFather> categoryFathers;
-
-    @OneToMany(mappedBy="categoryGrand")
-    private List<CategoryGrand> categoryGrands;
+    @OneToMany(mappedBy = "categoriesList")
+    private List<Categories> categoriesList;
 }

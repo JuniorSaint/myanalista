@@ -1,10 +1,6 @@
 package br.com.myanalista.models.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -26,6 +22,7 @@ public class Channel implements Serializable {
   private Long id;
   private String code;
   private String channel;
+
   @OneToMany(mappedBy="channel")
   private List<SubChannel> subChannels;
 

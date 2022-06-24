@@ -119,7 +119,7 @@ public class TeamsService {
 
           Teams channelResp = Teams.builder()
               .distributor(findDistributorByCnpj(line.substring(0, index_1).trim()))
-              .memberCode(line.substring(index_1 + 1, index_2).trim())
+              .memberCode(verifySizeCode(line.substring(index_1 + 1, index_2).trim()))
               .fullName(line.substring(index_2 + 1, index_3).trim())
               .memberFunction(line.substring(index_3 + 1, index_4).trim())
               .sellerOrSupervisor("vendedor")
@@ -134,11 +134,21 @@ public class TeamsService {
     }
   }
 
+  private String verifySizeCode(String code){
+    String result = code;
+    for(Integer x = 0; x < (3 - code.length()); x++){
+      result = "0".concat(result);
+    }
+    return result;
+  }
+
   private boolean ifTeamsRegistered(String code, String cnpj) {
       if (code.isEmpty() && cnpj.isEmpty()) {
       throw new BusinessException("Field code and cnpj is mandatory");
     }
-    String test = cnpj;
+    if(cnpj.length() < 14){
+      cnpj = "0" + cnpj;
+    }
     Optional<Distributor> responseDistributor = repositoryDistributor.findDistributorByCnpj(cnpj);
     if (!responseDistributor.isPresent()) {
       throw new BusinessException("Distributor not found with cnpj: " + cnpj);
@@ -154,6 +164,10 @@ public class TeamsService {
     if (cnpj.isEmpty()) {
       return null;
     }
+    if(cnpj.length() < 14){
+      cnpj = "0" + cnpj;
+    }
+
     Optional<Distributor> responseDistributor = repositoryDistributor.findDistributorByCnpj(cnpj);
     if (!responseDistributor.isPresent()) {
       return null;

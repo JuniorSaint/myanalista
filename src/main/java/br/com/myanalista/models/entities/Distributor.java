@@ -2,11 +2,7 @@ package br.com.myanalista.models.entities;
 
 import br.com.myanalista.models.enums.CustomerTypeEnum;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -66,10 +62,14 @@ public class Distributor implements Serializable {
     @UpdateTimestamp
     private LocalDate updatedAt;
 
+    @Singular
     @OneToMany(mappedBy="distributor")
     private Set<Customer> customers;
 
     @OneToOne(mappedBy = "distributor")
     @PrimaryKeyJoinColumn
     private Lending lending;
+
+    @OneToMany(mappedBy="distributor")
+    private List<Equipment> equipment;
 }
