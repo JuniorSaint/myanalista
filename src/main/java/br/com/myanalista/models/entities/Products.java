@@ -1,5 +1,6 @@
 package br.com.myanalista.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -36,6 +37,8 @@ public class Products implements Serializable {
     @Singular
     @OneToMany(mappedBy = "product")
     private List<SellOut> sellOuts;
-
-
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="category_id")
+    private Categories category;
 }

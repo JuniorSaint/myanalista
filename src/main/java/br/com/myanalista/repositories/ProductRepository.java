@@ -15,7 +15,7 @@ import org.springframework.data.repository.query.Param;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Products, Long>{
-  @Query(value = "select u from Products u where u.sku = :sku")
-  Optional<Products> findBySku(@Param(value = "sku") String sku);
+  @Query(value = "select u from Products u left join fetch u.category c where u.sku = :sku")
+  Optional<Products> findByCodeSku(@Param(value = "sku") String sku);
 
 }

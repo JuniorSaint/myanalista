@@ -47,8 +47,8 @@ public class UniqueChargeController {
    @Autowired
    private SellOutService serviceSellOut;
 
-   @Autowired
-   private LendingService serviceLending;
+//   @Autowired
+//   private LendingService serviceLending;
 
    @Autowired
    private EquipmentService serviceEquipment;
@@ -129,11 +129,11 @@ public class UniqueChargeController {
       serviceSellOut.recordDataToDb();
    }
 
-   @PostMapping("/lending")
-   public void chargeLending() throws IOException {
-
-      serviceLending.recordDataToDb();
-   }
+//   @PostMapping("/lending")
+//   public void chargeLending() throws IOException {
+//
+//      serviceLending.recordDataToDb();
+//   }
 
    @PostMapping("/turnover")
    public void chargeTurnover() throws IOException {
@@ -159,11 +159,11 @@ public class UniqueChargeController {
       serviceDistributor.recordDataToDb();
    }
 
-   @PostMapping("/product")
-   public void chargeProduct() throws IOException {
-
-      serviceProduct.recordDataToDb();
-   }
+//   @PostMapping("/product")
+//   public void chargeProduct() throws IOException {
+//
+//      serviceProduct.recordDataToDb();
+//   }
 
    @GetMapping("/{code}")
    public CustomerResponse findByCode(@PathVariable(value = "code") String code) {

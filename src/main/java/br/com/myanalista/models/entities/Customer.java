@@ -95,7 +95,7 @@ public class Customer implements Serializable {
   private String specie;
 
   @Singular
-  @OneToMany(mappedBy="customer")
+  @OneToMany(mappedBy="register")
   private List<SellOut> sellOuts;
 
   @OneToMany(mappedBy = "customerRegistration")

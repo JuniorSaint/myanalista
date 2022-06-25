@@ -7,8 +7,11 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import br.com.myanalista.models.entities.Categories;
 import br.com.myanalista.models.request.ProductRequestPost;
 import br.com.myanalista.models.response.ProductRequestPut;
+import br.com.myanalista.repositories.CategoryRepository;
+import org.hibernate.annotations.NaturalId;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,11 +29,14 @@ public class ProductService {
     private ProductRepository repository;
 
     @Autowired
+    private CategoryRepository repositoryCategory;
+
+    @Autowired
     private ModelMapper mapper;
 
     @Transactional
     public ProductResponse save(ProductRequestPost productRequest) {
-        Optional<Products> product = repository.findBySku(productRequest.getSku());
+        Optional<Products> product = repository.findByCodeSku(productRequest.getSku());
         if (product.isPresent()) {
             throw new BusinessException("There is product register with this sku: " + productRequest.getSku());
         }
@@ -62,19 +68,24 @@ public class ProductService {
         return "Product deleted with success";
     }
 
-    public ProductResponse findById(Long id) {
-        Optional<Products> product = repository.findById(id);
+    public ProductResponse findBySku(String sku) {
+        Optional<Products> product = repository.findByCodeSku(sku);
         if (product.isEmpty()) {
-            throw new BusinessException("It's not possible find product with id: " + id);
+            throw new BusinessException("It's not possible find product with Sku: " + sku);
         }
-        ProductResponse contactResp = new ProductResponse();
-        mapper.map(product.get(), contactResp);
-        return contactResp;
+        ProductResponse productResponse = new ProductResponse();
+        mapper.map(product.get(), productResponse);
+        return productResponse;
     }
 
-    public Products findByIdEntity(Long id) {
+    public ProductResponse findById(Long id) {
         Optional<Products> product = repository.findById(id);
-        return product.get();
+        ProductResponse productResponse = new ProductResponse();
+        if(product.isEmpty()){
+            throw new BusinessException("It's not possible find product with id: " + id);
+        }
+        mapper.map(product.get(), productResponse);
+        return productResponse;
     }
 
     public Page<ProductResponse> findAllWithPage(Pageable pageable) {
@@ -93,10 +104,12 @@ public class ProductService {
             while (line != null) {
 
                 int index_1 = line.indexOf(";");
+                int index_2 = line.indexOf(";", index_1 + 1);
 
                 Products channelResp = Products.builder()
                         .sku(line.substring(0, index_1).trim())
-                        .productDescription(line.substring(index_1 + 1).trim())
+                        .productDescription(line.substring(index_1 + 1, index_2).trim())
+                        .category(findCategoryById(Long.parseLong(line.substring(index_2 + 1).trim())))
                         .active(true)
                         .build();
 
@@ -114,5 +127,15 @@ public class ProductService {
         return entities.map(objectEntity -> mapper.map(objectEntity, dtoClass));
     }
 
+    private Categories findCategoryById(Long id) {
+        if (id == null) {
+            return null;
+        }
+        Optional<Categories> category = repositoryCategory.findById(id);
+        if (category.isEmpty()) {
+            return null;
+        }
+        return category.get();
+    }
 
 }

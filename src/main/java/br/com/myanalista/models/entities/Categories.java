@@ -30,11 +30,13 @@ public class Categories implements Serializable {
     private Long id;
     private String name;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "father_id", nullable = true)
-    private Categories father;
+    @ManyToOne
+    @JoinColumn(name="parent_id")
+    private Categories parent;
 
     @OneToMany(mappedBy = "categoriesList")
     private List<Categories> categoriesList;
+
+    @OneToMany(mappedBy="category")
+    private List<Products> products;
 }

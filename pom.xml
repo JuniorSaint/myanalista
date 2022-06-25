@@ -98,8 +98,18 @@
             <artifactId>java-jwt</artifactId>
             <version>3.19.2</version>
         </dependency>
-
-
+<!--        Read xlsx file Initial -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>5.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.2.0</version>
+        </dependency>
+        <!--        Read xlsx file End -->
     </dependencies>
 
     <build>

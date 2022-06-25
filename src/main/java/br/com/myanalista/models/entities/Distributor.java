@@ -72,4 +72,7 @@ public class Distributor implements Serializable {
 
     @OneToMany(mappedBy="distributor")
     private List<Equipment> equipment;
+
+    @OneToMany(mappedBy="distributor")
+    private List<SellOut> sellOuts;
 }

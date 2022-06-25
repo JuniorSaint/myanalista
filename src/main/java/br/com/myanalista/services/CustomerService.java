@@ -39,7 +39,7 @@ public class CustomerService {
 
     public void recordDataToDb() throws IOException {
 
-        String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/Clientes_06187813000119.CSV";
+        String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/Clientes.CSV";
 
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 
@@ -99,7 +99,7 @@ public class CustomerService {
                 int index_51 = line.indexOf(";", index_50 + 1);
                 int index_52 = line.indexOf(";", index_51 + 1);
 
-                Boolean isExist = ifCustomerExist(line.substring(0, index_1).trim(), line.substring(index_38 + 1, index_39).trim());
+                Boolean isExist = ifCustomerExist(line.substring(index_2 + 1, index_3).trim(), line.substring(index_38 + 1, index_39).trim());
 
                 if (!isExist) {
                     Customer channel = Customer.builder()
@@ -169,6 +169,16 @@ public class CustomerService {
         }
     }
 
+    private boolean ifCustomerExist(String cnpj, String distributor) {
+        String[] distri = distributor.split(":");
+        Optional<Distributor> dis = repositoryDistributor.findDistributorByCnpj(distri[0]);
+        Optional<Customer> response = repository.findByCodeByDistributor(cnpj.trim(), dis.get());
+        if (response.isPresent()) {
+            return true;
+        }
+        return false;
+    }
+
     private ClusterGec findClusterByName(String name) {
         if (name.isEmpty()) {
             return null;
@@ -189,15 +199,6 @@ public class CustomerService {
         return null;
     }
 
-    private boolean ifCustomerExist(String code, String distributor) {
-        String[] distri = distributor.split(":");
-        Optional<Distributor> dis = repositoryDistributor.findDistributorByCnpj(distri[0]);
-        Optional<Customer> response = repository.findByCodeByDistributor(code.trim(), dis.get());
-        if (response.isPresent()) {
-            return true;
-        }
-        return false;
-    }
 
     private SubChannel findSubChannelBySubChannel(String name) {
         Optional<SubChannel> response = repositorySubChannel.findSubChannelBysubChannel(name.trim());
@@ -220,7 +221,7 @@ public class CustomerService {
         String nameSaller = nameCode[1].trim();
 
         Optional<Teams> responseTeams = repositoryTeams.findByDistributorAndMemberCode(distributor, codeInteger);
-        if(responseTeams.isEmpty()){
+        if (responseTeams.isEmpty()) {
             Teams teamsBuild = Teams.builder().memberCode(codeInteger).fullName(nameSaller).build();
             return repositoryTeams.save(teamsBuild);
         }

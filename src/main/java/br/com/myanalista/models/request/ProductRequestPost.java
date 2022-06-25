@@ -19,7 +19,7 @@ public class ProductRequestPost {
     private String sku;
     private String productDescription;
     private boolean active;
-    private List<Categories> categories;
+    private Categories parent;
 }
 
 

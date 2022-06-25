@@ -90,12 +90,26 @@ public class CategoryService {
 
                 int index_1 = line.indexOf(";");
                 int index_2 = line.indexOf(";", index_1 + 1);
+                int index_3 = line.indexOf(";", index_2 + 1);
 
-                CategoryImportFileRequest categorySon = CategoryImportFileRequest.builder()
-                        .categorySon(seekAndSave(line.substring(0, index_1).trim()))
-                        .categoryFather(seekAndSave(line.substring(index_1 + 1, index_2).trim()))
-                        .categoryGrand(seekAndSave(line.substring(index_2 + 1).trim()))
+
+                Categories categoryGrand = Categories.builder()
+                        .name(line.substring(index_2 + 1).trim())
                         .build();
+               Categories grand =  repository.save(categoryGrand);
+
+                Categories categoryFather = Categories.builder()
+                        .name(line.substring(index_1 + 1, index_2).trim())
+                        .parent(seekAndSave(grand))
+                        .build();
+             Categories father =    repository.save(categoryFather);
+
+                Categories categorySon = Categories.builder()
+                        .name(line.substring(0, index_1).trim())
+                        .parent(seekAndSave(father))
+                        .build();
+                repository.save(categorySon);
+
                 line = br.readLine();
             }
         } catch (IOException e) {
@@ -103,14 +117,16 @@ public class CategoryService {
         }
     }
 
-    private String seekAndSave(String cat) {
-        Optional<Categories> response = repository.findCategoryByName(cat);
+    private Categories seekAndSave(Categories category) {
         Categories categories = new Categories();
-        if (!response.isPresent()) {
-            categories.setName(cat);
-            Categories responseSave =  repository.save(categories);
-            return responseSave.getName();
+        if (category == null) {
+            return categories;
         }
-        return response.get().getName();
+        Optional<Categories> response = repository.findById(category.getId());
+
+        if (response.isEmpty()) {
+            return categories;
+        }
+        return response.get();
     }
 }
