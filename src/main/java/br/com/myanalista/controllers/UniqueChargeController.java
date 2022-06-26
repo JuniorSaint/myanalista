@@ -105,12 +105,6 @@ public class UniqueChargeController {
       serviceNational.recordDataToDb();
    }
 
-   @PostMapping("/clients")
-   public void chargeClients() throws IOException {
-
-      serviceCustomer.recordDataToDb();
-   }
-
    @PostMapping("/channel")
    public void chargeChannel() throws IOException {
 
@@ -123,11 +117,6 @@ public class UniqueChargeController {
       serviceSub.recordDataToDb();
    }
 
-   @PostMapping("/sellout")
-   public void chargeSellOut() throws IOException {
-
-      serviceSellOut.recordDataToDb();
-   }
 
 //   @PostMapping("/lending")
 //   public void chargeLending() throws IOException {

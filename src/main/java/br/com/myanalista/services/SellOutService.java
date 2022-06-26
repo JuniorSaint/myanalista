@@ -35,9 +35,7 @@ public class SellOutService {
     @Autowired
     private ProductRepository repositoryProduct;
 
-    public void recordDataToDb() throws IOException {
-        String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/SELLOUT.CSV";
-
+    public void recordDataToDb(Long id, String path) throws IOException {
 
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 
@@ -137,15 +135,16 @@ public class SellOutService {
                 int index_90 = line.indexOf(";", index_89 + 1);
                 int index_91 = line.indexOf(";", index_90 + 1);
                 int index_92 = line.indexOf(";", index_91 + 1);
+                Distributor distri = findDistributor(id);
 
                 SellOut channel = SellOut.builder()
-                        .distributor(findDistributor(line.substring(0, index_1).trim().replaceAll("[^0-9]", "")))
+                        .distributor(distri)
                         .date(convertDate(line.substring(index_1 + 1, index_2).trim()))
-//                        .customer(findCustomer(line.substring(index_2 + 1, index_3).trim()))
+                        .customer(findCustomer(line.substring(index_2 + 1, index_3).trim(), distri))
                         .route(line.substring(index_3 + 1, index_4).trim())
-                        .sellersOrder(findTeamsMemberByCode(line.substring(index_4 + 1, index_5).trim(), findDistributor(line.substring(0, index_1).trim().replaceAll("[^0-9]", ""))))
+                        .sellersOrder(findTeamsMemberByCode(line.substring(index_4 + 1, index_5).trim(), distri))
                         .supervisorsOrder(line.substring(index_5 + 1, index_6).trim())
-                        .sellerRegistration(findTeamsMemberByCode(line.substring(index_6 + 1, index_7).trim(), findDistributor(line.substring(0, index_1).trim().replaceAll("[^0-9]", ""))))
+                        .sellerRegistration(findTeamsMemberByCode(line.substring(index_6 + 1, index_7).trim(), distri))
                         .supervisorRegistration(line.substring(index_7 + 1, index_8).trim())
 //                        .city(line.substring(index_8 + 1, index_9).trim().trim())
                         .typeOperation(line.substring(index_9 + 1, index_10).trim())
@@ -161,14 +160,11 @@ public class SellOutService {
                                 Double.parseDouble(line.substring(index_18 + 1, index_19).trim().replaceAll(",", "."))))
                         .tablePrice(Double.parseDouble(line.substring(index_19 + 1, index_20).trim().replace(",", ".")))
                         .groupR(line.substring(index_20 + 1, index_21).trim()) // product's group, don't put it()
-                        .category(line.substring(index_21 + 1, index_22).trim()) // categories don't put it()
-                        .brand(line.substring(index_22 + 1, index_23).trim()) // Brand don't need to put it()
+//                        .category(line.substring(index_21 + 1, index_22).trim())
+                        .brand(line.substring(index_22 + 1, index_23).trim())
                         // .tableSell(Integer.parseInt(line.substring(index_23 + 1, index_24).trim()))
-                        .cluster(findCluster(line.substring(index_24 + 1, index_25).trim())) // create register from sellout's
-                        // table()
-                        .channel(findSubChannel(line.substring(index_25 + 1, index_26).trim())) // channel is consider subchannel to
-                        // myanlista then put
-                        // subchannel on channel()
+                        .cluster(findCluster(line.substring(index_24 + 1, index_25).trim()))
+                        .channel(findSubChannel(line.substring(index_25 + 1, index_26).trim()))
                         .averageTerm(line.substring(index_26 + 1, index_27).trim().isEmpty() ? 0
                                 : Integer.parseInt(line.substring(index_26 + 1, index_27).trim()))
                         .cfop(line.substring(index_27 + 1, index_28).trim())
@@ -195,7 +191,7 @@ public class SellOutService {
                                 : Integer.parseInt(line.substring(index_45 + 1, index_46).trim().replace(",", ".")))
                         .coverMeta(line.substring(index_46 + 1, index_47).trim())
                         .averageTermMeta(line.substring(index_47 + 1, index_48).trim())
-                        .seller2(findTeamsMemberByCode(line.substring(index_48 + 1, index_49).trim(), findDistributor(line.substring(0, index_1).trim().replaceAll("[^0-9]", ""))))
+                        .seller2(findTeamsMemberByCode(line.substring(index_48 + 1, index_49).trim(), distri))
                         .supervisor2(line.substring(index_49 + 1, index_50).trim())
                         .route2(line.substring(index_50 + 1, index_51).trim())
                         .quarter(line.substring(index_51 + 1, index_52).trim())
@@ -208,7 +204,7 @@ public class SellOutService {
                                 Double.parseDouble(line.substring(index_55 + 1, index_56).trim().replace(",", "."))))
                         .unitBoxRmeta(String.format("%.3f",
                                 Double.parseDouble(line.substring(index_56 + 1, index_57).trim().replace(",", "."))))
-                        .register(findCustomer(line.substring(index_57 + 1, index_58).trim().replaceAll("[^0-9]", "")))
+//                        .register(findCustomer(line.substring(index_57 + 1, index_58).trim().replaceAll("[^0-9]", "")))
                         .area(line.substring(index_58 + 1, index_59).trim())
                         .discountCustomer((line.substring(index_59 + 1, index_60).trim()).isEmpty() ? 0.00
                                 : Double.parseDouble(line.substring(index_59 + 1, index_60).trim().replace(",", ".")))
@@ -256,11 +252,11 @@ public class SellOutService {
         }
     }
 
-    private Distributor findDistributor(String cnpj) {
-        if (cnpj.isEmpty()) {
+    private Distributor findDistributor(Long id) {
+        if (id == null) {
             return null;
         }
-        Optional<Distributor> response = repositoryDistributor.findDistributorByCnpj(cnpj);
+        Optional<Distributor> response = repositoryDistributor.findById(id);
         if (response.isPresent()) {
             return response.get();
         }
@@ -280,11 +276,12 @@ public class SellOutService {
         return dateConverted;
     }
 
-    private Customer findCustomer(String customer) {
-        if (customer.isEmpty()) {
+    private Customer findCustomer(String code, Distributor distributor) {
+        if (code.isEmpty() || distributor == null) {
             return null;
         }
-        Optional<Customer> customerResponse = repositoryCustomer.findCustomerByCnpj(customer);
+        String responseCode = code.split("-")[0];
+        Optional<Customer> customerResponse = repositoryCustomer.findCustomerByCodeAndDistributor(responseCode, distributor);
         if (!customerResponse.isPresent()) {
             return null;
         }

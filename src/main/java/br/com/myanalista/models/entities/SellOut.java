@@ -34,9 +34,9 @@ public class SellOut implements Serializable {
     @JoinColumn(name = "distributor_id")
     private Distributor distributor;
     private LocalDate date;
-//    @ManyToOne
-//    @JoinColumn(name = "customer_id")
-//    private Customer customer;
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
     private String route;
     @ManyToOne
     @JoinColumn(name = "sellersOrder_id")
@@ -61,7 +61,7 @@ public class SellOut implements Serializable {
     private String priceCost;
     private Double tablePrice;
     private String groupR; // product's group, don't put it;
-    private String category; // categories don't put it;
+//    private String category;
     private String brand; // Brand don't need to put it;
     @ManyToOne
     @JoinColumn(name = "cluster_id")
@@ -102,9 +102,9 @@ public class SellOut implements Serializable {
     private String unitBoxReturned;
     private String unitBoxBox;
     private String unitBoxRmeta;
-        @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer register;
+//        @ManyToOne
+//    @JoinColumn(name = "customer_id")
+//    private Customer register;
     private String area;
     private Double discountCustomer;
 //    private String uf;

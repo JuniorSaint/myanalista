@@ -37,9 +37,8 @@ public class CustomerService {
     @Autowired
     private ClusterGecRepository repositoryCluster;
 
-    public void recordDataToDb() throws IOException {
+    public String recordDataToDb(Long id, String path) throws IOException {
 
-        String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/Clientes.CSV";
 
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 
@@ -99,7 +98,9 @@ public class CustomerService {
                 int index_51 = line.indexOf(";", index_50 + 1);
                 int index_52 = line.indexOf(";", index_51 + 1);
 
-                Boolean isExist = ifCustomerExist(line.substring(index_2 + 1, index_3).trim(), line.substring(index_38 + 1, index_39).trim());
+                Distributor distri = findDistributor(id);
+
+                Boolean isExist = ifCustomerExist(line.substring(index_2 + 1, index_3).trim(), distri);
 
                 if (!isExist) {
                     Customer channel = Customer.builder()
@@ -122,7 +123,7 @@ public class CustomerService {
                             .email(line.substring(index_16 + 1, index_17).trim())
                             .tablePrice(line.substring(index_17 + 1, index_18).trim())
                             .groupBusiness(line.substring(index_18 + 1, index_19).trim())
-                            .seller(findTeamsMemberByCode(line.substring(index_19 + 1, index_20).trim(), findDistributor(line.substring(index_38 + 1, index_39).trim())))
+                            .seller(findTeamsMemberByCode(line.substring(index_19 + 1, index_20).trim(),distri))
                             .supervisor(line.substring(index_20 + 1, index_21).trim())
                             .area(line.substring(index_21 + 1, index_22).trim())
                             .originalPaymentMethod(line.substring(index_22 + 1, index_23).trim())
@@ -138,10 +139,10 @@ public class CustomerService {
                             .lastPurchase(line.substring(index_32 + 1, index_33).trim())
                             .creditLimit(line.substring(index_33 + 1, index_34).trim())
                             .addition(line.substring(index_34 + 1, index_35))
-                            .sellerCustomer2(findTeamsMemberByCode(line.substring(index_35 + 1, index_36).trim(), findDistributor(line.substring(index_38 + 1, index_39).trim())))
+                            .sellerCustomer2(findTeamsMemberByCode(line.substring(index_35 + 1, index_36).trim(), distri))
                             .week2(line.substring(index_36 + 1, index_37).trim())
                             .turnover2(line.substring(index_37 + 1, index_38).trim())
-                            .distributor(findDistributor(line.substring(index_38 + 1, index_39).trim()))
+                            .distributor(distri)
                             .latitude(line.substring(index_39 + 1, index_40).trim())
                             .longitude(line.substring(index_40 + 1, index_41).trim())
                             .notAllowCurrentRestChange(line.substring(index_41 + 1, index_42).trim())
@@ -167,12 +168,16 @@ public class CustomerService {
         } catch (IOException e) {
             throw new IOException("Error to read file " + e.getMessage());
         }
+        return "ok";
     }
 
-    private boolean ifCustomerExist(String cnpj, String distributor) {
-        String[] distri = distributor.split(":");
-        Optional<Distributor> dis = repositoryDistributor.findDistributorByCnpj(distri[0]);
-        Optional<Customer> response = repository.findByCodeByDistributor(cnpj.trim(), dis.get());
+    private boolean ifCustomerExist(String code, Distributor distributor) {
+        if (code.isEmpty() || distributor == null) {
+            //
+            return true;
+        }
+
+        Optional<Customer> response = repository.findCustomerByCodeAndDistributor(code.trim(), distributor);
         if (response.isPresent()) {
             return true;
         }
@@ -190,9 +195,8 @@ public class CustomerService {
         return clusterGec.get();
     }
 
-    private Distributor findDistributor(String cnpj) {
-        String[] distri = cnpj.split(":");
-        Optional<Distributor> response = repositoryDistributor.findDistributorByCnpj(distri[0]);
+    private Distributor findDistributor(Long id) {
+        Optional<Distributor> response = repositoryDistributor.findById(id);
         if (response.isPresent()) {
             return response.get();
         }
