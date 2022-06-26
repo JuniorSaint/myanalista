@@ -332,12 +332,12 @@ public class SellOutService {
         return subResponse.get();
     }
 
-    private Products findProductByCode(String prod) {
-        if (prod.isEmpty()) {
+    private Products findProductByCode(String sku) {
+        if (sku.isEmpty()) {
             Optional<Products> responseProd = repositoryProduct.findByCodeSku("900000");
             return responseProd.get();
         }
-        Optional<Products> responseProd = repositoryProduct.findByCodeSku(prod);
+        Optional<Products> responseProd = repositoryProduct.findByCodeSku(sku);
         if (!responseProd.isPresent()) {
             return null;
         }
