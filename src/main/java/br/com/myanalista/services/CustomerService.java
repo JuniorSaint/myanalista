@@ -100,7 +100,7 @@ public class CustomerService {
 
                 Distributor distri = findDistributor(id);
 
-                Boolean isExist = ifCustomerExist(line.substring(index_2 + 1, index_3).trim(), distri);
+                Boolean isExist = ifCustomerExist(line.substring(0, index_1).trim(), distri);
 
                 if (!isExist) {
                     Customer channel = Customer.builder()

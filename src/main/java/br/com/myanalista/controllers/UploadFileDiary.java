@@ -44,17 +44,13 @@ public class UploadFileDiary {
 
             String fileNameOriginal = new String(Objects.requireNonNull(file.getFile().getOriginalFilename())) ;
 
-            switch (fileNameOriginal.toLowerCase()) {
-                case "cliente.csv":
-                    serviceCustomer.recordDataToDb(file.getIdDistributor(), pathFileUpload);
-                    break;
-                case "sellout.csv":
-                    serviceSellout.recordDataToDb(file.getIdDistributor(), pathFileUpload);
-                    break;
-                default:
-                    return new ResponseEntity<>("{ \"message\": \"The name of file isn't standart\"}", HttpStatus.INTERNAL_SERVER_ERROR);
+            if(fileNameOriginal.toLowerCase().contains("cliente")){
+                serviceCustomer.recordDataToDb(file.getIdDistributor(), pathFileUpload);
             }
 
+            if(fileNameOriginal.toLowerCase().contains("sellout")){
+                serviceSellout.recordDataToDb(file.getIdDistributor(), pathFileUpload);
+            }
 //
             return new ResponseEntity<>("{ \"message\": \"Upload of file with success!\"}", HttpStatus.OK);
         } catch (BusinessException  e) {
