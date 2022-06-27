@@ -16,7 +16,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class ProductRequestPost {
-    private String sku;
+    private Integer sku;
     private String productDescription;
     private boolean active;
     private Categories parent;

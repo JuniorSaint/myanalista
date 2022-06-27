@@ -26,7 +26,7 @@ public class Products implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(unique = true)
-    private String sku;
+    private Integer sku;
     private String productDescription;
     private boolean active;
     @CreationTimestamp

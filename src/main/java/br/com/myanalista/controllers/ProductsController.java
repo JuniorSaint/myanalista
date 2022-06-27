@@ -25,7 +25,7 @@ public class ProductsController {
     private ProductService service;
 
     @GetMapping("/{sku}")
-    public ProductResponse findProductBySku(@PathVariable(value = "sku") String sku){
+    public ProductResponse findProductBySku(@PathVariable(value = "sku") Integer sku){
         ProductResponse product = service.findBySku(sku);
         return product;
     }

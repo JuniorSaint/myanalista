@@ -5,11 +5,13 @@ import br.com.myanalista.exceptions.BusinessException;
 import br.com.myanalista.models.request.UploadFileRequest;
 import br.com.myanalista.services.CustomerService;
 import br.com.myanalista.services.SellOutService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -19,6 +21,7 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping(value = "/v1/upload", produces = {"application/json"})
 @CrossOrigin("*")
 @Slf4j
+@AllArgsConstructor
 public class UploadFileDiary {
 
     @Autowired
@@ -31,29 +34,31 @@ public class UploadFileDiary {
     private SellOutService serviceSellout;
 
     @PostMapping
-    public ResponseEntity<String> uploadFile(@ModelAttribute UploadFileRequest file) throws IOException, InterruptedException {
+    public ResponseEntity<String> uploadFile(@ModelAttribute UploadFileRequest files) throws IOException, InterruptedException {
 
         try {
-            String pathFileUpload = String.valueOf(saveFile.saveFile(file.getFile()));
+            for (MultipartFile uploadedFile : files.getFile()) {
+                String pathFileUpload = String.valueOf(saveFile.saveFile(uploadedFile));
 
-            TimeUnit.SECONDS.sleep(2); // wait to startover new process
+                TimeUnit.SECONDS.sleep(2); // wait to startover new process
 
-            if (pathFileUpload.equals("Error to upload file")) {
-                return new ResponseEntity<>("{ \"message\": \"Error to upload file!\"}", HttpStatus.INTERNAL_SERVER_ERROR);
+                if (pathFileUpload.equals("Error to upload file")) {
+                    return new ResponseEntity<>("{ \"message\": \"Error to upload file!\"}", HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+
+                String fileNameOriginal = new String(Objects.requireNonNull(uploadedFile.getOriginalFilename()));
+
+                if (fileNameOriginal.toLowerCase().contains("cliente")) {
+                    serviceCustomer.recordDataToDb(files.getIdDistributor(), pathFileUpload);
+                }
+
+                if (fileNameOriginal.toLowerCase().contains("sellout")) {
+                    serviceSellout.recordDataToDb(files.getIdDistributor(), pathFileUpload);
+                }
+
             }
-
-            String fileNameOriginal = new String(Objects.requireNonNull(file.getFile().getOriginalFilename())) ;
-
-            if(fileNameOriginal.toLowerCase().contains("cliente")){
-                serviceCustomer.recordDataToDb(file.getIdDistributor(), pathFileUpload);
-            }
-
-            if(fileNameOriginal.toLowerCase().contains("sellout")){
-                serviceSellout.recordDataToDb(file.getIdDistributor(), pathFileUpload);
-            }
-//
-            return new ResponseEntity<>("{ \"message\": \"Upload of file with success!\"}", HttpStatus.OK);
-        } catch (BusinessException  e) {
+            return new ResponseEntity<>("{ \"message\": \"Upload of file with success! \" }", HttpStatus.OK);
+        } catch (BusinessException e) {
             return new ResponseEntity<>("{ \"message\": \"Error to upload file!\"}", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

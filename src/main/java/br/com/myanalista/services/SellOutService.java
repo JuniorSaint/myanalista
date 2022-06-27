@@ -288,21 +288,21 @@ public class SellOutService {
         return customerResponse.get();
     }
 
-    private Teams findTeamsMemberByCode(String code, Distributor distributor) {
-        if (code.isEmpty()) {
+    private Teams findTeamsMemberByCode(String codeOrigin, Distributor distributor) {
+        if (codeOrigin.isEmpty() || distributor == null) {
             return null;
         }
 
-        String[] nameCode = code.split("-");
-        if (code.toString().trim().equals("N/D")) {
+        String[] nameCode = codeOrigin.split("-");
+        if (codeOrigin.toString().trim().equals("N/D")) {
             return null;
         }
-        String codeInteger = nameCode[0];
+        String code = nameCode[0];
         String nameSaller = nameCode[1].trim();
 
-        Optional<Teams> responseTeams = repositoryTeams.findByDistributorAndMemberCode(distributor, codeInteger);
+        Optional<Teams> responseTeams = repositoryTeams.findMemberCodeAndDistributor(code, distributor );
         if (responseTeams.isEmpty()) {
-            Teams teamsBuild = Teams.builder().memberCode(codeInteger).fullName(nameSaller).build();
+            Teams teamsBuild = Teams.builder().memberCode(code).fullName(nameSaller).build();
             return repositoryTeams.save(teamsBuild);
         }
         return responseTeams.get();
@@ -333,11 +333,11 @@ public class SellOutService {
     }
 
     private Products findProductByCode(String sku) {
-        if (sku.isEmpty()) {
-            Optional<Products> responseProd = repositoryProduct.findByCodeSku("900000");
+        if(sku.trim().isEmpty()){
+            Optional<Products> responseProd = repositoryProduct.findByCodeSku(900000);
             return responseProd.get();
         }
-        Optional<Products> responseProd = repositoryProduct.findByCodeSku(sku);
+        Optional<Products> responseProd = repositoryProduct.findByCodeSku(Integer.parseInt(sku));
         if (!responseProd.isPresent()) {
             return null;
         }

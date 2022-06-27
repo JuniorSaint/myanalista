@@ -68,7 +68,7 @@ public class ProductService {
         return "Product deleted with success";
     }
 
-    public ProductResponse findBySku(String sku) {
+    public ProductResponse findBySku(Integer sku) {
         Optional<Products> product = repository.findByCodeSku(sku);
         if (product.isEmpty()) {
             throw new BusinessException("It's not possible find product with Sku: " + sku);
@@ -81,7 +81,7 @@ public class ProductService {
     public ProductResponse findById(Long id) {
         Optional<Products> product = repository.findById(id);
         ProductResponse productResponse = new ProductResponse();
-        if(product.isEmpty()){
+        if (product.isEmpty()) {
             throw new BusinessException("It's not possible find product with id: " + id);
         }
         mapper.map(product.get(), productResponse);
@@ -107,9 +107,8 @@ public class ProductService {
                 int index_2 = line.indexOf(";", index_1 + 1);
 
                 Products channelResp = Products.builder()
-                        .sku(line.substring(0, index_1).trim())
-                        .productDescription(line.substring(index_1 + 1, index_2).trim())
-                        .category(findCategoryById(Long.parseLong(line.substring(index_2 + 1).trim())))
+                        .sku(Integer.parseInt(line.substring(0, index_1).trim()))
+                        .productDescription(line.substring(index_1 + 1).trim())
                         .active(true)
                         .build();
 

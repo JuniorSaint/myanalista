@@ -16,21 +16,20 @@ import br.com.myanalista.models.entities.Distributor;
 import br.com.myanalista.models.entities.Teams;
 
 @Repository
-public interface TeamsRepository extends JpaRepository<Teams, Long>{
+public interface TeamsRepository extends JpaRepository<Teams, Long> {
 
-  @Query(value = "select t from Teams t where t.fullName = :fullName")
-  List<Teams> listToFull(@Param(value = "fullName") String fullName);
+    @Query(value = "select t from Teams t where t.fullName = :fullName")
+    List<Teams> listToFull(@Param(value = "fullName") String fullName);
 
-  Optional<Teams> findByMemberCode(String code);
+    Optional<Teams> findByMemberCode(String code);
 
-  @Query(value = "select t from Teams t where t.memberCode = :code and t.distributor = :distributor")
-  Teams findMemberCodeAndDistributor(@Param(value = "code") String code, @Param(value = "distributor") Distributor distributor);
+    @Query(value = "select t from Teams t where t.memberCode = :code and t.distributor = :distributor")
+    Optional<Teams> findMemberCodeAndDistributor(@Param(value = "code") String code, @Param(value = "distributor") Distributor distributor);
 
-  long deleteByMemberCode(String code);
+    long deleteByMemberCode(String code);
 
-  @Query(value = "select c.id, c.fullName, c.cpf, c.memberFunction, c.typeOfRegistrationMember from Teams c ")
-  Page<TeamsSearchResponse> findAllPageableAndSort(Pageable pageable, Example example);
+    @Query(value = "select c.id, c.fullName, c.cpf, c.memberFunction, c.typeOfRegistrationMember from Teams c ")
+    Page<TeamsSearchResponse> findAllPageableAndSort(Pageable pageable, Example example);
 
-  @Query(value = "select t from Teams t where t.memberCode = :code and t.distributor = :distributor")
-  Optional<Teams>  findByDistributorAndMemberCode(@Param(value = "distributor") Distributor distributor, @Param(value = "code") String code);
+
 }

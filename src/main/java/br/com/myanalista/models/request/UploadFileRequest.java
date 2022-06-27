@@ -15,5 +15,5 @@ import org.springframework.web.multipart.MultipartFile;
 public class UploadFileRequest {
     private Long idDistributor;
     private String distributor;
-    private MultipartFile file;
+    private MultipartFile[] file;
 }

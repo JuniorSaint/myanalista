@@ -148,11 +148,11 @@ public class UniqueChargeController {
       serviceDistributor.recordDataToDb();
    }
 
-//   @PostMapping("/product")
-//   public void chargeProduct() throws IOException {
-//
-//      serviceProduct.recordDataToDb();
-//   }
+   @PostMapping("/product")
+   public void chargeProduct() throws IOException {
+
+      serviceProduct.recordDataToDb();
+   }
 
    @GetMapping("/{code}")
    public CustomerResponse findByCode(@PathVariable(value = "code") String code) {
