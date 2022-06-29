@@ -63,16 +63,16 @@ public class Distributor implements Serializable {
     private LocalDate updatedAt;
 
     @Singular
-    @OneToMany(mappedBy="distributor")
+    @OneToMany(mappedBy="distributor", fetch = FetchType.LAZY)
     private Set<Customer> customers;
 
     @OneToOne(mappedBy = "distributor")
     @PrimaryKeyJoinColumn
     private Lending lending;
 
-    @OneToMany(mappedBy="distributor")
+    @OneToMany(mappedBy="distributor", fetch = FetchType.LAZY)
     private List<Equipment> equipment;
 
-    @OneToMany(mappedBy="distributor")
+    @OneToMany(mappedBy="distributor", fetch = FetchType.LAZY)
     private List<SellOut> sellOuts;
 }

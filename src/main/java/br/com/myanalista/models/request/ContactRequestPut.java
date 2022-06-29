@@ -6,11 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 @AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
 public class ContactRequestPut extends ContactRequestPost {
-
-  private Long id;
+    @NotEmpty(message = "Id is a mandatory field.")
+    private Long id;
 }

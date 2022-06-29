@@ -9,12 +9,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 @AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
 @SuperBuilder
 public class CutomerPost {
+  @NotEmpty(message = "Code is a mandatory field.")
   private String code;
   private String route;
   private String cnpj;
@@ -53,6 +57,7 @@ public class CutomerPost {
   private Teams seller2;
   private String week2;
   private String turnover2;
+  @NotEmpty(message = "Distributor is a mandatory field.")
   private String distributor;
   private String latitude;
   private String longitude;

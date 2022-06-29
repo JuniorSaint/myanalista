@@ -38,13 +38,13 @@ public class Teams implements Serializable {
     @UpdateTimestamp
     private LocalDate updatedAt;
 
-    @OneToMany(mappedBy="sellersOrder")
+    @OneToMany(mappedBy="sellersOrder", fetch = FetchType.LAZY)
     private List<SellOut> sellOutSellerOrders;
 
-    @OneToMany(mappedBy="sellerRegistration")
+    @OneToMany(mappedBy="sellerRegistration", fetch = FetchType.LAZY)
     private List<SellOut> sellOutSellerRegistrations;
 
-    @OneToMany(mappedBy = "seller2")
+    @OneToMany(mappedBy = "seller2", fetch = FetchType.LAZY)
     private List<SellOut> sellOutSellers;
 
     @OneToMany(mappedBy = "sellerCode")

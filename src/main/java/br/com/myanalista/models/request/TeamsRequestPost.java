@@ -7,18 +7,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+
 @AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
 @SuperBuilder
 public class TeamsRequestPost {
-
-  private String fullName;
-  private String memberCode;
-  private String cpf;
-  private String memberFunction;
-  private String typeOfRegistrationMember;
-  private String memberLink;
-  private Distributor distributor;  
+    private String memberCode;
+    @NotNull(message = "Fullname is a mandatory field.")
+    private String fullName;
+    private String cpf;
+    private String memberFunction;
+    private String typeOfRegistrationMember;
+    private Integer memberLink;
+    private String sellerOrSupervisor;
+    @NotNull(message = "Distributor is a mandatory field.")
+    private Distributor distributor;
 }

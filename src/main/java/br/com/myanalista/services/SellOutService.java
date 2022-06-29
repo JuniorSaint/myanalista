@@ -300,9 +300,14 @@ public class SellOutService {
         String code = nameCode[0];
         String nameSaller = nameCode[1].trim();
 
-        Optional<Teams> responseTeams = repositoryTeams.findMemberCodeAndDistributor(code, distributor );
+        String newCodeMember = code;
+        for (Integer x = 0; x < (3 - code.length()); x++) {
+            newCodeMember = "0".concat(newCodeMember);
+        }
+
+        Optional<Teams> responseTeams = repositoryTeams.findByMemberCodeAndDistributor(newCodeMember, distributor );
         if (responseTeams.isEmpty()) {
-            Teams teamsBuild = Teams.builder().memberCode(code).fullName(nameSaller).build();
+            Teams teamsBuild = Teams.builder().memberCode(code).fullName(nameSaller).distributor(distributor).build();
             return repositoryTeams.save(teamsBuild);
         }
         return responseTeams.get();

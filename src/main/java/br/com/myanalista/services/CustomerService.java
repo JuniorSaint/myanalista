@@ -212,21 +212,27 @@ public class CustomerService {
         return null;
     }
 
-    private Teams findTeamsMemberByCode(String code, Distributor distributor) {
-        if (code.isEmpty()) {
+    private Teams findTeamsMemberByCode(String codeOrigin, Distributor distributor) {
+        if (codeOrigin.isEmpty() || distributor == null) {
             return null;
         }
 
-        String[] nameCode = code.split("-");
-        if (code.toString().trim().equals("N/D")) {
+
+        String[] nameCode = codeOrigin.split("-");
+        if (codeOrigin.toString().trim().equals("N/D")) {
             return null;
         }
-        String codeInteger = nameCode[0];
+        String code = nameCode[0];
         String nameSaller = nameCode[1].trim();
 
-        Optional<Teams> responseTeams = repositoryTeams.findByDistributorAndMemberCode(distributor, codeInteger);
+        String newCodeMember = code;
+        for (Integer x = 0; x < (3 - code.length()); x++) {
+            newCodeMember = "0".concat(newCodeMember);
+        }
+
+        Optional<Teams> responseTeams = repositoryTeams.findByMemberCodeAndDistributor(code, distributor);
         if (responseTeams.isEmpty()) {
-            Teams teamsBuild = Teams.builder().memberCode(codeInteger).fullName(nameSaller).build();
+            Teams teamsBuild = Teams.builder().memberCode(code).fullName(nameSaller).distributor(distributor).build();
             return repositoryTeams.save(teamsBuild);
         }
         return responseTeams.get();

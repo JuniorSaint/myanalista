@@ -1,6 +1,8 @@
 package br.com.myanalista.models.request;
 
 import javax.persistence.Column;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import br.com.myanalista.models.enums.UserTypeEnum;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -16,11 +18,11 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class UserRequestPost {
-
-  private String userName;
-  @Column(unique=true)
-  private String userEmail;
-  private String password;
-  @JsonDeserialize
-  private UserTypeEnum userType;
+    @NotEmpty(message = "User name is a mandatory field.")
+    private String userName;
+    @NotEmpty(message = "Email is a mandatory field.")
+    private String userEmail;
+    private String password;
+    @JsonDeserialize
+    private UserTypeEnum userType;
 }

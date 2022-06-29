@@ -7,12 +7,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import javax.validation.constraints.NotEmpty;
+
 @AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
 @SuperBuilder
 public class UserRequestPut extends UserRequestPost {
-
-  private Long id;  
+    @NotEmpty(message = "Id is a mandatory field.")
+    private Long id;
 }

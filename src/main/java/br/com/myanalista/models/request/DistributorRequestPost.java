@@ -1,19 +1,20 @@
 package br.com.myanalista.models.request;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
-import javax.persistence.Lob;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
-import br.com.myanalista.models.entities.Contacts;
-import br.com.myanalista.models.entities.Teams;
+import br.com.myanalista.models.entities.*;
 import br.com.myanalista.models.enums.CompanyTypeEnum;
 import br.com.myanalista.models.enums.CustomerTypeEnum;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @AllArgsConstructor
 @Getter
@@ -21,10 +22,11 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class DistributorRequestPost {
- 
+
   private String cnpjCpf;
-  private CompanyTypeEnum companyType;  
+  private String companyType;
   private String nickName;
+  @NotEmpty(message = "Company name is a mandatory field.")
   private String companyName;
   private String fantasyName;
   private String address;
@@ -33,16 +35,14 @@ public class DistributorRequestPost {
   private String zipCode;
   private String district;
   private String city;
+  private String state;
+  private String observation;
   // Start Financial
   private LocalDate contractDate;
   private CustomerTypeEnum customerType;
   private String typeOfContract;
-  private Double contractValue;
+  private Double ContractValue;
   private String formOfPayment;
   private String cluster;
   // End Financial
-  @Lob
-  private String observation;
-  private Set<Contacts> contacts;
-  private Set<Teams> teams;
 }

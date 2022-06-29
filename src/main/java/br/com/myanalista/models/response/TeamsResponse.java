@@ -14,12 +14,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TeamsResponse {
-  private Long id;
-  private String fullName;
   private String memberCode;
+  private String fullName;
   private String cpf;
   private String memberFunction;
   private String typeOfRegistrationMember;
-  private String memberLink;
+  private Integer memberLink;
+  private String sellerOrSupervisor;
   private Distributor distributor;
 }

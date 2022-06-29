@@ -47,6 +47,9 @@ public class UniqueChargeController {
    @Autowired
    private SellOutService serviceSellOut;
 
+   @Autowired
+   private TeamsService serviceTeams;
+
 //   @Autowired
 //   private LendingService serviceLending;
 
@@ -55,9 +58,6 @@ public class UniqueChargeController {
 
    @Autowired
    private DistributorService serviceDistributor;
-
-   @Autowired
-   private TeamsService serviceTeams;
 
    @Autowired
    private ProductService serviceProduct;
