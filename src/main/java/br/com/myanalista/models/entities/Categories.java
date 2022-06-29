@@ -1,5 +1,6 @@
 package br.com.myanalista.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,11 +33,9 @@ public class Categories implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="parent_id")
-    private Categories parent;
+    private Categories category;
 
-    @OneToMany(mappedBy = "categoriesList")
-    private List<Categories> categoriesList;
 
-    @OneToMany(mappedBy="category")
+    @OneToMany(mappedBy="categories")
     private List<Products> products;
 }

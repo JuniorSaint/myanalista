@@ -9,9 +9,8 @@ import javax.transaction.Transactional;
 
 import br.com.myanalista.models.entities.Categories;
 import br.com.myanalista.models.request.ProductRequestPost;
-import br.com.myanalista.models.response.ProductRequestPut;
+import br.com.myanalista.models.request.ProductRequestPut;
 import br.com.myanalista.repositories.CategoryRepository;
-import org.hibernate.annotations.NaturalId;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +21,7 @@ import br.com.myanalista.exceptions.BusinessException;
 import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.response.ProductResponse;
 import br.com.myanalista.repositories.ProductRepository;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 public class ProductService {
@@ -36,10 +36,14 @@ public class ProductService {
 
     @Transactional
     public ProductResponse save(ProductRequestPost productRequest) {
+        ProductRequestPost rest = productRequest;
         Optional<Products> product = repository.findByCodeSku(productRequest.getSku());
         if (product.isPresent()) {
-            throw new BusinessException("There is product register with this sku: " + productRequest.getSku());
+            throw new BusinessException("There is product registered with this sku: " + productRequest.getSku());
         }
+
+        Optional<Categories> categories = repositoryCategory.findByIdSecundary(productRequest.getCategories().getId());
+        productRequest.setCategories(categories.get());
         Products productEntity = new Products();
         mapper.map(productRequest, productEntity);
         Products productCreated = repository.save(productEntity);
@@ -49,9 +53,11 @@ public class ProductService {
     }
 
     @Transactional
-    public ProductResponse update(ProductRequestPut contactRequest) {
+    public ProductResponse update(ProductRequestPut productRequestPut) {
         Products productEntity = new Products();
-        mapper.map(contactRequest, productEntity);
+        Optional<Categories> categories = repositoryCategory.findByIdSecundary(productRequestPut.getCategories().getId());
+        productRequestPut.setCategories(categories.get());
+        mapper.map(productRequestPut, productEntity);
         Products productUpdate = repository.save(productEntity);
         ProductResponse productResponse = new ProductResponse();
         mapper.map(productUpdate, productResponse);
@@ -59,7 +65,7 @@ public class ProductService {
     }
 
     @Transactional
-    public String delete(Long id) {
+    public String delete( Long id) {
         Optional<Products> product = repository.findById(id);
         if (!product.isPresent()) {
             throw new BusinessException("Product not found with id: " + id);
@@ -78,14 +84,12 @@ public class ProductService {
         return productResponse;
     }
 
-    public ProductResponse findById(Long id) {
+    public Products findById(Long id) {
         Optional<Products> product = repository.findById(id);
-        ProductResponse productResponse = new ProductResponse();
         if (product.isEmpty()) {
             throw new BusinessException("It's not possible find product with id: " + id);
         }
-        mapper.map(product.get(), productResponse);
-        return productResponse;
+        return product.get();
     }
 
     public Page<ProductResponse> findAllWithPage(Pageable pageable) {

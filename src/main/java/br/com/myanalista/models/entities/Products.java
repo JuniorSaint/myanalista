@@ -1,6 +1,7 @@
 package br.com.myanalista.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,16 +30,18 @@ public class Products implements Serializable {
     private Integer sku;
     private String productDescription;
     private boolean active;
+    @JsonIgnore
     @CreationTimestamp
     private LocalDate createdAt;
+    @JsonIgnore
     @UpdateTimestamp
     private LocalDate updatedAt;
 
     @Singular
     @OneToMany(mappedBy = "product")
     private List<SellOut> sellOuts;
-    @JsonIgnore
+    @JsonIgnoreProperties(value = {"products"})
     @ManyToOne
     @JoinColumn(name="category_id")
-    private Categories category;
+    private Categories categories;
 }

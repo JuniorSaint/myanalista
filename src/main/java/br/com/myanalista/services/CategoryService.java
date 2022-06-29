@@ -33,6 +33,8 @@ public class CategoryService {
 
     @Transactional
     public CategoryResponse save(CategoryRequestPost categoryRequest) {
+        Optional<Categories> categories = repository.findByIdSecundary(categoryRequest.getCategories().getId());
+        categoryRequest.setCategories(categories.get());
         Categories categoryEntity = new Categories();
         mapper.map(categoryRequest, categoryEntity);
         Categories categoryCreated = repository.save(categoryEntity);
@@ -43,6 +45,8 @@ public class CategoryService {
 
     @Transactional
     public CategoryResponse update(CategoryRequestPut categoryRequest) {
+        Optional<Categories> categories = repository.findByIdSecundary(categoryRequest.getCategories().getId());
+        categoryRequest.setCategories(categories.get());
         Categories categoryEntity = new Categories();
         mapper.map(categoryRequest, categoryEntity);
         Categories categoryUpdate = repository.save(categoryEntity);
@@ -66,6 +70,7 @@ public class CategoryService {
         if (category.isEmpty()) {
             throw new BusinessException("It's not possible find category with id: " + id);
         }
+
         CategoryResponse categoryResp = new CategoryResponse();
         mapper.map(category.get(), categoryResp);
         return categoryResp;
@@ -96,17 +101,17 @@ public class CategoryService {
                 Categories categoryGrand = Categories.builder()
                         .name(line.substring(index_2 + 1).trim())
                         .build();
-               Categories grand =  repository.save(categoryGrand);
+                Categories grand = repository.save(categoryGrand);
 
                 Categories categoryFather = Categories.builder()
                         .name(line.substring(index_1 + 1, index_2).trim())
-                        .parent(seekAndSave(grand))
+                        .category(seekAndSave(grand))
                         .build();
-             Categories father =    repository.save(categoryFather);
+                Categories father = repository.save(categoryFather);
 
                 Categories categorySon = Categories.builder()
                         .name(line.substring(0, index_1).trim())
-                        .parent(seekAndSave(father))
+                        .category(seekAndSave(father))
                         .build();
                 repository.save(categorySon);
 

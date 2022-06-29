@@ -23,7 +23,7 @@ public class ProductRequestPost {
     @NotNull(message = "Description of the product is mandatory.")
     private String productDescription;
     private boolean active;
-    private Categories parent;
+    private Categories categories;
 }
 
 
