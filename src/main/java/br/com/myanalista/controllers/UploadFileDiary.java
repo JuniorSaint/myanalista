@@ -4,6 +4,7 @@ import br.com.myanalista.configs.PlaceToSaveFile;
 import br.com.myanalista.exceptions.BusinessException;
 import br.com.myanalista.models.request.UploadFileRequest;
 import br.com.myanalista.services.CustomerService;
+import br.com.myanalista.services.EquipmentService;
 import br.com.myanalista.services.SellOutService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,13 +27,12 @@ public class UploadFileDiary {
 
     @Autowired
     private PlaceToSaveFile saveFile;
-
     @Autowired
     private CustomerService serviceCustomer;
-
     @Autowired
     private SellOutService serviceSellout;
-
+    @Autowired
+    private EquipmentService serviceEquipment;
     @PostMapping
     public ResponseEntity<String> uploadFile(@ModelAttribute UploadFileRequest files) throws IOException, InterruptedException {
 
@@ -54,6 +54,9 @@ public class UploadFileDiary {
 
                 if (fileNameOriginal.toLowerCase().contains("sellout")) {
                     serviceSellout.recordDataToDb(files.getIdDistributor(), pathFileUpload);
+                }
+                if (fileNameOriginal.toLowerCase().contains("equipamentos")) {
+                    serviceEquipment.recordDataToDb(files.getIdDistributor(), pathFileUpload);
                 }
 
             }

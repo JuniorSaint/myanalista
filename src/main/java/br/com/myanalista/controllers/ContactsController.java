@@ -23,42 +23,39 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/v1/contacts")
 @AllArgsConstructor
 public class ContactsController {
-  @Autowired
-  private ContactService service;
+    @Autowired
+    private ContactService service;
 
-  @GetMapping("/{id}")
-  public ContactResponse findAllWithList(@PathVariable(value = "id") Long id) {
-    ContactResponse response = service.findById(id);
-    return response;
-  }
-
-  @PostMapping
-  public ContactResponse save(@RequestBody ContactRequestPost request) {
-    try {
-      ContactResponse response = service.save(request);
-      return response;
-    } catch (BusinessException e) {
-      throw new BusinessException(e.getMessage());
+    @GetMapping("/{id}")
+    public ContactResponse findAllWithList(@PathVariable(value = "id") Long id) {
+        return service.findById(id);
     }
-  }
 
-  @DeleteMapping("/{id}")
-  public String delete(@PathVariable(value = "id") Long id) {
-    try {
-      return service.delete(id);
-    } catch (BusinessException e) {
-      throw new BusinessException(e.getMessage());
+    @PostMapping
+    public ContactResponse save(@RequestBody ContactRequestPost request) {
+        try {
+            return service.save(request);
+        } catch (BusinessException e) {
+            throw new BusinessException(e.getMessage());
+        }
     }
-  }
 
-  @PutMapping("/{id}")
-  public ContactResponse update(@PathVariable(value = "id") Long id,
-      @RequestBody ContactRequestPut request) {
-    try {
-      ContactResponse response = service.update(request);
-      return response;
-    } catch (BusinessException e) {
-     throw new BusinessException(e.getMessage());
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable(value = "id") Long id) {
+        try {
+            return service.delete(id);
+        } catch (BusinessException e) {
+            throw new BusinessException(e.getMessage());
+        }
     }
-  }
+
+    @PutMapping("/{id}")
+    public ContactResponse update(@PathVariable(value = "id") Long id,
+                                  @RequestBody ContactRequestPut request) {
+        try {
+            return service.update(request);
+        } catch (BusinessException e) {
+            throw new BusinessException(e.getMessage());
+        }
+    }
 }

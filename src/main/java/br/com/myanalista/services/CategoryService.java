@@ -33,8 +33,8 @@ public class CategoryService {
 
     @Transactional
     public CategoryResponse save(CategoryRequestPost categoryRequest) {
-        Optional<Categories> categories = repository.findByIdSecundary(categoryRequest.getCategories().getId());
-        categoryRequest.setCategories(categories.get());
+        Optional<Categories> categories = repository.findByIdSecundary(categoryRequest.getCategory().getId());
+        categoryRequest.setCategory(categories.get());
         Categories categoryEntity = new Categories();
         mapper.map(categoryRequest, categoryEntity);
         Categories categoryCreated = repository.save(categoryEntity);
@@ -45,8 +45,8 @@ public class CategoryService {
 
     @Transactional
     public CategoryResponse update(CategoryRequestPut categoryRequest) {
-        Optional<Categories> categories = repository.findByIdSecundary(categoryRequest.getCategories().getId());
-        categoryRequest.setCategories(categories.get());
+        Optional<Categories> categories = repository.findByIdSecundary(categoryRequest.getCategory().getId());
+        categoryRequest.setCategory(categories.get());
         Categories categoryEntity = new Categories();
         mapper.map(categoryRequest, categoryEntity);
         Categories categoryUpdate = repository.save(categoryEntity);
@@ -96,7 +96,6 @@ public class CategoryService {
                 int index_1 = line.indexOf(";");
                 int index_2 = line.indexOf(";", index_1 + 1);
                 int index_3 = line.indexOf(";", index_2 + 1);
-
 
                 Categories categoryGrand = Categories.builder()
                         .name(line.substring(index_2 + 1).trim())

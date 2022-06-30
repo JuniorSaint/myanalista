@@ -20,50 +20,46 @@ import javax.validation.Valid;
 
 public class UsersController {
 
-  @Autowired
-  private UserService service;
+    @Autowired
+    private UserService service;
 
-  @GetMapping("/term/{term}/{page}")
-  public Page<UserResponse> findAllWithList(@PathVariable(value = "page") Integer page,
-      @PathVariable(value = "term") Users users) {
-        Page<UserResponse> response = service.getUserByTerm(users,  page);
-    return response;
-  }
-
-  @GetMapping("/{id}")
-  public UserResponse findById(@PathVariable(value = "id") Long id) {
-    UserResponse response = service.findById(id);
-    return response;
-  }
-
-  @PostMapping
-  public UserResponse save(@RequestBody @Valid UserRequestPost userRequestPost) {
-    try {
-      UserResponse resp = service.save(userRequestPost);
-      return resp;
-    } catch (BusinessException e) {
-      throw new BusinessException(e.getMessage());
+    @GetMapping("/term/{term}/{page}")
+    public Page<UserResponse> findAllWithList(@PathVariable(value = "page") Integer page,
+                                              @PathVariable(value = "term") Users users) {
+        return service.getUserByTerm(users, page);
     }
-  }
 
-  @DeleteMapping("/{id}")
-  public String delete(@PathVariable(value = "id") Long id) {
-    try {
-      return service.delete(id);
-    } catch (BusinessException e) {
-      throw new BusinessException(e.getMessage());
+    @GetMapping("/{id}")
+    public UserResponse findById(@PathVariable(value = "id") Long id) {
+        return service.findById(id);
     }
-  }
 
-  @PutMapping("/{id}")
-  public UserResponse update(@PathVariable(value = "id") Long id,
-                             @RequestBody UserRequestPut request) {
-    try {
-      UserResponse response = service.update(request);
-      return response;
-    } catch (BusinessException e) {
-      throw new BusinessException(e.getMessage());
+    @PostMapping
+    public UserResponse save(@RequestBody @Valid UserRequestPost userRequestPost) {
+        try {
+            return service.save(userRequestPost);
+        } catch (BusinessException e) {
+            throw new BusinessException(e.getMessage());
+        }
     }
-  }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable(value = "id") Long id) {
+        try {
+            return service.delete(id);
+        } catch (BusinessException e) {
+            throw new BusinessException(e.getMessage());
+        }
+    }
+
+    @PutMapping("/{id}")
+    public UserResponse update(@PathVariable(value = "id") Long id,
+                               @RequestBody UserRequestPut request) {
+        try {
+            return service.update(request);
+        } catch (BusinessException e) {
+            throw new BusinessException(e.getMessage());
+        }
+    }
 
 }

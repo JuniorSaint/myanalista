@@ -24,42 +24,39 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class CategoriesController {
 
-  @Autowired
-  private CategoryService service;
+    @Autowired
+    private CategoryService service;
 
-  @GetMapping("/{id}")
-  public CategoryResponse findById(@PathVariable(value = "id") Long id) {
-    CategoryResponse response = service.findById(id);
-    return response;
-  }
-
-  @PostMapping
-  public CategoryResponse save(@RequestBody CategoryRequestPost request) {
-    try {
-      CategoryResponse response = service.save(request);
-      return response;
-    } catch (BusinessException e) {
-      throw new BusinessException(e.getMessage());
+    @GetMapping("/{id}")
+    public CategoryResponse findById(@PathVariable(value = "id") Long id) {
+        return service.findById(id);
     }
-  }
 
-  @DeleteMapping("/{id}")
-  public String delete(@PathVariable(value = "id") Long id) {
-    try {
-      return service.delete(id);
-    } catch (BusinessException e) {
-      throw new BusinessException(e.getMessage());
+    @PostMapping
+    public CategoryResponse save(@RequestBody CategoryRequestPost request) {
+        try {
+            return service.save(request);
+        } catch (BusinessException e) {
+            throw new BusinessException(e.getMessage());
+        }
     }
-  }
 
-  @PutMapping("/{id}")
-  public CategoryResponse update(@PathVariable(value = "id") Long id,
-      @RequestBody CategoryRequestPut request) {
-    try {
-      CategoryResponse response = service.update(request);
-      return response;
-    } catch (BusinessException e) {
-      throw new BusinessException(e.getMessage());
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable(value = "id") Long id) {
+        try {
+            return service.delete(id);
+        } catch (BusinessException e) {
+            throw new BusinessException(e.getMessage());
+        }
     }
-  }
+
+    @PutMapping("/{id}")
+    public CategoryResponse update(@PathVariable(value = "id") Long id,
+                                   @RequestBody CategoryRequestPut request) {
+        try {
+            return service.update(request);
+        } catch (BusinessException e) {
+            throw new BusinessException(e.getMessage());
+        }
+    }
 }

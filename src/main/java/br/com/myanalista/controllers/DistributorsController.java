@@ -18,20 +18,20 @@ import br.com.myanalista.models.response.DistributorResponse;
 import br.com.myanalista.services.DistributorService;
 
 import lombok.AllArgsConstructor;
+
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/distributor")
 @AllArgsConstructor
 
 public class DistributorsController {
-  @Autowired
-  private DistributorService service;
+    @Autowired
+    private DistributorService service;
 
-  @GetMapping("/{id}")
-  public DistributorResponse findAllWithListCustomer(@PathVariable(value = "id") Long id) {
-    DistributorResponse response = service.findById(id);
-    return response;
-  }
+    @GetMapping("/{id}")
+    public DistributorResponse findAllWithListCustomer(@PathVariable(value = "id") Long id) {
+        return service.findById(id);
+    }
 
 //  @GetMapping("/listSearch")
 //  public DistributorResponse findForSearchWithPageable() {
@@ -39,33 +39,31 @@ public class DistributorsController {
 //    return response;
 //  }
 
-  @PostMapping
-  public DistributorResponse saveCustomer(@RequestBody  DistributorRequestPost request) {
-    try {
-      DistributorResponse response = service.save(request);
-      return response;
-    } catch (BusinessException e) {
-      throw new BusinessException(e.getMessage());
+    @PostMapping
+    public DistributorResponse saveCustomer(@RequestBody DistributorRequestPost request) {
+        try {
+            return service.save(request);
+        } catch (BusinessException e) {
+            throw new BusinessException(e.getMessage());
+        }
     }
-  }
 
-  @DeleteMapping("/{id}")
-  public String deleteCustomer(@PathVariable(value = "id") Long id) {
-    try {
-      return service.delete(id);
-    } catch (BusinessException e) {
-      throw new BusinessException(e.getMessage());
+    @DeleteMapping("/{id}")
+    public String deleteCustomer(@PathVariable(value = "id") Long id) {
+        try {
+            return service.delete(id);
+        } catch (BusinessException e) {
+            throw new BusinessException(e.getMessage());
+        }
     }
-  }
 
-  @PutMapping("/{id}")
-  public DistributorResponse updateCustomer(@PathVariable(value = "id") Long id,
-      @RequestBody  DistributorRequestPut request) {
-    try {
-      DistributorResponse response = service.update(request);
-      return response;
-    } catch (BusinessException e) {
-     throw new BusinessException(e.getMessage());
+    @PutMapping("/{id}")
+    public DistributorResponse updateCustomer(@PathVariable(value = "id") Long id,
+                                              @RequestBody DistributorRequestPut request) {
+        try {
+            return service.update(request);
+        } catch (BusinessException e) {
+            throw new BusinessException(e.getMessage());
+        }
     }
-  }
 }

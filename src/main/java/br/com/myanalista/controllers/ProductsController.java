@@ -25,37 +25,33 @@ public class ProductsController {
 
     @GetMapping("/sku/{sku}")
     public ProductResponse findProductBySku(@PathVariable(value = "sku") Integer sku) {
-        ProductResponse product = service.findBySku(sku);
-        return product;
+        return service.findBySku(sku);
     }
 
     @GetMapping("/{id}")
     public Products findProductById(@PathVariable(value = "id") Long id) {
-        Products product = service.findById(id);
-        return product;
+        return service.findById(id);
     }
 
     @PostMapping
-    public ProductResponse save(@RequestBody @Valid ProductRequestPost productRequestPost) {
+    public Products save(@RequestBody @Valid ProductRequestPost productRequestPost) {
         try {
-            ProductResponse responseProduct = service.save(productRequestPost);
-            return responseProduct;
+            return service.save(productRequestPost);
         } catch (BusinessException e) {
             throw new BusinessException(e.getMessage());
         }
     }
 
-    @PutMapping("/id")
-    public ProductResponse update(@PathVariable(value = "id") Long id, @RequestBody @Valid ProductRequestPut productRequestPut) {
+    @PutMapping("/{id}")
+    public Products update(@PathVariable(value = "id") Long id, @RequestBody @Valid ProductRequestPost productRequestPut) {
         try {
-            ProductResponse responseProduct = service.update(productRequestPut);
-            return responseProduct;
+            return service.update(productRequestPut);
         } catch (BusinessException e) {
             throw new BusinessException(e.getMessage());
         }
     }
 
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     public String delete(@PathVariable(value = "id") Long id) {
         try {
             return service.delete(id);
@@ -66,8 +62,7 @@ public class ProductsController {
 
     @GetMapping("/page/{page}")
     public Page<ProductResponse> findAllWithList(@PathVariable(value = "page") Pageable page) {
-        Page<ProductResponse> response = service.findAllWithPage(page);
-        return response;
+        return service.findAllWithPage(page);
     }
 
 }

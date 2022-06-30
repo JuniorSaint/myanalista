@@ -23,43 +23,40 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/v1/teams")
 @AllArgsConstructor
 
-public class TeamsController {  
-  @Autowired
-  private TeamsService service;
+public class TeamsController {
+    @Autowired
+    private TeamsService service;
 
-  @GetMapping("/{id}")
-  public TeamsResponse findAllWithListTeams(@PathVariable(value = "id") String id) {
-    TeamsResponse response = service.findByMemberCode(id);
-    return response;
-  }
-
-  @PostMapping
-  public TeamsResponse saveTeams(@RequestBody  TeamsRequestPost request) {
-    try {
-      TeamsResponse response = service.save(request);
-      return response;
-    } catch (BusinessException e) {
-      throw new BusinessException(e.getMessage());
+    @GetMapping("/{id}")
+    public TeamsResponse findAllWithListTeams(@PathVariable(value = "id") String id) {
+        return service.findByMemberCode(id);
     }
-  }
 
-  @DeleteMapping("/{id}")
-  public String deleteTeams(@PathVariable(value = "id") String id) {
-    try {
-      return service.delete(id);
-    } catch (BusinessException e) {
-      throw new BusinessException(e.getMessage());
+    @PostMapping
+    public TeamsResponse saveTeams(@RequestBody TeamsRequestPost request) {
+        try {
+            return service.save(request);
+        } catch (BusinessException e) {
+            throw new BusinessException(e.getMessage());
+        }
     }
-  }
 
-  @PutMapping("/{id}")
-  public TeamsResponse updateTeams(@PathVariable(value = "id") Long id,
-      @RequestBody TeamsRequestPut request) {
-    try {
-      TeamsResponse response = service.update(request);
-      return response;
-    } catch (BusinessException e) {
-     throw new BusinessException(e.getMessage());
+    @DeleteMapping("/{id}")
+    public String deleteTeams(@PathVariable(value = "id") String id) {
+        try {
+            return service.delete(id);
+        } catch (BusinessException e) {
+            throw new BusinessException(e.getMessage());
+        }
     }
-  }
+
+    @PutMapping("/{id}")
+    public TeamsResponse updateTeams(@PathVariable(value = "id") Long id,
+                                     @RequestBody TeamsRequestPut request) {
+        try {
+            return service.update(request);
+        } catch (BusinessException e) {
+            throw new BusinessException(e.getMessage());
+        }
+    }
 }

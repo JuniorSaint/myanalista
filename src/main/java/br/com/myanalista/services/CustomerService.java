@@ -255,7 +255,7 @@ public class CustomerService {
         if (channel.isEmpty()) {
             return null;
         }
-        Optional<Channel> responseChannel = repositoryChannel.findChannelByChannel(channel);
+        Optional<Channel> responseChannel = repositoryChannel.findChannelByCode(channel);
         if (!responseChannel.isPresent()) {
             return null;
         }

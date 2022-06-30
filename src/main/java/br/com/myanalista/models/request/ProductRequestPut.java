@@ -1,5 +1,7 @@
 package br.com.myanalista.models.request;
 
+import br.com.myanalista.models.entities.Categories;
+
 import javax.validation.constraints.NotNull;
 
 public class ProductRequestPut extends ProductRequestPost {

@@ -130,11 +130,11 @@ public class UniqueChargeController {
       serviceTurnover.recordDataToDb();
    }
 
-   @PostMapping("/equipment")
-   public void chargeEquipment() throws IOException {
-
-      serviceEquipment.recordDataToDb();
-   }
+//   @PostMapping("/equipment")
+//   public void chargeEquipment() throws IOException {
+//
+//      serviceEquipment.recordDataToDb();
+//   }
 
    @PostMapping("/seller")
    public void chargeSeller() throws IOException {

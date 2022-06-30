@@ -25,9 +25,6 @@ public class CalendarService {
       String line = br.readLine(); // this first line will be discarted, because is the header.
       line = br.readLine();
       while (line != null) {
-   
-
-
         int index_1 = line.indexOf(";");
         int index_2 = line.indexOf(";", index_1 + 1);
         int index_3 = line.indexOf(";", index_2 + 1);

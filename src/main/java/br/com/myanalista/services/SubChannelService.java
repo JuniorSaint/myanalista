@@ -65,7 +65,7 @@ public class SubChannelService {
       if(code.isEmpty()){
       return null;
     }
-    Optional<Channel> response = repositoryChannel.findChannelByChannel(code);
+    Optional<Channel> response = repositoryChannel.findChannelByCode(code);
     if(!response.isPresent()){
       return null;
     }

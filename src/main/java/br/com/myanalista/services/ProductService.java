@@ -1,27 +1,25 @@
 package br.com.myanalista.services;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Optional;
-
-import javax.transaction.Transactional;
-
+import br.com.myanalista.exceptions.BusinessException;
 import br.com.myanalista.models.entities.Categories;
+import br.com.myanalista.models.entities.Products;
+import br.com.myanalista.models.entities.Users;
 import br.com.myanalista.models.request.ProductRequestPost;
 import br.com.myanalista.models.request.ProductRequestPut;
+import br.com.myanalista.models.response.ProductResponse;
 import br.com.myanalista.repositories.CategoryRepository;
+import br.com.myanalista.repositories.ProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.myanalista.exceptions.BusinessException;
-import br.com.myanalista.models.entities.Products;
-import br.com.myanalista.models.response.ProductResponse;
-import br.com.myanalista.repositories.ProductRepository;
-import org.springframework.web.bind.annotation.PathVariable;
+import javax.transaction.Transactional;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -35,37 +33,31 @@ public class ProductService {
     private ModelMapper mapper;
 
     @Transactional
-    public ProductResponse save(ProductRequestPost productRequest) {
-        ProductRequestPost rest = productRequest;
+    public Products save(ProductRequestPost productRequest) {
         Optional<Products> product = repository.findByCodeSku(productRequest.getSku());
         if (product.isPresent()) {
             throw new BusinessException("There is product registered with this sku: " + productRequest.getSku());
         }
-
-        Optional<Categories> categories = repositoryCategory.findByIdSecundary(productRequest.getCategories().getId());
+        Optional<Categories> categories = repositoryCategory.findById(productRequest.getCategories().getId());
         productRequest.setCategories(categories.get());
         Products productEntity = new Products();
         mapper.map(productRequest, productEntity);
-        Products productCreated = repository.save(productEntity);
-        ProductResponse productResponse = new ProductResponse();
-        mapper.map(productCreated, productResponse);
-        return productResponse;
+        return repository.save(productEntity);
     }
 
     @Transactional
-    public ProductResponse update(ProductRequestPut productRequestPut) {
-        Products productEntity = new Products();
-        Optional<Categories> categories = repositoryCategory.findByIdSecundary(productRequestPut.getCategories().getId());
-        productRequestPut.setCategories(categories.get());
-        mapper.map(productRequestPut, productEntity);
-        Products productUpdate = repository.save(productEntity);
-        ProductResponse productResponse = new ProductResponse();
-        mapper.map(productUpdate, productResponse);
-        return productResponse;
+    public Products update(ProductRequestPost productRequestPost) {
+        Optional<Products> productsResult = repository.findById(productRequestPost.getId());
+        if (!productsResult.isPresent()) {
+            throw new BusinessException("Product not found with id: " + productRequestPost.getId());
+        }
+        Products products = new Products();
+        mapper.map(productRequestPost, products);
+        return repository.save(products);
     }
 
     @Transactional
-    public String delete( Long id) {
+    public String delete(Long id) {
         Optional<Products> product = repository.findById(id);
         if (!product.isPresent()) {
             throw new BusinessException("Product not found with id: " + id);

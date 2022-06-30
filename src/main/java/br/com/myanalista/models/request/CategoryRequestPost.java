@@ -20,5 +20,5 @@ import javax.validation.constraints.NotNull;
 public class CategoryRequestPost {
     @NotEmpty(message = "Name of the category is mandatory.")
     private String name;
-    private Categories categories;
+    private Categories category;
 }

@@ -18,6 +18,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @SuperBuilder
 public class ProductRequestPost {
+    private Long id;
     @NotNull(message = "Code Sku is mandatory.")
     private Integer sku;
     @NotNull(message = "Description of the product is mandatory.")
