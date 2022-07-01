@@ -28,4 +28,7 @@ public class ClusterGec implements Serializable {
 
   @OneToMany(mappedBy = "clusterGec")
   private List<Customer> customers;
+
+  @OneToMany(mappedBy="cluster")
+  private List<Lending> lendings;
 }

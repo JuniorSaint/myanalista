@@ -155,7 +155,7 @@ public class CustomerService {
                             .phoneNumber4(line.substring(index_48 + 1, index_49).trim())
                             .promoter(line.substring(index_49 + 1, index_50).trim())
                             .promoterEq2(line.substring(index_50 + 1, index_51).trim())
-                            .channel(findChannelByCode(line.substring(index_51 + 1, index_52).trim()))
+                            .channel(findChannel(line.substring(index_51 + 1, index_52).trim()))
                             .specie(line.substring(index_52 + 1))
                             .build();
 
@@ -176,7 +176,6 @@ public class CustomerService {
             //
             return true;
         }
-
         Optional<Customer> response = repository.findCustomerByCodeAndDistributor(code.trim(), distributor);
         if (response.isPresent()) {
             return true;
@@ -251,11 +250,11 @@ public class CustomerService {
         return customer;
     }
 
-    private Channel findChannelByCode(String channel) {
+    private Channel findChannel(String channel) {
         if (channel.isEmpty()) {
             return null;
         }
-        Optional<Channel> responseChannel = repositoryChannel.findChannelByCode(channel);
+        Optional<Channel> responseChannel = repositoryChannel.findChannelBychannel(channel);
         if (!responseChannel.isPresent()) {
             return null;
         }

@@ -5,6 +5,7 @@ import br.com.myanalista.exceptions.BusinessException;
 import br.com.myanalista.models.request.UploadFileRequest;
 import br.com.myanalista.services.CustomerService;
 import br.com.myanalista.services.EquipmentService;
+import br.com.myanalista.services.LendingService;
 import br.com.myanalista.services.SellOutService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,14 +34,13 @@ public class UploadFileDiary {
     private SellOutService serviceSellout;
     @Autowired
     private EquipmentService serviceEquipment;
+    @Autowired
+    private LendingService serviceLending;
     @PostMapping
     public ResponseEntity<String> uploadFile(@ModelAttribute UploadFileRequest files) throws IOException, InterruptedException {
-
         try {
             for (MultipartFile uploadedFile : files.getFile()) {
                 String pathFileUpload = String.valueOf(saveFile.saveFile(uploadedFile));
-
-                TimeUnit.SECONDS.sleep(2); // wait to startover new process
 
                 if (pathFileUpload.equals("Error to upload file")) {
                     return new ResponseEntity<>("{ \"message\": \"Error to upload file!\"}", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -58,12 +58,13 @@ public class UploadFileDiary {
                 if (fileNameOriginal.toLowerCase().contains("equipamentos")) {
                     serviceEquipment.recordDataToDb(files.getIdDistributor(), pathFileUpload);
                 }
-
+                if (fileNameOriginal.toLowerCase().contains("comodatos")) {
+                    serviceLending.recordDataToDb(files.getIdDistributor(), pathFileUpload);
+                }
             }
             return new ResponseEntity<>("{ \"message\": \"Upload of file with success! \" }", HttpStatus.OK);
         } catch (BusinessException e) {
             return new ResponseEntity<>("{ \"message\": \"Error to upload file!\"}", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 }

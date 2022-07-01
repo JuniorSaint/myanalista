@@ -1,0 +1,693 @@
+    
+    IRMAOS CANCELLI LTDA                                       00/00/00  19 41     1
+    
+                                                Listagem dos Equipamentos
+    PATRIMONIO        COD. DESCRICAO                       POT.  DAT. FAB. SERIE           PROP. SITUACAO  PORTAS OBSERVACAO
+    3015              3015 CHOPEIRA 2 BICOS                  10  00/00/00                  SIM   EMPRESTADO     0
+    3016              3016 CILINDROS PAT POST MIX            10  00/00/00                  SIM   EMPRESTADO     0
+    3017              3017 RELOGIO REGULADOR GAS CHOPP       10  00/00/00                  SIM   EMPRESTADO     0
+    533                533 BARRIL CHOPP 30 LITROS                00/00/00                  SIM   DISPONIVEL     0
+    CHB42C            3013 GELADEIRA                         10  00/00/00  FREZZER BRANCO  SIM   DISPONIVEL     0
+    GEBL000708        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GECH000071        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GECH000245        3013 GELADEIRA                             00/00/00  INTERIOR        FAB   DISPONIVEL
+    GECH000425        3013 GELADEIRA                             00/00/00  INTERIOR        FAB   DISPONIVEL
+    GECH000483        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GECH000810        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GECH000820        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GECH000831        3013 GELADEIRA                             00/00/00  INTERIOR        FAB   DISPONIVEL
+    GECH000848        3013 GELADEIRA                             00/00/00  SUCATA          FAB   DISPONIVEL
+    GECH001024        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GECH001067        3013 GELADEIRA                             00/00/00  SUCATA          FAB   DISPONIVEL
+    GECH001189        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GECH001323        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GECH001329        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GECH001352        3036 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GECH001479        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GECH001663        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GECH001801        3013 GELADEIRA                             00/00/00  INTERIOR        FAB   DISPONIVEL
+    GECH001869        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GECH001896        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GECH001899        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GECH001901        3013 GELADEIRA                          5    /  /                    FAB   DISPONIVEL
+    GECH001911        3013 GELADEIRA                          5  09/03/19                  FAB   EMPRESTADO     0
+    GECH001946        3013 GELADEIRA                             00/00/00  INTERIOR        FAB   DISPONIVEL
+    GECH001947        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GECH001988        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GECH002021        3013 GELADEIRA                             10/05/21                  FAB   DISPONIVEL     0
+    GECH002069        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GECH002186        3013 GELADEIRA                             00/00/00  INTERIOR        FAB   DISPONIVEL
+    GECH002229        3036 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GECH002415        3013 GELADEIRA                             00/00/00  INTERIOR        FAB   DISPONIVEL
+    GECH002425        3013 GELADEIRA                             10/05/21                  FAB   DISPONIVEL     0
+    GECH002426        3013 GELADEIRA                             00/00/00  EVENTOS         FAB   DISPONIVEL
+    GECH002492        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GECH002493        3013 GELADEIRA                         10  00/00/00                  FAB   DISPONIVEL
+    GECH002503        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GECH002508        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GECH002585        3013 GELADEIRA                             10/05/21                  FAB   DISPONIVEL     0
+    GECH002587        3013 GELADEIRA                             00/00/00  INTERIOR        FAB   DISPONIVEL
+    GECH002589        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL     0
+    GECH002595        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GECH002641        3013 GELADEIRA                             00/00/00  LAGES           FAB   DISPONIVEL
+    GECH002707        3013 GELADEIRA                             10/05/21                  FAB   DISPONIVEL     0
+    GECH002708        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GECH002709        3013 GELADEIRA                         10  00/00/00  INTERIOR        FAB   EMPRESTADO
+    GECH002710        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEFP002482        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEPA001746        3036 GELADEIRA                             00/00/00  DEFEITO         FAB   DISPONIVEL
+    GEPA015857        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEPA016424        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEPA016801        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    
+    
+    
+    IRMAOS CANCELLI LTDA                                       00/00/00  19 41     2
+    
+                                                Listagem dos Equipamentos
+    PATRIMONIO        COD. DESCRICAO                       POT.  DAT. FAB. SERIE           PROP. SITUACAO  PORTAS OBSERVACAO
+    GEPA021437        3036 GELADEIRA                         10  00/00/00                  FAB   DISPONIVEL     0
+    GESP011174        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP014370        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GESP025215        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GESP029515        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP049175        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP266704        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GESP266717        3013 GELADEIRA                             10/05/21                  FAB   DISPONIVEL     0
+    GESP269357        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GESP269467        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP273694        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP274826        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP274840        3013 GELADEIRA                         10  09/03/19                  FAB   EMPRESTADO     0
+    GESP277545        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP277727        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP277728        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP291375        3013 GELADEIRA                         10  27/05/21                  FAB   EMPRESTADO     0
+    GESP301282        3013 GELADEIRA                         10  27/05/21                  FAB   EMPRESTADO     0
+    GESP301990        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP301992        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP301994        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GESP301995        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP301996        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP302001        3013 GELADEIRA                             10/05/21                  FAB   DISPONIVEL     0
+    GESP302002        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP302003        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP302007        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP302015        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP302022        3013 GELADEIRA                         10  00/00/00                  FAB   DISPONIVEL     0
+    GESP302024        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GESP302030        3013 GELADEIRA                             10/05/21                  FAB   EMPRESTADO     0
+    GESP302105        3013 GELADEIRA                         10  00/00/00                  FAB   EMPRESTADO
+    GESP302857        3013 GELADEIRA                         10  00/00/00                  FAB   EMPRESTADO
+    GESP304653        3013 GELADEIRA                         10  27/05/21                  FAB   EMPRESTADO     0
+    GESP315148        3013 GELADEIRA                         10  27/05/21                  FAB   EMPRESTADO     0
+    GESP315215        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP315228        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP315231        3013 GELADEIRA                             12/05/21                  FAB   EMPRESTADO     0
+    GESP315233        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP315234        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP324730        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP324735        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP324736        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP324742        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP324748        3013 GELADEIRA                         10  28/05/21                  FAB   EMPRESTADO     0
+    GESP325928        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP325929        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP325930        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP325933        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP325934        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP325935        3013 GELADEIRA                         10  09/03/19                  FAB   EMPRESTADO     0
+    GESP325969        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP325970        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP325972        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP327269        3013 GELADEIRA                             00/00/00                  FAB   EMPRESTADO     0
+    GESP327288        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    
+    
+    
+    IRMAOS CANCELLI LTDA                                       00/00/00  19 41     3
+    
+                                                Listagem dos Equipamentos
+    PATRIMONIO        COD. DESCRICAO                       POT.  DAT. FAB. SERIE           PROP. SITUACAO  PORTAS OBSERVACAO
+    GESP327297        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GESP327298        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP327300        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP327315        3013 GELADEIRA                             12/05/21                  FAB   EMPRESTADO     0
+    GESP327316        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP335355        3013 GELADEIRA                             00/00/00  NOVA            FAB   DISPONIVEL
+    GESP335375        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GESP335386        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GESP335388        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP335391        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP335398        3013 GELADEIRA                             09/03/19  NOVA            FAB   EMPRESTADO     0
+    GESP335402        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP337933        3013 GELADEIRA                         10  27/05/21                  FAB   DISPONIVEL     0
+    GESP338104        3013 GELADEIRA                             27/05/21                  FAB   DISPONIVEL     0
+    GESP338139        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP338143        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP338144        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP338145        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP338146        3013 GELADEIRA                         10  10/05/21                  FAB   DISPONIVEL     0
+    GESP338147        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP338148        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP338150        3013 GELADEIRA                             00/00/00  NOVA            FAB   DISPONIVEL
+    GESP338151        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP338152        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GESP338154        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP338155        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP338156        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP338157        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP338161        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP338162        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP339590        3013 GELADEIRA                         10  27/05/21                  FAB   EMPRESTADO     0
+    GESP341037        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GESP341079        3013 GELADEIRA                         10  09/03/19                  FAB   DISPONIVEL     0
+    GESP341083        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP341085        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP341087        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP341088        3013 GELADEIRA                         10    /  /    1               FAB   EMPRESTADO
+    GESP341096        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP341100        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP341107        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP341121        3013 GELADEIRA                         10  00/00/00  NOVA            FAB   EMPRESTADO
+    GESP341122        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GESP341124        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP341126        3013 GELADEIRA                             12/05/21                  FAB   EMPRESTADO     0
+    GESP341699        3013 GELADEIRA                             00/00/00                  FAB   EMPRESTADO     0
+    GESP341723        3013 GELADEIRA                         10  27/05/21                  FAB   EMPRESTADO     0
+    GESP342263        3013 GELADEIRA                             12/05/21                  FAB   EMPRESTADO     0
+    GESP344975        3013 GELADEIRA                         10  09/03/19                  FAB   DISPONIVEL     0
+    GESP344990        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP344992        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP344993        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP344996        3013 GELADEIRA                         10  09/03/19                  FAB   DISPONIVEL     0
+    GESP346259        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP346269        3013 GELADEIRA                         12    /  /                    FAB   EMPRESTADO
+    GESP346270        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP346271        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    
+    
+    
+    IRMAOS CANCELLI LTDA                                       00/00/00  19 41     4
+    
+                                                Listagem dos Equipamentos
+    PATRIMONIO        COD. DESCRICAO                       POT.  DAT. FAB. SERIE           PROP. SITUACAO  PORTAS OBSERVACAO
+    GESP346272        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GESP346273        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP346274        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP346278        3013 GELADEIRA                             00/00/00  NOVA            FAB   DISPONIVEL
+    GESP346281        3013 GELADEIRA                          5    /  /                    FAB   DISPONIVEL
+    GESP346282        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP346283        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP346284        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP346285        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP346286        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP346287        3013 GELADEIRA                             12/05/21                  FAB   EMPRESTADO     0
+    GESP346288        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP346289        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP346290        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP346291        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP346292        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP346293        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP346294        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP346295        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP346296        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP346297        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP347204        3013 GELADEIRA                         10  27/05/21                  FAB   DISPONIVEL     0
+    GESP347996        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP352931        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP352932        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP352951        3013 GELADEIRA                          5    /  /                    FAB   DISPONIVEL
+    GESP352953        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP352955        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP352956        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP352958        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP352959        3013 GELADEIRA                          5    /  /                    FAB   EMPRESTADO
+    GESP352960        3013 GELADEIRA                         10  00/00/00                  FAB   DISPONIVEL
+    GESP352961        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP352962        3013 GELADEIRA                             00/00/00                  FAB   EMPRESTADO
+    GESP352963        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP352964        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP352965        3013 GELADEIRA                         10  00/00/00                  FAB   EMPRESTADO     0
+    GESP352966        3013 GELADEIRA                         10  09/03/19                  FAB   EMPRESTADO     0
+    GESP352967        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP352974        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP352978        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP352979        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP366209        3013 GELADEIRA                             00/00/00                  FAB   EMPRESTADO     0
+    GESP371744        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP371745        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371746        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371747        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371748        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371749        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371750        3013 GELADEIRA                         10  00/00/00                  FAB   EMPRESTADO
+    GESP371751        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371752        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371753        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371754        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP371755        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371756        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    
+    
+    
+    IRMAOS CANCELLI LTDA                                       00/00/00  19 41     5
+    
+                                                Listagem dos Equipamentos
+    PATRIMONIO        COD. DESCRICAO                       POT.  DAT. FAB. SERIE           PROP. SITUACAO  PORTAS OBSERVACAO
+    GESP371757        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371758        3013 GELADEIRA                         10    /  /    01              FAB   EMPRESTADO
+    GESP371759        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP371760        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP371761        3013 GELADEIRA                             12/05/21                  FAB   DISPONIVEL     0
+    GESP371762        3013 GELADEIRA                         10  09/03/19                  FAB   EMPRESTADO     0
+    GESP371763        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP371764        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP371765        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371766        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP371767        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371768        3013 GELADEIRA                             12/05/21                  FAB   EMPRESTADO     0
+    GESP371769        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371770        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371771        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP371772        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP371773        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP371774        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371776        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371777        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371778        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371779        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GESP371780        3013 GELADEIRA                         10  00/00/00                  FAB   DISPONIVEL
+    GESP371781        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP371782        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371783        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371785        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP371786        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371788        3013 GELADEIRA                         10  09/03/19                  FAB   EMPRESTADO     0
+    GESP371790        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371791        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371792        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371793        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP371794        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP371795        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP371796        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP371797        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP376115        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP381991        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GESP381993        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP381994        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP381998        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP381999        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP382002        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP382005        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP382006        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP382009        3013 GELADEIRA                             12/05/21                  FAB   EMPRESTADO     0
+    GESP382010        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP382335        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP382370        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP382371        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP382376        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP382377        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP382378        3013 GELADEIRA                          5    /  /                    FAB   EMPRESTADO
+    GESP382379        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP382380        3013 GELADEIRA                          5    /  /                    FAB   EMPRESTADO
+    
+    
+    
+    IRMAOS CANCELLI LTDA                                       00/00/00  19 41     6
+    
+                                                Listagem dos Equipamentos
+    PATRIMONIO        COD. DESCRICAO                       POT.  DAT. FAB. SERIE           PROP. SITUACAO  PORTAS OBSERVACAO
+    GESP382382        3013 GELADEIRA                          5    /  /                    FAB   EMPRESTADO
+    GESP382385        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP385293        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP385498        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP391324        3013 GELADEIRA                             12/05/21                  FAB   EMPRESTADO     0
+    GESP393583        3013 GELADEIRA                         10  27/05/21                  FAB   EMPRESTADO     0
+    GESP397527        3013 GELADEIRA                         10  27/05/21                  FAB   DISPONIVEL     0
+    GESP400785        3013 GELADEIRA                         10  12/05/21                  FAB   EMPRESTADO     0
+    GESP400790        3013 GELADEIRA                             12/05/21                  FAB   DISPONIVEL     0
+    GESP400795        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP400798        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP400799        3013 GELADEIRA                             00/00/00                  FAB   EMPRESTADO     0
+    GESP400801        3013 GELADEIRA                         10  12/05/21                  FAB   EMPRESTADO     0
+    GESP400804        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP400806        3013 GELADEIRA                          5    /  /                    FAB   EMPRESTADO
+    GESP400807        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP400810        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP400816        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP400817        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP400819        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP400820        3013 GELADEIRA                             12/05/21                  FAB   EMPRESTADO     0
+    GESP400824        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP400825        3013 GELADEIRA                         10    /  /    1               FAB   DISPONIVEL
+    GESP400826        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP400831        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP400834        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP400835        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP409357        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP409398        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP409406        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP409407        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP409408        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GESP409409        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP427517        3013 GELADEIRA                         10  09/03/19                  FAB   EMPRESTADO     0
+    GESP429220        3013 GELADEIRA                             27/05/21                  FAB   DISPONIVEL     0
+    GESP432420        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP432424        3013 GELADEIRA                             12/05/21                  FAB   EMPRESTADO     0
+    GESP432430        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP432434        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP435313        3008 GELADEIRA MINI MONSTER            10    /  /                    FAB   EMPRESTADO
+    GESP435323        3014 GELADEIRA DE MONSTER               5    /  /                    FAB   EMPRESTADO
+    GESP437466        3008 GELADEIRA MINI MONSTER                00/00/00                  FAB   DISPONIVEL
+    GESP437628        3008 GELADEIRA MINI MONSTER            10    /  /                    FAB   EMPRESTADO
+    GESP438629        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GESP438630        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP438648        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP438693        3013 GELADEIRA                         10  09/03/19                  FAB   DISPONIVEL     0
+    GESP438703        3013 GELADEIRA                             12/05/21                  FAB   EMPRESTADO     0
+    GESP438707        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP438711        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP438719        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP438722        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP438892        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP441772        3013 GELADEIRA                         10  00/00/00                  FAB   DISPONIVEL     0
+    GESP441779        3013 GELADEIRA                         10  00/00/00                  FAB   DISPONIVEL     0
+    GESP441797        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    
+    
+    
+    IRMAOS CANCELLI LTDA                                       00/00/00  19 41     7
+    
+                                                Listagem dos Equipamentos
+    PATRIMONIO        COD. DESCRICAO                       POT.  DAT. FAB. SERIE           PROP. SITUACAO  PORTAS OBSERVACAO
+    GESP441799        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP441800        3013 GELADEIRA                         10  00/00/00                  FAB   DISPONIVEL
+    GESP441810        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP441816        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP441858        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP441882        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP441886        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP441890        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP441892        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP441895        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP441901        3013 GELADEIRA                         10  09/03/19                  FAB   EMPRESTADO     0
+    GESP441917        3013 GELADEIRA                             12/05/21                  FAB   EMPRESTADO     0
+    GESP441921        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GESP441933        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP448459        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP449503        3011 GELADEIRA DE MONSTER                    /  /                    FAB   EMPRESTADO
+    GESP449515        3011 GELADEIRA DE MONSTER                    /  /                    FAB   DISPONIVEL
+    GESP453522        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP453525        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP453538        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP453541        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP453548        3013 GELADEIRA                             12/05/21                  FAB   EMPRESTADO     0
+    GESP453550        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP453553        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP453554        3013 GELADEIRA                         12    /  /                    FAB   EMPRESTADO
+    GESP453735        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP456116        3013 GELADEIRA                             00/00/00                  FAB   EMPRESTADO     0
+    GESP456135        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP456143        3013 GELADEIRA                             12/05/21                  FAB   EMPRESTADO     0
+    GESP456146        3013 GELADEIRA                         10  09/03/19                  FAB   EMPRESTADO     0
+    GESP456147        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GESP456196        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP456206        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP456221        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP456222        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP456518        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GESP456521        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GESP456529        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GESP470251        3013 GELADEIRA                             00/00/00                  FAB   EMPRESTADO     0
+    GESP470260        3013 GELADEIRA                             27/05/21                  FAB   DISPONIVEL     0
+    GESP475857        3013 GELADEIRA                             27/05/21                  FAB   EMPRESTADO     0
+    GESP494732        3013 GELADEIRA                         10  27/05/21                  FAB   DISPONIVEL     0
+    GESP498801        3013 GELADEIRA                             00/00/00                  FAB   EMPRESTADO     0
+    GESP507476        3013 GELADEIRA                             00/00/00                  FAB   EMPRESTADO     0
+    GEVP000356        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP000842        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP001374        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP001490        3012 GELADEIRA DE SUCO                     00/00/00  SEM NUMERO      FAB   DISPONIVEL
+    GEVP002269        3013 GELADEIRA                             00/00/00  INTERIOR        FAB   DISPONIVEL
+    GEVP002289        3013 GELADEIRA                          5    /  /                    FAB   DISPONIVEL
+    GEVP002294        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP002306        3013 GELADEIRA                             00/00/00  INTERIOR        FAB   DISPONIVEL
+    GEVP002319        3013 GELADEIRA                         10  10/05/21                  FAB   EMPRESTADO     0
+    GEVP002321        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP002326        3013 GELADEIRA                             00/00/00  INTERIOR        FAB   DISPONIVEL
+    GEVP002330        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    
+    
+    
+    IRMAOS CANCELLI LTDA                                       00/00/00  19 41     8
+    
+                                                Listagem dos Equipamentos
+    PATRIMONIO        COD. DESCRICAO                       POT.  DAT. FAB. SERIE           PROP. SITUACAO  PORTAS OBSERVACAO
+    GEVP002602        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP002603        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP004683        3013 GELADEIRA                             00/00/00  INTERIOR        FAB   DISPONIVEL
+    GEVP004689        3013 GELADEIRA                             00/00/00  INTERIOR        FAB   DISPONIVEL
+    GEVP004690        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP004691        3013 GELADEIRA                             12/05/21                  FAB   EMPRESTADO     0
+    GEVP004693        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP006170        3036 GELADEIRA                         10  09/03/19                  FAB   DISPONIVEL     0
+    GEVP006204        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP006225        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP006226        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP006241        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP006276        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP006286        3036 GELADEIRA                          5  24/05/21                  FAB   EMPRESTADO     0
+    GEVP006292        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP006293        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP006322        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP006325        3036 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP006338        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEVP006350        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP006355        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP006361        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP006375        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP006381        3036 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP006402        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP006414        3036 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP006419        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP006451        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP006509        3036 GELADEIRA                         10  09/03/19                  FAB   EMPRESTADO     0
+    GEVP006516        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP006521        3036 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP007033        3036 GELADEIRA                             09/03/19                  FAB   DISPONIVEL     0
+    GEVP007044        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP007173        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP007194        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEVP007238        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP007263        3013 GELADEIRA                             10/05/21                  FAB   DISPONIVEL     0
+    GEVP008136        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEVP008141        3013 GELADEIRA                             24/05/21                  FAB   DISPONIVEL     0
+    GEVP008154        3013 GELADEIRA                             00/00/00  INTERIOR        FAB   DISPONIVEL
+    GEVP008261        3013 GELADEIRA                             10/05/21                  FAB   EMPRESTADO     0
+    GEVP008879        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP009386        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEVP009522        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP009549        3013 GELADEIRA                         10  00/00/00                  FAB   EMPRESTADO
+    GEVP009582        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP009590        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP009601        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP009634        3013 GELADEIRA                             00/00/00  SUKATA REDE ECO FAB   DISPONIVEL
+    GEVP009637        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP009642        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEVP009763        3036 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GEVP009766        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEVP009779        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEVP009780        3036 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP009783        3036 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    
+    
+    
+    IRMAOS CANCELLI LTDA                                       00/00/00  19 41     9
+    
+                                                Listagem dos Equipamentos
+    PATRIMONIO        COD. DESCRICAO                       POT.  DAT. FAB. SERIE           PROP. SITUACAO  PORTAS OBSERVACAO
+    GEVP009784        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP009791        3036 GELADEIRA                          5    /  /                    FAB   EMPRESTADO
+    GEVP009795        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEVP009806        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP009807        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP011174        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEVP011346        3013 GELADEIRA                             24/05/21                  FAB   DISPONIVEL     0
+    GEVP011347        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP011959        3013 GELADEIRA                             09/03/19                  FAB   BAIXADO        0
+    GEVP013938        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP013950        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEVP015597        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP015910        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP015921        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEVP015948        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEVP015983        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GEVP017469        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP020544        3013 GELADEIRA                             09/03/19                  FAB   BAIXADO        0
+    GEVP020556        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP023038        3013 GELADEIRA                             00/00/00  LAGES           FAB   DISPONIVEL
+    GEVP025225        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP025273        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP025876        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP025915        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP025916        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP025946        3013 GELADEIRA                          5    /  /                    FAB   DISPONIVEL
+    GEVP025962        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP025983        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP026049        3013 GELADEIRA                         10  27/05/21                  FAB   EMPRESTADO     0
+    GEVP026165        3013 GELADEIRA                         10  27/05/21                  FAB   EMPRESTADO     0
+    GEVP026218        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP026299        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP026308        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP026536        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GEVP028115        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP028829        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP028992        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP029515        3036 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEVP030510        3013 GELADEIRA                         10  27/05/21                  FAB   EMPRESTADO     0
+    GEVP032042        3013 GELADEIRA                          5    /  /                    FAB   DISPONIVEL
+    GEVP032048        3013 GELADEIRA                         10  00/00/00                  FAB   EMPRESTADO
+    GEVP032951        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEVP036963        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP0369921       3013 GELADEIRA                             00/00/00  MANJERICAO      FAB   DISPONIVEL
+    GEVP037016        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP037675        3013 GELADEIRA                             00/00/00  NOVA            FAB   DISPONIVEL
+    GEVP038288        3013 GELADEIRA                             09/03/19                  FAB   BAIXADO        0
+    GEVP039642        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GEVP040623        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GEVP040866        3013 GELADEIRA                         10  00/00/00  SUCATA          FAB   EMPRESTADO
+    GEVP040890        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP040977        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP041579        3013 GELADEIRA                          5  27/05/21                  FAB   DISPONIVEL     0
+    GEVP041605        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP041699        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP041951        3013 GELADEIRA                             12/05/21                  FAB   EMPRESTADO     0
+    
+    
+    
+    IRMAOS CANCELLI LTDA                                       00/00/00  19 41    10
+    
+                                                Listagem dos Equipamentos
+    PATRIMONIO        COD. DESCRICAO                       POT.  DAT. FAB. SERIE           PROP. SITUACAO  PORTAS OBSERVACAO
+    GEVP042479        3013 GELADEIRA                             10/05/21                  FAB   EMPRESTADO     0
+    GEVP044756        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEVP045004        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP045569        3036 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP045570        3036 GELADEIRA                         10  00/00/00                  FAB   DISPONIVEL     0
+    GEVP045571        3036 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEVP045572        3036 GELADEIRA                         10  09/03/19                  FAB   EMPRESTADO     0
+    GEVP045573        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP045607        3036 GELADEIRA                         10  00/00/00                  FAB   DISPONIVEL     0
+    GEVP045616        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEVP045617        3013 GELADEIRA                         10  00/00/00                  FAB   EMPRESTADO
+    GEVP045618        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP045706        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP046145        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GEVP046326        3013 GELADEIRA                         10  27/05/21                  FAB   EMPRESTADO     0
+    GEVP049175        3036 GELADEIRA                         10  09/03/19                  FAB   EMPRESTADO     0
+    GEVP049176        3036 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP049177        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEVP049189        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEVP049190        3036 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP049191        3036 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP049744        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP050153        3013 GELADEIRA                         10  27/05/21                  FAB   EMPRESTADO     0
+    GEVP050184        3013 GELADEIRA                         10  27/05/21                  FAB   EMPRESTADO     0
+    GEVP050226        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP050227        3013 GELADEIRA                             10/05/21                  FAB   DISPONIVEL     0
+    GEVP050229        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP050230        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP050233        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP050237        3013 GELADEIRA                             10/05/21                  FAB   EMPRESTADO     0
+    GEVP050238        3013 GELADEIRA                             10/05/21                  FAB   DISPONIVEL     0
+    GEVP050241        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP050255        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP050719        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEVP052225        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP052934        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP053017        3013 GELADEIRA                         10  27/05/21                  FAB   EMPRESTADO     0
+    GEVP053082        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GEVP054136        3013 GELADEIRA                         10  27/05/21                  FAB   DISPONIVEL     0
+    GEVP054147        3013 GELADEIRA                         10  09/03/19  INTER SCHOPPING FAB   EMPRESTADO     0
+    GEVP054153        3013 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP054156        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP054217        3013 GELADEIRA                         10  00/00/00                  FAB   EMPRESTADO     0
+    GEVP054277        3013 GELADEIRA                             12/05/21                  FAB   DISPONIVEL     0
+    GEVP054286        3036 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GEVP054477        3013 GELADEIRA                             27/05/21                  FAB   EMPRESTADO     0
+    GEVP054485        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP058161        3036 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP058201        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP058202        3036 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP058205        3036 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP058206        3036 GELADEIRA                             24/05/21                  FAB   DISPONIVEL     0
+    GEVP058214        3036 GELADEIRA                         10  00/00/00                  FAB   EMPRESTADO     0
+    GEVP058220        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEVP058221        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP058223        3036 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    
+    
+    
+    IRMAOS CANCELLI LTDA                                       00/00/00  19 41    11
+    
+                                                Listagem dos Equipamentos
+    PATRIMONIO        COD. DESCRICAO                       POT.  DAT. FAB. SERIE           PROP. SITUACAO  PORTAS OBSERVACAO
+    GEVP058224        3036 GELADEIRA                          5    /  /                    FAB   EMPRESTADO
+    GEVP058254        3013 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP058258        3036 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP058260        3036 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP058262        3036 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEVP059103        3010 GELADEIRA DE SUCO PEQUENA         10    /  /                    FAB   DISPONIVEL
+    GEVP059478        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEVP059482        3013 GELADEIRA                         10  00/00/00                  FAB   DISPONIVEL
+    GEVP059486        3013 GELADEIRA                             10/05/21                  FAB   EMPRESTADO     0
+    GEVP059514        3013 GELADEIRA                             12/05/21                  FAB   EMPRESTADO     0
+    GEVP059515        3013 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GEVP059516        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP059517        3036 GELADEIRA                             00/00/00                  FAB   EMPRESTADO     0
+    GEVP059518        3036 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP061923        3013 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GEVP062425        3013 GELADEIRA                         10  00/00/00                  FAB   EMPRESTADO
+    GEVP064155        3013 GELADEIRA                             12/05/21                  FAB   DISPONIVEL     0
+    GEVP064671        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP064672        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP064673        3036 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP064674        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP064675        3036 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GEVP064679        3036 GELADEIRA                         10  09/03/19                  FAB   DISPONIVEL     0
+    GEVP064680        3036 GELADEIRA                         10  09/03/19                  FAB   DISPONIVEL     0
+    GEVP064681        3036 GELADEIRA                             00/00/00  DEFEITO         FAB   DISPONIVEL
+    GEVP064682        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GEVP324748        3013 GELADEIRA                             24/05/21                  FAB   DISPONIVEL     0
+    GEVP58206         3036 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GEVP58220         3036 GELADEIRA                               /  /                    FAB   EMPRESTADO
+    GEVP9784          3036 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GKPA001501        3013 GELADEIRA                             00/00/00  INTERIOR        FAB   DISPONIVEL
+    GKPA001523        3013 GELADEIRA                               /  /                    FAB   DISPONIVEL
+    GKPA001525        3036 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GKPA001531        3036 GELADEIRA                         10  12/05/21                  FAB   DISPONIVEL     0
+    GKPA001535        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GKPA001700        3036 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GKPA001741        3036 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GKPA001745        3036 GELADEIRA                         10  00/00/00                  FAB   EMPRESTADO
+    GKPA001795        3036 GELADEIRA                             00/00/00                  FAB   DISPONIVEL
+    GKPA001832        3036 GELADEIRA                         10  09/03/19                  FAB   EMPRESTADO     0
+    GKPA002749        3036 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GKPA003040        3036 GELADEIRA                         10    /  /                    FAB   DISPONIVEL
+    GKPA003050        3013 GELADEIRA                             12/05/21                  FAB   DISPONIVEL     0
+    GKPA003128        3036 GELADEIRA                             09/03/19                  FAB   QUEBRADO       0
+    GKPA003673        3013 GELADEIRA                             00/00/00  INTERIOR        FAB   DISPONIVEL
+    GKPA003682        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GKPA003684        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GKPA003686        3013 GELADEIRA                             00/00/00  INTERIOR        FAB   DISPONIVEL
+    GKPA003695        3036 GELADEIRA                         10    /  /                    FAB   EMPRESTADO
+    GKPA003697        3036 GELADEIRA                             00/00/00                  FAB   DISPONIVEL     0
+    PMPA001404        3019 POSTMIX                                 /  /                    FAB   EMPRESTADO
+    PMPA001654        3019 POSTMIX                                 /  /                    FAB   EMPRESTADO
+ 
+ 
+ 
+ 
+ 
+ 

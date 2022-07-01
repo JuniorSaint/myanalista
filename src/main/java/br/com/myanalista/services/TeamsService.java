@@ -51,7 +51,7 @@ public class TeamsService {
         teamsRequest.setMemberCode(newCodeMember);
 
         Optional<Distributor> distributor = repositoryDistributor
-                .findDistributorById(teamsRequest.getDistributor().getId());
+                .findById(teamsRequest.getDistributor().getId());
         if (!distributor.isPresent()) {
             throw new BusinessException("There's not distributor with id: " + teamsRequest.getDistributor().getCnpjCpf());
         }
@@ -83,7 +83,7 @@ public class TeamsService {
         teamsRequest.setMemberCode(newCodeMember);
 
         Optional<Distributor> distributor = repositoryDistributor
-                .findDistributorById(teamsRequest.getDistributor().getId());
+                .findById(teamsRequest.getDistributor().getId());
         if (!distributor.isPresent()) {
             throw new BusinessException("There's not Customer with id: " + teamsRequest.getDistributor().getCnpjCpf());
         }

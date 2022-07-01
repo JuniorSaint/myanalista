@@ -2,6 +2,7 @@ package br.com.myanalista.models.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,7 +38,9 @@ public class Lending implements Serializable {
   @ManyToOne
   @JoinColumn(name = "customerRegistration_id")
   private Customer customerRegistration;
-  private String gec;
+  @ManyToOne
+  @JoinColumn(name="cluster_id")
+  private ClusterGec cluster;
   @ManyToOne
   @JoinColumn(name="subChannel_id")
   private SubChannel subChannel;
@@ -45,14 +48,14 @@ public class Lending implements Serializable {
   @OneToOne
   @JoinColumn(name = "equipmentNumber_id")
   private Equipment equipmentNumber;
-  private String contract;
+  private Integer contract;
   private Integer amount;
-  private LocalDate dateSend;
-  private LocalDate dueDate;
+  private Date dateSend;
+  private Date dueDate;
   @ManyToOne
   @JoinColumn(name = "sellerCode_id")
   private Teams sellerCode;
-  private String route;
-  private String nfe;
+  private Integer route;
+  private Integer nfe;
   private String conservation;
 }
