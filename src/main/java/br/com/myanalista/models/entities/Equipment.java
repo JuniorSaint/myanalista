@@ -1,6 +1,7 @@
 package br.com.myanalista.models.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -38,6 +39,6 @@ public class Equipment implements Serializable {
   @JoinColumn(name="distributor_id")
   private Distributor distributor;
 
-  @OneToOne(mappedBy = "equipmentNumber")
-  private Lending lending;
+  @OneToMany(mappedBy="equipmentNumber")
+  private List<Lending> lendings;
 }

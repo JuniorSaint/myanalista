@@ -36,18 +36,28 @@ public class LendingService {
     @Autowired
     private ClusterGecRepository repositoryCluster;
 
+    public Lending findById(Long id) {
+        Optional<Lending> response = repository.findById(id);
+        return response.get();
+    }
+
+    public List<Lending> findAll() {
+        List<Lending> response = repository.findAll();
+        return response;
+    }
+
     public void recordDataToDb(Long id, String path) throws IOException {
         try {
             @Cleanup FileInputStream file = new FileInputStream(new File(path));  // @cleanup is to void close the file in the end
             Workbook workbook = new XSSFWorkbook(file);
             Sheet sheet = workbook.getSheetAt(0);  // Set wich sheet the file is reading
-
+            sheet.removeRow(sheet.getRow(0)); // remove rows of header.
+            sheet.removeRow(sheet.getRow(1));
+            sheet.removeRow(sheet.getRow(2));
             List<Row> rows = (List<Row>) toList(sheet.iterator());  // Iterate the rows
 
-            rows.remove(0); // remove the line to read
 
             rows.forEach(row -> {
-
                 List<Cell> cells = (List<Cell>) toList(row.cellIterator());  // Iterate the cells
 
                 Lending lending = Lending.builder()
@@ -60,9 +70,9 @@ public class LendingService {
                         .equipmentNumber(findEquipment(cells.get(10).getStringCellValue(), distributor(id)))
                         .contract((int) cells.get(14).getNumericCellValue())
                         .amount((int) cells.get(17).getNumericCellValue())
-                        .dateSend((cells.get(18).getDateCellValue()))
-                        .dueDate((cells.get(19).getDateCellValue()))
-                        .sellerCode(findSeller((int) cells.get(19).getNumericCellValue(), distributor(id)))
+                        .dateSend(cells.get(18).getLocalDateTimeCellValue())
+                        .dueDate(cells.get(19).getLocalDateTimeCellValue())
+                        .sellerCode(findSeller((int) cells.get(20).getNumericCellValue(), distributor(id)))
                         .route((int) cells.get(21).getNumericCellValue())
                         .nfe((int) cells.get(22).getNumericCellValue())
                         .conservation(cells.get(23).getStringCellValue())

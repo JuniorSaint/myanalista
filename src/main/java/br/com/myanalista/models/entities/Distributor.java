@@ -66,9 +66,8 @@ public class Distributor implements Serializable {
     @OneToMany(mappedBy="distributor", fetch = FetchType.LAZY)
     private Set<Customer> customers;
 
-    @OneToOne(mappedBy = "distributor")
-    @PrimaryKeyJoinColumn
-    private Lending lending;
+    @OneToMany(mappedBy = "distributor")
+    private List<Lending> lendings;
 
     @OneToMany(mappedBy="distributor", fetch = FetchType.LAZY)
     private List<Equipment> equipment;

@@ -2,6 +2,7 @@ package br.com.myanalista.models.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,7 +33,7 @@ public class Lending implements Serializable {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
   private String territory;
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "distributor_id")
   private Distributor distributor;
   @ManyToOne
@@ -45,17 +46,18 @@ public class Lending implements Serializable {
   @JoinColumn(name="subChannel_id")
   private SubChannel subChannel;
   private String city;
-  @OneToOne
-  @JoinColumn(name = "equipmentNumber_id")
-  private Equipment equipmentNumber;
   private Integer contract;
   private Integer amount;
-  private Date dateSend;
-  private Date dueDate;
-  @ManyToOne
-  @JoinColumn(name = "sellerCode_id")
-  private Teams sellerCode;
+  private LocalDateTime dateSend;
+  private LocalDateTime dueDate;
   private Integer route;
   private Integer nfe;
   private String conservation;
+  @ManyToOne
+  @JoinColumn(name = "sellerCode_id")
+  private Teams sellerCode;
+  @ManyToOne
+  @JoinColumn(name="equipmentNumber_id")
+  private Equipment equipmentNumber;
+
 }
