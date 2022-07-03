@@ -26,8 +26,6 @@ public class LogInService {
     UserService userService;
     @Autowired
     JwtUtils jwtUtils;
-    @Autowired
-    UtilsService utils;
 
     public TokenResponse signin(String email, String password) {
         Authentication authentication = authenticationManager.authenticate(

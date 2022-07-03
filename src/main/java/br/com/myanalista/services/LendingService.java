@@ -1,5 +1,6 @@
 package br.com.myanalista.services;
 
+import br.com.myanalista.configs.DateValidatorUsingDateTimeFormatter;
 import br.com.myanalista.models.entities.*;
 import br.com.myanalista.repositories.*;
 import io.jsonwebtoken.io.IOException;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -36,16 +38,17 @@ public class LendingService {
     @Autowired
     private ClusterGecRepository repositoryCluster;
 
+    @Autowired
+    private DateValidatorUsingDateTimeFormatter dateValidator;
+
     public Lending findById(Long id) {
         Optional<Lending> response = repository.findById(id);
         return response.get();
     }
-
     public List<Lending> findAll() {
         List<Lending> response = repository.findAll();
         return response;
     }
-
     public void recordDataToDb(Long id, String path) throws IOException {
         try {
             @Cleanup FileInputStream file = new FileInputStream(new File(path));  // @cleanup is to void close the file in the end
@@ -55,7 +58,6 @@ public class LendingService {
             sheet.removeRow(sheet.getRow(1));
             sheet.removeRow(sheet.getRow(2));
             List<Row> rows = (List<Row>) toList(sheet.iterator());  // Iterate the rows
-
 
             rows.forEach(row -> {
                 List<Cell> cells = (List<Cell>) toList(row.cellIterator());  // Iterate the cells
@@ -70,8 +72,8 @@ public class LendingService {
                         .equipmentNumber(findEquipment(cells.get(10).getStringCellValue(), distributor(id)))
                         .contract((int) cells.get(14).getNumericCellValue())
                         .amount((int) cells.get(17).getNumericCellValue())
-                        .dateSend(cells.get(18).getLocalDateTimeCellValue())
-                        .dueDate(cells.get(19).getLocalDateTimeCellValue())
+                        .dateSend(verifyDateIsValid(cells.get(18).getLocalDateTimeCellValue()))
+                        .dueDate(verifyDateIsValid(cells.get(19).getLocalDateTimeCellValue()))
                         .sellerCode(findSeller((int) cells.get(20).getNumericCellValue(), distributor(id)))
                         .route((int) cells.get(21).getNumericCellValue())
                         .nfe((int) cells.get(22).getNumericCellValue())
@@ -83,16 +85,24 @@ public class LendingService {
             throw new RuntimeException(e);
         }
     }
-
+    private LocalDateTime verifyDateIsValid(LocalDateTime date){
+        if(date == null){
+            return null;
+        }
+        String dateConvert = date.toString();
+        Boolean response = dateValidator.isValid(dateConvert);
+        if(response.equals(false)){
+            return null;
+        }
+        return date;
+    }
     private List<?> toList(Iterator<?> iterator) {
         return IteratorUtils.toList(iterator);
     }
-
     private Distributor distributor(Long id) {
         Optional<Distributor> dis = repositoryDistributor.findById(id);
         return dis.get();
     }
-
     private Customer findCustomer(Integer code, Distributor distributor) {
         String newCode = code.toString();
         if (newCode.isEmpty()) {
@@ -109,7 +119,6 @@ public class LendingService {
         }
         return customerResponse.get();
     }
-
     private SubChannel findSubChannel(String sub) {
         if (sub.isEmpty()) {
             return null;
@@ -120,7 +129,6 @@ public class LendingService {
         }
         return subResponse.get();
     }
-
     private ClusterGec findCluster(String name) {
         if (name.isEmpty()) {
             return null;
@@ -131,7 +139,6 @@ public class LendingService {
         }
         return clusterGec.get();
     }
-
     private Equipment findEquipment(String code, Distributor distributor) {
         String newCode = code.toString();
         if (newCode.isEmpty()) {
@@ -143,7 +150,6 @@ public class LendingService {
         }
         return responseEquipment.get();
     }
-
     private Teams findSeller(Integer code, Distributor distributor) {
         String newCode = code.toString();
         if (newCode.isEmpty()) {

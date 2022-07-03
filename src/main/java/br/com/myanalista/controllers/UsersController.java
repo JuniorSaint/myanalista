@@ -2,13 +2,17 @@ package br.com.myanalista.controllers;
 
 import br.com.myanalista.exceptions.BusinessException;
 import br.com.myanalista.models.entities.Users;
+import br.com.myanalista.models.request.ChangePasswordRequest;
 import br.com.myanalista.models.request.UserRequestPost;
 import br.com.myanalista.models.request.UserRequestPut;
+import br.com.myanalista.models.response.ProductResponse;
 import br.com.myanalista.models.response.UserResponse;
 import br.com.myanalista.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -29,6 +33,11 @@ public class UsersController {
         return service.getUserByTerm(users, page);
     }
 
+    @GetMapping("/page/{page}")
+    public Page<UserResponse> findAllWithList(@PathVariable(value = "page") Pageable page) {
+        return service.findAllWithPage(page);
+    }
+
     @GetMapping("/{id}")
     public UserResponse findById(@PathVariable(value = "id") Long id) {
         return service.findById(id);
@@ -42,7 +51,6 @@ public class UsersController {
             throw new BusinessException(e.getMessage());
         }
     }
-
     @DeleteMapping("/{id}")
     public String delete(@PathVariable(value = "id") Long id) {
         try {
@@ -51,7 +59,6 @@ public class UsersController {
             throw new BusinessException(e.getMessage());
         }
     }
-
     @PutMapping("/{id}")
     public UserResponse update(@PathVariable(value = "id") Long id,
                                @RequestBody UserRequestPut request) {
@@ -61,5 +68,13 @@ public class UsersController {
             throw new BusinessException(e.getMessage());
         }
     }
-
+    @PutMapping("/change-password/{id}")
+    public String changePassowrd(@PathVariable(value = "id") Long id,
+                                 @RequestBody ChangePasswordRequest request) {
+        try {
+            return service.changePassword(request);
+        } catch (BusinessException e) {
+            throw new BusinessException(e.getMessage());
+        }
+    }
 }
