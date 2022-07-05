@@ -16,10 +16,21 @@ public class DetailDataUser implements UserDetails {
     public DetailDataUser(Optional<Users> users) {
         this.users = users;
     }
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        //        List<GrantedAuthority> authorities = new ArrayList<>();
+//        if(users.get().getAdmin()){
+//            authorities.add( new SimpleGrantedAuthority ("ADMINISTRATOR"));
+//            authorities.add( new SimpleGrantedAuthority ("COLLABORATOR"));
+//        }else{
+//            authorities.add( new SimpleGrantedAuthority ("COLLABORATOR"));
+//        }
+//        return authorities;
         return new ArrayList<>();
     }
+
     @Override
     public String getPassword() {
         return users.orElse(new Users()).getPassword();

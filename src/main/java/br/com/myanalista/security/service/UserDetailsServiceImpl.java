@@ -5,12 +5,10 @@ import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.models.entities.Users;
 import br.com.myanalista.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -37,7 +35,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Users> user = repository.findByUserEmail(username);
         if (user.isEmpty()) {
-            throw new EntityNotFoundException("User [" + username + "] not found");
+            throw new EntityNotFoundException("User " + username + "or password is not correct");
         }
         return new DetailDataUser(user);
     }
