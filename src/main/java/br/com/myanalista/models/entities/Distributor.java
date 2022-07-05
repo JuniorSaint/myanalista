@@ -29,7 +29,6 @@ public class Distributor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(unique=true)
     private String cnpjCpf;
     private String companyType;
     private String nickName;
@@ -63,15 +62,19 @@ public class Distributor implements Serializable {
     private LocalDate updatedAt;
 
     @Singular
-    @OneToMany(mappedBy="distributor", fetch = FetchType.LAZY)
-    private Set<Customer> customers;
+    @OneToMany(mappedBy="distributor")
+    @JsonIgnoreProperties(value = {"distributor"})
+    private List<Customer> customers;
 
     @OneToMany(mappedBy = "distributor")
+    @JsonIgnoreProperties(value = {"distributor"})
     private List<Lending> lendings;
 
-    @OneToMany(mappedBy="distributor", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="distributor")
+    @JsonIgnoreProperties(value = {"distributor"})
     private List<Equipment> equipment;
 
-    @OneToMany(mappedBy="distributor", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="distributor")
+    @JsonIgnoreProperties(value = {"distributor"})
     private List<SellOut> sellOuts;
 }

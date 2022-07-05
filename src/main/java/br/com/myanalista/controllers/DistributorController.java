@@ -12,28 +12,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.myanalista.exceptions.BusinessException;
-import br.com.myanalista.models.request.CategoryRequestPost;
-import br.com.myanalista.models.request.CategoryRequestPut;
-import br.com.myanalista.models.response.CategoryResponse;
-import br.com.myanalista.services.CategoryService;
+import br.com.myanalista.models.request.DistributorRequestPost;
+import br.com.myanalista.models.request.DistributorRequestPut;
+import br.com.myanalista.models.response.DistributorResponse;
+import br.com.myanalista.services.DistributorService;
+
 import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
-@RequestMapping("/v1/categories")
+@RequestMapping("/v1/distributor")
 @AllArgsConstructor
-public class CategoriesController {
 
+public class DistributorController {
     @Autowired
-    private CategoryService service;
+    private DistributorService service;
 
     @GetMapping("/{id}")
-    public CategoryResponse findById(@PathVariable(value = "id") Long id) {
+    public DistributorResponse findAllWithListCustomer(@PathVariable(value = "id") Long id) {
         return service.findById(id);
     }
 
+//  @GetMapping("/listSearch")
+//  public DistributorResponse findForSearchWithPageable() {
+//  Page<DistributorResponse> response = service.listOfDistributor(id);
+//    return response;
+//  }
+
     @PostMapping
-    public CategoryResponse save(@RequestBody CategoryRequestPost request) {
+    public DistributorResponse saveCustomer(@RequestBody DistributorRequestPost request) {
         try {
             return service.save(request);
         } catch (BusinessException e) {
@@ -42,7 +49,7 @@ public class CategoriesController {
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable(value = "id") Long id) {
+    public String deleteCustomer(@PathVariable(value = "id") Long id) {
         try {
             return service.delete(id);
         } catch (BusinessException e) {
@@ -51,8 +58,8 @@ public class CategoriesController {
     }
 
     @PutMapping("/{id}")
-    public CategoryResponse update(@PathVariable(value = "id") Long id,
-                                   @RequestBody CategoryRequestPut request) {
+    public DistributorResponse updateCustomer(@PathVariable(value = "id") Long id,
+                                              @RequestBody DistributorRequestPut request) {
         try {
             return service.update(request);
         } catch (BusinessException e) {

@@ -8,8 +8,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 @Repository
 public interface CategoryRepository extends JpaRepository<Categories, Long> {
-  @Query(value = "select c from Categories c where c.id = :id ")
-  Optional<Categories> findByIdSecundary(@Param(value = "id") Long id);
 
-
+    @Query(value = "select c from Categories c left join c.category where c.id = :id")
+    Optional<Categories> getByIdPerson(@Param(value = "id") Long id);
 }

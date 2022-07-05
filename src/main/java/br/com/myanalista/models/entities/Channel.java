@@ -1,5 +1,6 @@
 package br.com.myanalista.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,8 +25,10 @@ public class Channel implements Serializable {
   private String channel;
 
   @OneToMany(mappedBy="channel")
+  @JsonIgnoreProperties(value = {"channel"})
   private List<SubChannel> subChannels;
 
   @OneToMany(mappedBy = "channel")
+  @JsonIgnoreProperties(value = {"channel"})
   private List<Customer> customer;
 }

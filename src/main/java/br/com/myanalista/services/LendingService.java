@@ -12,6 +12,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -45,8 +47,8 @@ public class LendingService {
         Optional<Lending> response = repository.findById(id);
         return response.get();
     }
-    public List<Lending> findAll() {
-        List<Lending> response = repository.findAll();
+    public Page<Lending> findAll(Pageable pageable) {
+        Page<Lending> response = repository.findAll(pageable);
         return response;
     }
     public void recordDataToDb(Long id, String path) throws IOException {

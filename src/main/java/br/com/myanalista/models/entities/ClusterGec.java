@@ -1,5 +1,6 @@
 package br.com.myanalista.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,8 +28,10 @@ public class ClusterGec implements Serializable {
   private List<SellOut> sellOuts;
 
   @OneToMany(mappedBy = "clusterGec")
+  @JsonIgnoreProperties(value = {"clusterGec"})
   private List<Customer> customers;
 
   @OneToMany(mappedBy="cluster")
+  @JsonIgnoreProperties(value = {"cluster"})
   private List<Lending> lendings;
 }

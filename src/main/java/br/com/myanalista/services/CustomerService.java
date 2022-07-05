@@ -5,9 +5,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Optional;
 
+import br.com.myanalista.configs.Utils;
 import br.com.myanalista.models.entities.*;
+import br.com.myanalista.models.response.ChannelResponse;
 import br.com.myanalista.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.myanalista.exceptions.BusinessException;
@@ -18,30 +22,37 @@ import org.modelmapper.ModelMapper;
 public class CustomerService {
     @Autowired
     private CustomerRepository repository;
-
     @Autowired
     private SubChannelRepository repositorySubChannel;
-
     @Autowired
     private TeamsRepository repositoryTeams;
 
     @Autowired
     private ModelMapper mapper;
-
     @Autowired
     private ChannelRepository repositoryChannel;
-
     @Autowired
     private DistributorRepository repositoryDistributor;
-
     @Autowired
     private ClusterGecRepository repositoryCluster;
 
+    @Autowired
+    private Utils utils;
+
+    public Customer findById(Long id) {
+        Optional<Customer> channel = repository.findById(id);
+        if (channel.isEmpty()) {
+            throw new BusinessException("There isn't customer with id: " + id);
+        }
+        return channel.get();
+    }
+
+    public Page<Customer> findAllWithPage(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
+
     public String recordDataToDb(Long id, String path) throws IOException {
-
-
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-
             String line = br.readLine(); // this first line will be discarted, because is the header.
             line = br.readLine();
             while (line != null) {
@@ -101,7 +112,6 @@ public class CustomerService {
                 Distributor distri = findDistributor(id);
 
                 Boolean isExist = ifCustomerExist(line.substring(0, index_1).trim(), distri);
-
                 if (!isExist) {
                     Customer channel = Customer.builder()
                             .code(line.substring(0, index_1).trim())
@@ -123,7 +133,7 @@ public class CustomerService {
                             .email(line.substring(index_16 + 1, index_17).trim())
                             .tablePrice(line.substring(index_17 + 1, index_18).trim())
                             .groupBusiness(line.substring(index_18 + 1, index_19).trim())
-                            .seller(findTeamsMemberByCode(line.substring(index_19 + 1, index_20).trim(),distri))
+                            .seller(findTeamsMemberByCode(line.substring(index_19 + 1, index_20).trim(), distri))
                             .supervisor(line.substring(index_20 + 1, index_21).trim())
                             .area(line.substring(index_21 + 1, index_22).trim())
                             .originalPaymentMethod(line.substring(index_22 + 1, index_23).trim())

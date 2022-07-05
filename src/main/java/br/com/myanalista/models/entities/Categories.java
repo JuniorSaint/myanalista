@@ -1,6 +1,7 @@
 package br.com.myanalista.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,10 +33,11 @@ public class Categories implements Serializable {
     private String name;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name="parent_id")
     private Categories category;
 
-
     @OneToMany(mappedBy="categories")
+    @JsonIgnoreProperties(value = {"categories"}) // Fix problem cyclic reference
     private List<Products> products;
 }

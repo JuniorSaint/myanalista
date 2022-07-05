@@ -38,7 +38,7 @@ public class ContactService {
   public ContactResponse save(ContactRequestPost contactRequest) {
    Optional<Distributor> distributor = repositoryDistributor.findById(contactRequest.getDistributor().getId());
     if (!distributor.isPresent()) {
-      throw new BusinessException("There's not Customer with id: " + contactRequest.getDistributor().getId());
+      throw new BusinessException("There's not distributor with id: " + contactRequest.getDistributor().getId());
     }
       Contacts contactEntity = new Contacts();
       mapper.map(contactRequest, contactEntity);
@@ -53,7 +53,7 @@ public class ContactService {
   public ContactResponse update(ContactRequestPut contactRequest) {
    Optional<Distributor> distributor = repositoryDistributor.findById(contactRequest.getDistributor().getId());
     if (!distributor.isPresent()) {
-      throw new BusinessException("There's not Customer with id: " + contactRequest.getDistributor().getId());
+      throw new BusinessException("There's not distributor with id: " + contactRequest.getDistributor().getId());
     }
     Contacts contactEntity = new Contacts();
       mapper.map(contactRequest, contactEntity);

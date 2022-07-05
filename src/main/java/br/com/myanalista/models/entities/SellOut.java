@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,18 +32,22 @@ public class SellOut implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "distributor_id")
     private Distributor distributor;
     private LocalDate date;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "customer_id")
     private Customer customer;
     private String route;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "sellersOrder_id")
     private Teams sellersOrder;
     private String supervisorsOrder;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "sellerRegistration_id")
     private Teams sellerRegistration;
     private String supervisorRegistration;
@@ -50,6 +55,7 @@ public class SellOut implements Serializable {
     private String typeOperation;
     private String nfNumber;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "product_id")
     private Products product;
     private Double amount;
@@ -64,9 +70,11 @@ public class SellOut implements Serializable {
 //    private String category;
     private String brand; // Brand don't need to put it;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "cluster_id")
     private ClusterGec cluster; // create register from sellout's table;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "channel_id")
     private SubChannel channel; // channel is consider subchannel to myanlista then put subchannel on channel;
     private Integer averageTerm;
@@ -92,6 +100,7 @@ public class SellOut implements Serializable {
     private String coverMeta;
     private String averageTermMeta;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "seller2_id")
     private Teams seller2;
     private String supervisor2;

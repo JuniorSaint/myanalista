@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -36,6 +38,7 @@ public class Equipment implements Serializable {
   private Integer doors;
   private String observation;
   @ManyToOne
+  @JsonIgnore
   @JoinColumn(name="distributor_id")
   private Distributor distributor;
 

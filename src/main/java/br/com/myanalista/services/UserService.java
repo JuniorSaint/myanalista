@@ -3,6 +3,7 @@ package br.com.myanalista.services;
 import br.com.myanalista.configs.GeralConfig;
 import br.com.myanalista.configs.Utils;
 import br.com.myanalista.exceptions.BusinessException;
+import br.com.myanalista.exceptions.NotFoundById;
 import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.entities.Users;
 import br.com.myanalista.models.request.ChangePasswordRequest;
@@ -44,7 +45,7 @@ public class UserService {
     public UserResponse save(UserRequestPost userRequest) {
         Optional<Users> searchForUser = repository.findByUserEmail(userRequest.getUserEmail());
         if (searchForUser.isPresent()) {
-            throw new BusinessException(
+            throw new NotFoundById(
                     "Already exist user with this email: " + userRequest.getUserEmail() + ", try with another one");
         }
         userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
@@ -57,7 +58,7 @@ public class UserService {
     public String changePassword(ChangePasswordRequest request) {
         Optional<Users> user = repository.findById(request.getId());
         if (!user.isPresent()) {
-            throw new BusinessException("User not found with id: " + request.getId());
+            throw new NotFoundById("User not found with id: " + request.getId());
         }
         user.get().setPassword(passwordEncoder.encode(request.getPassword()));
         Users userUpdate = repository.save(user.get());
@@ -81,7 +82,7 @@ public class UserService {
     public String delete(Long id) {
         Optional<Users> user = repository.findById(id);
         if (!user.isPresent()) {
-            throw new BusinessException("user not found with id: " + id);
+            throw new NotFoundById("user not found with id: " + id);
         }
         repository.deleteById(id);
         return "User deleted with success";
@@ -90,7 +91,7 @@ public class UserService {
     public UserResponse findById(Long id) {
         Optional<Users> response = repository.findById(id);
         if (response.isEmpty()) {
-            throw new BusinessException("There isn't user with this id: " + id);
+            throw new NotFoundById("There isn't user with this id: " + id);
         }
         return convertEntityToUserResponse(response.get());
     }

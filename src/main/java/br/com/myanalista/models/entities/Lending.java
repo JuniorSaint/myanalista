@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,15 +35,19 @@ public class Lending implements Serializable {
   private Long id;
   private String territory;
   @ManyToOne
+  @JsonIgnore
   @JoinColumn(name = "distributor_id")
   private Distributor distributor;
   @ManyToOne
+  @JsonIgnore
   @JoinColumn(name = "customerRegistration_id")
   private Customer customerRegistration;
   @ManyToOne
+  @JsonIgnore
   @JoinColumn(name="cluster_id")
   private ClusterGec cluster;
   @ManyToOne
+  @JsonIgnore
   @JoinColumn(name="subChannel_id")
   private SubChannel subChannel;
   private String city;
@@ -54,10 +59,11 @@ public class Lending implements Serializable {
   private Integer nfe;
   private String conservation;
   @ManyToOne
+  @JsonIgnore
   @JoinColumn(name = "sellerCode_id")
   private Teams sellerCode;
   @ManyToOne
+  @JsonIgnore
   @JoinColumn(name="equipmentNumber_id")
   private Equipment equipmentNumber;
-
 }

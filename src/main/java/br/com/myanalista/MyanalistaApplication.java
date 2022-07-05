@@ -13,7 +13,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan(basePackages = {"br.com.myanalista.models.entities"})
 @ComponentScan(basePackages = {"br.com.myanalista.controllers",
         "br.com.myanalista.services", "br.com.myanalista.configs",
-        "br.com.myanalista.security.jwt", "br.com.myanalista.security.service"
+        "br.com.myanalista.security.jwt", "br.com.myanalista.security.service",
+        "br.com.myanalista.security.service"
 })
 
 public class MyanalistaApplication {

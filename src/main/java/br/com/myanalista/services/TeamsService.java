@@ -42,7 +42,6 @@ public class TeamsService {
         if (teamsRequest.getDistributor().getId() == null || teamsRequest.getMemberCode() == null) {
             throw new BusinessException("Fields memberCode and distributor id is mandatory");
         }
-
 //        The code needs to have 3 digitals, because in the file sellout the code has 3 digital
         String newCodeMember = teamsRequest.getMemberCode();
         for (Integer x = 0; x < (3 - teamsRequest.getMemberCode().length()); x++) {
@@ -74,7 +73,6 @@ public class TeamsService {
         if (teamsRequest.getDistributor().getId() == null || teamsRequest.getMemberCode() == null) {
             throw new BusinessException("Fields memberCode and distributor id is mandatory");
         }
-
 //        The code needs to have 3 digitals, because in the file sellout the code has 3 digital
         String newCodeMember = teamsRequest.getMemberCode();
         for (Integer x = 0; x < (3 - teamsRequest.getMemberCode().length()); x++) {
@@ -97,12 +95,12 @@ public class TeamsService {
     }
 
     @Transactional
-    public String delete(String code) {
-        Optional<Teams> teams = repository.findByMemberCode(code);
+    public String delete(Long id) {
+        Optional<Teams> teams = repository.findById(id);
         if (!teams.isPresent()) {
-            throw new BusinessException("Teams not found with code: " + code);
+            throw new BusinessException("There isn't  team member with id:  " + id);
         }
-        repository.deleteByMemberCode(code);
+        repository.delete(teams.get());
         return "Teams deleted with success";
     }
 
@@ -115,6 +113,16 @@ public class TeamsService {
         mapper.map(teams.get(), teamsResponse);
         return teamsResponse;
     }
+    public TeamsResponse findById(Long id) {
+        Optional<Teams> teams = repository.findById(id);
+        if (teams.isEmpty()) {
+            throw new BusinessException("It's not possible find Teams with id: " + id);
+        }
+        TeamsResponse teamsResponse = new TeamsResponse();
+        mapper.map(teams.get(), teamsResponse);
+        return teamsResponse;
+    }
+
 
     public Page<TeamsSearchResponse> listOfDistributor(Teams teams, Pageable pageable) {
         ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase();

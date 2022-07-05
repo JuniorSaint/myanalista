@@ -1,5 +1,6 @@
 package br.com.myanalista.controllers;
 
+import br.com.myanalista.models.entities.Categories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,35 +13,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.myanalista.exceptions.BusinessException;
-import br.com.myanalista.models.request.DistributorRequestPost;
-import br.com.myanalista.models.request.DistributorRequestPut;
-import br.com.myanalista.models.response.DistributorResponse;
-import br.com.myanalista.services.DistributorService;
-
+import br.com.myanalista.models.request.CategoryRequestPost;
+import br.com.myanalista.models.request.CategoryRequestPut;
+import br.com.myanalista.models.response.CategoryResponse;
+import br.com.myanalista.services.CategoryService;
 import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
-@RequestMapping("/v1/distributor")
+@RequestMapping("/v1/categories")
 @AllArgsConstructor
+public class CategoryController {
 
-public class DistributorsController {
     @Autowired
-    private DistributorService service;
+    private CategoryService service;
 
     @GetMapping("/{id}")
-    public DistributorResponse findAllWithListCustomer(@PathVariable(value = "id") Long id) {
-        return service.findById(id);
+    public CategoryResponse findById(@PathVariable(value = "id") Long id){
+    return service.findById(id);
     }
-
-//  @GetMapping("/listSearch")
-//  public DistributorResponse findForSearchWithPageable() {
-//  Page<DistributorResponse> response = service.listOfDistributor(id);
-//    return response;
-//  }
-
     @PostMapping
-    public DistributorResponse saveCustomer(@RequestBody DistributorRequestPost request) {
+    public Categories save(@RequestBody CategoryRequestPost request) {
         try {
             return service.save(request);
         } catch (BusinessException e) {
@@ -49,7 +42,7 @@ public class DistributorsController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteCustomer(@PathVariable(value = "id") Long id) {
+    public String delete(@PathVariable(value = "id") Long id) {
         try {
             return service.delete(id);
         } catch (BusinessException e) {
@@ -58,8 +51,8 @@ public class DistributorsController {
     }
 
     @PutMapping("/{id}")
-    public DistributorResponse updateCustomer(@PathVariable(value = "id") Long id,
-                                              @RequestBody DistributorRequestPut request) {
+    public Categories update(@PathVariable(value = "id") Long id,
+                                   @RequestBody CategoryRequestPut request) {
         try {
             return service.update(request);
         } catch (BusinessException e) {

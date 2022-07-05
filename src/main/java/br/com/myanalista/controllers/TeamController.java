@@ -23,13 +23,13 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/v1/teams")
 @AllArgsConstructor
 
-public class TeamsController {
+public class TeamController {
     @Autowired
     private TeamsService service;
 
     @GetMapping("/{id}")
-    public TeamsResponse findAllWithListTeams(@PathVariable(value = "id") String id) {
-        return service.findByMemberCode(id);
+    public TeamsResponse findAllWithListTeams(@PathVariable(value = "id") Long id) {
+        return service.findById(id);
     }
 
     @PostMapping
@@ -42,7 +42,7 @@ public class TeamsController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteTeams(@PathVariable(value = "id") String id) {
+    public String deleteTeams(@PathVariable(value = "id") Long id) {
         try {
             return service.delete(id);
         } catch (BusinessException e) {

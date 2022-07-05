@@ -4,7 +4,6 @@ package br.com.myanalista.controllers;
 import br.com.myanalista.exceptions.BusinessException;
 import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.request.ProductRequestPost;
-import br.com.myanalista.models.request.ProductRequestPut;
 import br.com.myanalista.models.response.ProductResponse;
 import br.com.myanalista.services.ProductService;
 import lombok.AllArgsConstructor;
@@ -18,7 +17,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/v1/products")
 @AllArgsConstructor
-public class ProductsController {
+public class ProductController {
 
     @Autowired
     private ProductService service;
@@ -60,8 +59,8 @@ public class ProductsController {
         }
     }
 
-    @GetMapping("/page/{page}")
-    public Page<ProductResponse> findAllWithList(@PathVariable(value = "page") Pageable page) {
+    @GetMapping("/page")
+    public Page<ProductResponse> findAllWithList(Pageable page) {
         return service.findAllWithPage(page);
     }
 

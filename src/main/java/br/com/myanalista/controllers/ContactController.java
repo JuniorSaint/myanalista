@@ -22,7 +22,7 @@ import lombok.AllArgsConstructor;
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/contacts")
 @AllArgsConstructor
-public class ContactsController {
+public class ContactController {
     @Autowired
     private ContactService service;
 

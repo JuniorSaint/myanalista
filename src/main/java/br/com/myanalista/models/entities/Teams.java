@@ -1,5 +1,7 @@
 package br.com.myanalista.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,6 +33,7 @@ public class Teams implements Serializable {
     private Integer memberLink;
     private String sellerOrSupervisor;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "distributor_id", nullable = true)
     private Distributor distributor;
     @CreationTimestamp
@@ -38,21 +41,27 @@ public class Teams implements Serializable {
     @UpdateTimestamp
     private LocalDate updatedAt;
 
-    @OneToMany(mappedBy="sellersOrder", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="sellersOrder")
+    @JsonIgnoreProperties(value = {"sellersOrder"})
     private List<SellOut> sellOutSellerOrders;
 
-    @OneToMany(mappedBy="sellerRegistration", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="sellerRegistration")
+    @JsonIgnoreProperties(value = {"sellerRegistration"})
     private List<SellOut> sellOutSellerRegistrations;
 
-    @OneToMany(mappedBy = "seller2", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "seller2")
+    @JsonIgnoreProperties(value = {"seller2"})
     private List<SellOut> sellOutSellers;
 
     @OneToMany(mappedBy = "sellerCode")
+    @JsonIgnoreProperties(value = {"sellerCode"})
     private List<Lending> lendings;
 
     @OneToMany(mappedBy = "seller")
+    @JsonIgnoreProperties(value = {"seller"})
     private List<Customer> customers;
 
     @OneToMany(mappedBy = "sellerCustomer2")
+    @JsonIgnoreProperties(value = {"sellerCustomer2"})
     private List<Customer> customerSeller2;
 }

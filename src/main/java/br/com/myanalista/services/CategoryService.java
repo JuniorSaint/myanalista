@@ -21,38 +21,47 @@ import br.com.myanalista.repositories.CategoryRepository;
 
 @Service
 public class CategoryService {
-
     @Autowired
     private CategoryRepository repository;
-
     @Autowired
     private ModelMapper mapper;
-
     @Autowired
     private ProductService serviceProduct;
 
     @Transactional
-    public CategoryResponse save(CategoryRequestPost categoryRequest) {
-        Optional<Categories> categories = repository.findByIdSecundary(categoryRequest.getCategory().getId());
-        categoryRequest.setCategory(categories.get());
+    public Categories save(CategoryRequestPost categoryRequest) {
+        Categories categoriesResult = null;
+        if (categoryRequest.getCategory() != null) {
+          Optional<Categories> result =  repository.findById(categoryRequest.getCategory().getId());
+            categoriesResult = result.get();
+            if (result.isEmpty()) {
+                throw new BusinessException("There isn't category parent with id: " + categoryRequest.getCategory().getId());
+            }
+        }
+        categoryRequest.setCategory(categoriesResult);
         Categories categoryEntity = new Categories();
         mapper.map(categoryRequest, categoryEntity);
-        Categories categoryCreated = repository.save(categoryEntity);
-        CategoryResponse categoryResponse = new CategoryResponse();
-        mapper.map(categoryCreated, categoryResponse);
-        return categoryResponse;
+        return repository.save(categoryEntity);
     }
 
     @Transactional
-    public CategoryResponse update(CategoryRequestPut categoryRequest) {
-        Optional<Categories> categories = repository.findByIdSecundary(categoryRequest.getCategory().getId());
-        categoryRequest.setCategory(categories.get());
+    public Categories update(CategoryRequestPut categoryRequest) {
+        Categories categoriesResult = null;
+        Optional<Categories> categorySeek = repository.findById(categoryRequest.getId());
+        if(categorySeek.isEmpty()){
+            throw new BusinessException("There isn't category with id: " + categoryRequest.getId());
+        }
+        if (categoryRequest.getCategory() != null) {
+            Optional<Categories> result =  repository.findById(categoryRequest.getCategory().getId());
+            categoriesResult = result.get();
+            if (result.isEmpty()) {
+                throw new BusinessException("There isn't category parent with id: " + categoryRequest.getCategory().getId());
+            }
+        }
+        categoryRequest.setCategory(categoriesResult);
         Categories categoryEntity = new Categories();
         mapper.map(categoryRequest, categoryEntity);
-        Categories categoryUpdate = repository.save(categoryEntity);
-        CategoryResponse categoryResponse = new CategoryResponse();
-        mapper.map(categoryUpdate, categoryResponse);
-        return categoryResponse;
+        return repository.save(categoryEntity);
     }
 
     @Transactional
@@ -66,21 +75,14 @@ public class CategoryService {
     }
 
     public CategoryResponse findById(Long id) {
-        Optional<Categories> category = repository.findById(id);
+        Optional<Categories> category = repository.getByIdPerson(id);
         if (category.isEmpty()) {
             throw new BusinessException("It's not possible find category with id: " + id);
         }
-
-        CategoryResponse categoryResp = new CategoryResponse();
-        mapper.map(category.get(), categoryResp);
-        return categoryResp;
+        CategoryResponse categoryResponse = new CategoryResponse();
+        mapper.map(category.get(), categoryResponse);
+        return categoryResponse;
     }
-
-    public Categories findByIdEntity(Long id) {
-        Optional<Categories> category = repository.findById(id);
-        return category.get();
-    }
-
 
     public void recordDataToDb() throws IOException {
 
@@ -95,7 +97,6 @@ public class CategoryService {
 
                 int index_1 = line.indexOf(";");
                 int index_2 = line.indexOf(";", index_1 + 1);
-                int index_3 = line.indexOf(";", index_2 + 1);
 
                 Categories categoryGrand = Categories.builder()
                         .name(line.substring(index_2 + 1).trim())

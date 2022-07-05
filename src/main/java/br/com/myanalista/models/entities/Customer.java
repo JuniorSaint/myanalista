@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 @Builder
@@ -42,6 +44,7 @@ public class Customer implements Serializable {
   private String district;
   private String phoneNumber;
   @ManyToOne
+  @JsonIgnore
   @JoinColumn(name = "subChannel_id")
   private SubChannel subChannel;
   private String week;
@@ -67,14 +70,17 @@ public class Customer implements Serializable {
   private String creditLimit;
   private String addition;
   @ManyToOne
+  @JsonIgnore
   @JoinColumn(name = "clusterGec_id")
   private ClusterGec clusterGec;
   @ManyToOne
+  @JsonIgnore
   @JoinColumn(name = "seller2_id")
   private Teams sellerCustomer2;
   private String week2;
   private String turnover2;
   @ManyToOne
+  @JsonIgnore
   @JoinColumn(name="distributor_id")
   private Distributor distributor;
   private String latitude;
@@ -89,15 +95,18 @@ public class Customer implements Serializable {
   private String phoneNumber4;
   private String promoter;
   private String promoterEq2;
-  @OneToOne
+  @ManyToOne
+  @JsonIgnore
   @JoinColumn(name = "channel_id")
   private Channel channel;
   private String specie;
 
   @Singular
   @OneToMany(mappedBy="customer")
+  @JsonIgnoreProperties(value = {"customer"})
   private List<SellOut> sellOuts;
 
   @OneToMany(mappedBy = "customerRegistration")
+  @JsonIgnoreProperties(value = {"customerRegistration"})
   private List<Lending> lending;
 }

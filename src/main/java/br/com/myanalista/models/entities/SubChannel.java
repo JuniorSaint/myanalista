@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 @Builder
@@ -34,6 +35,7 @@ public class SubChannel implements Serializable {
   private String focusDual;
   private String subChannelIne;
   @ManyToOne
+  @JsonIgnore
   @JoinColumn(name = "channel_id")
   private Channel channel;
 

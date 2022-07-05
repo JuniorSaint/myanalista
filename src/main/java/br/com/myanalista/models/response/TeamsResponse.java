@@ -14,6 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TeamsResponse {
+  private Long id;
   private String memberCode;
   private String fullName;
   private String cpf;

@@ -4,6 +4,8 @@ import br.com.myanalista.models.entities.Lending;
 import br.com.myanalista.services.LendingService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +25,8 @@ public class LendingController {
         return serviceLending.findById(id);
     }
 
-    @GetMapping
-    public List<Lending> findAll() {
-        return serviceLending.findAll();
+    @GetMapping("/page")
+    public Page<Lending> findAll(Pageable pageable) {
+        return serviceLending.findAll(pageable);
     }
 }
