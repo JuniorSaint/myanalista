@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import br.com.myanalista.models.response.DistributorSearchResponse;
+import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.models.response.TeamsSearchResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.myanalista.exceptions.BusinessException;
 import br.com.myanalista.models.entities.Distributor;
 import br.com.myanalista.models.entities.Teams;
 import br.com.myanalista.models.request.TeamsRequestPost;
@@ -40,7 +39,7 @@ public class TeamsService {
     @Transactional
     public TeamsResponse save(TeamsRequestPost teamsRequest) {
         if (teamsRequest.getDistributor().getId() == null || teamsRequest.getMemberCode() == null) {
-            throw new BusinessException("Fields memberCode and distributor id is mandatory");
+            throw new EntityNotFoundException("Fields memberCode and distributor id is mandatory");
         }
 //        The code needs to have 3 digitals, because in the file sellout the code has 3 digital
         String newCodeMember = teamsRequest.getMemberCode();
@@ -52,12 +51,12 @@ public class TeamsService {
         Optional<Distributor> distributor = repositoryDistributor
                 .findById(teamsRequest.getDistributor().getId());
         if (!distributor.isPresent()) {
-            throw new BusinessException("There's not distributor with id: " + teamsRequest.getDistributor().getCnpjCpf());
+            throw new EntityNotFoundException("There's not distributor with id: " + teamsRequest.getDistributor().getCnpjCpf());
         }
 
         Optional<Teams> teamsResponseTest = repository.findMemberCodeAndDistributor(teamsRequest.getMemberCode(), distributor.get());
         if (teamsResponseTest.isPresent()) {
-            throw new BusinessException("There is a team member with memberCode " + teamsRequest.getMemberCode() + ", and distributor id: " + teamsRequest.getDistributor().getId());
+            throw new EntityNotFoundException("There is a team member with memberCode " + teamsRequest.getMemberCode() + ", and distributor id: " + teamsRequest.getDistributor().getId());
         }
         Teams teamsEntity = new Teams();
         mapper.map(teamsRequest, teamsEntity);
@@ -71,7 +70,7 @@ public class TeamsService {
     @Transactional
     public TeamsResponse update(TeamsRequestPut teamsRequest) {
         if (teamsRequest.getDistributor().getId() == null || teamsRequest.getMemberCode() == null) {
-            throw new BusinessException("Fields memberCode and distributor id is mandatory");
+            throw new EntityNotFoundException("Fields memberCode and distributor id is mandatory");
         }
 //        The code needs to have 3 digitals, because in the file sellout the code has 3 digital
         String newCodeMember = teamsRequest.getMemberCode();
@@ -83,7 +82,7 @@ public class TeamsService {
         Optional<Distributor> distributor = repositoryDistributor
                 .findById(teamsRequest.getDistributor().getId());
         if (!distributor.isPresent()) {
-            throw new BusinessException("There's not Customer with id: " + teamsRequest.getDistributor().getCnpjCpf());
+            throw new EntityNotFoundException("There's not Customer with id: " + teamsRequest.getDistributor().getCnpjCpf());
         }
         Teams teamsEntity = new Teams();
         mapper.map(teamsRequest, teamsEntity);
@@ -98,7 +97,7 @@ public class TeamsService {
     public String delete(Long id) {
         Optional<Teams> teams = repository.findById(id);
         if (!teams.isPresent()) {
-            throw new BusinessException("There isn't  team member with id:  " + id);
+            throw new EntityNotFoundException("There isn't  team member with id:  " + id);
         }
         repository.delete(teams.get());
         return "Teams deleted with success";
@@ -107,7 +106,7 @@ public class TeamsService {
     public TeamsResponse findByMemberCode(String code) {
         Optional<Teams> teams = repository.findByMemberCode(code);
         if (teams.isEmpty()) {
-            throw new BusinessException("It's not possible find Teams with code: " + code);
+            throw new EntityNotFoundException("It's not possible find Teams with code: " + code);
         }
         TeamsResponse teamsResponse = new TeamsResponse();
         mapper.map(teams.get(), teamsResponse);
@@ -116,7 +115,7 @@ public class TeamsService {
     public TeamsResponse findById(Long id) {
         Optional<Teams> teams = repository.findById(id);
         if (teams.isEmpty()) {
-            throw new BusinessException("It's not possible find Teams with id: " + id);
+            throw new EntityNotFoundException("It's not possible find Teams with id: " + id);
         }
         TeamsResponse teamsResponse = new TeamsResponse();
         mapper.map(teams.get(), teamsResponse);
@@ -192,7 +191,7 @@ public class TeamsService {
         }
         Optional<Distributor> responseDistributor = repositoryDistributor.findDistributorByCnpj(cnpj);
         if (!responseDistributor.isPresent()) {
-            throw new BusinessException("Distributor not found with cnpj: " + cnpj);
+            throw new EntityNotFoundException("Distributor not found with cnpj: " + cnpj);
         }
         Optional<Teams> responseTeam = repository.findMemberCodeAndDistributor(code, responseDistributor.get());
         if (responseTeam.isPresent()) {

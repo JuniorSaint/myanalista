@@ -3,18 +3,17 @@ package br.com.myanalista.services;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.models.response.DistributorSearchResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
-import br.com.myanalista.exceptions.BusinessException;
 import br.com.myanalista.models.entities.Distributor;
 import br.com.myanalista.models.request.DistributorRequestPost;
 import br.com.myanalista.models.request.DistributorRequestPut;
@@ -53,7 +52,7 @@ public class DistributorService {
     public String delete(Long id) {
         Optional<Distributor> contact = repository.findById(id);
         if (!contact.isPresent()) {
-            throw new BusinessException("Customer not found with id: " + id);
+            throw new EntityNotFoundException("Customer not found with id: " + id);
         }
         repository.deleteById(id);
         return "Customer deleted with success";
@@ -62,7 +61,7 @@ public class DistributorService {
     public DistributorResponse findById(Long id) {
         Optional<Distributor> distributor = repository.findById(id);
         if (distributor.isEmpty()) {
-            throw new BusinessException("It's not possible find customer with id: " + id);
+            throw new EntityNotFoundException("It's not possible find customer with id: " + id);
         }
         DistributorResponse distributorResponse = new DistributorResponse();
         mapper.map(distributor.get(), distributorResponse);
@@ -72,7 +71,7 @@ public class DistributorService {
     public Distributor findByIdEntity(Long id) {
         Optional<Distributor> distributor = repository.findById(id);
         if (distributor.isEmpty()) {
-            throw new BusinessException("It's not possible find customer with id: " + id);
+            throw new EntityNotFoundException("It's not possible find customer with id: " + id);
         }
         return distributor.get();
     }

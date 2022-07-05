@@ -1,15 +1,11 @@
 package br.com.myanalista.services;
 
-import br.com.myanalista.configs.GeralConfig;
 import br.com.myanalista.configs.Utils;
-import br.com.myanalista.exceptions.BusinessException;
-import br.com.myanalista.exceptions.NotFoundById;
-import br.com.myanalista.models.entities.Products;
+import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.models.entities.Users;
 import br.com.myanalista.models.request.ChangePasswordRequest;
 import br.com.myanalista.models.request.UserRequestPost;
 import br.com.myanalista.models.request.UserRequestPut;
-import br.com.myanalista.models.response.ProductResponse;
 import br.com.myanalista.models.response.UserResponse;
 import br.com.myanalista.repositories.UserRepository;
 
@@ -22,7 +18,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.ExampleMatcher.StringMatcher;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -35,8 +31,8 @@ public class UserService {
     private UserRepository repository;
     @Autowired
     private ModelMapper mapper;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
     @Autowired
     private Utils utils;
     UserResponse userResponse = new UserResponse();
@@ -45,10 +41,10 @@ public class UserService {
     public UserResponse save(UserRequestPost userRequest) {
         Optional<Users> searchForUser = repository.findByUserEmail(userRequest.getUserEmail());
         if (searchForUser.isPresent()) {
-            throw new NotFoundById(
+            throw new EntityNotFoundException(
                     "Already exist user with this email: " + userRequest.getUserEmail() + ", try with another one");
         }
-        userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+//        userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
         Users userEntity = new Users();
         mapper.map(userRequest, userEntity);
         Users userCreated = repository.save(userEntity);
@@ -58,9 +54,9 @@ public class UserService {
     public String changePassword(ChangePasswordRequest request) {
         Optional<Users> user = repository.findById(request.getId());
         if (!user.isPresent()) {
-            throw new NotFoundById("User not found with id: " + request.getId());
+            throw new EntityNotFoundException("User not found with id: " + request.getId());
         }
-        user.get().setPassword(passwordEncoder.encode(request.getPassword()));
+//        user.get().setPassword(passwordEncoder.encode(request.getPassword()));
         Users userUpdate = repository.save(user.get());
         return "The password was changed with success of the user: " + userUpdate.getUserName();
     }
@@ -69,9 +65,9 @@ public class UserService {
     public UserResponse update(UserRequestPut userRequestPut) {
         Optional<Users> user = repository.findById(userRequestPut.getId());
         if (!user.isPresent()) {
-            throw new BusinessException("User not found with id: " + userRequestPut.getId());
+            throw new EntityNotFoundException("User not found with id: " + userRequestPut.getId());
         }
-        userRequestPut.setPassword(passwordEncoder.encode(userRequestPut.getPassword()));
+//        userRequestPut.setPassword(passwordEncoder.encode(userRequestPut.getPassword()));
         Users userEntity = new Users();
         mapper.map(userRequestPut, userEntity);
         Users userUpdate = repository.save(userEntity);
@@ -82,7 +78,7 @@ public class UserService {
     public String delete(Long id) {
         Optional<Users> user = repository.findById(id);
         if (!user.isPresent()) {
-            throw new NotFoundById("user not found with id: " + id);
+            throw new EntityNotFoundException("user not found with id: " + id);
         }
         repository.deleteById(id);
         return "User deleted with success";
@@ -91,7 +87,7 @@ public class UserService {
     public UserResponse findById(Long id) {
         Optional<Users> response = repository.findById(id);
         if (response.isEmpty()) {
-            throw new NotFoundById("There isn't user with this id: " + id);
+            throw new EntityNotFoundException("There isn't user with this id: " + id);
         }
         return convertEntityToUserResponse(response.get());
     }

@@ -1,7 +1,7 @@
 package br.com.myanalista.controllers;
 
 import br.com.myanalista.configs.PlaceToSaveFile;
-import br.com.myanalista.exceptions.BusinessException;
+import br.com.myanalista.exceptions.BadRequestException;
 import br.com.myanalista.models.request.UploadFileRequest;
 import br.com.myanalista.services.CustomerService;
 import br.com.myanalista.services.EquipmentService;
@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping(value = "/v1/upload", produces = {"application/json"})
@@ -63,7 +62,7 @@ public class UploadFileDiary {
                 }
             }
             return new ResponseEntity<>("{ \"message\": \"Upload of file with success! \" }", HttpStatus.OK);
-        } catch (BusinessException e) {
+        } catch (BadRequestException e) {
             return new ResponseEntity<>("{ \"message\": \"Error to upload file!\"}", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

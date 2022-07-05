@@ -1,11 +1,9 @@
 package br.com.myanalista.services;
 
-import br.com.myanalista.exceptions.BusinessException;
+import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.models.entities.Categories;
 import br.com.myanalista.models.entities.Products;
-import br.com.myanalista.models.entities.Users;
 import br.com.myanalista.models.request.ProductRequestPost;
-import br.com.myanalista.models.request.ProductRequestPut;
 import br.com.myanalista.models.response.ProductResponse;
 import br.com.myanalista.repositories.CategoryRepository;
 import br.com.myanalista.repositories.ProductRepository;
@@ -36,7 +34,7 @@ public class ProductService {
     public Products save(ProductRequestPost productRequest) {
         Optional<Products> product = repository.findByCodeSku(productRequest.getSku());
         if (product.isPresent()) {
-            throw new BusinessException("There is product registered with this sku: " + productRequest.getSku());
+            throw new EntityNotFoundException("There is product registered with this sku: " + productRequest.getSku());
         }
         Optional<Categories> categories = repositoryCategory.findById(productRequest.getCategories().getId());
         productRequest.setCategories(categories.get());
@@ -49,7 +47,7 @@ public class ProductService {
     public Products update(ProductRequestPost productRequestPost) {
         Optional<Products> productsResult = repository.findById(productRequestPost.getId());
         if (!productsResult.isPresent()) {
-            throw new BusinessException("Product not found with id: " + productRequestPost.getId());
+            throw new EntityNotFoundException("Product not found with id: " + productRequestPost.getId());
         }
         Products products = new Products();
         mapper.map(productRequestPost, products);
@@ -60,7 +58,7 @@ public class ProductService {
     public String delete(Long id) {
         Optional<Products> product = repository.findById(id);
         if (!product.isPresent()) {
-            throw new BusinessException("Product not found with id: " + id);
+            throw new EntityNotFoundException("Product not found with id: " + id);
         }
         repository.deleteById(id);
         return "Product deleted with success";
@@ -69,7 +67,7 @@ public class ProductService {
     public ProductResponse findBySku(Integer sku) {
         Optional<Products> product = repository.findByCodeSku(sku);
         if (product.isEmpty()) {
-            throw new BusinessException("It's not possible find product with Sku: " + sku);
+            throw new EntityNotFoundException("It's not possible find product with Sku: " + sku);
         }
         ProductResponse productResponse = new ProductResponse();
         mapper.map(product.get(), productResponse);
@@ -79,7 +77,7 @@ public class ProductService {
     public Products findById(Long id) {
         Optional<Products> product = repository.findById(id);
         if (product.isEmpty()) {
-            throw new BusinessException("It's not possible find product with id: " + id);
+            throw new EntityNotFoundException("It's not possible find product with id: " + id);
         }
         return product.get();
     }

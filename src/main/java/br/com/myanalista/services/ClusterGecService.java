@@ -3,12 +3,8 @@ package br.com.myanalista.services;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Optional;
 
 import br.com.myanalista.configs.Utils;
-import br.com.myanalista.exceptions.BusinessException;
-import br.com.myanalista.models.entities.Channel;
-import br.com.myanalista.models.response.ChannelResponse;
 import br.com.myanalista.models.response.ClusterResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

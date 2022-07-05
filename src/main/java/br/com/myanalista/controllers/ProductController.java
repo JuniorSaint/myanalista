@@ -1,7 +1,5 @@
 package br.com.myanalista.controllers;
 
-
-import br.com.myanalista.exceptions.BusinessException;
 import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.request.ProductRequestPost;
 import br.com.myanalista.models.response.ProductResponse;
@@ -18,7 +16,6 @@ import javax.validation.Valid;
 @RequestMapping("/v1/products")
 @AllArgsConstructor
 public class ProductController {
-
     @Autowired
     private ProductService service;
 
@@ -34,29 +31,17 @@ public class ProductController {
 
     @PostMapping
     public Products save(@RequestBody @Valid ProductRequestPost productRequestPost) {
-        try {
             return service.save(productRequestPost);
-        } catch (BusinessException e) {
-            throw new BusinessException(e.getMessage());
-        }
     }
 
     @PutMapping("/{id}")
     public Products update(@PathVariable(value = "id") Long id, @RequestBody @Valid ProductRequestPost productRequestPut) {
-        try {
             return service.update(productRequestPut);
-        } catch (BusinessException e) {
-            throw new BusinessException(e.getMessage());
-        }
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable(value = "id") Long id) {
-        try {
             return service.delete(id);
-        } catch (BusinessException e) {
-            throw new BusinessException(e.getMessage());
-        }
     }
 
     @GetMapping("/page")

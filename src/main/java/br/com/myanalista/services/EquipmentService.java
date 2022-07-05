@@ -7,10 +7,9 @@ import java.util.Optional;
 import java.util.Scanner;
 
 import br.com.myanalista.configs.Utils;
+import br.com.myanalista.exceptions.BadRequestException;
+import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.models.entities.Distributor;
-import br.com.myanalista.models.entities.Users;
-import br.com.myanalista.models.response.EquipmentResponse;
-import br.com.myanalista.models.response.UserResponse;
 import br.com.myanalista.repositories.DistributorRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.myanalista.exceptions.BusinessException;
 import br.com.myanalista.models.entities.Equipment;
 import br.com.myanalista.repositories.EquipmentRepository;
 
@@ -40,7 +38,7 @@ public class EquipmentService {
     public Equipment findById(Long id) {
         Optional<Equipment> response = repository.findByIpPerson(id);
         if (response.isEmpty()) {
-            throw new BusinessException("There isn't equipment with this id: " + id);
+            throw new EntityNotFoundException("There isn't equipment with this id: " + id);
         }
         return response.get();
     }
@@ -69,8 +67,8 @@ public class EquipmentService {
                     repository.save(channel);
                 }
             }
-        } catch (BusinessException e) {
-            throw new BusinessException("Error to read file " + e.getMessage());
+        } catch (BadRequestException e) {
+            throw new BadRequestException("Error to read file ");
         }
     }
 

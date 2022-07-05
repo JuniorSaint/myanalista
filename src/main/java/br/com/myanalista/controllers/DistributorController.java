@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.myanalista.exceptions.BusinessException;
 import br.com.myanalista.models.request.DistributorRequestPost;
 import br.com.myanalista.models.request.DistributorRequestPut;
 import br.com.myanalista.models.response.DistributorResponse;
@@ -41,29 +40,17 @@ public class DistributorController {
 
     @PostMapping
     public DistributorResponse saveCustomer(@RequestBody DistributorRequestPost request) {
-        try {
-            return service.save(request);
-        } catch (BusinessException e) {
-            throw new BusinessException(e.getMessage());
-        }
+        return service.save(request);
     }
 
     @DeleteMapping("/{id}")
     public String deleteCustomer(@PathVariable(value = "id") Long id) {
-        try {
-            return service.delete(id);
-        } catch (BusinessException e) {
-            throw new BusinessException(e.getMessage());
-        }
+        return service.delete(id);
     }
 
     @PutMapping("/{id}")
     public DistributorResponse updateCustomer(@PathVariable(value = "id") Long id,
                                               @RequestBody DistributorRequestPut request) {
-        try {
-            return service.update(request);
-        } catch (BusinessException e) {
-            throw new BusinessException(e.getMessage());
-        }
+        return service.update(request);
     }
 }

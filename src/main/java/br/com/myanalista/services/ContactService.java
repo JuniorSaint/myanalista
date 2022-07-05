@@ -4,8 +4,8 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.models.response.ContactSearchResponse;
-import br.com.myanalista.models.response.DistributorSearchResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -14,7 +14,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.myanalista.exceptions.BusinessException;
 import br.com.myanalista.models.entities.Contacts;
 import br.com.myanalista.models.entities.Distributor;
 import br.com.myanalista.models.request.ContactRequestPost;
@@ -38,7 +37,7 @@ public class ContactService {
   public ContactResponse save(ContactRequestPost contactRequest) {
    Optional<Distributor> distributor = repositoryDistributor.findById(contactRequest.getDistributor().getId());
     if (!distributor.isPresent()) {
-      throw new BusinessException("There's not distributor with id: " + contactRequest.getDistributor().getId());
+      throw new EntityNotFoundException("There's not distributor with id: " + contactRequest.getDistributor().getId());
     }
       Contacts contactEntity = new Contacts();
       mapper.map(contactRequest, contactEntity);
@@ -53,7 +52,7 @@ public class ContactService {
   public ContactResponse update(ContactRequestPut contactRequest) {
    Optional<Distributor> distributor = repositoryDistributor.findById(contactRequest.getDistributor().getId());
     if (!distributor.isPresent()) {
-      throw new BusinessException("There's not distributor with id: " + contactRequest.getDistributor().getId());
+      throw new EntityNotFoundException("There's not distributor with id: " + contactRequest.getDistributor().getId());
     }
     Contacts contactEntity = new Contacts();
       mapper.map(contactRequest, contactEntity);
@@ -68,7 +67,7 @@ public class ContactService {
   public String delete(Long id) {
       Optional<Contacts> contact = repository.findById(id);
       if (!contact.isPresent()) {
-        throw new BusinessException("Contact not found with id: " + id);
+        throw new EntityNotFoundException("Contact not found with id: " + id);
       }
       repository.deleteById(id);
       return "Contact deleted with success";    
@@ -77,7 +76,7 @@ public class ContactService {
   public ContactResponse findById(Long id){
     Optional<Contacts> contact = repository.findById(id);
     if(contact.isEmpty()){
-      throw new BusinessException("It's not possible find contact with id: " + id);
+      throw new EntityNotFoundException("It's not possible find contact with id: " + id);
     }
     ContactResponse contactResp = new ContactResponse();
     mapper.map(contact.get(), contactResp);

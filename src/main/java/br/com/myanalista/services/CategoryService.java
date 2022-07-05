@@ -7,13 +7,12 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.models.entities.*;
-import br.com.myanalista.models.request.CategoryImportFileRequest;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.myanalista.exceptions.BusinessException;
 import br.com.myanalista.models.request.CategoryRequestPost;
 import br.com.myanalista.models.request.CategoryRequestPut;
 import br.com.myanalista.models.response.CategoryResponse;
@@ -35,7 +34,7 @@ public class CategoryService {
           Optional<Categories> result =  repository.findById(categoryRequest.getCategory().getId());
             categoriesResult = result.get();
             if (result.isEmpty()) {
-                throw new BusinessException("There isn't category parent with id: " + categoryRequest.getCategory().getId());
+                throw new EntityNotFoundException("There isn't category parent with id: " + categoryRequest.getCategory().getId());
             }
         }
         categoryRequest.setCategory(categoriesResult);
@@ -49,13 +48,13 @@ public class CategoryService {
         Categories categoriesResult = null;
         Optional<Categories> categorySeek = repository.findById(categoryRequest.getId());
         if(categorySeek.isEmpty()){
-            throw new BusinessException("There isn't category with id: " + categoryRequest.getId());
+            throw new EntityNotFoundException("There isn't category with id: " + categoryRequest.getId());
         }
         if (categoryRequest.getCategory() != null) {
             Optional<Categories> result =  repository.findById(categoryRequest.getCategory().getId());
             categoriesResult = result.get();
             if (result.isEmpty()) {
-                throw new BusinessException("There isn't category parent with id: " + categoryRequest.getCategory().getId());
+                throw new EntityNotFoundException("There isn't category parent with id: " + categoryRequest.getCategory().getId());
             }
         }
         categoryRequest.setCategory(categoriesResult);
@@ -68,7 +67,7 @@ public class CategoryService {
     public String delete(Long id) {
         Optional<Categories> category = repository.findById(id);
         if (!category.isPresent()) {
-            throw new BusinessException("Category not found with id: " + id);
+            throw new EntityNotFoundException("Category not found with id: " + id);
         }
         repository.deleteById(id);
         return "Category deleted with success";
@@ -77,7 +76,7 @@ public class CategoryService {
     public CategoryResponse findById(Long id) {
         Optional<Categories> category = repository.getByIdPerson(id);
         if (category.isEmpty()) {
-            throw new BusinessException("It's not possible find category with id: " + id);
+            throw new EntityNotFoundException("It's not possible find category with id: " + id);
         }
         CategoryResponse categoryResponse = new CategoryResponse();
         mapper.map(category.get(), categoryResponse);

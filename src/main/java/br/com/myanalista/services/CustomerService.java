@@ -6,15 +6,14 @@ import java.io.IOException;
 import java.util.Optional;
 
 import br.com.myanalista.configs.Utils;
+import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.models.entities.*;
-import br.com.myanalista.models.response.ChannelResponse;
 import br.com.myanalista.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.myanalista.exceptions.BusinessException;
 import br.com.myanalista.models.response.CustomerResponse;
 import org.modelmapper.ModelMapper;
 
@@ -42,7 +41,7 @@ public class CustomerService {
     public Customer findById(Long id) {
         Optional<Customer> channel = repository.findById(id);
         if (channel.isEmpty()) {
-            throw new BusinessException("There isn't customer with id: " + id);
+            throw new EntityNotFoundException("There isn't customer with id: " + id);
         }
         return channel.get();
     }
@@ -253,7 +252,7 @@ public class CustomerService {
         }
         Optional<Customer> response = repository.findByCode(code);
         if (response.isEmpty()) {
-            throw new BusinessException("There isn't customer with code: " + code);
+            throw new EntityNotFoundException("There isn't customer with code: " + code);
         }
         CustomerResponse customer = new CustomerResponse();
         mapper.map(response.get(), customer);
