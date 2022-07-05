@@ -38,4 +38,15 @@ public class ResourceExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
     }
 
+    @ExceptionHandler(NotAuthorizateException.class)
+    public final ResponseEntity<StandardError> notAuthorized(NotAuthorizateException e, HttpServletRequest request) {
+        StandardError err = new StandardError();
+        err.getTimestamp();
+        err.setStatus(HttpStatus.NOT_FOUND.value());
+        err.setError("Problem to proceed");
+        err.setMessage(e.getMessage());
+        err.setPath(request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(err);
+    }
+
 }

@@ -2,6 +2,7 @@ package br.com.myanalista.controllers;
 
 import br.com.myanalista.models.entities.Users;
 import br.com.myanalista.models.request.ChangePasswordRequest;
+import br.com.myanalista.models.request.LogInRequest;
 import br.com.myanalista.models.request.UserRequestPost;
 import br.com.myanalista.models.request.UserRequestPut;
 import br.com.myanalista.models.response.UserResponse;
@@ -10,6 +11,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -59,5 +61,10 @@ public class UserController {
     public String changePassowrd(@PathVariable(value = "id") Long id,
                                  @RequestBody ChangePasswordRequest request) {
             return service.changePassword(request);
+    }
+
+    @GetMapping("/validate-password")
+    public ResponseEntity<Boolean> validatePassword(@RequestBody LogInRequest logInRequest){
+        return service.validatePassword(logInRequest);
     }
 }

@@ -32,7 +32,7 @@ public class Users implements Serializable {
     @NotEmpty(message = "Password is mandatory field")
     private String password;
     @NotEmpty(message = "Administrator is mandatory field")
-    private UserTypeEnum userType;
+    private Boolean admin;
     @NotEmpty(message = "Email is mandatory field")
     private String userEmail;
     @CreationTimestamp
