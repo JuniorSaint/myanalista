@@ -24,5 +24,5 @@ public class UserRequestPost {
     private String userEmail;
     private String password;
     @JsonDeserialize
-    private UserTypeEnum userType;
+    private Boolean admin;
 }

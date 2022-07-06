@@ -18,6 +18,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -53,9 +56,16 @@ public class AuthTokenFilter extends UsernamePasswordAuthenticationFilter {
 
         String token = JWT.create().
                 withSubject(userData.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + CP.EXPIRATION))
+                .withExpiresAt(expirationIn(CP.EXPIRATION))
                 .sign(Algorithm.HMAC512(CP.SIGNATURE_KEY));
         response.getWriter().write(token);
         response.getWriter().flush();
+    }
+
+    private Date expirationIn(Long exp){
+        long expString = Long.valueOf(exp);
+        LocalDateTime dataHoraExpiracao = LocalDateTime.now().plusSeconds(expString);
+        Instant instant = dataHoraExpiracao.atZone(ZoneId.systemDefault()).toInstant();
+        return Date.from(instant);
     }
 }

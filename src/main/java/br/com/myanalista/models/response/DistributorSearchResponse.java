@@ -15,6 +15,6 @@ import lombok.Setter;
 public class DistributorSearchResponse {
   private String cnpjCpf;
   private String nickName;
-  private CustomerTypeEnum customerType;
+  private String customerType;
   private String companyName;
 }

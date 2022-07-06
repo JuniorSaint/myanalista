@@ -43,7 +43,6 @@ public class Products implements Serializable {
     private List<SellOut> sellOuts;
     @JsonIgnoreProperties(value = {"products"})
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name="category_id")
     private Categories categories;
 }

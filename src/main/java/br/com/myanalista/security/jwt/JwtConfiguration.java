@@ -36,6 +36,8 @@ public class JwtConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/swagger-resources/**").permitAll()
                 .antMatchers("/swagger-ui/**").permitAll()
                 .antMatchers("/v3/api-docs").permitAll()
+                .antMatchers("/v1/products/**").permitAll()
+                .antMatchers("/v1/upload/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new AuthTokenFilter(authenticationManager()))

@@ -47,10 +47,12 @@ public class LendingService {
         Optional<Lending> response = repository.findById(id);
         return response.get();
     }
+
     public Page<Lending> findAll(Pageable pageable) {
         Page<Lending> response = repository.findAll(pageable);
         return response;
     }
+
     public void recordDataToDb(Long id, String path) throws IOException {
         try {
             @Cleanup FileInputStream file = new FileInputStream(new File(path));  // @cleanup is to void close the file in the end
@@ -71,11 +73,11 @@ public class LendingService {
                         .cluster(findCluster(cells.get(7).getStringCellValue()))
                         .subChannel(findSubChannel(cells.get(8).getStringCellValue()))
                         .city(cells.get(9).getStringCellValue())
-                        .equipmentNumber(findEquipment(cells.get(10).getStringCellValue(), distributor(id)))
+                        .equipmentNumber(findEquipment(cells.get(10), distributor(id)))
                         .contract((int) cells.get(14).getNumericCellValue())
                         .amount((int) cells.get(17).getNumericCellValue())
-                        .dateSend(verifyDateIsValid(cells.get(18).getLocalDateTimeCellValue()))
-                        .dueDate(verifyDateIsValid(cells.get(19).getLocalDateTimeCellValue()))
+                        .dateSend(verifyDateIsValid(cells.get(18)))
+                        .dueDate(verifyDateIsValid(cells.get(19)))
                         .sellerCode(findSeller((int) cells.get(20).getNumericCellValue(), distributor(id)))
                         .route((int) cells.get(21).getNumericCellValue())
                         .nfe((int) cells.get(22).getNumericCellValue())
@@ -87,24 +89,35 @@ public class LendingService {
             throw new RuntimeException(e);
         }
     }
-    private LocalDateTime verifyDateIsValid(LocalDateTime date){
-        if(date == null){
+    private Equipment findEquipment(Cell code, Distributor distributor) {
+        String newCode = code.toString().replace(".0", "");
+        if (newCode.isEmpty()) {
             return null;
         }
-        String dateConvert = date.toString();
-        Boolean response = dateValidator.isValid(dateConvert);
-        if(response.equals(false)){
+        Optional<Equipment> responseEquipment = repositoryEquipment.findByPatrimonyAndDistributor(newCode, distributor);
+        if (responseEquipment.isEmpty()) {
             return null;
         }
-        return date;
+        return responseEquipment.get();
     }
+
+    private LocalDateTime verifyDateIsValid(Cell date) {
+        try {
+            return date.getLocalDateTimeCellValue();
+        } catch (IllegalStateException | NumberFormatException c) {
+            return null;
+        }
+    }
+
     private List<?> toList(Iterator<?> iterator) {
         return IteratorUtils.toList(iterator);
     }
+
     private Distributor distributor(Long id) {
         Optional<Distributor> dis = repositoryDistributor.findById(id);
         return dis.get();
     }
+
     private Customer findCustomer(Integer code, Distributor distributor) {
         String newCode = code.toString();
         if (newCode.isEmpty()) {
@@ -121,6 +134,7 @@ public class LendingService {
         }
         return customerResponse.get();
     }
+
     private SubChannel findSubChannel(String sub) {
         if (sub.isEmpty()) {
             return null;
@@ -131,6 +145,7 @@ public class LendingService {
         }
         return subResponse.get();
     }
+
     private ClusterGec findCluster(String name) {
         if (name.isEmpty()) {
             return null;
@@ -140,17 +155,6 @@ public class LendingService {
             return null;
         }
         return clusterGec.get();
-    }
-    private Equipment findEquipment(String code, Distributor distributor) {
-        String newCode = code.toString();
-        if (newCode.isEmpty()) {
-            return null;
-        }
-        Optional<Equipment> responseEquipment = repositoryEquipment.findByPatrimonyAndDistributor(newCode, distributor);
-        if (responseEquipment.isEmpty()) {
-            return null;
-        }
-        return responseEquipment.get();
     }
     private Teams findSeller(Integer code, Distributor distributor) {
         String newCode = code.toString();
