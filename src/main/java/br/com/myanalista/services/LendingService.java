@@ -1,6 +1,5 @@
 package br.com.myanalista.services;
 
-import br.com.myanalista.configs.DateValidatorUsingDateTimeFormatter;
 import br.com.myanalista.models.entities.*;
 import br.com.myanalista.repositories.*;
 import io.jsonwebtoken.io.IOException;
@@ -39,9 +38,6 @@ public class LendingService {
     private DistributorRepository repositoryDistributor;
     @Autowired
     private ClusterGecRepository repositoryCluster;
-
-    @Autowired
-    private DateValidatorUsingDateTimeFormatter dateValidator;
 
     public Lending findById(Long id) {
         Optional<Lending> response = repository.findById(id);

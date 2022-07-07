@@ -1,6 +1,10 @@
 package br.com.myanalista.controllers;
 
+import br.com.myanalista.models.response.DistributorSearchResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,28 +33,44 @@ public class DistributorController {
 
     @GetMapping("/{id}")
     public DistributorResponse findAllWithListCustomer(@PathVariable(value = "id") Long id) {
-        return service.findById(id);
+        try {
+            return service.findById(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
-//  @GetMapping("/listSearch")
-//  public DistributorResponse findForSearchWithPageable() {
-//  Page<DistributorResponse> response = service.listOfDistributor(id);
-//    return response;
-//  }
+    @GetMapping("/list-search")
+    public Page<DistributorSearchResponse> findForSearchWithPageable(Pageable page) {
+        Page<DistributorSearchResponse> response = service.listOfDistributorPageable(page);
+        return response;
+    }
 
     @PostMapping
     public DistributorResponse saveCustomer(@RequestBody DistributorRequestPost request) {
-        return service.save(request);
+        try {
+            return service.save(request);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @DeleteMapping("/{id}")
-    public String deleteCustomer(@PathVariable(value = "id") Long id) {
-        return service.delete(id);
+    public ResponseEntity<Object> deleteCustomer(@PathVariable(value = "id") Long id) {
+        try {
+            return service.delete(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @PutMapping("/{id}")
     public DistributorResponse updateCustomer(@PathVariable(value = "id") Long id,
                                               @RequestBody DistributorRequestPut request) {
-        return service.update(request);
+        try {
+            return service.update(request);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

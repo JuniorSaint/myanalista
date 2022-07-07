@@ -50,18 +50,11 @@ public class Distributor implements Serializable {
     private String formOfPayment;
     private String cluster;
     // End Financial
-    @JsonIgnoreProperties(value = {"distributor"}) // Fix problem cyclic reference
-    @OneToMany(mappedBy="distributor")
-    private List<Contacts> contacts;
-    @JsonIgnoreProperties(value = {"distributor"}) // Fix problem cyclic reference
-    @OneToMany(mappedBy="distributor")
-    private List<Teams> teams;
     @CreationTimestamp
     private LocalDate createdAt;
     @UpdateTimestamp
     private LocalDate updatedAt;
 
-    @Singular
     @OneToMany(mappedBy="distributor")
     @JsonIgnoreProperties(value = {"distributor"})
     private List<Customer> customers;
@@ -77,4 +70,12 @@ public class Distributor implements Serializable {
     @OneToMany(mappedBy="distributor")
     @JsonIgnoreProperties(value = {"distributor"})
     private List<SellOut> sellOuts;
+
+    @OneToMany(mappedBy="distributor")
+    @JsonIgnoreProperties(value = {"distributor"}) // Fix problem cyclic reference
+    private List<Teams> teams;
+
+    @OneToMany(mappedBy="distributor")
+    @JsonIgnoreProperties(value = {"distributor"}) // Fix problem cyclic reference
+    private List<Contacts> contacts;
 }

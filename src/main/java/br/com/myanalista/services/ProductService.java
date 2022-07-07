@@ -23,13 +23,10 @@ import java.util.Optional;
 public class ProductService {
     @Autowired
     private ProductRepository repository;
-
     @Autowired
     private CategoryRepository repositoryCategory;
-
     @Autowired
     private ModelMapper mapper;
-
     @Transactional
     public Products save(ProductRequestPost productRequest) {
         Optional<Products> product = repository.findByCodeSku(productRequest.getSku());

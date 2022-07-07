@@ -25,46 +25,68 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @GetMapping("/term/{term}/{page}")
-    public Page<UserResponse> findAllWithList(@PathVariable(value = "page") Integer page,
-                                              @PathVariable(value = "term") Users users) {
-        return service.getUserByTerm(users, page);
-    }
-
     @GetMapping("/page")
-    public Page<UserResponse> findAllWithList(Pageable page) {
-        return service.findAllWithPage(page);
+    public Page<UserResponse> findAllPageable(Pageable page) {
+        try {
+            return service.findAllWithPage(page);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @GetMapping("/{id}")
     public UserResponse findById(@PathVariable(value = "id") Long id) {
-        return service.findById(id);
+        try {
+            return service.findById(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @PostMapping
     public UserResponse save(@RequestBody @Valid UserRequestPost userRequestPost) {
+        try {
             return service.save(userRequestPost);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<Object> delete(@PathVariable(value = "id") Long id) {
+        try {
             return service.delete(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @PutMapping("/{id}")
     public UserResponse update(@PathVariable(value = "id") Long id,
                                @RequestBody UserRequestPut request) {
+        try {
             return service.update(request);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @PutMapping("/change-password/{id}")
     public String changePassowrd(@PathVariable(value = "id") Long id,
                                  @RequestBody ChangePasswordRequest request) {
+        try {
             return service.changePassword(request);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @GetMapping("/validate-password")
     public ResponseEntity<Boolean> validatePassword(@RequestBody LogInRequest logInRequest){
-        return service.validatePassword(logInRequest);
+        try {
+            return service.validatePassword(logInRequest);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

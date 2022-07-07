@@ -11,6 +11,8 @@ import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.models.entities.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.myanalista.models.request.CategoryRequestPost;
@@ -64,13 +66,13 @@ public class CategoryService {
     }
 
     @Transactional
-    public String delete(Long id) {
+    public ResponseEntity<Object> delete(Long id) {
         Optional<Categories> category = repository.findById(id);
         if (!category.isPresent()) {
             throw new EntityNotFoundException("Category not found with id: " + id);
         }
         repository.deleteById(id);
-        return "Category deleted with success";
+        return ResponseEntity.status(HttpStatus.OK).body("Category deleted with success!");
     }
 
     public CategoryResponse findById(Long id) {

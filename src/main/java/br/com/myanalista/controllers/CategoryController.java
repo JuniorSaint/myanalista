@@ -2,6 +2,7 @@ package br.com.myanalista.controllers;
 
 import br.com.myanalista.models.entities.Categories;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,22 +29,41 @@ public class CategoryController {
     private CategoryService service;
 
     @GetMapping("/{id}")
-    public CategoryResponse findById(@PathVariable(value = "id") Long id){
-    return service.findById(id);
+    public CategoryResponse findById(@PathVariable(value = "id") Long id) {
+        try {
+            return service.findById(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
+
     @PostMapping
     public Categories save(@RequestBody CategoryRequestPost request) {
+        try {
             return service.save(request);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<Object> delete(@PathVariable(value = "id") Long id) throws Exception {
+        try {
             return service.delete(id);
+        } catch (Exception ex) {
+            throw new Exception(ex.getMessage());
+        }
+
+
     }
 
     @PutMapping("/{id}")
     public Categories update(@PathVariable(value = "id") Long id,
-                                   @RequestBody CategoryRequestPut request) {
+                             @RequestBody CategoryRequestPut request) throws Exception {
+        try {
             return service.update(request);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 }

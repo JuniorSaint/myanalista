@@ -30,8 +30,7 @@ public interface TeamsRepository extends JpaRepository<Teams, Long> {
 
     long deleteByMemberCode(String code);
 
-    @Query(value = "select c.id, c.fullName, c.cpf, c.memberFunction, c.typeOfRegistrationMember from Teams c ")
-    Page<TeamsSearchResponse> findAllPageableAndSort(Pageable pageable, Example example);
+    Page<Teams> findAll(Pageable pageable);
 
 
 }

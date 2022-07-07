@@ -7,11 +7,14 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import br.com.myanalista.configs.Utils;
 import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.models.response.DistributorSearchResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.myanalista.models.entities.Distributor;
@@ -24,9 +27,10 @@ import br.com.myanalista.repositories.DistributorRepository;
 public class DistributorService {
     @Autowired
     private DistributorRepository repository;
-
     @Autowired
     private ModelMapper mapper;
+    @Autowired
+    private Utils utils;
 
     @Transactional
     public DistributorResponse save(DistributorRequestPost customerRequest) {
@@ -49,13 +53,13 @@ public class DistributorService {
     }
 
     @Transactional
-    public String delete(Long id) {
+    public ResponseEntity<Object> delete(Long id) {
         Optional<Distributor> contact = repository.findById(id);
         if (!contact.isPresent()) {
             throw new EntityNotFoundException("Customer not found with id: " + id);
         }
         repository.deleteById(id);
-        return "Customer deleted with success";
+        return ResponseEntity.status(HttpStatus.OK).body("Customer deleted with success!");
     }
 
     public DistributorResponse findById(Long id) {
@@ -76,12 +80,10 @@ public class DistributorService {
         return distributor.get();
     }
 
-    public Page<DistributorSearchResponse> listOfDistributor(Distributor distributor, Pageable pageable) {
-        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase();
-        Example<Distributor> example = Example.of(distributor, matcher);
-
-        Page<DistributorSearchResponse> response = repository.findAllPageableAndSort(pageable, example);
-        return response;
+    public Page<DistributorSearchResponse> listOfDistributorPageable(Pageable pageable) {
+        Page<Distributor> response = repository.findAll(pageable);
+        Page<DistributorSearchResponse> disResponse = utils.mapEntityPageIntoDtoPage(response, DistributorSearchResponse.class);
+        return disResponse;
     }
 
     public void recordDataToDb() throws IOException {

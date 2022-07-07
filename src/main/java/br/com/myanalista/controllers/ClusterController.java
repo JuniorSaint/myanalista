@@ -22,6 +22,10 @@ public class ClusterController {
     private ClusterGecService service;
     @GetMapping("/page")
     public Page<ClusterResponse> findAllWithPage(Pageable page) {
-        return service.findAllWithPage(page);
+        try {
+            return service.findAllWithPage(page);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -3,10 +3,12 @@ package br.com.myanalista.services;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import br.com.myanalista.configs.Utils;
 import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.models.response.TeamsSearchResponse;
 import org.modelmapper.ModelMapper;
@@ -15,6 +17,8 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.myanalista.models.entities.Distributor;
@@ -29,12 +33,12 @@ import br.com.myanalista.repositories.TeamsRepository;
 public class TeamsService {
     @Autowired
     private TeamsRepository repository;
-
     @Autowired
     private ModelMapper mapper;
-
     @Autowired
     private DistributorRepository repositoryDistributor;
+    @Autowired
+    private Utils utils;
 
     @Transactional
     public TeamsResponse save(TeamsRequestPost teamsRequest) {
@@ -47,7 +51,6 @@ public class TeamsService {
             newCodeMember = "0".concat(newCodeMember);
         }
         teamsRequest.setMemberCode(newCodeMember);
-
         Optional<Distributor> distributor = repositoryDistributor
                 .findById(teamsRequest.getDistributor().getId());
         if (!distributor.isPresent()) {
@@ -66,7 +69,6 @@ public class TeamsService {
         mapper.map(teamsCreated, teamsResponse);
         return teamsResponse;
     }
-
     @Transactional
     public TeamsResponse update(TeamsRequestPut teamsRequest) {
         if (teamsRequest.getDistributor().getId() == null || teamsRequest.getMemberCode() == null) {
@@ -78,7 +80,6 @@ public class TeamsService {
             newCodeMember = "0".concat(newCodeMember);
         }
         teamsRequest.setMemberCode(newCodeMember);
-
         Optional<Distributor> distributor = repositoryDistributor
                 .findById(teamsRequest.getDistributor().getId());
         if (!distributor.isPresent()) {
@@ -94,13 +95,13 @@ public class TeamsService {
     }
 
     @Transactional
-    public String delete(Long id) {
+    public ResponseEntity<Object> delete(Long id) {
         Optional<Teams> teams = repository.findById(id);
         if (!teams.isPresent()) {
             throw new EntityNotFoundException("There isn't  team member with id:  " + id);
         }
         repository.delete(teams.get());
-        return "Teams deleted with success";
+        return ResponseEntity.status(HttpStatus.OK).body("Teams deleted with success!");
     }
 
     public TeamsResponse findByMemberCode(String code) {
@@ -121,14 +122,10 @@ public class TeamsService {
         mapper.map(teams.get(), teamsResponse);
         return teamsResponse;
     }
-
-
-    public Page<TeamsSearchResponse> listOfDistributor(Teams teams, Pageable pageable) {
-        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase();
-        Example<Teams> example = Example.of(teams, matcher);
-
-        Page<TeamsSearchResponse> response = repository.findAllPageableAndSort(pageable, example);
-        return response;
+    public Page<TeamsSearchResponse> listOfTeams(Pageable pageable) {
+        Page<Teams> response = repository.findAll(pageable);
+        Page<TeamsSearchResponse> responses =  utils.mapEntityPageIntoDtoPage(response, TeamsSearchResponse.class);
+        return responses;
     }
 
     public void recordDataToDb() throws IOException {

@@ -1,6 +1,12 @@
 package br.com.myanalista.controllers;
 
+import br.com.myanalista.models.entities.Contacts;
+import br.com.myanalista.models.response.ContactSearchResponse;
+import br.com.myanalista.models.response.DistributorSearchResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,22 +33,43 @@ public class ContactController {
 
     @GetMapping("/{id}")
     public ContactResponse findAllWithList(@PathVariable(value = "id") Long id) {
-        return service.findById(id);
+        try {
+            return service.findById(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @PostMapping
     public ContactResponse save(@RequestBody ContactRequestPost request) {
+        try {
             return service.save(request);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<Object> delete(@PathVariable(value = "id") Long id) {
+        try {
             return service.delete(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @PutMapping("/{id}")
     public ContactResponse update(@PathVariable(value = "id") Long id,
                                   @RequestBody ContactRequestPut request) {
+        try {
             return service.update(request);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @GetMapping("/list-search")
+    public Page<ContactSearchResponse> findForSearchWithPageable(Pageable page) {
+        Page<ContactSearchResponse> response = service.listOfContactPageable(page);
+        return response;
     }
 }

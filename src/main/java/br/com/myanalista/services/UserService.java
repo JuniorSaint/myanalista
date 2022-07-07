@@ -80,13 +80,13 @@ public class UserService {
     }
 
     @Transactional
-    public String delete(Long id) {
+    public ResponseEntity<Object> delete(Long id) {
         Optional<Users> user = repository.findById(id);
         if (!user.isPresent()) {
             throw new EntityNotFoundException("user not found with id: " + id);
         }
         repository.deleteById(id);
-        return "User deleted with success";
+        return ResponseEntity.status(HttpStatus.OK).body("User deleted with success!");
     }
 
     public UserResponse findById(Long id) {

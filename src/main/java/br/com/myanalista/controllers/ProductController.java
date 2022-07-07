@@ -21,7 +21,11 @@ public class ProductController {
 
     @GetMapping("/sku/{sku}")
     public ProductResponse findProductBySku(@PathVariable(value = "sku") Integer sku) {
-        return service.findBySku(sku);
+        try {
+            return service.findBySku(sku);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @GetMapping("/{id}")
@@ -36,17 +40,28 @@ public class ProductController {
 
     @PutMapping("/{id}")
     public Products update(@PathVariable(value = "id") Long id, @RequestBody @Valid ProductRequestPost productRequestPut) {
+        try {
             return service.update(productRequestPut);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable(value = "id") Long id) {
+        try {
             return service.delete(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @GetMapping("/page")
     public Page<ProductResponse> findAllWithList(Pageable page) {
-        return service.findAllWithPage(page);
+        try {
+            return service.findAllWithPage(page);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
-
 }

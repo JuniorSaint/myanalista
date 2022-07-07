@@ -18,12 +18,7 @@ public interface DistributorRepository extends JpaRepository<Distributor, Long> 
     Optional<Distributor> findDistributorByCnpj(@Param("cnpjCpf") String cnpjCpf);
     @Query(value = "select c from Distributor c where c.id = :id")
     Distributor findDistribuitorById(@Param(value = "id") Long id);
-
-    List<Distributor> findAll(Example example);
-
-    @Query(value = "select d.cnpjCpf, d.nickName, d.companyName, d.customerType from Distributor d")
-    Page<DistributorSearchResponse> findAllPageableAndSort(Pageable pageable,  Example example);
-
+    Page<Distributor> findAll(Pageable pageable);
     @Query(value = "select c from Distributor c where c.id = :id")
     List<Distributor> findAllById(@Param(value = "id") Long id);
 }

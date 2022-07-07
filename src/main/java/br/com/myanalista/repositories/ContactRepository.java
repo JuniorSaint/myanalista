@@ -13,11 +13,11 @@ import br.com.myanalista.models.entities.Contacts;
 import br.com.myanalista.models.response.ContactSearchResponse;
 
 @Repository
-public interface ContactRepository extends JpaRepository<Contacts, Long>{
-  
-  Optional<Contacts> findById(Long id);
+public interface ContactRepository extends JpaRepository<Contacts, Long> {
 
-  @Query(value = "select new br.com.myanalista.models.response.ContactSearchResponse(id,contactDepartament,contactEmail,contactName,contactPhone) from Contacts")
-  Page<ContactSearchResponse> findAllPageableAndSort(Pageable pageable, Example example);
+    Optional<Contacts> findById(Long id);
+
+    @Query(value = "select new br.com.myanalista.models.response.ContactSearchResponse(id,contactDepartament,contactEmail,contactName,contactPhone) from Contacts")
+    Page<Contacts> findAllPageableAndSort(Pageable pageable);
 
 }

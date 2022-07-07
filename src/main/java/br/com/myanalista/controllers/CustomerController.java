@@ -19,11 +19,19 @@ public class CustomerController {
 
     @GetMapping("/{id}")
     public Customer findById(@PathVariable(value = "id") Long id) {
-        return service.findById(id);
+        try {
+            return service.findById(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @GetMapping("/page")
     public Page<Customer> findAllWithPage(Pageable page) {
-        return service.findAllWithPage(page);
+        try {
+            return service.findAllWithPage(page);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

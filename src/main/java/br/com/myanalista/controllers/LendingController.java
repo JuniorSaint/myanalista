@@ -22,11 +22,19 @@ public class LendingController {
 
     @GetMapping("/{id}")
     public Lending findProductById(@PathVariable(value = "id") Long id) {
-        return serviceLending.findById(id);
+        try {
+            return serviceLending.findById(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @GetMapping("/page")
     public Page<Lending> findAll(Pageable pageable) {
-        return serviceLending.findAll(pageable);
+        try {
+            return serviceLending.findAll(pageable);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
