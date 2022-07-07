@@ -25,7 +25,7 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @GetMapping("/page")
+    @GetMapping
     public ResponseEntity<Page<UserResponse>> findAllPageable(Pageable page) {
         try {
             return service.findAllWithPage(page);

@@ -21,9 +21,10 @@ public class DetailDataUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = Arrays.stream(users.get().getRoles())
-                .map(role -> new SimpleGrantedAuthority(role.toString())).collect(Collectors.toList());
-        return authorities;
+//        List<GrantedAuthority> authorities = Arrays.stream(users.get().getRoles())
+//                .map(role -> new SimpleGrantedAuthority(role.toString())).collect(Collectors.toList());
+//        return authorities;
+        return null;
     }
 
     @Override

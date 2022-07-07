@@ -57,7 +57,7 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/page")
+    @GetMapping
     public ResponseEntity<Page<ProductResponse>> findAllWithList(Pageable page) {
         try {
             return service.findAllWithPage(page);

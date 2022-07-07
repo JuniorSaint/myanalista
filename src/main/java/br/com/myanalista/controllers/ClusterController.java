@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class ClusterController {
     @Autowired
     private ClusterGecService service;
-    @GetMapping("/page")
+    @GetMapping
     public Page<ClusterResponse> findAllWithPage(Pageable page) {
         try {
             return service.findAllWithPage(page);

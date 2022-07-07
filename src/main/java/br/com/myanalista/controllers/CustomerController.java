@@ -25,7 +25,7 @@ public class CustomerController {
         }
     }
 
-    @GetMapping("/page")
+    @GetMapping
     public Page<Customer> findAllWithPage(Pageable page) {
         try {
             return service.findAllWithPage(page);

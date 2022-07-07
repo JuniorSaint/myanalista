@@ -27,7 +27,7 @@ public class EquipmentController {
         }
     }
 
-    @GetMapping("/page")
+    @GetMapping
     public ResponseEntity<Page<Equipment>> findAllWithPage(Pageable page) {
         try {
             return service.findAllWithPage(page);

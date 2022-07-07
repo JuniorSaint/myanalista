@@ -41,8 +41,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (user.isEmpty()) {
             throw new EntityNotFoundException("User " + username + "or password is not correct");
         }
-        String[] roles = user.get().getAdmin() ? new String[]{"ADMINISTRATOR", "COLLABORATOR"} : new String[]{"COLLABORATOR"};
-        user.get().setRoles(roles);
+//        String[] roles = user.get().getAdmin() ? new String[]{"ADMINISTRATOR", "COLLABORATOR"} : new String[]{"COLLABORATOR"};
+//        user.get().setRoles(roles);
         return new DetailDataUser(user);
     }
 }

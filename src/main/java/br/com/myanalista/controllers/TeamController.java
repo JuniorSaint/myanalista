@@ -68,7 +68,7 @@ public class TeamController {
         }
     }
 
-    @GetMapping("/page")
+    @GetMapping
     public ResponseEntity<Page<TeamsSearchResponse>> findForSearchWithPageable(Pageable page) {
         try {
             return service.listOfTeams(page);

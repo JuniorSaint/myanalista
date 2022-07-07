@@ -24,7 +24,7 @@ public class ChannelController {
         }
     }
 
-    @GetMapping("/page")
+    @GetMapping
     public Page<ChannelResponse> findAllWithPage(Pageable page) {
         try {
             return service.findAllWithPage(page);

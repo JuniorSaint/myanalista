@@ -30,7 +30,7 @@ public class LendingController {
         }
     }
 
-    @GetMapping("/page")
+    @GetMapping
     public ResponseEntity<Page<Lending>> findAll(Pageable pageable) {
         try {
             return serviceLending.findAll(pageable);
