@@ -67,7 +67,7 @@ public class ContactController {
             throw new RuntimeException(e);
         }
     }
-    @GetMapping("/list-search")
+    @GetMapping("/page")
     public Page<ContactSearchResponse> findForSearchWithPageable(Pageable page) {
         Page<ContactSearchResponse> response = service.listOfContactPageable(page);
         return response;

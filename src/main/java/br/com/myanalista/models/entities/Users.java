@@ -32,6 +32,8 @@ public class Users implements Serializable {
     private String password;
     @NotEmpty(message = "Administrator is mandatory field")
     private Boolean admin;
+    private String [] roles;
+    private Boolean active;
     @NotEmpty(message = "Email is mandatory field")
     private String userEmail;
     @CreationTimestamp

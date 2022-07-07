@@ -3,11 +3,12 @@ package br.com.myanalista.security.service;
 
 import br.com.myanalista.models.entities.Users;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DetailDataUser implements UserDetails {
 
@@ -20,15 +21,9 @@ public class DetailDataUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        //        List<GrantedAuthority> authorities = new ArrayList<>();
-//        if(users.get().getAdmin()){
-//            authorities.add( new SimpleGrantedAuthority ("ADMINISTRATOR"));
-//            authorities.add( new SimpleGrantedAuthority ("COLLABORATOR"));
-//        }else{
-//            authorities.add( new SimpleGrantedAuthority ("COLLABORATOR"));
-//        }
-//        return authorities;
-        return new ArrayList<>();
+        List<GrantedAuthority> authorities = Arrays.stream(users.get().getRoles())
+                .map(role -> new SimpleGrantedAuthority(role.toString())).collect(Collectors.toList());
+        return authorities;
     }
 
     @Override

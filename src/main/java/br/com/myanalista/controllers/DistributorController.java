@@ -40,7 +40,7 @@ public class DistributorController {
         }
     }
 
-    @GetMapping("/list-search")
+    @GetMapping("/page")
     public ResponseEntity<Page<DistributorSearchResponse>> findForSearchWithPageable(Pageable page) {
         try {
             return service.listOfDistributorPageable(page);

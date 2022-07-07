@@ -31,18 +31,18 @@ public class JwtConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .antMatchers( HttpMethod.POST, "/login").permitAll()
-                .antMatchers("/v1/users/**").permitAll()
-                .antMatchers("/swagger-resources/**").permitAll()
-                .antMatchers("/swagger-ui/**").permitAll()
-                .antMatchers("/v3/api-docs").permitAll()
-                .antMatchers("/v1/upload/**").permitAll()
+                .antMatchers("/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/v1/users/**").hasRole("ADMINISTRATOR")
+                .antMatchers("/swagger-resources/**").permitAll() //swagger
+                .antMatchers("/swagger-ui/**").permitAll()//swagger
+                .antMatchers("/v3/api-docs").permitAll() //swagger
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new AuthTokenFilter(authenticationManager()))
                 .addFilter(new JwtValidFilter(authenticationManager()))
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
+
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
