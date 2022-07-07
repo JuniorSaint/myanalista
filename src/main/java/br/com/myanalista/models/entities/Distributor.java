@@ -1,20 +1,14 @@
 package br.com.myanalista.models.entities;
 
-import br.com.myanalista.models.enums.CustomerTypeEnum;
-
 import lombok.*;
-
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
+
 
 @Builder
 @Entity
@@ -44,7 +38,7 @@ public class Distributor implements Serializable {
     private String observation;
     // Start Financial
     private LocalDate contractDate;
-    private CustomerTypeEnum customerType;
+    private String customerType;
     private String typeOfContract;
     private Double ContractValue;
     private String formOfPayment;

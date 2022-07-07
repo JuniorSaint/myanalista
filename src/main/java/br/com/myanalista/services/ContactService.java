@@ -85,7 +85,6 @@ public class ContactService {
         mapper.map(contact.get(), contactResp);
         return contactResp;
     }
-
     public Page<ContactSearchResponse> listOfContactPageable(Pageable pageable) {
         Page<Contacts> responseEntity = repository.findAllPageableAndSort(pageable);
         Page<ContactSearchResponse> response = utils.mapEntityPageIntoDtoPage(responseEntity, ContactSearchResponse.class);

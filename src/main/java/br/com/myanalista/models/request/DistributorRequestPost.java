@@ -1,20 +1,13 @@
 package br.com.myanalista.models.request;
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Set;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-
-import br.com.myanalista.models.entities.*;
-import br.com.myanalista.models.enums.CompanyTypeEnum;
-import br.com.myanalista.models.enums.CustomerTypeEnum;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.validation.constraints.NotEmpty;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @Getter
@@ -39,7 +32,7 @@ public class DistributorRequestPost {
   private String observation;
   // Start Financial
   private LocalDate contractDate;
-  private CustomerTypeEnum customerType;
+  private String customerType;
   private String typeOfContract;
   private Double ContractValue;
   private String formOfPayment;

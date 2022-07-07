@@ -32,7 +32,7 @@ public class DistributorController {
     private DistributorService service;
 
     @GetMapping("/{id}")
-    public DistributorResponse findAllWithListCustomer(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<DistributorResponse> findAllWithListCustomer(@PathVariable(value = "id") Long id) {
         try {
             return service.findById(id);
         } catch (Exception e) {
@@ -41,13 +41,16 @@ public class DistributorController {
     }
 
     @GetMapping("/list-search")
-    public Page<DistributorSearchResponse> findForSearchWithPageable(Pageable page) {
-        Page<DistributorSearchResponse> response = service.listOfDistributorPageable(page);
-        return response;
+    public ResponseEntity<Page<DistributorSearchResponse>> findForSearchWithPageable(Pageable page) {
+        try {
+            return service.listOfDistributorPageable(page);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     @PostMapping
-    public DistributorResponse saveCustomer(@RequestBody DistributorRequestPost request) {
+    public ResponseEntity<DistributorResponse> saveCustomer(@RequestBody DistributorRequestPost request) {
         try {
             return service.save(request);
         } catch (Exception e) {
@@ -65,7 +68,7 @@ public class DistributorController {
     }
 
     @PutMapping("/{id}")
-    public DistributorResponse updateCustomer(@PathVariable(value = "id") Long id,
+    public ResponseEntity<DistributorResponse> updateCustomer(@PathVariable(value = "id") Long id,
                                               @RequestBody DistributorRequestPut request) {
         try {
             return service.update(request);

@@ -1,6 +1,5 @@
 package br.com.myanalista.models.response;
 
-import br.com.myanalista.models.enums.CustomerTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

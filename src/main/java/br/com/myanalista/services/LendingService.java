@@ -13,6 +13,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -39,14 +41,12 @@ public class LendingService {
     @Autowired
     private ClusterGecRepository repositoryCluster;
 
-    public Lending findById(Long id) {
-        Optional<Lending> response = repository.findById(id);
-        return response.get();
+    public ResponseEntity<Lending> findById(Long id) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(repository.findById(id).get());
     }
 
-    public Page<Lending> findAll(Pageable pageable) {
-        Page<Lending> response = repository.findAll(pageable);
-        return response;
+    public ResponseEntity<Page<Lending>> findAll(Pageable pageable) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(repository.findAll(pageable));
     }
 
     public void recordDataToDb(Long id, String path) throws IOException {
@@ -85,6 +85,7 @@ public class LendingService {
             throw new RuntimeException(e);
         }
     }
+
     private Equipment findEquipment(Cell code, Distributor distributor) {
         String newCode = code.toString().replace(".0", "");
         if (newCode.isEmpty()) {
@@ -152,6 +153,7 @@ public class LendingService {
         }
         return clusterGec.get();
     }
+
     private Teams findSeller(Integer code, Distributor distributor) {
         String newCode = code.toString();
         if (newCode.isEmpty()) {

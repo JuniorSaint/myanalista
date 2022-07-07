@@ -2,7 +2,6 @@ package br.com.myanalista.models.response;
 
 import java.time.LocalDate;
 
-import br.com.myanalista.models.enums.UserTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

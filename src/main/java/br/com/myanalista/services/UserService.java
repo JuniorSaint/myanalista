@@ -1,6 +1,7 @@
 package br.com.myanalista.services;
 
 import br.com.myanalista.configs.Utils;
+import br.com.myanalista.exceptions.BadRequestException;
 import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.exceptions.NotAuthorizateException;
 import br.com.myanalista.models.entities.Users;
@@ -43,31 +44,33 @@ public class UserService {
     UserResponse userResponse = new UserResponse();
 
     @Transactional
-    public UserResponse save(UserRequestPost userRequest) {
+    public ResponseEntity<UserResponse> save(UserRequestPost userRequest) {
         Optional<Users> searchForUser = repository.findByUserEmail(userRequest.getUserEmail());
         if (searchForUser.isPresent()) {
-            throw new EntityNotFoundException(
+            throw new BadRequestException(
                     "Already exist user with this email: " + userRequest.getUserEmail() + ", try with another one");
         }
         userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
         Users userEntity = new Users();
         mapper.map(userRequest, userEntity);
         Users userCreated = repository.save(userEntity);
-        return convertEntityToUserResponse(userCreated);
+        ;
+        return ResponseEntity.status(HttpStatus.CREATED).body(convertEntityToUserResponse(userCreated));
     }
 
-    public String changePassword(ChangePasswordRequest request) {
+    public ResponseEntity<Object> changePassword(ChangePasswordRequest request) {
         Optional<Users> user = repository.findById(request.getId());
         if (!user.isPresent()) {
             throw new EntityNotFoundException("User not found with id: " + request.getId());
         }
         user.get().setPassword(passwordEncoder.encode(request.getPassword()));
         Users userUpdate = repository.save(user.get());
-        return "The password was changed with success of the user: " + userUpdate.getUserName();
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("The password was changed with success of the user: " + userUpdate.getUserName());
     }
 
     @Transactional
-    public UserResponse update(UserRequestPut userRequestPut) {
+    public ResponseEntity<UserResponse> update(UserRequestPut userRequestPut) {
         Optional<Users> user = repository.findById(userRequestPut.getId());
         if (!user.isPresent()) {
             throw new EntityNotFoundException("User not found with id: " + userRequestPut.getId());
@@ -76,7 +79,7 @@ public class UserService {
         Users userEntity = new Users();
         mapper.map(userRequestPut, userEntity);
         Users userUpdate = repository.save(userEntity);
-        return convertEntityToUserResponse(userUpdate);
+        return ResponseEntity.status(HttpStatus.OK).body(convertEntityToUserResponse(userUpdate));
     }
 
     @Transactional
@@ -89,15 +92,16 @@ public class UserService {
         return ResponseEntity.status(HttpStatus.OK).body("User deleted with success!");
     }
 
-    public UserResponse findById(Long id) {
+    public ResponseEntity<UserResponse> findById(Long id) {
         Optional<Users> response = repository.findById(id);
         if (response.isEmpty()) {
             throw new EntityNotFoundException("There isn't user with this id: " + id);
         }
-        return convertEntityToUserResponse(response.get());
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body(convertEntityToUserResponse(response.get()));
     }
 
-    public Page<UserResponse> getUserByTerm(Users users, Integer page) {
+    public ResponseEntity<Page<UserResponse>> getUserByTerm(Users users, Integer page) {
         Sort sort = Sort.by("userName").descending();
         Pageable pageable = PageRequest.of(page, 20, sort);
         ExampleMatcher matcher = ExampleMatcher.matching()
@@ -105,8 +109,8 @@ public class UserService {
                 .withIgnoreCase();
         Example<Users> example = Example.of(users, matcher);
         Page<Users> respFromRepository = repository.findAll(example, pageable);
-        Page<UserResponse> response = mapEntityPageIntoDtoPage(respFromRepository, UserResponse.class);
-        return response;
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body(mapEntityPageIntoDtoPage(respFromRepository, UserResponse.class));
     }
 
     public ResponseEntity<Boolean> validatePassword(LogInRequest logInRequest) {
@@ -132,8 +136,9 @@ public class UserService {
         return entities.map(objectEntity -> mapper.map(objectEntity, dtoClass));
     }
 
-    public Page<UserResponse> findAllWithPage(Pageable pageable) {
+    public ResponseEntity<Page<UserResponse>> findAllWithPage(Pageable pageable) {
         Page<Users> responses = repository.findAll(pageable);
-        return utils.mapEntityPageIntoDtoPage(responses, UserResponse.class);
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body(utils.mapEntityPageIntoDtoPage(responses, UserResponse.class));
     }
 }

@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/v1/channel")
 @AllArgsConstructor
 public class ChannelController {
-
     @Autowired
     private ChannelService service;
-
     @GetMapping("/{id}")
     public ChannelResponse findById(@PathVariable(value = "id") Long id) {
         try {

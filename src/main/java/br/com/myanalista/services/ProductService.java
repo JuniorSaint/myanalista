@@ -1,5 +1,6 @@
 package br.com.myanalista.services;
 
+import br.com.myanalista.exceptions.BadRequestException;
 import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.models.entities.Categories;
 import br.com.myanalista.models.entities.Products;
@@ -11,6 +12,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -28,60 +31,61 @@ public class ProductService {
     @Autowired
     private ModelMapper mapper;
     @Transactional
-    public Products save(ProductRequestPost productRequest) {
+    public ResponseEntity<Products> save(ProductRequestPost productRequest) {
         Optional<Products> product = repository.findByCodeSku(productRequest.getSku());
         if (product.isPresent()) {
-            throw new EntityNotFoundException("There is product registered with this sku: " + productRequest.getSku());
+            throw new BadRequestException("There is product registered with this sku: " + productRequest.getSku());
         }
         Optional<Categories> categories = repositoryCategory.findById(productRequest.getCategories().getId());
         productRequest.setCategories(categories.get());
         Products productEntity = new Products();
         mapper.map(productRequest, productEntity);
-        return repository.save(productEntity);
+        return ResponseEntity.status(HttpStatus.CREATED).body( repository.save(productEntity));
     }
 
     @Transactional
-    public Products update(ProductRequestPost productRequestPost) {
+    public ResponseEntity<Products> update(ProductRequestPost productRequestPost) {
         Optional<Products> productsResult = repository.findById(productRequestPost.getId());
         if (!productsResult.isPresent()) {
             throw new EntityNotFoundException("Product not found with id: " + productRequestPost.getId());
         }
         Products products = new Products();
         mapper.map(productRequestPost, products);
-       return repository.save(products);
+        return ResponseEntity.status(HttpStatus.OK).body(repository.save(products));
     }
 
     @Transactional
-    public String delete(Long id) {
+    public ResponseEntity<String> delete(Long id) {
         Optional<Products> product = repository.findById(id);
         if (!product.isPresent()) {
             throw new EntityNotFoundException("Product not found with id: " + id);
         }
         repository.deleteById(id);
-        return "Product deleted with success";
+        return ResponseEntity.status(HttpStatus.OK).body("Product deleted with success");
     }
 
-    public ProductResponse findBySku(Integer sku) {
+    public ResponseEntity<ProductResponse> findBySku(Integer sku) {
         Optional<Products> product = repository.findByCodeSku(sku);
         if (product.isEmpty()) {
             throw new EntityNotFoundException("It's not possible find product with Sku: " + sku);
         }
         ProductResponse productResponse = new ProductResponse();
         mapper.map(product.get(), productResponse);
-        return productResponse;
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(productResponse);
     }
 
-    public Products findById(Long id) {
+    public ResponseEntity<Products> findById(Long id) {
         Optional<Products> product = repository.findById(id);
         if (product.isEmpty()) {
             throw new EntityNotFoundException("It's not possible find product with id: " + id);
         }
-        return product.get();
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(product.get());
     }
 
-    public Page<ProductResponse> findAllWithPage(Pageable pageable) {
+    public ResponseEntity<Page<ProductResponse>> findAllWithPage(Pageable pageable) {
         Page<Products> responses = repository.findAll(pageable);
-        return mapEntityPageIntoDtoPage(responses, ProductResponse.class);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(mapEntityPageIntoDtoPage(responses, ProductResponse.class));
+
     }
 
 

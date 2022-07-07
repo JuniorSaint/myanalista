@@ -31,7 +31,7 @@ public class ResourceExceptionHandler extends ResponseEntityExceptionHandler {
     public final ResponseEntity<StandardError> badRequest(BadRequestException e, HttpServletRequest request) {
         StandardError err = new StandardError();
         err.getTimestamp();
-        err.setStatus(HttpStatus.NOT_FOUND.value());
+        err.setStatus(HttpStatus.BAD_REQUEST.value());
         err.setError("Problem to proceed");
         err.setMessage(e.getMessage());
         err.setPath(request.getRequestURI());
@@ -42,7 +42,7 @@ public class ResourceExceptionHandler extends ResponseEntityExceptionHandler {
     public final ResponseEntity<StandardError> notAuthorized(NotAuthorizateException e, HttpServletRequest request) {
         StandardError err = new StandardError();
         err.getTimestamp();
-        err.setStatus(HttpStatus.NOT_FOUND.value());
+        err.setStatus(HttpStatus.UNAUTHORIZED.value());
         err.setError("Problem to proceed");
         err.setMessage(e.getMessage());
         err.setPath(request.getRequestURI());

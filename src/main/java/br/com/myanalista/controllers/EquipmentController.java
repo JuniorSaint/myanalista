@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,7 +19,7 @@ public class EquipmentController {
     private EquipmentService service;
 
     @GetMapping("/{id}")
-    public Equipment findById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<Equipment> findById(@PathVariable(value = "id") Long id) {
         try {
             return service.findById(id);
         } catch (Exception e) {
@@ -27,7 +28,7 @@ public class EquipmentController {
     }
 
     @GetMapping("/page")
-    public Page<Equipment> findAllWithPage(Pageable page) {
+    public ResponseEntity<Page<Equipment>> findAllWithPage(Pageable page) {
         try {
             return service.findAllWithPage(page);
         } catch (Exception e) {

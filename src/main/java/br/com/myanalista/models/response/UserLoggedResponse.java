@@ -1,6 +1,5 @@
 package br.com.myanalista.models.response;
 
-import br.com.myanalista.models.enums.UserTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,5 +14,5 @@ import lombok.Setter;
 public class UserLoggedResponse {
   private String userEmail;
   private String password;
-  private UserTypeEnum userType;
+  private Boolean admin;
 }

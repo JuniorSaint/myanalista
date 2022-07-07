@@ -32,7 +32,7 @@ public class TeamController {
     private TeamsService service;
 
     @GetMapping("/{id}")
-    public TeamsResponse findById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<TeamsResponse> findById(@PathVariable(value = "id") Long id) {
         try {
             return service.findById(id);
         } catch (Exception e) {
@@ -41,7 +41,7 @@ public class TeamController {
     }
 
     @PostMapping
-    public TeamsResponse saveTeams(@RequestBody TeamsRequestPost request) {
+    public ResponseEntity<TeamsResponse> saveTeams(@RequestBody TeamsRequestPost request) {
         try {
             return service.save(request);
         } catch (Exception e) {
@@ -59,17 +59,21 @@ public class TeamController {
     }
 
     @PutMapping("/{id}")
-    public TeamsResponse updateTeams(@PathVariable(value = "id") Long id,
-                                     @RequestBody TeamsRequestPut request) {
+    public ResponseEntity<TeamsResponse> updateTeams(@PathVariable(value = "id") Long id,
+                                                     @RequestBody TeamsRequestPut request) {
         try {
             return service.update(request);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
     @GetMapping("/list-search")
-    public Page<TeamsSearchResponse> findForSearchWithPageable(Pageable page) {
-        Page<TeamsSearchResponse> response = service.listOfTeams(page);
-        return response;
+    public ResponseEntity<Page<TeamsSearchResponse>> findForSearchWithPageable(Pageable page) {
+        try {
+            return service.listOfTeams(page);
+        }catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
     }
 }

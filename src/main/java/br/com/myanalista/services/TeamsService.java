@@ -41,13 +41,13 @@ public class TeamsService {
     private Utils utils;
 
     @Transactional
-    public TeamsResponse save(TeamsRequestPost teamsRequest) {
+    public ResponseEntity<TeamsResponse> save(TeamsRequestPost teamsRequest) {
         if (teamsRequest.getDistributor().getId() == null || teamsRequest.getMemberCode() == null) {
             throw new EntityNotFoundException("Fields memberCode and distributor id is mandatory");
         }
 //        The code needs to have 3 digitals, because in the file sellout the code has 3 digital
         String newCodeMember = teamsRequest.getMemberCode();
-        for (Integer x = 0; x < (3 - teamsRequest.getMemberCode().length()); x++) {
+        for (int x = 0; x < (3 - teamsRequest.getMemberCode().length()); x++) {
             newCodeMember = "0".concat(newCodeMember);
         }
         teamsRequest.setMemberCode(newCodeMember);
@@ -67,10 +67,11 @@ public class TeamsService {
         Teams teamsCreated = repository.save(teamsEntity);
         TeamsResponse teamsResponse = new TeamsResponse();
         mapper.map(teamsCreated, teamsResponse);
-        return teamsResponse;
+        return ResponseEntity.status(HttpStatus.CREATED).body(teamsResponse);
     }
+
     @Transactional
-    public TeamsResponse update(TeamsRequestPut teamsRequest) {
+    public ResponseEntity<TeamsResponse> update(TeamsRequestPut teamsRequest) {
         if (teamsRequest.getDistributor().getId() == null || teamsRequest.getMemberCode() == null) {
             throw new EntityNotFoundException("Fields memberCode and distributor id is mandatory");
         }
@@ -91,7 +92,7 @@ public class TeamsService {
         Teams teamsUpdate = repository.save(teamsEntity);
         TeamsResponse teamsResponse = new TeamsResponse();
         mapper.map(teamsUpdate, teamsResponse);
-        return teamsResponse;
+        return ResponseEntity.status(HttpStatus.OK).body(teamsResponse);
     }
 
     @Transactional
@@ -104,28 +105,30 @@ public class TeamsService {
         return ResponseEntity.status(HttpStatus.OK).body("Teams deleted with success!");
     }
 
-    public TeamsResponse findByMemberCode(String code) {
+    public ResponseEntity<TeamsResponse> findByMemberCode(String code) {
         Optional<Teams> teams = repository.findByMemberCode(code);
         if (teams.isEmpty()) {
             throw new EntityNotFoundException("It's not possible find Teams with code: " + code);
         }
         TeamsResponse teamsResponse = new TeamsResponse();
         mapper.map(teams.get(), teamsResponse);
-        return teamsResponse;
+        return ResponseEntity.status(HttpStatus.OK).body(teamsResponse);
     }
-    public TeamsResponse findById(Long id) {
+
+    public ResponseEntity<TeamsResponse> findById(Long id) {
         Optional<Teams> teams = repository.findById(id);
         if (teams.isEmpty()) {
             throw new EntityNotFoundException("It's not possible find Teams with id: " + id);
         }
         TeamsResponse teamsResponse = new TeamsResponse();
         mapper.map(teams.get(), teamsResponse);
-        return teamsResponse;
+        return ResponseEntity.status(HttpStatus.OK).body(teamsResponse);
     }
-    public Page<TeamsSearchResponse> listOfTeams(Pageable pageable) {
+
+    public ResponseEntity<Page<TeamsSearchResponse>> listOfTeams(Pageable pageable) {
         Page<Teams> response = repository.findAll(pageable);
-        Page<TeamsSearchResponse> responses =  utils.mapEntityPageIntoDtoPage(response, TeamsSearchResponse.class);
-        return responses;
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(utils.mapEntityPageIntoDtoPage(response, TeamsSearchResponse.class));
     }
 
     public void recordDataToDb() throws IOException {
@@ -142,12 +145,10 @@ public class TeamsService {
                 int index_3 = line.indexOf(";", index_2 + 1);
                 int index_4 = line.indexOf(";", index_3 + 1);
 
-
                 boolean isExist = ifTeamsRegistered(line.substring(index_1 + 1, index_2).trim(),
                         line.substring(0, index_1).trim());
 
                 if (!isExist) {
-
                     Teams channelResp = Teams.builder()
                             .distributor(findDistributorByCnpj(line.substring(0, index_1).trim()))
                             .memberCode(verifySizeCode(line.substring(index_1 + 1, index_2).trim()))
@@ -155,7 +156,6 @@ public class TeamsService {
                             .memberFunction(line.substring(index_3 + 1, index_4).trim())
                             .sellerOrSupervisor("vendedor")
                             .build();
-
                     repository.save(channelResp);
                 }
                 line = br.readLine();
@@ -187,11 +187,11 @@ public class TeamsService {
             cnpj = "0" + cnpj;
         }
         Optional<Distributor> responseDistributor = repositoryDistributor.findDistributorByCnpj(cnpj);
-        if (!responseDistributor.isPresent()) {
+        if (responseDistributor.isEmpty()) {
             throw new EntityNotFoundException("Distributor not found with cnpj: " + cnpj);
         }
         Optional<Teams> responseTeam = repository.findMemberCodeAndDistributor(code, responseDistributor.get());
-        if (responseTeam.isPresent()) {
+        if(responseTeam.isPresent()) {
             return true;
         }
         return false;
@@ -201,13 +201,12 @@ public class TeamsService {
         if (cnpj.isEmpty()) {
             return null;
         }
-        //        cnpj in the file when start with 0, the zerou disappear
+//        cnpj in the file when start with 0, the zerou disappear
         if (cnpj.length() < 14) {
             cnpj = "0" + cnpj;
         }
-
         Optional<Distributor> responseDistributor = repositoryDistributor.findDistributorByCnpj(cnpj);
-        if (!responseDistributor.isPresent()) {
+        if (responseDistributor.isEmpty()) {
             return null;
         }
         return responseDistributor.get();

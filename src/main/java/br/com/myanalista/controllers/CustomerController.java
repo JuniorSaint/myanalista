@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/v1/customer")
 @AllArgsConstructor
 public class CustomerController {
-
     @Autowired
     private CustomerService service;
 

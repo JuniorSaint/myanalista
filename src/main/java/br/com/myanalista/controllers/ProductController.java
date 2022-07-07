@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,7 +21,7 @@ public class ProductController {
     private ProductService service;
 
     @GetMapping("/sku/{sku}")
-    public ProductResponse findProductBySku(@PathVariable(value = "sku") Integer sku) {
+    public ResponseEntity<ProductResponse> findProductBySku(@PathVariable(value = "sku") Integer sku) {
         try {
             return service.findBySku(sku);
         } catch (Exception e) {
@@ -29,17 +30,17 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public Products findProductById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<Products> findProductById(@PathVariable(value = "id") Long id) {
         return service.findById(id);
     }
 
     @PostMapping
-    public Products save(@RequestBody @Valid ProductRequestPost productRequestPost) {
+    public ResponseEntity<Products> save(@RequestBody @Valid ProductRequestPost productRequestPost) {
             return service.save(productRequestPost);
     }
 
     @PutMapping("/{id}")
-    public Products update(@PathVariable(value = "id") Long id, @RequestBody @Valid ProductRequestPost productRequestPut) {
+    public ResponseEntity<Products> update(@PathVariable(value = "id") Long id, @RequestBody @Valid ProductRequestPost productRequestPut) {
         try {
             return service.update(productRequestPut);
         } catch (Exception e) {
@@ -48,7 +49,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<String> delete(@PathVariable(value = "id") Long id) {
         try {
             return service.delete(id);
         } catch (Exception e) {
@@ -57,7 +58,7 @@ public class ProductController {
     }
 
     @GetMapping("/page")
-    public Page<ProductResponse> findAllWithList(Pageable page) {
+    public ResponseEntity<Page<ProductResponse>> findAllWithList(Pageable page) {
         try {
             return service.findAllWithPage(page);
         } catch (Exception e) {

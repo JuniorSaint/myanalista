@@ -5,8 +5,6 @@ import java.util.Set;
 
 import br.com.myanalista.models.entities.Contacts;
 import br.com.myanalista.models.entities.Teams;
-import br.com.myanalista.models.enums.CompanyTypeEnum;
-import br.com.myanalista.models.enums.CustomerTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +20,7 @@ public class DistributorResponse {
 
     private Long id;
     private String cnpjCpf;
-    private CompanyTypeEnum companyType;
+    private String companyType;
     private String nickName;
     private String companyName;
     private String fantasyName;
@@ -34,7 +32,7 @@ public class DistributorResponse {
     private String city;
     // Start Financial
     private LocalDate contractDate;
-    private CustomerTypeEnum customerType;
+    private String customerType;
     private String typeOfContract;
     private Double ContractValue;
     private String formOfPayment;

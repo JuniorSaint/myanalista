@@ -26,7 +26,7 @@ public class UserController {
     private UserService service;
 
     @GetMapping("/page")
-    public Page<UserResponse> findAllPageable(Pageable page) {
+    public ResponseEntity<Page<UserResponse>> findAllPageable(Pageable page) {
         try {
             return service.findAllWithPage(page);
         } catch (Exception e) {
@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public UserResponse findById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<UserResponse> findById(@PathVariable(value = "id") Long id) {
         try {
             return service.findById(id);
         } catch (Exception e) {
@@ -44,7 +44,7 @@ public class UserController {
     }
 
     @PostMapping
-    public UserResponse save(@RequestBody @Valid UserRequestPost userRequestPost) {
+    public ResponseEntity<UserResponse> save(@RequestBody @Valid UserRequestPost userRequestPost) {
         try {
             return service.save(userRequestPost);
         } catch (Exception e) {
@@ -62,8 +62,8 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public UserResponse update(@PathVariable(value = "id") Long id,
-                               @RequestBody UserRequestPut request) {
+    public ResponseEntity<UserResponse> update(@PathVariable(value = "id") Long id,
+                                               @RequestBody UserRequestPut request) {
         try {
             return service.update(request);
         } catch (Exception e) {
@@ -72,8 +72,8 @@ public class UserController {
     }
 
     @PutMapping("/change-password/{id}")
-    public String changePassowrd(@PathVariable(value = "id") Long id,
-                                 @RequestBody ChangePasswordRequest request) {
+    public ResponseEntity<Object> changePassowrd(@PathVariable(value = "id") Long id,
+                                                 @RequestBody ChangePasswordRequest request) {
         try {
             return service.changePassword(request);
         } catch (Exception e) {
@@ -82,7 +82,7 @@ public class UserController {
     }
 
     @GetMapping("/validate-password")
-    public ResponseEntity<Boolean> validatePassword(@RequestBody LogInRequest logInRequest){
+    public ResponseEntity<Boolean> validatePassword(@RequestBody LogInRequest logInRequest) {
         try {
             return service.validatePassword(logInRequest);
         } catch (Exception e) {

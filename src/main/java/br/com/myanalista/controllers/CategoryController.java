@@ -29,7 +29,7 @@ public class CategoryController {
     private CategoryService service;
 
     @GetMapping("/{id}")
-    public CategoryResponse findById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<CategoryResponse> findById(@PathVariable(value = "id") Long id) {
         try {
             return service.findById(id);
         } catch (Exception e) {
@@ -38,7 +38,7 @@ public class CategoryController {
     }
 
     @PostMapping
-    public Categories save(@RequestBody CategoryRequestPost request) {
+    public ResponseEntity<Categories> save(@RequestBody CategoryRequestPost request) {
         try {
             return service.save(request);
         } catch (Exception e) {
@@ -53,12 +53,10 @@ public class CategoryController {
         } catch (Exception ex) {
             throw new Exception(ex.getMessage());
         }
-
-
     }
 
     @PutMapping("/{id}")
-    public Categories update(@PathVariable(value = "id") Long id,
+    public ResponseEntity<Categories> update(@PathVariable(value = "id") Long id,
                              @RequestBody CategoryRequestPut request) throws Exception {
         try {
             return service.update(request);

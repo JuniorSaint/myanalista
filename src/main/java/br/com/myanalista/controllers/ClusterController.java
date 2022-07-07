@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/v1/cluster")
 @AllArgsConstructor
 public class ClusterController {
-
     @Autowired
     private ClusterGecService service;
     @GetMapping("/page")

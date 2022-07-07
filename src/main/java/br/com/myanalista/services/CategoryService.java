@@ -30,10 +30,10 @@ public class CategoryService {
     private ProductService serviceProduct;
 
     @Transactional
-    public Categories save(CategoryRequestPost categoryRequest) {
+    public ResponseEntity<Categories> save(CategoryRequestPost categoryRequest) {
         Categories categoriesResult = null;
         if (categoryRequest.getCategory() != null) {
-          Optional<Categories> result =  repository.findById(categoryRequest.getCategory().getId());
+            Optional<Categories> result = repository.findById(categoryRequest.getCategory().getId());
             categoriesResult = result.get();
             if (result.isEmpty()) {
                 throw new EntityNotFoundException("There isn't category parent with id: " + categoryRequest.getCategory().getId());
@@ -42,18 +42,18 @@ public class CategoryService {
         categoryRequest.setCategory(categoriesResult);
         Categories categoryEntity = new Categories();
         mapper.map(categoryRequest, categoryEntity);
-        return repository.save(categoryEntity);
+        return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(categoryEntity));
     }
 
     @Transactional
-    public Categories update(CategoryRequestPut categoryRequest) {
+    public ResponseEntity<Categories> update(CategoryRequestPut categoryRequest) {
         Categories categoriesResult = null;
         Optional<Categories> categorySeek = repository.findById(categoryRequest.getId());
-        if(categorySeek.isEmpty()){
+        if (categorySeek.isEmpty()) {
             throw new EntityNotFoundException("There isn't category with id: " + categoryRequest.getId());
         }
         if (categoryRequest.getCategory() != null) {
-            Optional<Categories> result =  repository.findById(categoryRequest.getCategory().getId());
+            Optional<Categories> result = repository.findById(categoryRequest.getCategory().getId());
             categoriesResult = result.get();
             if (result.isEmpty()) {
                 throw new EntityNotFoundException("There isn't category parent with id: " + categoryRequest.getCategory().getId());
@@ -62,7 +62,7 @@ public class CategoryService {
         categoryRequest.setCategory(categoriesResult);
         Categories categoryEntity = new Categories();
         mapper.map(categoryRequest, categoryEntity);
-        return repository.save(categoryEntity);
+        return ResponseEntity.status(HttpStatus.OK).body(repository.save(categoryEntity));
     }
 
     @Transactional
@@ -75,14 +75,15 @@ public class CategoryService {
         return ResponseEntity.status(HttpStatus.OK).body("Category deleted with success!");
     }
 
-    public CategoryResponse findById(Long id) {
+    public ResponseEntity<CategoryResponse> findById(Long id) {
         Optional<Categories> category = repository.getByIdPerson(id);
         if (category.isEmpty()) {
             throw new EntityNotFoundException("It's not possible find category with id: " + id);
         }
         CategoryResponse categoryResponse = new CategoryResponse();
         mapper.map(category.get(), categoryResponse);
-        return categoryResponse;
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(categoryResponse);
+
     }
 
     public void recordDataToDb() throws IOException {

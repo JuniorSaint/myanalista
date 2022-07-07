@@ -15,6 +15,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.myanalista.models.entities.Equipment;
@@ -31,16 +33,16 @@ public class EquipmentService {
     @Autowired
     private ModelMapper mapper;
 
-    public Page<Equipment> findAllWithPage(Pageable pageable) {
-        return repository.findAll(pageable);
+    public ResponseEntity<Page<Equipment>> findAllWithPage(Pageable pageable) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(repository.findAll(pageable));
     }
 
-    public Equipment findById(Long id) {
+    public ResponseEntity<Equipment> findById(Long id) {
         Optional<Equipment> response = repository.findByIpPerson(id);
         if (response.isEmpty()) {
             throw new EntityNotFoundException("There isn't equipment with this id: " + id);
         }
-        return response.get();
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(response.get());
     }
 
     public void recordDataToDb(Long id, String path) throws IOException {

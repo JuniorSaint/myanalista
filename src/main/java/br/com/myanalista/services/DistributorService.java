@@ -33,23 +33,23 @@ public class DistributorService {
     private Utils utils;
 
     @Transactional
-    public DistributorResponse save(DistributorRequestPost customerRequest) {
+    public ResponseEntity<DistributorResponse> save(DistributorRequestPost customerRequest) {
         Distributor distributorEntity = new Distributor();
         mapper.map(customerRequest, distributorEntity);
         Distributor customerCreated = repository.save(distributorEntity);
         DistributorResponse distributorResponse = new DistributorResponse();
         mapper.map(customerCreated, distributorResponse);
-        return distributorResponse;
+        return ResponseEntity.status(HttpStatus.CREATED).body(distributorResponse);
     }
 
     @Transactional
-    public DistributorResponse update(DistributorRequestPut contactRequest) {
+    public ResponseEntity<DistributorResponse> update(DistributorRequestPut contactRequest) {
         Distributor distributorEntity = new Distributor();
         mapper.map(contactRequest, distributorEntity);
         Distributor customerUpdate = repository.save(distributorEntity);
         DistributorResponse distributorResponse = new DistributorResponse();
         mapper.map(customerUpdate, distributorResponse);
-        return distributorResponse;
+        return ResponseEntity.status(HttpStatus.CREATED).body(distributorResponse);
     }
 
     @Transactional
@@ -62,28 +62,28 @@ public class DistributorService {
         return ResponseEntity.status(HttpStatus.OK).body("Customer deleted with success!");
     }
 
-    public DistributorResponse findById(Long id) {
+    public ResponseEntity<DistributorResponse> findById(Long id) {
         Optional<Distributor> distributor = repository.findById(id);
         if (distributor.isEmpty()) {
             throw new EntityNotFoundException("It's not possible find customer with id: " + id);
         }
         DistributorResponse distributorResponse = new DistributorResponse();
         mapper.map(distributor.get(), distributorResponse);
-        return distributorResponse;
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(distributorResponse);
     }
 
-    public Distributor findByIdEntity(Long id) {
+    public ResponseEntity<Distributor> findByIdEntity(Long id) {
         Optional<Distributor> distributor = repository.findById(id);
         if (distributor.isEmpty()) {
             throw new EntityNotFoundException("It's not possible find customer with id: " + id);
         }
-        return distributor.get();
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(distributor.get());
     }
 
-    public Page<DistributorSearchResponse> listOfDistributorPageable(Pageable pageable) {
+    public ResponseEntity<Page<DistributorSearchResponse>> listOfDistributorPageable(Pageable pageable) {
         Page<Distributor> response = repository.findAll(pageable);
         Page<DistributorSearchResponse> disResponse = utils.mapEntityPageIntoDtoPage(response, DistributorSearchResponse.class);
-        return disResponse;
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(disResponse);
     }
 
     public void recordDataToDb() throws IOException {
