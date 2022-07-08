@@ -1,6 +1,5 @@
 package br.com.myanalista.controllers;
 
-import br.com.myanalista.models.entities.Users;
 import br.com.myanalista.models.request.ChangePasswordRequest;
 import br.com.myanalista.models.request.LogInRequest;
 import br.com.myanalista.models.request.UserRequestPost;

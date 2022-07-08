@@ -20,8 +20,8 @@ public class UserRequestPost {
     @NotEmpty(message = "User name is a mandatory field.")
     private String userName;
     @NotEmpty(message = "Email is a mandatory field.")
-    private String userEmail;
+    private String email;
     private String password;
-    @JsonDeserialize
-    private Boolean admin;
+    private Boolean active;
+
 }
