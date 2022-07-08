@@ -1,11 +1,14 @@
 package br.com.myanalista.models.entities;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -23,9 +26,14 @@ public class User implements UserDetails, Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String userName;
+    @Column(unique = true)
     private String email;
     private String password;
     private Boolean active;
+    @CreationTimestamp
+    private LocalDate createdAt;
+    @UpdateTimestamp
+    private LocalDate updatedAt;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_permission", joinColumns = {@JoinColumn(name = "id_user")},
@@ -39,7 +47,6 @@ public class User implements UserDetails, Serializable {
         }
         return roles;
     }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

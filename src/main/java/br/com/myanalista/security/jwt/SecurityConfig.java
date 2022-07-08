@@ -4,19 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
+//@EnableWebSecurity
+//public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig {
     @Autowired
     private JwtTokenProvider tokenProvider;
 
@@ -30,30 +32,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .httpBasic().disable()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/auth/signin",
+                        "/v1/signin/**",
                         "/auth/refresh",
                         "/api-docs/**",
-                        "/swagger-ui.html**"
+                        "/swagger-ui.html**",
+                        "/v1/users/**"
                 ).permitAll()
-                .antMatchers("/api/**").authenticated()
-                .antMatchers("/users").denyAll()
+                .antMatchers("/v1/**").authenticated()
+                .antMatchers("/users").denyAll() // denay standard path, don't remove
                 .and()
                 .cors()
                 .and()
                 .apply(new JwtConfigurer(tokenProvider));
+        return http.build();
     }
 }

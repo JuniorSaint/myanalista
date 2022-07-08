@@ -13,13 +13,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService {
-
     @Autowired
     private AuthenticationManager authenticationManager;
-
     @Autowired
     private JwtTokenProvider tokenProvider;
-
     @Autowired
     private UserRepository repository;
 
@@ -37,7 +34,7 @@ public class AuthService {
             if (user != null) {
                 tokenResponse = tokenProvider.createAccessToken(username, user.getRoles());
             } else {
-                throw new EntityNotFoundException("Username " + username + " not found!");
+                throw new EntityNotFoundException("Email " + username + " ,not found!");
             }
             return ResponseEntity.ok(tokenResponse);
         } catch (Exception e) {

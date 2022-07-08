@@ -21,7 +21,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 })
 
 public class MyanalistaApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(MyanalistaApplication.class, args);
     }

@@ -1,10 +1,13 @@
 package br.com.myanalista.models.response;
 
+import br.com.myanalista.models.entities.Permission;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Builder
 @Getter
@@ -12,7 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserLoggedResponse {
-  private String userEmail;
+  private String email;
   private String password;
-  private Boolean admin;
+  private List<Permission> permissions;
 }

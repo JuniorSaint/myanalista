@@ -27,10 +27,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -61,7 +65,7 @@ public class UserService implements UserDetailsService {
             throw new BadRequestException(
                     "Already exist user with this email: " + userRequest.getEmail() + ", try with another one");
         }
-        userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+        userRequest.setPassword(encodePassword(userRequest.getPassword()));
         User userEntity = new User();
         mapper.map(userRequest, userEntity);
         User userCreated = repository.save(userEntity);
@@ -74,7 +78,7 @@ public class UserService implements UserDetailsService {
         if (!user.isPresent()) {
             throw new EntityNotFoundException("User not found with id: " + request.getId());
         }
-        user.get().setPassword(passwordEncoder.encode(request.getPassword()));
+        user.get().setPassword(encodePassword(request.getPassword()));
         User userUpdate = repository.save(user.get());
         return ResponseEntity.status(HttpStatus.OK)
                 .body("The password was changed with success of the user: " + userUpdate.getEmail());
@@ -86,7 +90,7 @@ public class UserService implements UserDetailsService {
         if (!user.isPresent()) {
             throw new EntityNotFoundException("User not found with id: " + userRequestPut.getId());
         }
-        userRequestPut.setPassword(passwordEncoder.encode(userRequestPut.getPassword()));
+        userRequestPut.setPassword(encodePassword(userRequestPut.getPassword()));
         User userEntity = new User();
         mapper.map(userRequestPut, userEntity);
         User userUpdate = repository.save(userEntity);
@@ -152,4 +156,11 @@ public class UserService implements UserDetailsService {
         return ResponseEntity.status(HttpStatus.ACCEPTED)
                 .body(utils.mapEntityPageIntoDtoPage(responses, UserResponse.class));
     }
-}
+
+    private String encodePassword(String password){
+        Map<String, PasswordEncoder> encoders = new HashMap<>();
+        encoders.put("pbkdf2", new Pbkdf2PasswordEncoder());
+        DelegatingPasswordEncoder passwordEncoder = new DelegatingPasswordEncoder("pbkdf2", encoders);
+        passwordEncoder.setDefaultPasswordEncoderForMatches(new Pbkdf2PasswordEncoder());
+        return passwordEncoder.encode(password);
+    }}

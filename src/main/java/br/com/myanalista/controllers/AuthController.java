@@ -3,6 +3,7 @@ package br.com.myanalista.controllers;
 import br.com.myanalista.models.request.LogInRequest;
 import br.com.myanalista.security.jwt.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ public class AuthController {
     AuthService authServices;
 
     @SuppressWarnings("rawtypes")
+    @Tag(name = "Authentication Endpoint")
     @Operation(summary = "Authenticates a user and returns a token")
     @PostMapping(value = "/signin")
     public ResponseEntity signin(@RequestBody LogInRequest data) {

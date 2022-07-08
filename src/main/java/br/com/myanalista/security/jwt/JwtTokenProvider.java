@@ -17,6 +17,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
@@ -35,7 +38,7 @@ public class JwtTokenProvider {
 
     public TokenResponse createAccessToken(String username, List<String> roles) {
         Date now = new Date();
-        Date validity = new Date(now.getTime() + CP.EXPIRATION);
+        Date validity = dateExperition(CP.EXPIRATION);
         var accessToken = getAccessToken(username, roles, now, validity);
         var refreshToken = getRefreshToken(username, roles, now);
 
@@ -67,7 +70,7 @@ public class JwtTokenProvider {
     }
 
     private String getRefreshToken(String username, List<String> roles, Date now) {
-        Date validityRefreshToken = new Date(now.getTime() + (CP.EXPIRATION * 3));
+        Date validityRefreshToken = dateExperition(CP.EXPIRATION * 3) ;
         return JWT.create()
                 .withClaim("roles", roles)
                 .withIssuedAt(now)
@@ -110,5 +113,12 @@ public class JwtTokenProvider {
         } catch (Exception e) {
             throw new NotAuthorizateException("Expired or invalid JWT token!");
         }
+    }
+
+    private Date dateExperition(Long timeInSecond){
+        long expString = Long.valueOf(timeInSecond);
+        LocalDateTime dataHoraExpiracao = LocalDateTime.now().plusMinutes(expString);
+        Instant instant = dataHoraExpiracao.atZone(ZoneId.systemDefault()).toInstant();
+        return Date.from(instant);
     }
 }
