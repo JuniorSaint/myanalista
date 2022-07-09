@@ -20,10 +20,10 @@ import java.util.List;
 @NoArgsConstructor
 @SuperBuilder
 public class UserRequestPost {
-    @NotEmpty(message = "User name is a mandatory field.")
-    private String userName;
+    private String name;
     @NotEmpty(message = "Email is a mandatory field.")
     private String email;
+    @NotEmpty(message = "Password is a mandatory field.")
     private String password;
     private Boolean active;
     private List<Permission> permissions;

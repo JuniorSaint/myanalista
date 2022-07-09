@@ -3,6 +3,7 @@ package br.com.myanalista.security.jwt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,8 +17,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-//@EnableWebSecurity
-//public class SecurityConfig extends WebSecurityConfigurerAdapter {
 public class SecurityConfig {
     @Autowired
     private JwtTokenProvider tokenProvider;
@@ -47,11 +46,22 @@ public class SecurityConfig {
                         "/v1/signin/**",
                         "/auth/refresh",
                         "/api-docs/**",
-                        "/swagger-ui.html**",
-                        "/v1/users/**"
+                        "/swagger-ui.html**"
                 ).permitAll()
-                .antMatchers("/v1/**").authenticated()
+                .antMatchers(
+                        "/v1/categories/**",
+                        "/v1/channel/**",
+                        "/v1/cluster/**",
+                        "/v1/contacts/**",
+                        "/v1/customer/**",
+                        "/v1/distributor/**",
+                        "/v1/equipment/**",
+                        "/v1/lending/**",
+                        "/v1/products/**",
+                        "/v1/teams/**"
+                ).authenticated()
                 .antMatchers("/users").denyAll() // denay standard path, don't remove
+                .antMatchers(HttpMethod.POST ,"/v1/user").hasRole("ADMINISTRATOR") // denay standard path, don't remove
                 .and()
                 .cors()
                 .and()

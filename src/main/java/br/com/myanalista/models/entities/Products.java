@@ -30,10 +30,8 @@ public class Products implements Serializable {
     private Integer sku;
     private String productDescription;
     private boolean active;
-    @JsonIgnore
     @CreationTimestamp
     private LocalDate createdAt;
-    @JsonIgnore
     @UpdateTimestamp
     private LocalDate updatedAt;
 
@@ -41,8 +39,9 @@ public class Products implements Serializable {
     @OneToMany(mappedBy = "product")
     @JsonIgnoreProperties(value = {"product"})
     private List<SellOut> sellOuts;
-    @JsonIgnoreProperties(value = {"products"})
-    @ManyToOne
-    @JoinColumn(name="category_id")
-    private Categories categories;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "products_categories", joinColumns = {@JoinColumn(name = "id_product")},
+            inverseJoinColumns = {@JoinColumn(name = "id_category")})
+    private List<Categories> categories;
 }

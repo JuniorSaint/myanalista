@@ -36,8 +36,6 @@ public class ProductService {
         if (product.isPresent()) {
             throw new BadRequestException("There is product registered with this sku: " + productRequest.getSku());
         }
-        Optional<Categories> categories = repositoryCategory.findById(productRequest.getCategories().getId());
-        productRequest.setCategories(categories.get());
         Products productEntity = new Products();
         mapper.map(productRequest, productEntity);
         return ResponseEntity.status(HttpStatus.CREATED).body( repository.save(productEntity));
@@ -90,7 +88,7 @@ public class ProductService {
 
 
     public void recordDataToDb() throws IOException {
-        String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/PRODUTOS.csv";
+        String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/imported/PRODUTOS.csv";
 
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 

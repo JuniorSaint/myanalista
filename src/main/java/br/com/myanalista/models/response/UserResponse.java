@@ -17,9 +17,10 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UserResponse {
   private Long id;
-  private String userName;
+  private String name;
   private String email;
-  private List<Permission> permissions;
+  private Boolean active;
   private LocalDate createdAt;
   private LocalDate updatedAt;
+  private List<Permission> permissions;
 }

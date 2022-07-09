@@ -1,7 +1,10 @@
 package br.com.myanalista.controllers;
 
 import br.com.myanalista.models.entities.Categories;
+import br.com.myanalista.models.response.CategoryOnlyResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -57,11 +60,20 @@ public class CategoryController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Categories> update(@PathVariable(value = "id") Long id,
-                             @RequestBody CategoryRequestPut request) throws Exception {
+                                             @RequestBody CategoryRequestPut request) throws Exception {
         try {
             return service.update(request);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
+        }
+    }
+
+    @GetMapping("/seek/{name}")
+    public ResponseEntity<Page<CategoryOnlyResponse>> findByName(@PathVariable(value = "name") String name, Pageable page) {
+        try {
+            return service.findAllSeekByName(name, page);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }

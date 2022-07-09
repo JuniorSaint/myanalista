@@ -1,136 +1,136 @@
-// package br.com.myanalista.controllers;
+ package br.com.myanalista.controllers;
 
-// import java.io.IOException;
+ import java.io.IOException;
 
-// import br.com.myanalista.services.*;
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.web.bind.annotation.CrossOrigin;
-// import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.PathVariable;
-// import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.RequestMapping;
-// import org.springframework.web.bind.annotation.RestController;
+ import br.com.myanalista.services.*;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.web.bind.annotation.CrossOrigin;
+ import org.springframework.web.bind.annotation.GetMapping;
+ import org.springframework.web.bind.annotation.PathVariable;
+ import org.springframework.web.bind.annotation.PostMapping;
+ import org.springframework.web.bind.annotation.RequestMapping;
+ import org.springframework.web.bind.annotation.RestController;
 
-// import br.com.myanalista.models.response.CustomerResponse;
-// import lombok.AllArgsConstructor;
+ import br.com.myanalista.models.response.CustomerResponse;
+ import lombok.AllArgsConstructor;
 
-// @RestController
-// @CrossOrigin(origins = "*", maxAge = 60 * 60)
-// @RequestMapping("/v1/chargeunique")
-// @AllArgsConstructor
-// public class UniqueChargeController {
+ @RestController
+ @CrossOrigin(origins = "*", maxAge = 60 * 60)
+ @RequestMapping("/v1/chargeunique")
+ @AllArgsConstructor
+ public class UniqueChargeController {
 
-//    @Autowired
-//    private CityIneService serviceCity;
+    @Autowired
+    private CityIneService serviceCity;
 
-//    @Autowired
-//    private ClusterGecService serviceCluster;
+    @Autowired
+    private ClusterGecService serviceCluster;
 
-//    @Autowired
-//    private VisitDayService serviceVisitDay;
+    @Autowired
+    private VisitDayService serviceVisitDay;
 
-//    @Autowired
-//    private CalendarService serviceCalendar;
+    @Autowired
+    private CalendarService serviceCalendar;
 
-//    @Autowired
-//    private NationalHolidayService serviceNational;
+    @Autowired
+    private NationalHolidayService serviceNational;
 
-//    @Autowired
-//    private SubChannelService serviceSub;
+    @Autowired
+    private SubChannelService serviceSub;
 
-//    @Autowired
-//    private CustomerService serviceCustomer;
+    @Autowired
+    private CustomerService serviceCustomer;
 
-//    @Autowired
-//    private ChannelService serviceChannel;
+    @Autowired
+    private ChannelService serviceChannel;
 
-//    @Autowired
-//    private TeamsService serviceTeams;
+    @Autowired
+    private TeamsService serviceTeams;
 
-//    @Autowired
-//    private DistributorService serviceDistributor;
+    @Autowired
+    private DistributorService serviceDistributor;
 
-//    @Autowired
-//    private ProductService serviceProduct;
+    @Autowired
+    private ProductService serviceProduct;
 
-//    @Autowired
-//    private TurnoverService serviceTurnover;
+    @Autowired
+    private TurnoverService serviceTurnover;
 
-//    @Autowired
-//    private CategoryService serviceCategory;
+    @Autowired
+    private CategoryService serviceCategory;
 
-//    @PostMapping("/cityine")
-//    public void chargeCityIne() throws IOException {
-//       serviceCity.recordDataToDb();
-//    }
-//    @PostMapping("/category")
-//    public void chargeCategory() throws IOException {
-//       serviceCategory.recordDataToDb();
-//    }
+    @PostMapping("/cityine")
+    public void chargeCityIne() throws IOException {
+       serviceCity.recordDataToDb();
+    }
+    @PostMapping("/category")
+    public void chargeCategory() throws IOException {
+       serviceCategory.recordDataToDb();
+    }
 
-//    @PostMapping("/clustergec")
-//    public void chargeCluster() throws IOException {
+    @PostMapping("/clustergec")
+    public void chargeCluster() throws IOException {
 
-//       serviceCluster.recordDataToDb();
-//    }
+       serviceCluster.recordDataToDb();
+    }
 
-//    @PostMapping("/visitday")
-//    public void chargeRoute() throws IOException {
+    @PostMapping("/visitday")
+    public void chargeRoute() throws IOException {
 
-//       serviceVisitDay.recordDataToDb();
-//    }
+       serviceVisitDay.recordDataToDb();
+    }
 
-//    @PostMapping("/calendar")
-//    public void chargeCalendar() throws IOException {
+    @PostMapping("/calendar")
+    public void chargeCalendar() throws IOException {
 
-//       serviceCalendar.recordDataToDb();
+       serviceCalendar.recordDataToDb();
 
-//    }
+    }
 
-//    @PostMapping("/nationalholidays")
-//    public void chargeNationalHolidays() throws IOException {
+    @PostMapping("/nationalholidays")
+    public void chargeNationalHolidays() throws IOException {
 
-//       serviceNational.recordDataToDb();
-//    }
+       serviceNational.recordDataToDb();
+    }
 
-//    @PostMapping("/channel")
-//    public void chargeChannel() throws IOException {
+    @PostMapping("/channel")
+    public void chargeChannel() throws IOException {
 
-//       serviceChannel.recordDataToDb();
-//    }
+       serviceChannel.recordDataToDb();
+    }
 
-//    @PostMapping("/subchannel")
-//    public void chargeSubChannel() throws IOException {
+    @PostMapping("/subchannel")
+    public void chargeSubChannel() throws IOException {
 
-//       serviceSub.recordDataToDb();
-//    }
+       serviceSub.recordDataToDb();
+    }
 
-//    @PostMapping("/turnover")
-//    public void chargeTurnover() throws IOException {
+    @PostMapping("/turnover")
+    public void chargeTurnover() throws IOException {
 
-//       serviceTurnover.recordDataToDb();
-//    }
+       serviceTurnover.recordDataToDb();
+    }
 
-//    @PostMapping("/seller")
-//    public void chargeSeller() throws IOException {
+    @PostMapping("/seller")
+    public void chargeSeller() throws IOException {
 
-//       serviceTeams.recordDataToDb();
-//    }
+       serviceTeams.recordDataToDb();
+    }
 
-//    @PostMapping("/distributor")
-//    public void chargeDistributor() throws IOException {
+    @PostMapping("/distributor")
+    public void chargeDistributor() throws IOException {
 
-//       serviceDistributor.recordDataToDb();
-//    }
+       serviceDistributor.recordDataToDb();
+    }
 
-//    @PostMapping("/product")
-//    public void chargeProduct() throws IOException {
+    @PostMapping("/product")
+    public void chargeProduct() throws IOException {
 
-//       serviceProduct.recordDataToDb();
-//    }
+       serviceProduct.recordDataToDb();
+    }
 
-//    @GetMapping("/{code}")
-//    public CustomerResponse findByCode(@PathVariable(value = "code") String code) {
-//       return serviceCustomer.findCustomerByCode(code);
-//    }
-// }
+    @GetMapping("/{code}")
+    public CustomerResponse findByCode(@PathVariable(value = "code") String code) {
+       return serviceCustomer.findCustomerByCode(code);
+    }
+ }

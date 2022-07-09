@@ -33,12 +33,6 @@ public class Categories implements Serializable {
     private String name;
 
     @ManyToOne
-
     @JoinColumn(name = "parent_id")
     private Categories category;
-
-    @OneToMany(mappedBy = "categories")
-    @JsonIgnore
-    @JsonIgnoreProperties(value = {"categories"}) // Fix problem cyclic reference
-    private List<Products> products;
 }

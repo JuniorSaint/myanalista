@@ -7,10 +7,14 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import br.com.myanalista.configs.Utils;
 import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.models.entities.*;
+import br.com.myanalista.models.response.CategoryOnlyResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -19,6 +23,7 @@ import br.com.myanalista.models.request.CategoryRequestPost;
 import br.com.myanalista.models.request.CategoryRequestPut;
 import br.com.myanalista.models.response.CategoryResponse;
 import br.com.myanalista.repositories.CategoryRepository;
+import org.springframework.web.servlet.function.EntityResponse;
 
 @Service
 public class CategoryService {
@@ -28,6 +33,8 @@ public class CategoryService {
     private ModelMapper mapper;
     @Autowired
     private ProductService serviceProduct;
+    @Autowired
+    private Utils utils;
 
     @Transactional
     public ResponseEntity<Categories> save(CategoryRequestPost categoryRequest) {
@@ -83,12 +90,17 @@ public class CategoryService {
         CategoryResponse categoryResponse = new CategoryResponse();
         mapper.map(category.get(), categoryResponse);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(categoryResponse);
+    }
 
+    public ResponseEntity<Page<CategoryOnlyResponse>> findAllSeekByName(String name, Pageable page) {
+        Page<Categories> categories = repository.findAllByName(name, page);
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body(utils.mapEntityPageIntoDtoPage(categories, CategoryOnlyResponse.class));
     }
 
     public void recordDataToDb() throws IOException {
 
-        String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/CATEGORIAS.csv";
+        String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/imported/CATEGORIAS.csv";
 
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 
@@ -96,7 +108,6 @@ public class CategoryService {
             line = br.readLine();
 
             while (line != null) {
-
                 int index_1 = line.indexOf(";");
                 int index_2 = line.indexOf(";", index_1 + 1);
 
