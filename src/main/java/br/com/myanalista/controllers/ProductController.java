@@ -2,6 +2,7 @@ package br.com.myanalista.controllers;
 
 import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.request.ProductRequestPost;
+import br.com.myanalista.models.request.ProductRequestQuery;
 import br.com.myanalista.models.response.ProductResponse;
 import br.com.myanalista.services.ProductService;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/products")
@@ -61,6 +63,14 @@ public class ProductController {
     public ResponseEntity<Page<ProductResponse>> findAllWithList(Pageable page) {
         try {
             return service.findAllWithPage(page);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @GetMapping("/search")
+    public ResponseEntity<List<Products>> findAllWithSearch(@RequestBody Products products ) {
+        try {
+            return service.findAllWithPageSeek(products);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

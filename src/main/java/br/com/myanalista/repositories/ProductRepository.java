@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import br.com.myanalista.models.entities.Products;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Example;
@@ -18,6 +19,6 @@ public interface ProductRepository extends JpaRepository<Products, Long>{
   @Query(value = "select u from Products u where u.sku = :sku")
   Optional<Products> findByCodeSku(@Param(value = "sku") Integer sku);
 
-  Page<Products> findAll(Pageable pageable);
+  List<Products> findAll(Example example);
 
 }

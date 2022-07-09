@@ -5,13 +5,13 @@ import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.models.entities.Categories;
 import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.request.ProductRequestPost;
+import br.com.myanalista.models.request.ProductRequestQuery;
 import br.com.myanalista.models.response.ProductResponse;
 import br.com.myanalista.repositories.CategoryRepository;
 import br.com.myanalista.repositories.ProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -20,6 +20,7 @@ import javax.transaction.Transactional;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -84,6 +85,12 @@ public class ProductService {
         Page<Products> responses = repository.findAll(pageable);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(mapEntityPageIntoDtoPage(responses, ProductResponse.class));
 
+    }
+    public ResponseEntity<List<Products>> findAllWithPageSeek(Products product) {
+        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.STARTING);
+        Example<Products> example = Example.of(product, matcher);
+        List<Products> responses = repository.findAll(example);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(responses);
     }
 
 
