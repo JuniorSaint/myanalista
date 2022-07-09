@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 
 import br.com.myanalista.configs.Utils;
 import br.com.myanalista.exceptions.EntityNotFoundException;
+import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.response.DistributorSearchResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,6 +85,13 @@ public class DistributorService {
         Page<Distributor> response = repository.findAll(pageable);
         Page<DistributorSearchResponse> disResponse = utils.mapEntityPageIntoDtoPage(response, DistributorSearchResponse.class);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(disResponse);
+    }
+
+    public ResponseEntity<Page<Distributor>> findAllWithPageSeek(Distributor distributor, Pageable pageable) {
+        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        Example<Distributor> example = Example.of(distributor, matcher);
+        Page<Distributor> responses = repository.findAll(example, pageable);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(responses);
     }
 
     public void recordDataToDb() throws IOException {

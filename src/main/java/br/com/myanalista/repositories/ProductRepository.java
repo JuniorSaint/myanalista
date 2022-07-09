@@ -19,6 +19,6 @@ public interface ProductRepository extends JpaRepository<Products, Long>{
   @Query(value = "select u from Products u where u.sku = :sku")
   Optional<Products> findByCodeSku(@Param(value = "sku") Integer sku);
 
-  List<Products> findAll(Example example);
+  Page<Products> findAll(Example example, Pageable pageable);
 
 }

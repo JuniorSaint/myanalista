@@ -32,7 +32,7 @@ public class CategoryController {
     private CategoryService service;
 
     @GetMapping("/{id}")
-    public ResponseEntity<CategoryResponse> findById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<Categories> findById(@PathVariable(value = "id") Long id) {
         try {
             return service.findById(id);
         } catch (Exception e) {

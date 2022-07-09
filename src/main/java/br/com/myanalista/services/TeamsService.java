@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 
 import br.com.myanalista.configs.Utils;
 import br.com.myanalista.exceptions.EntityNotFoundException;
+import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.response.TeamsSearchResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -130,6 +131,13 @@ public class TeamsService {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(utils.mapEntityPageIntoDtoPage(response, TeamsSearchResponse.class));
     }
+
+//    public ResponseEntity<Page<TeamsSearchResponse>> findAllWithPageSeek(Teams teams, Pageable pageable) {
+//        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+//        Example<Teams> example = Example.of(teams, matcher);
+//        Page<Teams> responses = repository.findAll(example, pageable);
+//        return ResponseEntity.status(HttpStatus.ACCEPTED).body(responses);
+//    }
 
     public void recordDataToDb() throws IOException {
         String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/VENDEDORES.csv";

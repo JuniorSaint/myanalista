@@ -3,6 +3,7 @@ package br.com.myanalista.repositories;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.response.TeamsSearchResponse;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -30,7 +31,7 @@ public interface TeamsRepository extends JpaRepository<Teams, Long> {
 
     long deleteByMemberCode(String code);
 
-    Page<Teams> findAll(Pageable pageable);
+    Page<Products> findAll(Example example, Pageable pageable);
 
 
 }

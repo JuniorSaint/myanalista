@@ -1,5 +1,8 @@
 package br.com.myanalista.controllers;
 
+import br.com.myanalista.models.entities.Contacts;
+import br.com.myanalista.models.entities.Teams;
+import br.com.myanalista.models.response.ContactSearchResponse;
 import br.com.myanalista.models.response.DistributorSearchResponse;
 import br.com.myanalista.models.response.TeamsSearchResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,4 +79,12 @@ public class TeamController {
             throw new RuntimeException(e.getMessage());
         }
     }
+//    @GetMapping("/search")
+//    public ResponseEntity<Page<TeamsSearchResponse>> findAllWithSearch(@RequestBody Teams teams, Pageable pageable ) {
+//        try {
+//            return service.findAllWithPageSeek(teams, pageable);
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 }

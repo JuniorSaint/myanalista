@@ -17,5 +17,5 @@ import java.util.List;
 public class CategoryResponse {
   private Long id;
   private String name;
-  private Categories category;
+  private List<Categories> category;
 }

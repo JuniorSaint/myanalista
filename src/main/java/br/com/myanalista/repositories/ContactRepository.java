@@ -2,6 +2,7 @@ package br.com.myanalista.repositories;
 
 import java.util.Optional;
 
+import br.com.myanalista.models.entities.Products;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +17,8 @@ import br.com.myanalista.models.response.ContactSearchResponse;
 public interface ContactRepository extends JpaRepository<Contacts, Long> {
 
     Optional<Contacts> findById(Long id);
+
+    Page<Contacts> findAll(Example example, Pageable pageable);
 
     @Query(value = "select new br.com.myanalista.models.response.ContactSearchResponse(id,contactDepartament,contactEmail,contactName,contactPhone) from Contacts")
     Page<Contacts> findAllPageableAndSort(Pageable pageable);

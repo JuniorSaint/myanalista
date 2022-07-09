@@ -1,5 +1,7 @@
 package br.com.myanalista.controllers;
 
+import br.com.myanalista.models.entities.Distributor;
+import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.response.DistributorSearchResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -72,6 +74,14 @@ public class DistributorController {
                                               @RequestBody DistributorRequestPut request) {
         try {
             return service.update(request);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @GetMapping("/search")
+    public ResponseEntity<Page<Distributor>> findAllWithSearch(@RequestBody Distributor distributor, Pageable pageable ) {
+        try {
+            return service.findAllWithPageSeek(distributor, pageable);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

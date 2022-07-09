@@ -42,16 +42,16 @@ public class AuthService {
         }
     }
 
-    @SuppressWarnings("rawtypes")
-    public ResponseEntity refreshToken(String username, String refreshToken) {
-        var user = repository.findByEmailPerson(username);
-
-        var tokenResponse = new TokenResponse();
-        if (user != null) {
-            tokenResponse = tokenProvider.refreshToken(refreshToken);
-        } else {
-            throw new EntityNotFoundException("Username " + username + " not found!");
-        }
-        return ResponseEntity.ok(tokenResponse);
-    }
+//    @SuppressWarnings("rawtypes")
+//    public ResponseEntity refreshToken(String username, String refreshToken) {
+//        var user = repository.findByEmailPerson(username);
+//
+//        var tokenResponse = new TokenResponse();
+//        if (user != null) {
+//            tokenResponse = tokenProvider.refreshToken(refreshToken);
+//        } else {
+//            throw new EntityNotFoundException("Username " + username + " not found!");
+//        }
+//        return ResponseEntity.ok(tokenResponse);
+//    }
 }

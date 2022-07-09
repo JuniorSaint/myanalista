@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import br.com.myanalista.configs.Utils;
 import br.com.myanalista.exceptions.EntityNotFoundException;
+import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.response.ContactSearchResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,5 +90,12 @@ public class ContactService {
         Page<Contacts> responseEntity = repository.findAllPageableAndSort(pageable);
         Page<ContactSearchResponse> response = utils.mapEntityPageIntoDtoPage(responseEntity, ContactSearchResponse.class);
         return response;
+    }
+
+    public ResponseEntity<Page<ContactSearchResponse>> findAllWithPageSeek(Contacts contacts, Pageable pageable) {
+        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        Example<Contacts> example = Example.of(contacts, matcher);
+        Page<Contacts> responses = repository.findAll(example, pageable);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(utils.mapEntityPageIntoDtoPage(responses, ContactSearchResponse.class));
     }
 }

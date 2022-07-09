@@ -11,6 +11,7 @@ import br.com.myanalista.configs.Utils;
 import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.models.entities.*;
 import br.com.myanalista.models.response.CategoryOnlyResponse;
+import org.apache.poi.sl.draw.geom.GuideIf;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -82,14 +83,12 @@ public class CategoryService {
         return ResponseEntity.status(HttpStatus.OK).body("Category deleted with success!");
     }
 
-    public ResponseEntity<CategoryResponse> findById(Long id) {
-        Optional<Categories> category = repository.getByIdPerson(id);
+    public ResponseEntity<Categories> findById(Long id) {
+        Optional<Categories> category = repository.findById(id);
         if (category.isEmpty()) {
             throw new EntityNotFoundException("It's not possible find category with id: " + id);
         }
-        CategoryResponse categoryResponse = new CategoryResponse();
-        mapper.map(category.get(), categoryResponse);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(categoryResponse);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(category.get());
     }
 
     public ResponseEntity<Page<CategoryOnlyResponse>> findAllSeekByName(String name, Pageable page) {
@@ -111,22 +110,11 @@ public class CategoryService {
                 int index_1 = line.indexOf(";");
                 int index_2 = line.indexOf(";", index_1 + 1);
 
-                Categories categoryGrand = Categories.builder()
-                        .name(line.substring(index_2 + 1).trim())
-                        .build();
-                Categories grand = repository.save(categoryGrand);
+                Categories categoryGrand = firstImport(line.substring(index_2 + 1).trim());
 
-                Categories categoryFather = Categories.builder()
-                        .name(line.substring(index_1 + 1, index_2).trim())
-                        .category(seekAndSave(grand))
-                        .build();
-                Categories father = repository.save(categoryFather);
+                Categories categoryFather = secondImport(line.substring(index_1 + 1, index_2).trim(), line.substring(index_2 + 1).trim());
 
-                Categories categorySon = Categories.builder()
-                        .name(line.substring(0, index_1).trim())
-                        .category(seekAndSave(father))
-                        .build();
-                repository.save(categorySon);
+                Categories categorySon = secondImport(line.substring(0, index_1).trim(), line.substring(index_1 + 1, index_2).trim());
 
                 line = br.readLine();
             }
@@ -135,16 +123,19 @@ public class CategoryService {
         }
     }
 
-    private Categories seekAndSave(Categories category) {
-        Categories categories = new Categories();
-        if (category == null) {
-            return categories;
+    private Categories firstImport(String cat){
+        Optional<Categories> category = repository.findByCategoryName(cat);
+        if(category.isPresent()){
+            return category.get();
         }
-        Optional<Categories> response = repository.findById(category.getId());
-
-        if (response.isEmpty()) {
-            return categories;
+        return repository.save(Categories.builder().name(cat).build());
+    }
+    private Categories secondImport(String cat, String catParent){
+        Optional<Categories> category = repository.findByCategoryName(cat);
+        if(category.isPresent()){
+            return category.get();
         }
-        return response.get();
+        Optional<Categories> categoryParent = repository.findByCategoryName(catParent);
+        return repository.save(Categories.builder().name(cat).category(categoryParent.get()).build());
     }
 }

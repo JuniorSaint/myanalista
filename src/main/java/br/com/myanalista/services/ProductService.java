@@ -1,11 +1,11 @@
 package br.com.myanalista.services;
 
+import br.com.myanalista.configs.Utils;
 import br.com.myanalista.exceptions.BadRequestException;
 import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.models.entities.Categories;
 import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.request.ProductRequestPost;
-import br.com.myanalista.models.request.ProductRequestQuery;
 import br.com.myanalista.models.response.ProductResponse;
 import br.com.myanalista.repositories.CategoryRepository;
 import br.com.myanalista.repositories.ProductRepository;
@@ -31,6 +31,8 @@ public class ProductService {
     private CategoryRepository repositoryCategory;
     @Autowired
     private ModelMapper mapper;
+    @Autowired
+    private Utils utils;
     @Transactional
     public ResponseEntity<Products> save(ProductRequestPost productRequest) {
         Optional<Products> product = repository.findByCodeSku(productRequest.getSku());
@@ -86,10 +88,10 @@ public class ProductService {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(mapEntityPageIntoDtoPage(responses, ProductResponse.class));
 
     }
-    public ResponseEntity<List<Products>> findAllWithPageSeek(Products product) {
-        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.STARTING);
+    public ResponseEntity<Page<Products>> findAllWithPageSeek(Products product, Pageable pageable) {
+        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
         Example<Products> example = Example.of(product, matcher);
-        List<Products> responses = repository.findAll(example);
+        Page<Products> responses = repository.findAll(example, pageable);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(responses);
     }
 

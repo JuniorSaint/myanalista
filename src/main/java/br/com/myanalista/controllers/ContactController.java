@@ -1,6 +1,7 @@
 package br.com.myanalista.controllers;
 
 import br.com.myanalista.models.entities.Contacts;
+import br.com.myanalista.models.entities.Distributor;
 import br.com.myanalista.models.response.ContactSearchResponse;
 import br.com.myanalista.models.response.DistributorSearchResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,5 +72,13 @@ public class ContactController {
     public Page<ContactSearchResponse> findForSearchWithPageable(Pageable page) {
         Page<ContactSearchResponse> response = service.listOfContactPageable(page);
         return response;
+    }
+    @GetMapping("/search")
+    public ResponseEntity<Page<ContactSearchResponse>> findAllWithSearch(@RequestBody Contacts contacts, Pageable pageable ) {
+        try {
+            return service.findAllWithPageSeek(contacts, pageable);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

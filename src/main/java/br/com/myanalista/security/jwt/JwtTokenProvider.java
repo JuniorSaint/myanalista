@@ -40,21 +40,21 @@ public class JwtTokenProvider {
         Date now = new Date();
         Date validity = dateExperition(CP.EXPIRATION);
         var accessToken = getAccessToken(username, roles, now, validity);
-        var refreshToken = getRefreshToken(username, roles, now);
+//        var refreshToken = getRefreshToken(username, roles, now);
 
-        return new TokenResponse(username, true, now, validity, accessToken, refreshToken);
+        return new TokenResponse(username, true, now, validity, accessToken);
     }
 
-    public TokenResponse refreshToken(String refreshToken) {
-        if (refreshToken.contains("Bearer ")) refreshToken =
-                refreshToken.substring("Bearer ".length());
-
-        JWTVerifier verifier = JWT.require(algorithm).build();
-        DecodedJWT decodedJWT = verifier.verify(refreshToken);
-        String username = decodedJWT.getSubject();
-        List<String> roles = decodedJWT.getClaim("roles").asList(String.class);
-        return createAccessToken(username, roles);
-    }
+//    public TokenResponse refreshToken(String refreshToken) {
+//        if (refreshToken.contains("Bearer ")) refreshToken =
+//                refreshToken.substring("Bearer ".length());
+//
+//        JWTVerifier verifier = JWT.require(algorithm).build();
+//        DecodedJWT decodedJWT = verifier.verify(refreshToken);
+//        String username = decodedJWT.getSubject();
+//        List<String> roles = decodedJWT.getClaim("roles").asList(String.class);
+//        return createAccessToken(username, roles);
+//    }
 
     private String getAccessToken(String username, List<String> roles, Date now, Date validity) {
         String issuerUrl = ServletUriComponentsBuilder
@@ -69,16 +69,16 @@ public class JwtTokenProvider {
                 .strip();
     }
 
-    private String getRefreshToken(String username, List<String> roles, Date now) {
-        Date validityRefreshToken = dateExperition(CP.EXPIRATION * 3) ;
-        return JWT.create()
-                .withClaim("roles", roles)
-                .withIssuedAt(now)
-                .withExpiresAt(validityRefreshToken)
-                .withSubject(username)
-                .sign(algorithm)
-                .strip();
-    }
+//    private String getRefreshToken(String username, List<String> roles, Date now) {
+//        Date validityRefreshToken = dateExperition(CP.EXPIRATION * 3) ;
+//        return JWT.create()
+//                .withClaim("roles", roles)
+//                .withIssuedAt(now)
+//                .withExpiresAt(validityRefreshToken)
+//                .withSubject(username)
+//                .sign(algorithm)
+//                .strip();
+//    }
 
     public Authentication getAuthentication(String token) {
         DecodedJWT decodedJWT = decodedToken(token);
@@ -117,7 +117,7 @@ public class JwtTokenProvider {
 
     private Date dateExperition(Long timeInSecond){
         long expString = Long.valueOf(timeInSecond);
-        LocalDateTime dataHoraExpiracao = LocalDateTime.now().plusMinutes(expString);
+        LocalDateTime dataHoraExpiracao = LocalDateTime.now().plusSeconds(expString);
         Instant instant = dataHoraExpiracao.atZone(ZoneId.systemDefault()).toInstant();
         return Date.from(instant);
     }

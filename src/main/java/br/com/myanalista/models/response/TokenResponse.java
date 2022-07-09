@@ -15,5 +15,5 @@ public class TokenResponse {
   private Date created;
   private Date expiration;
   private String accessToken;
-  private String refreshToken;
+//  private String refreshToken;
 }

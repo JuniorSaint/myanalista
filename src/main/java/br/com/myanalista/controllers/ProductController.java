@@ -2,7 +2,6 @@ package br.com.myanalista.controllers;
 
 import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.request.ProductRequestPost;
-import br.com.myanalista.models.request.ProductRequestQuery;
 import br.com.myanalista.models.response.ProductResponse;
 import br.com.myanalista.services.ProductService;
 import lombok.AllArgsConstructor;
@@ -68,9 +67,9 @@ public class ProductController {
         }
     }
     @GetMapping("/search")
-    public ResponseEntity<List<Products>> findAllWithSearch(@RequestBody Products products ) {
+    public ResponseEntity<Page<Products>> findAllWithSearch(@RequestBody Products products, Pageable pageable ) {
         try {
-            return service.findAllWithPageSeek(products);
+            return service.findAllWithPageSeek(products, pageable);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
