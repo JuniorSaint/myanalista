@@ -14,6 +14,8 @@ import br.com.myanalista.models.response.CategoryOnlyResponse;
 import org.apache.poi.sl.draw.geom.GuideIf;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -91,10 +93,11 @@ public class CategoryService {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(category.get());
     }
 
-    public ResponseEntity<Page<CategoryOnlyResponse>> findAllSeekByName(String name, Pageable page) {
-        Page<Categories> categories = repository.findAllByName(name, page);
-        return ResponseEntity.status(HttpStatus.ACCEPTED)
-                .body(utils.mapEntityPageIntoDtoPage(categories, CategoryOnlyResponse.class));
+    public ResponseEntity<Page<Categories>> findAllWithPageSeek(Categories categories, Pageable pageable) {
+        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        Example<Categories> example = Example.of(categories, matcher);
+        Page<Categories> responses = repository.findAll(example, pageable);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(responses);
     }
 
     public void recordDataToDb() throws IOException {

@@ -1,6 +1,7 @@
 package br.com.myanalista.controllers;
 
 import br.com.myanalista.models.entities.Categories;
+import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.response.CategoryOnlyResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -68,10 +69,10 @@ public class CategoryController {
         }
     }
 
-    @GetMapping("/seek/{name}")
-    public ResponseEntity<Page<CategoryOnlyResponse>> findByName(@PathVariable(value = "name") String name, Pageable page) {
+    @GetMapping("/search")
+    public ResponseEntity<Page<Categories>> findAllWithSearch(@RequestBody Categories categories, Pageable pageable ) {
         try {
-            return service.findAllSeekByName(name, page);
+            return service.findAllWithPageSeek(categories, pageable);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

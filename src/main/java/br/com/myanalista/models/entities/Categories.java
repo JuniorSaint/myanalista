@@ -32,7 +32,12 @@ public class Categories implements Serializable {
     private Long id;
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+
+    @OneToMany(mappedBy="category")
+    private List<Categories> categories;
+
+    @JsonIgnore
+    @ManyToOne
     @JoinColumn(name = "parent_id")
     private Categories category;
 }

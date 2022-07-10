@@ -49,4 +49,15 @@ public class ResourceExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(err);
     }
 
+    @ExceptionHandler(MathOperationException.class)
+    public final ResponseEntity<StandardError> mathOperationException(MathOperationException e, HttpServletRequest request) {
+        StandardError err = new StandardError();
+        err.getTimestamp();
+        err.setStatus(HttpStatus.BAD_REQUEST.value());
+        err.setError("Problem to proceed");
+        err.setMessage(e.getMessage());
+        err.setPath(request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+    }
+
 }

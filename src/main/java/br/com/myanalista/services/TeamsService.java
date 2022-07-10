@@ -132,12 +132,12 @@ public class TeamsService {
                 .body(utils.mapEntityPageIntoDtoPage(response, TeamsSearchResponse.class));
     }
 
-//    public ResponseEntity<Page<TeamsSearchResponse>> findAllWithPageSeek(Teams teams, Pageable pageable) {
-//        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-//        Example<Teams> example = Example.of(teams, matcher);
-//        Page<Teams> responses = repository.findAll(example, pageable);
-//        return ResponseEntity.status(HttpStatus.ACCEPTED).body(responses);
-//    }
+    public ResponseEntity<Page<TeamsSearchResponse>> findAllWithPageSeek(Teams teams, Pageable pageable) {
+        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        Example<Teams> example = Example.of(teams, matcher);
+        Page<Teams> responses = repository.findAll(example, pageable);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(utils.mapEntityPageIntoDtoPage(responses,TeamsSearchResponse.class));
+    }
 
     public void recordDataToDb() throws IOException {
         String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/VENDEDORES.csv";

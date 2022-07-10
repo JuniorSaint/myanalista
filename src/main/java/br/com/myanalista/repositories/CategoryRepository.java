@@ -1,5 +1,7 @@
 package br.com.myanalista.repositories;
 
+import br.com.myanalista.models.entities.Products;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -17,4 +19,7 @@ public interface CategoryRepository extends JpaRepository<Categories, Long> {
     Page<Categories> findAllByName(String name, Pageable pageable);
     @Query(value = "select c from Categories c where c.name = :name")
     Optional<Categories> findByCategoryName(@Param(value = "name") String name);
+
+    Page<Categories> findAll(Example example, Pageable pageable);
+
 }

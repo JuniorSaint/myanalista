@@ -31,7 +31,7 @@ public interface TeamsRepository extends JpaRepository<Teams, Long> {
 
     long deleteByMemberCode(String code);
 
-    Page<Products> findAll(Example example, Pageable pageable);
+    Page<Teams> findAll(Example example, Pageable pageable);
 
 
 }

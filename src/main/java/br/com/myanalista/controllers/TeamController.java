@@ -79,12 +79,12 @@ public class TeamController {
             throw new RuntimeException(e.getMessage());
         }
     }
-//    @GetMapping("/search")
-//    public ResponseEntity<Page<TeamsSearchResponse>> findAllWithSearch(@RequestBody Teams teams, Pageable pageable ) {
-//        try {
-//            return service.findAllWithPageSeek(teams, pageable);
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+    @GetMapping("/search")
+    public ResponseEntity<Page<TeamsSearchResponse>> findAllWithSearch(@RequestBody Teams teams, Pageable pageable ) {
+        try {
+            return service.findAllWithPageSeek(teams, pageable);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

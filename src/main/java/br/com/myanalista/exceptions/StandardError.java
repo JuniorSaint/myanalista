@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Date;
 
 @AllArgsConstructor
 @Getter
@@ -14,7 +15,7 @@ import java.time.Instant;
 public class StandardError implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Instant timestamp;
+    private Date timestamp;
     private Integer status;
     private String error;
     private String message;
