@@ -19,7 +19,6 @@
  @CrossOrigin(origins = "*", maxAge = 60 * 60)
  @RequestMapping("/v1/chargeunique")
  @AllArgsConstructor
- @Tag(name = "Imports", description = "Gives initial load to the database")
  public class UniqueChargeController {
 
     @Autowired

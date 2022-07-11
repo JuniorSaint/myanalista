@@ -28,15 +28,13 @@ import lombok.AllArgsConstructor;
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/distributor")
-@Tag(name = "Distributor", description = "Implement the distributor")
 @AllArgsConstructor
-
 public class DistributorController {
     @Autowired
     private DistributorService service;
 
     @GetMapping("/{id}")
-    public ResponseEntity<DistributorResponse> findAllWithListCustomer(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<DistributorResponse> findById(@PathVariable(value = "id") Long id) {
         try {
             return service.findById(id);
         } catch (Exception e) {
@@ -71,17 +69,17 @@ public class DistributorController {
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<DistributorResponse> updateCustomer(@PathVariable(value = "id") Long id,
-                                              @RequestBody DistributorRequestPut request) {
+    @PutMapping
+    public ResponseEntity<DistributorResponse> updateCustomer(@RequestBody DistributorRequestPut request) {
         try {
             return service.update(request);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
     @GetMapping("/search")
-    public ResponseEntity<Page<Distributor>> findAllWithSearch(@RequestBody Distributor distributor, Pageable pageable ) {
+    public ResponseEntity<Page<Distributor>> findAllWithSearch(@RequestBody Distributor distributor, Pageable pageable) {
         try {
             return service.findAllWithPageSeek(distributor, pageable);
         } catch (Exception e) {

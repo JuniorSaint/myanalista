@@ -33,7 +33,6 @@ public class Teams implements Serializable {
     private Integer memberLink;
     private String sellerOrSupervisor;
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "distributor_id", nullable = true)
     private Distributor distributor;
     @CreationTimestamp
@@ -58,6 +57,7 @@ public class Teams implements Serializable {
     private List<Lending> lendings;
 
     @OneToMany(mappedBy = "seller")
+    @JsonIgnore
     @JsonIgnoreProperties(value = {"seller"})
     private List<Customer> customers;
 

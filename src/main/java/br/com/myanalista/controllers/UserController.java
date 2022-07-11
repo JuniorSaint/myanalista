@@ -1,16 +1,17 @@
 package br.com.myanalista.controllers;
 
+import br.com.myanalista.models.entities.Categories;
 import br.com.myanalista.models.request.ChangePasswordRequest;
 import br.com.myanalista.models.request.LogInRequest;
 import br.com.myanalista.models.request.UserRequestPost;
 import br.com.myanalista.models.request.UserRequestPut;
 import br.com.myanalista.models.response.UserResponse;
 import br.com.myanalista.services.UserService;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,9 +20,7 @@ import javax.validation.Valid;
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/users")
-@Tag(name = "User", description = "Implement the users")
 @AllArgsConstructor
-
 public class UserController {
     @Autowired
     private UserService service;
@@ -62,9 +61,8 @@ public class UserController {
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<UserResponse> update(@PathVariable(value = "id") Long id,
-                                               @RequestBody UserRequestPut request) {
+    @PutMapping
+    public ResponseEntity<UserResponse> update(@RequestBody UserRequestPut request) {
         try {
             return service.update(request);
         } catch (Exception e) {
@@ -72,20 +70,18 @@ public class UserController {
         }
     }
 
-    @PutMapping("/change-password/{id}")
-    public ResponseEntity<Object> changePassowrd(@PathVariable(value = "id") Long id,
-                                                 @RequestBody ChangePasswordRequest request) {
+    @PutMapping(value = "/change-password", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> changePassowrd(@RequestBody ChangePasswordRequest request) {
         try {
             return service.changePassword(request);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-
-    @GetMapping("/validate-password")
-    public ResponseEntity<Boolean> validatePassword(@RequestBody LogInRequest logInRequest) {
+    @GetMapping("/search/{search}")
+    public ResponseEntity<Page<UserResponse>> findAllWithSearch(@PathVariable(value = "search") String search, Pageable pageable ) {
         try {
-            return service.validatePassword(logInRequest);
+            return service.findAllWithPageSeek(search, pageable);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

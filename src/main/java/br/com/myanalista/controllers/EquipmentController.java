@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/equipment")
 @AllArgsConstructor
-@Tag(name = "Equipment", description = "Implement the equipments")
 public class EquipmentController {
     @Autowired
     private EquipmentService service;

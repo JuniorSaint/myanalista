@@ -4,6 +4,7 @@ import br.com.myanalista.configs.Utils;
 import br.com.myanalista.exceptions.BadRequestException;
 import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.exceptions.NotAuthorizateException;
+import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.entities.User;
 import br.com.myanalista.models.request.ChangePasswordRequest;
 import br.com.myanalista.models.request.LogInRequest;
@@ -116,16 +117,9 @@ public class UserService implements UserDetailsService {
                 .body(convertEntityToUserResponse(response.get()));
     }
 
-    public ResponseEntity<Page<UserResponse>> getUserByTerm(User users, Integer page) {
-        Sort sort = Sort.by("userName").descending();
-        Pageable pageable = PageRequest.of(page, 20, sort);
-        ExampleMatcher matcher = ExampleMatcher.matching()
-                .withStringMatcher(StringMatcher.STARTING)
-                .withIgnoreCase();
-        Example<User> example = Example.of(users, matcher);
-        Page<User> respFromRepository = repository.findAll(example, pageable);
-        return ResponseEntity.status(HttpStatus.ACCEPTED)
-                .body(mapEntityPageIntoDtoPage(respFromRepository, UserResponse.class));
+    public ResponseEntity<Page<UserResponse>> findAllWithPageSeek(String search, Pageable pageable) {
+        Page<User> responses = repository.findByNameOrEmail(search, pageable);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(utils.mapEntityPageIntoDtoPage(responses, UserResponse.class));
     }
 
     public ResponseEntity<Boolean> validatePassword(LogInRequest logInRequest) {
@@ -145,12 +139,6 @@ public class UserService implements UserDetailsService {
         mapper.map(entity, userResponse);
         return userResponse;
     }
-
-    // Generic convertion Page<Entity> to Page<Dto>
-    private <D, T> Page<D> mapEntityPageIntoDtoPage(Page<T> entities, Class<D> dtoClass) {
-        return entities.map(objectEntity -> mapper.map(objectEntity, dtoClass));
-    }
-
     public ResponseEntity<Page<UserResponse>> findAllWithPage(Pageable pageable) {
         Page<User> responses = repository.findAll(pageable);
         return ResponseEntity.status(HttpStatus.ACCEPTED)

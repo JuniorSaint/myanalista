@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/channel")
 @AllArgsConstructor
-@Tag(name = "Channel", description = "Implement the channel")
 public class ChannelController {
     @Autowired
     private ChannelService service;

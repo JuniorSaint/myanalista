@@ -28,7 +28,6 @@ import java.util.List;
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/categories")
 @AllArgsConstructor
-@Tag(name = "Category", description = "Implement the categories")
 public class CategoryController {
 
     @Autowired
@@ -61,9 +60,8 @@ public class CategoryController {
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Categories> update(@PathVariable(value = "id") Long id,
-                                             @RequestBody CategoryRequestPut request) throws Exception {
+    @PutMapping
+    public ResponseEntity<Categories> update(@RequestBody CategoryRequestPut request) throws Exception {
         try {
             return service.update(request);
         } catch (Exception e) {
@@ -71,16 +69,17 @@ public class CategoryController {
         }
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<Page<Categories>> findAllWithSearch(@RequestBody Categories categories, Pageable pageable ) {
+    @GetMapping("/search/{search}")
+    public ResponseEntity<Page<Categories>> findAllWithSearch(@PathVariable(value = "search") String search, Pageable pageable) {
         try {
-            return service.findAllWithPageSeek(categories, pageable);
+            return service.findAllWithPageSeek(search, pageable);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
     @GetMapping("/main-categories")
-    public ResponseEntity<List<CategoryMainResponse>> mainCategories( ) {
+    public ResponseEntity<List<CategoryMainResponse>> mainCategories() {
         try {
             return service.listCategoryMain();
         } catch (Exception e) {

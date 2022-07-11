@@ -29,7 +29,6 @@ import lombok.AllArgsConstructor;
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/contacts")
 @AllArgsConstructor
-@Tag(name = "Contact", description = "Implement the contact")
 public class ContactController {
     @Autowired
     private ContactService service;
@@ -61,22 +60,23 @@ public class ContactController {
         }
     }
 
-    @PutMapping("/{id}")
-    public ContactResponse update(@PathVariable(value = "id") Long id,
-                                  @RequestBody ContactRequestPut request) {
+    @PutMapping
+    public ContactResponse update(@RequestBody ContactRequestPut request) {
         try {
             return service.update(request);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
     @GetMapping
     public Page<ContactSearchResponse> findForSearchWithPageable(Pageable page) {
         Page<ContactSearchResponse> response = service.listOfContactPageable(page);
         return response;
     }
+
     @GetMapping("/search")
-    public ResponseEntity<Page<ContactSearchResponse>> findAllWithSearch(@RequestBody Contacts contacts, Pageable pageable ) {
+    public ResponseEntity<Page<ContactSearchResponse>> findAllWithSearch(@RequestBody Contacts contacts, Pageable pageable) {
         try {
             return service.findAllWithPageSeek(contacts, pageable);
         } catch (Exception e) {

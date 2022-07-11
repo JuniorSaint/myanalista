@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1")
-@Tag(name = "Authentication", description = "Authenticates a user and returns a token")
 public class AuthController {
 
     @Autowired

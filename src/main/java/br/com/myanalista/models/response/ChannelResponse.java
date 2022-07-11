@@ -13,6 +13,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class ChannelResponse {
+  private Long id;
   private String code;
   private String channel;
 }

@@ -12,6 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DistributorSearchResponse {
+  private Long id;
   private String cnpjCpf;
   private String nickName;
   private String customerType;

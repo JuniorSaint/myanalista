@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class SubChannelResponse {
-  
+  private Long id;
   private String code;
   private String subChannel;
   private String subChannelType;

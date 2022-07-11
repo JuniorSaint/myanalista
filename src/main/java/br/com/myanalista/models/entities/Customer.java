@@ -43,18 +43,11 @@ public class Customer implements Serializable {
   private String zipCode;
   private String district;
   private String phoneNumber;
-  @ManyToOne
-  @JsonIgnore
-  @JoinColumn(name = "subChannel_id")
-  private SubChannel subChannel;
   private String week;
   private String sequence;
   private String email;
   private String tablePrice;
   private String groupBusiness;
-  @OneToOne
-  @JoinColumn(name = "seller_id")
-  private Teams seller;
   private String supervisor;
   private String area;
   private String originalPaymentMethod;
@@ -69,20 +62,8 @@ public class Customer implements Serializable {
   private String lastPurchase;
   private String creditLimit;
   private String addition;
-  @ManyToOne
-  @JsonIgnore
-  @JoinColumn(name = "clusterGec_id")
-  private ClusterGec clusterGec;
-  @ManyToOne
-  @JsonIgnore
-  @JoinColumn(name = "seller2_id")
-  private Teams sellerCustomer2;
   private String week2;
   private String turnover2;
-  @ManyToOne
-  @JsonIgnore
-  @JoinColumn(name="distributor_id")
-  private Distributor distributor;
   private String latitude;
   private String longitude;
   private String notAllowCurrentRestChange;
@@ -95,11 +76,27 @@ public class Customer implements Serializable {
   private String phoneNumber4;
   private String promoter;
   private String promoterEq2;
+  private String specie;
+
+  @ManyToOne
+  @JsonIgnore
+  @JoinColumn(name = "clusterGec_id")
+  private ClusterGec clusterGec;
+
+  @ManyToOne
+  @JsonIgnore
+  @JoinColumn(name = "seller2_id")
+  private Teams sellerCustomer2;
+
   @ManyToOne
   @JsonIgnore
   @JoinColumn(name = "channel_id")
   private Channel channel;
-  private String specie;
+
+  @ManyToOne
+  @JsonIgnore
+  @JoinColumn(name="distributor_id")
+  private Distributor distributor;
 
   @Singular
   @OneToMany(mappedBy="customer")
@@ -109,4 +106,13 @@ public class Customer implements Serializable {
   @OneToMany(mappedBy = "customerRegistration")
   @JsonIgnoreProperties(value = {"customerRegistration"})
   private List<Lending> lending;
+
+  @ManyToOne
+  @JsonIgnore
+  @JoinColumn(name = "subChannel_id")
+  private SubChannel subChannel;
+
+  @OneToOne
+  @JoinColumn(name = "seller_id")
+  private Teams seller;
 }

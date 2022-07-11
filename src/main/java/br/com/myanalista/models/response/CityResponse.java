@@ -12,6 +12,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class CityResponse {
+  private Long id;
   private String code;
   private String city;
   private String cityIne;  

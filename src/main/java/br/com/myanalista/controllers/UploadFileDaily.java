@@ -7,7 +7,6 @@ import br.com.myanalista.services.CustomerService;
 import br.com.myanalista.services.EquipmentService;
 import br.com.myanalista.services.LendingService;
 import br.com.myanalista.services.SellOutService;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +23,7 @@ import java.util.Objects;
 @CrossOrigin("*")
 @Slf4j
 @AllArgsConstructor
-@Tag(name = "Imports", description = "Gives daily load to the database")
-public class UploadFileDiary {
+public class UploadFileDaily {
 
     @Autowired
     private PlaceToSaveFile saveFile;

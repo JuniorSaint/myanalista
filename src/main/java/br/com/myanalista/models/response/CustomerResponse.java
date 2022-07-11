@@ -1,14 +1,16 @@
 package br.com.myanalista.models.response;
 
-import br.com.myanalista.models.entities.ClusterGec;
-import br.com.myanalista.models.entities.Channel;
-import br.com.myanalista.models.entities.Teams;
+import br.com.myanalista.models.entities.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
+
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import java.util.List;
 
 @Builder
 @Getter
@@ -16,6 +18,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomerResponse {
+  private Long id;
   private String code;
   private String route;
   private String cnpj;
@@ -29,13 +32,11 @@ public class CustomerResponse {
   private String zipCode;
   private String district;
   private String phoneNumber;
-  private Channel subChannel;
   private String week;
   private String sequence;
   private String email;
   private String tablePrice;
   private String groupBusiness;
-  private Teams seller;
   private String supervisor;
   private String area;
   private String originalPaymentMethod;
@@ -44,17 +45,14 @@ public class CustomerResponse {
   private String regiterDay;
   private String inactivationDay;
   private String status;
-  private ClusterGec clusterGec;
   private String refPet;
   private String ls;
   private String rgb;
   private String lastPurchase;
   private String creditLimit;
   private String addition;
-  private Teams seller2;
   private String week2;
   private String turnover2;
-  private String distributor;
   private String latitude;
   private String longitude;
   private String notAllowCurrentRestChange;
@@ -67,6 +65,13 @@ public class CustomerResponse {
   private String phoneNumber4;
   private String promoter;
   private String promoterEq2;
-  private Channel channel;
   private String specie;
+  private ClusterGec clusterGec;
+  private Teams sellerCustomer2;
+  private Channel channel;
+  private Distributor distributor;
+  private SubChannel subChannel;
+  private Teams seller;
+  private List<SellOut> sellOuts;
+  private List<Lending> lending;
 }

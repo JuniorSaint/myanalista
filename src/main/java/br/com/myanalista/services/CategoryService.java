@@ -92,10 +92,8 @@ public class CategoryService {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(category.get());
     }
 
-    public ResponseEntity<Page<Categories>> findAllWithPageSeek(Categories categories, Pageable pageable) {
-        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-        Example<Categories> example = Example.of(categories, matcher);
-        Page<Categories> responses = repository.findAll(example, pageable);
+    public ResponseEntity<Page<Categories>> findAllWithPageSeek(String search, Pageable pageable) {
+        Page<Categories> responses = repository.findByName(search, pageable);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(responses);
     }
 

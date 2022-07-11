@@ -15,6 +15,5 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @SuperBuilder
 public class CategoryRequestPut extends CategoryRequestPost {
-    @NotEmpty(message = "Id is a mandadory field")
     private Long id;
 }

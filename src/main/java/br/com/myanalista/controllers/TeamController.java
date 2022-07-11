@@ -29,7 +29,6 @@ import lombok.AllArgsConstructor;
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/teams")
-@Tag(name = "Teams", description = "Implement the teams")
 @AllArgsConstructor
 
 public class TeamController {
@@ -63,9 +62,8 @@ public class TeamController {
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<TeamsResponse> updateTeams(@PathVariable(value = "id") Long id,
-                                                     @RequestBody TeamsRequestPut request) {
+    @PutMapping
+    public ResponseEntity<TeamsResponse> updateTeams(@RequestBody TeamsRequestPut request) {
         try {
             return service.update(request);
         } catch (Exception e) {
@@ -77,12 +75,13 @@ public class TeamController {
     public ResponseEntity<Page<TeamsSearchResponse>> findForSearchWithPageable(Pageable page) {
         try {
             return service.listOfTeams(page);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }
+
     @GetMapping("/search")
-    public ResponseEntity<Page<TeamsSearchResponse>> findAllWithSearch(@RequestBody Teams teams, Pageable pageable ) {
+    public ResponseEntity<Page<TeamsSearchResponse>> findAllWithSearch(@RequestBody Teams teams, Pageable pageable) {
         try {
             return service.findAllWithPageSeek(teams, pageable);
         } catch (Exception e) {

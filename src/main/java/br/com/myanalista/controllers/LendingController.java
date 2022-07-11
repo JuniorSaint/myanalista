@@ -18,7 +18,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1/lending")
 @AllArgsConstructor
-@Tag(name = "Lending", description = "Implement the lendings")
 public class LendingController {
     @Autowired
     private LendingService serviceLending;

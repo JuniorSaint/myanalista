@@ -27,7 +27,6 @@ public class Contacts implements Serializable {
     private String contactName;
     private String contactPhone;
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name="distributor_id", nullable=true)
     private Distributor distributor;
 

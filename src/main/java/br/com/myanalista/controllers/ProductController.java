@@ -18,7 +18,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1/products")
 @AllArgsConstructor
-@Tag(name = "Product", description = "Implement the products")
 public class ProductController {
     @Autowired
     private ProductService service;
@@ -42,8 +41,8 @@ public class ProductController {
             return service.save(productRequestPost);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Products> update(@PathVariable(value = "id") Long id, @RequestBody @Valid ProductRequestPost productRequestPut) {
+    @PutMapping
+    public ResponseEntity<Products> update(@RequestBody @Valid ProductRequestPost productRequestPut) {
         try {
             return service.update(productRequestPut);
         } catch (Exception e) {

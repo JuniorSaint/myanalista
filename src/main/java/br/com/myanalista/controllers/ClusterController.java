@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/cluster")
 @AllArgsConstructor
-@Tag(name = "Cluster", description = "Implement the Cluster")
 public class ClusterController {
     @Autowired
     private ClusterGecService service;

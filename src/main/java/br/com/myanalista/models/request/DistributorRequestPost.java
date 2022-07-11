@@ -19,7 +19,6 @@ public class DistributorRequestPost {
   private String cnpjCpf;
   private String companyType;
   private String nickName;
-  @NotEmpty(message = "Company name is a mandatory field.")
   private String companyName;
   private String fantasyName;
   private String address;

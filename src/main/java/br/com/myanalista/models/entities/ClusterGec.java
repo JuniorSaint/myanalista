@@ -1,5 +1,6 @@
 package br.com.myanalista.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -15,23 +16,23 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClusterGec implements Serializable {
-  private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long id;
-  private String clusterGec;
-  private String gecIne;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String clusterGec;
+    private String gecIne;
 
-  @Singular
-  @OneToMany(mappedBy="cluster")
-  private List<SellOut> sellOuts;
+    @Singular
+    @OneToMany(mappedBy = "cluster")
+    private List<SellOut> sellOuts;
 
-  @OneToMany(mappedBy = "clusterGec")
-  @JsonIgnoreProperties(value = {"clusterGec"})
-  private List<Customer> customers;
+    @OneToMany(mappedBy = "clusterGec")
+    @JsonIgnore
+    private List<Customer> customers;
 
-  @OneToMany(mappedBy="cluster")
-  @JsonIgnoreProperties(value = {"cluster"})
-  private List<Lending> lendings;
+    @OneToMany(mappedBy = "cluster")
+    @JsonIgnoreProperties(value = {"cluster"})
+    private List<Lending> lendings;
 }

@@ -61,7 +61,7 @@ public class SecurityConfig {
                         "/v1/teams/**"
                 ).authenticated()
                 .antMatchers("/users").denyAll() // denay standard path, don't remove
-                .antMatchers(HttpMethod.POST ,"/v1/user").hasRole("ADMINISTRATOR") // denay standard path, don't remove
+                .antMatchers("/v1/users/**").permitAll()
                 .and()
                 .cors()
                 .and()

@@ -21,7 +21,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class SellOutResponse {
   private Long id;
-
   private String distributor;
   private LocalDate date;
   private Customer customer;

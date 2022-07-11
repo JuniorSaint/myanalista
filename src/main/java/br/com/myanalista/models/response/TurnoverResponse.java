@@ -14,7 +14,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class TurnoverResponse {
-
   private Long id;
   private LocalDate calendarDate;
   private String turnoverByCalendar;  

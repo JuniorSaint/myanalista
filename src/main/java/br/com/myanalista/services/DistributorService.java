@@ -96,7 +96,7 @@ public class DistributorService {
 
     public void recordDataToDb() throws IOException {
 
-        String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/DISTRIBUIDORAS.csv";
+        String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/imported/DISTRIBUIDORAS.csv";
 
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 

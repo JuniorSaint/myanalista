@@ -33,7 +33,7 @@ public class ClusterGecService {
 
     public void recordDataToDb() throws IOException {
 
-        String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/GEC.csv";
+        String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/imported/GEC.csv";
 
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 

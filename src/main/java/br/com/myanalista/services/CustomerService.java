@@ -38,12 +38,13 @@ public class CustomerService {
     @Autowired
     private Utils utils;
 
-    public Customer findById(Long id) {
-        Optional<Customer> channel = repository.findById(id);
-        if (channel.isEmpty()) {
+    public CustomerResponse findById(Long id) {
+        Optional<Customer> customer = repository.findById(id);
+        if (customer.isEmpty()) {
             throw new EntityNotFoundException("There isn't customer with id: " + id);
         }
-        return channel.get();
+        return mapper.map(customer, CustomerResponse.class);
+
     }
 
     public Page<Customer> findAllWithPage(Pageable pageable) {

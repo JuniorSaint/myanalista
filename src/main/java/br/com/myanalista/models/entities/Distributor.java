@@ -1,10 +1,14 @@
 package br.com.myanalista.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
@@ -42,34 +46,38 @@ public class Distributor implements Serializable {
     private String typeOfContract;
     private Double ContractValue;
     private String formOfPayment;
-    private String cluster;
+
+    @ManyToMany
+    @JoinTable(name = "distributor_cluster", joinColumns = {@JoinColumn(name = "id_distributor")},
+            inverseJoinColumns = {@JoinColumn(name = "id_cluster")})
+    private List<ClusterGec> clusters;
     // End Financial
     @CreationTimestamp
     private LocalDate createdAt;
     @UpdateTimestamp
     private LocalDate updatedAt;
 
-    @OneToMany(mappedBy="distributor")
-    @JsonIgnoreProperties(value = {"distributor"})
+    @OneToMany(mappedBy = "distributor")
+    @JsonIgnore
     private List<Customer> customers;
 
     @OneToMany(mappedBy = "distributor")
     @JsonIgnoreProperties(value = {"distributor"})
     private List<Lending> lendings;
 
-    @OneToMany(mappedBy="distributor")
+    @OneToMany(mappedBy = "distributor")
     @JsonIgnoreProperties(value = {"distributor"})
     private List<Equipment> equipment;
 
-    @OneToMany(mappedBy="distributor")
+    @OneToMany(mappedBy = "distributor")
     @JsonIgnoreProperties(value = {"distributor"})
     private List<SellOut> sellOuts;
 
-    @OneToMany(mappedBy="distributor")
-    @JsonIgnoreProperties(value = {"distributor"}) // Fix problem cyclic reference
+    @OneToMany(mappedBy = "distributor")
+    @JsonIgnore
     private List<Teams> teams;
 
-    @OneToMany(mappedBy="distributor")
+    @OneToMany(mappedBy = "distributor")
     @JsonIgnoreProperties(value = {"distributor"}) // Fix problem cyclic reference
     private List<Contacts> contacts;
 }
