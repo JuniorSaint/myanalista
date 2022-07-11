@@ -4,6 +4,7 @@ import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.request.ProductRequestPost;
 import br.com.myanalista.models.response.ProductResponse;
 import br.com.myanalista.services.ProductService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1/products")
 @AllArgsConstructor
+@Tag(name = "Product", description = "Implement the products")
 public class ProductController {
     @Autowired
     private ProductService service;

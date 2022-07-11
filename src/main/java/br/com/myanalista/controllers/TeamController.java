@@ -5,6 +5,7 @@ import br.com.myanalista.models.entities.Teams;
 import br.com.myanalista.models.response.ContactSearchResponse;
 import br.com.myanalista.models.response.DistributorSearchResponse;
 import br.com.myanalista.models.response.TeamsSearchResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +29,7 @@ import lombok.AllArgsConstructor;
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/teams")
+@Tag(name = "Teams", description = "Implement the teams")
 @AllArgsConstructor
 
 public class TeamController {

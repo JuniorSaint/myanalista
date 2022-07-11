@@ -4,6 +4,7 @@ import br.com.myanalista.models.entities.Contacts;
 import br.com.myanalista.models.entities.Distributor;
 import br.com.myanalista.models.response.ContactSearchResponse;
 import br.com.myanalista.models.response.DistributorSearchResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +29,7 @@ import lombok.AllArgsConstructor;
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/contacts")
 @AllArgsConstructor
+@Tag(name = "Contact", description = "Implement the contact")
 public class ContactController {
     @Autowired
     private ContactService service;

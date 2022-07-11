@@ -3,15 +3,16 @@ package br.com.myanalista.services;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
 import br.com.myanalista.configs.Utils;
 import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.models.entities.*;
-import br.com.myanalista.models.response.CategoryOnlyResponse;
-import org.apache.poi.sl.draw.geom.GuideIf;
+import br.com.myanalista.models.response.CategoryMainResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -24,9 +25,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.myanalista.models.request.CategoryRequestPost;
 import br.com.myanalista.models.request.CategoryRequestPut;
-import br.com.myanalista.models.response.CategoryResponse;
 import br.com.myanalista.repositories.CategoryRepository;
-import org.springframework.web.servlet.function.EntityResponse;
 
 @Service
 public class CategoryService {
@@ -100,6 +99,14 @@ public class CategoryService {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(responses);
     }
 
+    public ResponseEntity<List<CategoryMainResponse>> listCategoryMain() {
+        List<Categories> listCategories = repository.findAll();
+        List<Categories> response = listCategories.stream()
+                .filter(cat -> cat.getCategory() == null)
+                .collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(utils.mapListIntoDtoList(response, CategoryMainResponse.class));
+    }
+
     public void recordDataToDb() throws IOException {
 
         String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/imported/CATEGORIAS.csv";
@@ -126,16 +133,17 @@ public class CategoryService {
         }
     }
 
-    private Categories firstImport(String cat){
+    private Categories firstImport(String cat) {
         Optional<Categories> category = repository.findByCategoryName(cat);
-        if(category.isPresent()){
+        if (category.isPresent()) {
             return category.get();
         }
         return repository.save(Categories.builder().name(cat).build());
     }
-    private Categories secondImport(String cat, String catParent){
+
+    private Categories secondImport(String cat, String catParent) {
         Optional<Categories> category = repository.findByCategoryName(cat);
-        if(category.isPresent()){
+        if (category.isPresent()) {
             return category.get();
         }
         Optional<Categories> categoryParent = repository.findByCategoryName(catParent);

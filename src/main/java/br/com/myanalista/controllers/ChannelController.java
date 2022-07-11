@@ -2,6 +2,7 @@ package br.com.myanalista.controllers;
 
 import br.com.myanalista.models.response.ChannelResponse;
 import br.com.myanalista.services.ChannelService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/channel")
 @AllArgsConstructor
+@Tag(name = "Channel", description = "Implement the channel")
 public class ChannelController {
     @Autowired
     private ChannelService service;

@@ -32,8 +32,7 @@ public class Categories implements Serializable {
     private Long id;
     private String name;
 
-
-    @OneToMany(mappedBy="category")
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.PERSIST, mappedBy = "category")
     private List<Categories> categories;
 
     @JsonIgnore

@@ -3,6 +3,7 @@
  import java.io.IOException;
 
  import br.com.myanalista.services.*;
+ import io.swagger.v3.oas.annotations.tags.Tag;
  import org.springframework.beans.factory.annotation.Autowired;
  import org.springframework.web.bind.annotation.CrossOrigin;
  import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@
  @CrossOrigin(origins = "*", maxAge = 60 * 60)
  @RequestMapping("/v1/chargeunique")
  @AllArgsConstructor
+ @Tag(name = "Imports", description = "Gives initial load to the database")
  public class UniqueChargeController {
 
     @Autowired
