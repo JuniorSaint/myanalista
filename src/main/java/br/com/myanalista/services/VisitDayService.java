@@ -17,7 +17,7 @@ public class VisitDayService {
 
   public void recordDataToDb() throws IOException {
 
-    String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/DIA_VISITA.csv";
+    String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/imported/DIA_VISITA.csv";
 
     try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 

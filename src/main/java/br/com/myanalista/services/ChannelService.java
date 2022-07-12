@@ -42,7 +42,7 @@ public class ChannelService {
   }
 
   public void recordDataToDb() throws IOException {
-    String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/CANAIS.csv";
+    String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/imported/CANAIS.csv";
 
     try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 

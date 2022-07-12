@@ -18,7 +18,7 @@ public class CalendarService {
 
   public void recordDataToDb() throws IOException {
 
-    String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/CALENDARIO.csv";
+    String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/imported/CALENDARIO.csv";
 
     try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 

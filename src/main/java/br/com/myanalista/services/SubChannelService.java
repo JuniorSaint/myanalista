@@ -23,7 +23,7 @@ public class SubChannelService {
   private ChannelRepository repositoryChannel;
 
   public void recordDataToDb() throws IOException {
-    String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/SUBCANAIS.csv";
+    String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/imported/SUBCANAIS.csv";
 
     try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 
