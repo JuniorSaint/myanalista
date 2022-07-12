@@ -2,6 +2,7 @@ package br.com.myanalista.controllers;
 
 import br.com.myanalista.configs.PlaceToSaveFile;
 import br.com.myanalista.exceptions.BadRequestException;
+import br.com.myanalista.exceptions.ErrorUploadFileException;
 import br.com.myanalista.models.request.UploadFileRequest;
 import br.com.myanalista.services.CustomerService;
 import br.com.myanalista.services.EquipmentService;
@@ -42,7 +43,7 @@ public class UploadFileDaily {
                 String pathFileUpload = String.valueOf(saveFile.saveFile(uploadedFile));
 
                 if (pathFileUpload.equals("Error to upload file")) {
-                    return new ResponseEntity<>("{ \"message\": \"Error to upload file!\"}", HttpStatus.INTERNAL_SERVER_ERROR);
+                    throw new ErrorUploadFileException("There was a problem to upload file try again or call the administrator");
                 }
 
                 String fileNameOriginal = new String(Objects.requireNonNull(uploadedFile.getOriginalFilename()));
@@ -63,7 +64,7 @@ public class UploadFileDaily {
             }
             return new ResponseEntity<>("{ \"message\": \"Upload of file with success! \" }", HttpStatus.OK);
         } catch (BadRequestException e) {
-            return new ResponseEntity<>("{ \"message\": \"Error to upload file!\"}", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new ErrorUploadFileException("There was a problem to upload file try again or call the administrator");
         }
     }
 }

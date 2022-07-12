@@ -47,10 +47,10 @@ public class TeamController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteTeams(@PathVariable(value = "id") Long id) {
+    @DeleteMapping
+    public ResponseEntity<Object> deleteTeams(@RequestParam Optional<Long> id) {
         try {
-            return service.delete(id);
+            return service.delete(id.get());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
