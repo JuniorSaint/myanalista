@@ -90,6 +90,7 @@ public class ProductService {
 
     }
     public ResponseEntity<Page<ProductSearchResponse>> findAllWithPageSeek(String search, Pageable pageable) {
+
         Page<Products> responses = repository.findByActiveOrSkuOrProductDescription(search, pageable);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(mapEntityPageIntoDtoPage(responses, ProductSearchResponse.class));
     }
