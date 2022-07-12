@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/equipment")
@@ -18,15 +20,14 @@ public class EquipmentController {
     @Autowired
     private EquipmentService service;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Equipment> findById(@PathVariable(value = "id") Long id) {
+    @GetMapping
+    public ResponseEntity<Equipment> findById(@RequestParam Optional<Long> id) {
         try {
-            return service.findById(id);
+            return service.findById(id.get());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-
     @GetMapping
     public ResponseEntity<Page<Equipment>> findAllWithPage(Pageable page) {
         try {

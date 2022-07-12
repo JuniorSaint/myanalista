@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/channel")
@@ -16,10 +18,10 @@ import org.springframework.web.bind.annotation.*;
 public class ChannelController {
     @Autowired
     private ChannelService service;
-    @GetMapping("/{id}")
-    public ChannelResponse findById(@PathVariable(value = "id") Long id) {
+    @GetMapping
+    public ChannelResponse findById(@RequestParam Optional<Long> id) {
         try {
-            return service.findById(id);
+            return service.findById(id.get());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

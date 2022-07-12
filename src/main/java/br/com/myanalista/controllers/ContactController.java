@@ -9,21 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import br.com.myanalista.models.request.ContactRequestPost;
 import br.com.myanalista.models.request.ContactRequestPut;
 import br.com.myanalista.models.response.ContactResponse;
 import br.com.myanalista.services.ContactService;
 import lombok.AllArgsConstructor;
+
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
@@ -33,10 +27,10 @@ public class ContactController {
     @Autowired
     private ContactService service;
 
-    @GetMapping("/{id}")
-    public ContactResponse findAllWithList(@PathVariable(value = "id") Long id) {
+    @GetMapping
+    public ContactResponse findAllWithList(@RequestParam Optional<Long> id) {
         try {
-            return service.findById(id);
+            return service.findById(id.get());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -51,10 +45,10 @@ public class ContactController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> delete(@PathVariable(value = "id") Long id) {
+    @DeleteMapping
+    public ResponseEntity<Object> delete(@RequestParam Optional<Long>  id) {
         try {
-            return service.delete(id);
+            return service.delete(id.get());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -68,17 +62,13 @@ public class ContactController {
             throw new RuntimeException(e);
         }
     }
-
-    @GetMapping
-    public Page<ContactSearchResponse> findForSearchWithPageable(Pageable page) {
-        Page<ContactSearchResponse> response = service.listOfContactPageable(page);
-        return response;
-    }
-
     @GetMapping("/search")
-    public ResponseEntity<Page<ContactSearchResponse>> findAllWithSearch(@RequestBody Contacts contacts, Pageable pageable) {
+    public ResponseEntity<Page<ContactSearchResponse>> findAllWithSearch(@RequestParam Optional<String>  search, Pageable pageable) {
         try {
-            return service.findAllWithPageSeek(contacts, pageable);
+            if(search.isEmpty()){
+                return  service.findAllWithPage(pageable);
+            }
+            return service.findAllWithPageSeek(search.get(), pageable);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -8,12 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/lending")
@@ -22,10 +20,10 @@ public class LendingController {
     @Autowired
     private LendingService serviceLending;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Lending> findProductById(@PathVariable(value = "id") Long id) {
+    @GetMapping
+    public ResponseEntity<Lending> findProductById(@RequestParam Optional<Long> id) {
         try {
-            return serviceLending.findById(id);
+            return serviceLending.findById(id.get());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
@@ -52,10 +53,10 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> delete(@PathVariable(value = "id") Long id) {
+    @DeleteMapping
+    public ResponseEntity<Object> delete(@RequestParam Optional<Long>  id) {
         try {
-            return service.delete(id);
+            return service.delete(id.get());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -78,10 +79,14 @@ public class UserController {
             throw new RuntimeException(e);
         }
     }
-    @GetMapping("/search/{search}")
-    public ResponseEntity<Page<UserResponse>> findAllWithSearch(@PathVariable(value = "search") String search, Pageable pageable ) {
+
+    @GetMapping("/search/")
+    public ResponseEntity<Page<UserResponse>> findAllWithSearch(@RequestParam Optional<String> search, Pageable pageable) {
         try {
-            return service.findAllWithPageSeek(search, pageable);
+            if (search.isEmpty()) {
+                return service.findAllWithPage(pageable);
+            }
+            return service.findAllWithPageSeek(search.get(), pageable);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

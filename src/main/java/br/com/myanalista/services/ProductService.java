@@ -89,10 +89,8 @@ public class ProductService {
 
     }
     public ResponseEntity<Page<Products>> findAllWithPageSeek(Products product, Pageable pageable) {
-        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-        Example<Products> example = Example.of(product, matcher);
-        Page<Products> responses = repository.findAll(example, pageable);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(responses);
+        Page<Products> responses = repository.findAll(product, pageable);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(mapEntityPageIntoDtoPage(responses, ProductResponse.class));
     }
 
 

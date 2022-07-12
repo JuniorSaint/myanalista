@@ -81,17 +81,14 @@ public class DistributorService {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(distributor.get());
     }
 
-    public ResponseEntity<Page<DistributorSearchResponse>> listOfDistributorPageable(Pageable pageable) {
+    public ResponseEntity<Page<DistributorSearchResponse>> findAllWithPage(Pageable pageable) {
         Page<Distributor> response = repository.findAll(pageable);
-        Page<DistributorSearchResponse> disResponse = utils.mapEntityPageIntoDtoPage(response, DistributorSearchResponse.class);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(disResponse);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(utils.mapEntityPageIntoDtoPage(response, DistributorSearchResponse.class));
     }
 
-    public ResponseEntity<Page<Distributor>> findAllWithPageSeek(Distributor distributor, Pageable pageable) {
-        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-        Example<Distributor> example = Example.of(distributor, matcher);
-        Page<Distributor> responses = repository.findAll(example, pageable);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(responses);
+    public ResponseEntity<Page<DistributorSearchResponse>> findAllWithPageSeek(String search, Pageable pageable) {
+        Page<Distributor> response = repository.findByNickNameOrCompanyNameOrCnpjCpf(search, pageable);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(utils.mapEntityPageIntoDtoPage(response, DistributorSearchResponse.class));
     }
 
     public void recordDataToDb() throws IOException {

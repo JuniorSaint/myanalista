@@ -25,6 +25,7 @@ import br.com.myanalista.models.request.ContactRequestPut;
 import br.com.myanalista.models.response.ContactResponse;
 import br.com.myanalista.repositories.ContactRepository;
 import br.com.myanalista.repositories.DistributorRepository;
+import org.springframework.web.servlet.function.EntityResponse;
 
 @Service
 public class ContactService {
@@ -86,16 +87,13 @@ public class ContactService {
         mapper.map(contact.get(), contactResp);
         return contactResp;
     }
-    public Page<ContactSearchResponse> listOfContactPageable(Pageable pageable) {
-        Page<Contacts> responseEntity = repository.findAllPageableAndSort(pageable);
-        Page<ContactSearchResponse> response = utils.mapEntityPageIntoDtoPage(responseEntity, ContactSearchResponse.class);
-        return response;
+    public ResponseEntity<Page<ContactSearchResponse>> findAllWithPage(Pageable pageable) {
+        Page<Contacts> responses = repository.findAll(pageable);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(utils.mapEntityPageIntoDtoPage(responses, ContactSearchResponse.class));
     }
 
-    public ResponseEntity<Page<ContactSearchResponse>> findAllWithPageSeek(Contacts contacts, Pageable pageable) {
-        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-        Example<Contacts> example = Example.of(contacts, matcher);
-        Page<Contacts> responses = repository.findAll(example, pageable);
+    public ResponseEntity<Page<ContactSearchResponse>> findAllWithPageSeek(String search, Pageable pageable) {
+        Page<Contacts> responses = repository.findByContactNameOrContactEmailOrContactDepartament(search, pageable);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(utils.mapEntityPageIntoDtoPage(responses, ContactSearchResponse.class));
     }
 }

@@ -7,15 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import br.com.myanalista.models.request.CategoryRequestPost;
 import br.com.myanalista.models.request.CategoryRequestPut;
@@ -23,6 +15,7 @@ import br.com.myanalista.services.CategoryService;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
@@ -33,10 +26,10 @@ public class CategoryController {
     @Autowired
     private CategoryService service;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Categories> findById(@PathVariable(value = "id") Long id) {
+    @GetMapping
+    public ResponseEntity<Categories> findById(@RequestParam Optional<Long> id) {
         try {
-            return service.findById(id);
+            return service.findById(id.get());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -51,10 +44,10 @@ public class CategoryController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> delete(@PathVariable(value = "id") Long id) throws Exception {
+    @DeleteMapping
+    public ResponseEntity<Object> delete(@RequestParam Optional<Long>  id) throws Exception {
         try {
-            return service.delete(id);
+            return service.delete(id.get());
         } catch (Exception ex) {
             throw new Exception(ex.getMessage());
         }
@@ -69,10 +62,13 @@ public class CategoryController {
         }
     }
 
-    @GetMapping("/search/{search}")
-    public ResponseEntity<Page<Categories>> findAllWithSearch(@PathVariable(value = "search") String search, Pageable pageable) {
+    @GetMapping("/search/")
+    public ResponseEntity<Page<Categories>> findAllWithSearch(@RequestParam Optional<String>  search, Pageable pageable) {
         try {
-            return service.findAllWithPageSeek(search, pageable);
+            if(search.isEmpty()){
+                return service.findAllWithPage( pageable);
+            }
+            return service.findAllWithPageSeek(search.get(), pageable);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

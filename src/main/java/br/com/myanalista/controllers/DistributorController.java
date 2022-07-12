@@ -8,15 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import br.com.myanalista.models.request.DistributorRequestPost;
 import br.com.myanalista.models.request.DistributorRequestPut;
@@ -24,6 +16,8 @@ import br.com.myanalista.models.response.DistributorResponse;
 import br.com.myanalista.services.DistributorService;
 
 import lombok.AllArgsConstructor;
+
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
@@ -33,21 +27,12 @@ public class DistributorController {
     @Autowired
     private DistributorService service;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<DistributorResponse> findById(@PathVariable(value = "id") Long id) {
+    @GetMapping
+    public ResponseEntity<DistributorResponse> findById(@RequestParam Optional<Long> id) {
         try {
-            return service.findById(id);
+            return service.findById(id.get());
         } catch (Exception e) {
             throw new RuntimeException(e);
-        }
-    }
-
-    @GetMapping
-    public ResponseEntity<Page<DistributorSearchResponse>> findForSearchWithPageable(Pageable page) {
-        try {
-            return service.listOfDistributorPageable(page);
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -60,10 +45,10 @@ public class DistributorController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteCustomer(@PathVariable(value = "id") Long id) {
+    @DeleteMapping
+    public ResponseEntity<Object> deleteCustomer(@RequestParam Optional<Long> id) {
         try {
-            return service.delete(id);
+            return service.delete(id.get());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -79,11 +64,15 @@ public class DistributorController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<Page<Distributor>> findAllWithSearch(@RequestBody Distributor distributor, Pageable pageable) {
+    public ResponseEntity<Page<DistributorSearchResponse>> findAllWithSearch(@RequestParam Optional<String> search, Pageable pageable) {
         try {
-            return service.findAllWithPageSeek(distributor, pageable);
+            if(search.isEmpty()){
+                return service.findAllWithPage(pageable);
+            }
+            return service.findAllWithPageSeek(search.get(), pageable);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
 }

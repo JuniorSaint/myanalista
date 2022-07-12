@@ -121,6 +121,10 @@ public class UserService implements UserDetailsService {
         Page<User> responses = repository.findByNameOrEmail(search, pageable);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(utils.mapEntityPageIntoDtoPage(responses, UserResponse.class));
     }
+    public ResponseEntity<Page<UserResponse>> findAllWithPage(String search, Pageable pageable) {
+        Page<User> responses = repository.findByNameOrEmail(search, pageable);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(utils.mapEntityPageIntoDtoPage(responses, UserResponse.class));
+    }
 
     public ResponseEntity<Boolean> validatePassword(LogInRequest logInRequest) {
         Optional<User> userResponse = repository.findByEmail(logInRequest.getEmail());

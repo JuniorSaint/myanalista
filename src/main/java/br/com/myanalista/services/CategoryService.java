@@ -96,6 +96,10 @@ public class CategoryService {
         Page<Categories> responses = repository.findByName(search, pageable);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(responses);
     }
+    public ResponseEntity<Page<Categories>> findAllWithPage(Pageable pageable) {
+        Page<Categories> responses = repository.findAll(pageable);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(responses);
+    }
 
     public ResponseEntity<List<CategoryMainResponse>> listCategoryMain() {
         List<Categories> listCategories = repository.findAll();

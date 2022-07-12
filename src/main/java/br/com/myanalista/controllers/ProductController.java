@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/products")
@@ -22,18 +23,18 @@ public class ProductController {
     @Autowired
     private ProductService service;
 
-    @GetMapping("/sku/{sku}")
-    public ResponseEntity<ProductResponse> findProductBySku(@PathVariable(value = "sku") Integer sku) {
+    @GetMapping("/sku")
+    public ResponseEntity<ProductResponse> findProductBySku(@RequestParam Optional<Integer> sku) {
         try {
-            return service.findBySku(sku);
+            return service.findBySku(sku.get());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Products> findProductById(@PathVariable(value = "id") Long id) {
-        return service.findById(id);
+    @GetMapping
+    public ResponseEntity<Products> findProductById(@RequestParam Optional<Long>  id) {
+        return service.findById(id.get());
     }
 
     @PostMapping
@@ -50,27 +51,22 @@ public class ProductController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable(value = "id") Long id) {
+    @DeleteMapping
+    public ResponseEntity<String> delete(@RequestParam Optional<Long>  id) {
         try {
-            return service.delete(id);
+            return service.delete(id.get());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    @GetMapping
-    public ResponseEntity<Page<ProductResponse>> findAllWithList(Pageable page) {
-        try {
-            return service.findAllWithPage(page);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
     @GetMapping("/search")
-    public ResponseEntity<Page<Products>> findAllWithSearch(@RequestBody Products products, Pageable pageable ) {
+    public ResponseEntity<Page<Products>> findAllWithSearch(@RequestParam Optional<String>  search, Pageable pageable ) {
         try {
-            return service.findAllWithPageSeek(products, pageable);
+            if(search.isEmpty()){
+                service.findAllWithPage(pageable);
+            }
+            return service.findAllWithPageSeek(search.get(), pageable);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
