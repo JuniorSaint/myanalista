@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import br.com.myanalista.models.entities.Products;
+import br.com.myanalista.models.entities.User;
 import br.com.myanalista.models.response.TeamsSearchResponse;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -31,7 +32,14 @@ public interface TeamsRepository extends JpaRepository<Teams, Long> {
 
     long deleteByMemberCode(String code);
 
-    Page<Teams> findAll(Example example, Pageable pageable);
+    Page<Teams> findAll(Pageable pageable);
+
+    @Query("select t from Teams t where lower(t.fullName) like lower(concat('%', :search, '%')) " +
+            "or lower(t.memberCode) like lower(concat('%', :search, '%'))" +
+            "or lower(t.memberFunction) like lower(concat('%', :search, '%'))" +
+            "or lower(t.typeOfRegistrationMember) like lower(concat('%', :search, '%'))" +
+            "or lower(t.cpf) like lower(concat('%', :search, '%'))")
+    Page<Teams> findByFullNameOrmemberCode(@Param("search") String search, Pageable pageable);
 
 
 }

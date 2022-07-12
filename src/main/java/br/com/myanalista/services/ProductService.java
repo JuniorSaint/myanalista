@@ -7,6 +7,7 @@ import br.com.myanalista.models.entities.Categories;
 import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.request.ProductRequestPost;
 import br.com.myanalista.models.response.ProductResponse;
+import br.com.myanalista.models.response.ProductSearchResponse;
 import br.com.myanalista.repositories.CategoryRepository;
 import br.com.myanalista.repositories.ProductRepository;
 import org.modelmapper.ModelMapper;
@@ -83,14 +84,14 @@ public class ProductService {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(product.get());
     }
 
-    public ResponseEntity<Page<ProductResponse>> findAllWithPage(Pageable pageable) {
+    public ResponseEntity<Page<ProductSearchResponse>> findAllWithPage(Pageable pageable) {
         Page<Products> responses = repository.findAll(pageable);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(mapEntityPageIntoDtoPage(responses, ProductResponse.class));
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(mapEntityPageIntoDtoPage(responses, ProductSearchResponse.class));
 
     }
-    public ResponseEntity<Page<Products>> findAllWithPageSeek(Products product, Pageable pageable) {
-        Page<Products> responses = repository.findAll(product, pageable);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(mapEntityPageIntoDtoPage(responses, ProductResponse.class));
+    public ResponseEntity<Page<ProductSearchResponse>> findAllWithPageSeek(String search, Pageable pageable) {
+        Page<Products> responses = repository.findByActiveOrSkuOrProductDescription(search, pageable);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(mapEntityPageIntoDtoPage(responses, ProductSearchResponse.class));
     }
 
 

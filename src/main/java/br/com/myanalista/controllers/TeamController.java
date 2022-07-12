@@ -10,21 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import br.com.myanalista.models.request.TeamsRequestPost;
 import br.com.myanalista.models.request.TeamsRequestPut;
 import br.com.myanalista.models.response.TeamsResponse;
 import br.com.myanalista.services.TeamsService;
 import lombok.AllArgsConstructor;
+
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
@@ -71,19 +65,13 @@ public class TeamController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<Page<TeamsSearchResponse>> findForSearchWithPageable(Pageable page) {
-        try {
-            return service.listOfTeams(page);
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }
-
     @GetMapping("/search")
-    public ResponseEntity<Page<TeamsSearchResponse>> findAllWithSearch(@RequestBody Teams teams, Pageable pageable) {
+    public ResponseEntity<Page<TeamsSearchResponse>> findAllTeamsWithSearch(@RequestParam Optional<String> search, Pageable pageable) {
         try {
-            return service.findAllWithPageSeek(teams, pageable);
+            if(search.isEmpty()){
+                return service.listOfTeams(pageable);
+            }
+            return service.findAllWithPageSeek(search.get(), pageable);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -28,8 +28,8 @@ public class EquipmentController {
             throw new RuntimeException(e);
         }
     }
-    @GetMapping
-    public ResponseEntity<Page<Equipment>> findAllWithPage(Pageable page) {
+    @GetMapping("/pageable")
+    public ResponseEntity<Page<Equipment>> findAllEquipmentWithPage(Pageable page) {
         try {
             return service.findAllWithPage(page);
         } catch (Exception e) {

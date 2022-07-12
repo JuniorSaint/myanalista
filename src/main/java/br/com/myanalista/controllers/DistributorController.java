@@ -64,12 +64,12 @@ public class DistributorController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<Page<DistributorSearchResponse>> findAllWithSearch(@RequestParam Optional<String> search, Pageable pageable) {
+    public ResponseEntity<Page<DistributorSearchResponse>> findAllDistributorWithSearch(@RequestParam Optional<String> search, Pageable pageable) {
         try {
             if(search.isEmpty()){
                 return service.findAllWithPage(pageable);
             }
-            return service.findAllWithPageSeek(search.get(), pageable);
+            return service.findAllWithPageSeek(search.get().trim(), pageable);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

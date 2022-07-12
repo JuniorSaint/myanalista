@@ -132,11 +132,10 @@ public class TeamsService {
                 .body(utils.mapEntityPageIntoDtoPage(response, TeamsSearchResponse.class));
     }
 
-    public ResponseEntity<Page<TeamsSearchResponse>> findAllWithPageSeek(Teams teams, Pageable pageable) {
-        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-        Example<Teams> example = Example.of(teams, matcher);
-        Page<Teams> responses = repository.findAll(example, pageable);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(utils.mapEntityPageIntoDtoPage(responses,TeamsSearchResponse.class));
+    public ResponseEntity<Page<TeamsSearchResponse>> findAllWithPageSeek(String search, Pageable pageable) {
+        Page<Teams> response = repository.findByFullNameOrmemberCode(search, pageable);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(utils.mapEntityPageIntoDtoPage(response, TeamsSearchResponse.class));
     }
 
     public void recordDataToDb() throws IOException {

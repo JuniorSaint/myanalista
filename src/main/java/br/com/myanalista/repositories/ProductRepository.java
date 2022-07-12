@@ -22,8 +22,10 @@ public interface ProductRepository extends JpaRepository<Products, Long>{
 
   Page<Products> findAll(Pageable pageable);
 
-  @Query("select p from Products p where lower(p.name) like lower(concat('%', :search, '%')) " +
-          "or lower(p.email) like lower(concat('%', :search, '%'))")
-  Page<Products> findByNameOrEmail(@Param("search") String search, Pageable pageable);
+  @Query("select p from Products p where lower(p.productDescription) like lower(concat('%', :search, '%')) " +
+//          "or lower(p.sku) like lower(concat('%', :search, '%'))" +
+//          "or lower(p.active) like lower(concat('%', :search, '%'))" +
+          "or lower(p.productDescription) like lower(concat('%', :search, '%'))")
+  Page<Products> findByActiveOrSkuOrProductDescription(@Param("search") String search, Pageable pageable);
 
 }

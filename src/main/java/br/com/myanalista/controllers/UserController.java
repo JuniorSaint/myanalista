@@ -27,7 +27,7 @@ public class UserController {
     private UserService service;
 
     @GetMapping
-    public ResponseEntity<Page<UserResponse>> findAllPageable(Pageable page) {
+    public ResponseEntity<Page<UserResponse>> findAllUserPageable(Pageable page) {
         try {
             return service.findAllWithPage(page);
         } catch (Exception e) {
@@ -80,8 +80,8 @@ public class UserController {
         }
     }
 
-    @GetMapping("/search/")
-    public ResponseEntity<Page<UserResponse>> findAllWithSearch(@RequestParam Optional<String> search, Pageable pageable) {
+    @GetMapping("/search")
+    public ResponseEntity<Page<UserResponse>> findAllUserWithSearch(@RequestParam Optional<String> search, Pageable pageable) {
         try {
             if (search.isEmpty()) {
                 return service.findAllWithPage(pageable);

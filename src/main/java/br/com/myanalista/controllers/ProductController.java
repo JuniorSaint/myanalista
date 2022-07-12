@@ -3,6 +3,7 @@ package br.com.myanalista.controllers;
 import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.request.ProductRequestPost;
 import br.com.myanalista.models.response.ProductResponse;
+import br.com.myanalista.models.response.ProductSearchResponse;
 import br.com.myanalista.services.ProductService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -61,12 +62,12 @@ public class ProductController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<Page<Products>> findAllWithSearch(@RequestParam Optional<String>  search, Pageable pageable ) {
+    public ResponseEntity<Page<ProductSearchResponse>> findAllProductWithSearch(@RequestParam Optional<String>  search, Pageable pageable ) {
         try {
             if(search.isEmpty()){
                 service.findAllWithPage(pageable);
             }
-            return service.findAllWithPageSeek(search.get(), pageable);
+            return service.findAllWithPageSeek(search.get().trim(), pageable);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

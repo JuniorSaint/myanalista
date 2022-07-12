@@ -28,7 +28,7 @@ public class ContactController {
     private ContactService service;
 
     @GetMapping
-    public ContactResponse findAllWithList(@RequestParam Optional<Long> id) {
+    public ContactResponse findAllContactWithList(@RequestParam Optional<Long> id) {
         try {
             return service.findById(id.get());
         } catch (Exception e) {
@@ -63,12 +63,12 @@ public class ContactController {
         }
     }
     @GetMapping("/search")
-    public ResponseEntity<Page<ContactSearchResponse>> findAllWithSearch(@RequestParam Optional<String>  search, Pageable pageable) {
+    public ResponseEntity<Page<ContactSearchResponse>> findAllContactWithSearch(@RequestParam Optional<String>  search, Pageable pageable) {
         try {
             if(search.isEmpty()){
                 return  service.findAllWithPage(pageable);
             }
-            return service.findAllWithPageSeek(search.get(), pageable);
+            return service.findAllWithPageSeek(search.get().trim(), pageable);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
