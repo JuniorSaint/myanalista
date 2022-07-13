@@ -15,6 +15,7 @@ import br.com.myanalista.services.CategoryService;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -45,7 +46,7 @@ public class CategoryController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Object> delete(@RequestParam Optional<Long>  id) throws Exception {
+    public ResponseEntity<Object> delete(@RequestParam Optional<Long> id) throws Exception {
         try {
             return service.delete(id.get());
         } catch (Exception ex) {
@@ -63,12 +64,14 @@ public class CategoryController {
     }
 
     @GetMapping("/search/")
-    public ResponseEntity<Page<Categories>> findAllWithSearch(@RequestParam Optional<String>  search, Pageable pageable) {
+    public ResponseEntity<Page<Categories>> findAllWithSearch(@RequestParam Optional<String> search, Pageable pageable) {
         try {
-            if(search.isEmpty()){
-                return service.findAllWithPage( pageable);
+            if (search.isEmpty()) {
+                return service.findAllWithPage(pageable);
             }
             return service.findAllWithPageSeek(search.get().trim(), pageable);
+        } catch (NoSuchElementException e) {
+            return service.findAllWithPage(pageable);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

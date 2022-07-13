@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -54,7 +55,7 @@ public class UserController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Object> delete(@RequestParam Optional<Long>  id) {
+    public ResponseEntity<Object> delete(@RequestParam Optional<Long> id) {
         try {
             return service.delete(id.get());
         } catch (Exception e) {
@@ -87,6 +88,8 @@ public class UserController {
                 return service.findAllWithPage(pageable);
             }
             return service.findAllWithPageSeek(search.get(), pageable);
+        } catch (NoSuchElementException e) {
+            return service.findAllWithPage(pageable);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

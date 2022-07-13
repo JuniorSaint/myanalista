@@ -17,6 +17,7 @@ import br.com.myanalista.services.DistributorService;
 
 import lombok.AllArgsConstructor;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -66,10 +67,12 @@ public class DistributorController {
     @GetMapping("/search")
     public ResponseEntity<Page<DistributorSearchResponse>> findAllDistributorWithSearch(@RequestParam Optional<String> search, Pageable pageable) {
         try {
-            if(search.isEmpty()){
+            if (search.isEmpty()) {
                 return service.findAllWithPage(pageable);
             }
             return service.findAllWithPageSeek(search.get().trim(), pageable);
+        } catch (NoSuchElementException e) {
+            return service.findAllWithPage(pageable);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

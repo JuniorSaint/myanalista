@@ -18,6 +18,7 @@ import br.com.myanalista.models.response.TeamsResponse;
 import br.com.myanalista.services.TeamsService;
 import lombok.AllArgsConstructor;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -72,6 +73,8 @@ public class TeamController {
                 return service.listOfTeams(pageable);
             }
             return service.findAllWithPageSeek(search.get(), pageable);
+        } catch (NoSuchElementException e) {
+            return service.listOfTeams(pageable);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

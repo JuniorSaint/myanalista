@@ -24,11 +24,11 @@ public interface ProductRepository extends JpaRepository<Products, Long> {
     Page<Products> findAll(Pageable pageable);
 
     @EntityGraph(attributePaths = "categories")
-    @Query("select p from Products p where lower(p.productDescription) like lower(concat('%', :search, '%')) " +
+    @Query("select p from Products p  LEFT JOIN p.categories c where lower(p.productDescription) like lower(concat('%', :search, '%')) " +
             "or CAST(p.sku as text) like lower(concat('%', :search, '%'))" +
             "or CAST(p.active as text ) like lower(concat('%', :search , '%'))" +
-//            "or CAST(p.categories.id as text ) like lower(concat('%', :search , '%'))" +
-            "or lower(p.productDescription) like lower(concat('%', :search, '%'))")
+            "or lower(p.productDescription) like lower(concat('%', :search, '%'))" +
+            "or lower(c.name) like lower(concat('%', :search , '%'))")
     Page<Products> findByActiveOrSkuOrProductDescription(@Param("search") String search, Pageable pageable);
 
 }

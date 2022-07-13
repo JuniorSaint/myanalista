@@ -17,6 +17,7 @@ import br.com.myanalista.models.response.ContactResponse;
 import br.com.myanalista.services.ContactService;
 import lombok.AllArgsConstructor;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -46,7 +47,7 @@ public class ContactController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Object> delete(@RequestParam Optional<Long>  id) {
+    public ResponseEntity<Object> delete(@RequestParam Optional<Long> id) {
         try {
             return service.delete(id.get());
         } catch (Exception e) {
@@ -62,13 +63,16 @@ public class ContactController {
             throw new RuntimeException(e);
         }
     }
+
     @GetMapping("/search")
-    public ResponseEntity<Page<ContactSearchResponse>> findAllContactWithSearch(@RequestParam Optional<String>  search, Pageable pageable) {
+    public ResponseEntity<Page<ContactSearchResponse>> findAllContactWithSearch(@RequestParam Optional<String> search, Pageable pageable) {
         try {
-            if(search.isEmpty()){
-                return  service.findAllWithPage(pageable);
+            if (search.isEmpty()) {
+                return service.findAllWithPage(pageable);
             }
             return service.findAllWithPageSeek(search.get().trim(), pageable);
+        } catch (NoSuchElementException e) {
+            return service.findAllWithPage(pageable);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
