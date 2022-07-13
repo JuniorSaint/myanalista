@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import br.com.myanalista.configs.Utils;
 import br.com.myanalista.exceptions.EntityNotFoundException;
+import br.com.myanalista.exceptions.ErrorUploadFileException;
 import br.com.myanalista.models.entities.*;
 import br.com.myanalista.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -175,8 +176,9 @@ public class CustomerService {
                 }
                 line = br.readLine();
             }
-        } catch (IOException e) {
-            throw new IOException("Error to read file " + e.getMessage());
+        } catch (Exception e) {
+            throw new ErrorUploadFileException(
+                    "Could not store file. Please try again!, " + e);
         }
         return "ok";
     }

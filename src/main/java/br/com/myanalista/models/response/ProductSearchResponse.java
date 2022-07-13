@@ -20,5 +20,5 @@ public class ProductSearchResponse {
     private String sku;
     private String productDescription;
     private boolean active;
-//    private List<Categories> categories;
+    private List<CategoryMainResponse> categories;
 }

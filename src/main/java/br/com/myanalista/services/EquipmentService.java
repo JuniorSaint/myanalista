@@ -9,6 +9,7 @@ import java.util.Scanner;
 import br.com.myanalista.configs.Utils;
 import br.com.myanalista.exceptions.BadRequestException;
 import br.com.myanalista.exceptions.EntityNotFoundException;
+import br.com.myanalista.exceptions.ErrorUploadFileException;
 import br.com.myanalista.models.entities.Distributor;
 import br.com.myanalista.repositories.DistributorRepository;
 import org.modelmapper.ModelMapper;
@@ -69,8 +70,9 @@ public class EquipmentService {
                     repository.save(channel);
                 }
             }
-        } catch (BadRequestException e) {
-            throw new BadRequestException("Error to read file ");
+        } catch (Exception e) {
+            throw new ErrorUploadFileException(
+                    "Could not store file. Please try again!, " + e);
         }
     }
 

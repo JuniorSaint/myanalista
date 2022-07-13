@@ -1,31 +1,27 @@
 package br.com.myanalista.services;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import javax.transaction.Transactional;
-
 import br.com.myanalista.configs.Utils;
 import br.com.myanalista.exceptions.EntityNotFoundException;
-import br.com.myanalista.models.entities.*;
+import br.com.myanalista.models.entities.Categories;
+import br.com.myanalista.models.request.CategoryRequestPost;
+import br.com.myanalista.models.request.CategoryRequestPut;
 import br.com.myanalista.models.response.CategoryMainResponse;
+import br.com.myanalista.repositories.CategoryRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import br.com.myanalista.models.request.CategoryRequestPost;
-import br.com.myanalista.models.request.CategoryRequestPut;
-import br.com.myanalista.repositories.CategoryRepository;
+import javax.transaction.Transactional;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryService {

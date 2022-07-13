@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import br.com.myanalista.exceptions.ErrorUploadFileException;
 import br.com.myanalista.models.entities.*;
 import br.com.myanalista.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,25 +14,18 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SellOutService {
-
     @Autowired
     private SellOutRepository repository;
-
     @Autowired
     private CustomerRepository repositoryCustomer;
-
     @Autowired
     private TeamsRepository repositoryTeams;
-
     @Autowired
     private ClusterGecRepository repositoryCluster;
-
     @Autowired
     private SubChannelRepository repositorySub;
-
     @Autowired
     private DistributorRepository repositoryDistributor;
-
     @Autowired
     private ProductRepository repositoryProduct;
 
@@ -248,7 +242,8 @@ public class SellOutService {
                 line = br.readLine();
             }
         } catch (IOException e) {
-            throw new IOException("Error to read file " + e.getMessage());
+            throw new ErrorUploadFileException(
+                    "Could not store file. Please try again!, " + e);
         }
     }
 

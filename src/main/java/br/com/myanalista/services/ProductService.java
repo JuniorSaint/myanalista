@@ -6,10 +6,12 @@ import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.models.entities.Categories;
 import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.request.ProductRequestPost;
+import br.com.myanalista.models.response.CategoryMainResponse;
 import br.com.myanalista.models.response.ProductResponse;
 import br.com.myanalista.models.response.ProductSearchResponse;
 import br.com.myanalista.repositories.CategoryRepository;
 import br.com.myanalista.repositories.ProductRepository;
+import br.com.myanalista.models.response.CategoryMainResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -23,6 +25,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -34,6 +37,7 @@ public class ProductService {
     private ModelMapper mapper;
     @Autowired
     private Utils utils;
+
     @Transactional
     public ResponseEntity<Products> save(ProductRequestPost productRequest) {
         Optional<Products> product = repository.findByCodeSku(productRequest.getSku());
@@ -42,7 +46,7 @@ public class ProductService {
         }
         Products productEntity = new Products();
         mapper.map(productRequest, productEntity);
-        return ResponseEntity.status(HttpStatus.CREATED).body( repository.save(productEntity));
+        return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(productEntity));
     }
 
     @Transactional
@@ -86,13 +90,28 @@ public class ProductService {
 
     public ResponseEntity<Page<ProductSearchResponse>> findAllWithPage(Pageable pageable) {
         Page<Products> responses = repository.findAll(pageable);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(mapEntityPageIntoDtoPage(responses, ProductSearchResponse.class));
-
+        return implementedFilterCategoryinList(responses);
     }
-    public ResponseEntity<Page<ProductSearchResponse>> findAllWithPageSeek(String search, Pageable pageable) {
 
+    public ResponseEntity<Page<ProductSearchResponse>> findAllWithPageSeek(String search, Pageable pageable) {
         Page<Products> responses = repository.findByActiveOrSkuOrProductDescription(search, pageable);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(mapEntityPageIntoDtoPage(responses, ProductSearchResponse.class));
+        return implementedFilterCategoryinList(responses);
+    }
+
+    private ResponseEntity<Page<ProductSearchResponse>> implementedFilterCategoryinList(Page<Products> products) {
+        List<ProductSearchResponse> response = products.stream().map(value ->
+                ProductSearchResponse.builder()
+                        .id(value.getId())
+                        .sku(String.valueOf(value.getSku()))
+                        .productDescription(value.getProductDescription())
+                        .active(value.isActive())
+                        .categories(utils.mapListIntoDtoList(value.getCategories()
+                                .stream()
+                                .filter(cat -> cat.getCategory() == null)
+                                .collect(Collectors.toList()), CategoryMainResponse.class))
+                        .build()).collect(Collectors.toList());
+        Page<ProductSearchResponse> page = new PageImpl<>(response);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(page);
     }
 
 
@@ -123,11 +142,6 @@ public class ProductService {
         }
     }
 
-    // Generic convertion Page<Entity> to Page<Dto>
-    private <D, T> Page<D> mapEntityPageIntoDtoPage(Page<T> entities, Class<D> dtoClass) {
-        return entities.map(objectEntity -> mapper.map(objectEntity, dtoClass));
-    }
-
     private Categories findCategoryById(Long id) {
         if (id == null) {
             return null;
@@ -138,5 +152,4 @@ public class ProductService {
         }
         return category.get();
     }
-
 }

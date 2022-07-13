@@ -62,7 +62,7 @@ public class UploadFileDaily {
                     serviceLending.recordDataToDb(files.getIdDistributor(), pathFileUpload);
                 }
             }
-            return new ResponseEntity<>("{ \"message\": \"Upload of file with success! \" }", HttpStatus.OK);
+            return ResponseEntity.status(HttpStatus.OK).body("Upload of the file was successful");
         } catch (BadRequestException e) {
             throw new ErrorUploadFileException("There was a problem to upload file try again or call the administrator");
         }

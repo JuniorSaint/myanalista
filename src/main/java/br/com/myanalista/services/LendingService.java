@@ -1,5 +1,6 @@
 package br.com.myanalista.services;
 
+import br.com.myanalista.exceptions.ErrorUploadFileException;
 import br.com.myanalista.models.entities.*;
 import br.com.myanalista.repositories.*;
 import io.jsonwebtoken.io.IOException;
@@ -81,8 +82,9 @@ public class LendingService {
                         .build();
                 repository.save(lending);
             });
-        } catch (java.io.IOException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new ErrorUploadFileException(
+                    "Could not store file. Please try again!, " + e);
         }
     }
 

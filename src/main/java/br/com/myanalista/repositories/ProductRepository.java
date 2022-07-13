@@ -2,6 +2,7 @@ package br.com.myanalista.repositories;
 
 import br.com.myanalista.models.entities.User;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Repository;
 
 import br.com.myanalista.models.entities.Products;
@@ -22,9 +23,11 @@ public interface ProductRepository extends JpaRepository<Products, Long> {
 
     Page<Products> findAll(Pageable pageable);
 
+    @EntityGraph(attributePaths = "categories")
     @Query("select p from Products p where lower(p.productDescription) like lower(concat('%', :search, '%')) " +
             "or CAST(p.sku as text) like lower(concat('%', :search, '%'))" +
             "or CAST(p.active as text ) like lower(concat('%', :search , '%'))" +
+//            "or CAST(p.categories.id as text ) like lower(concat('%', :search , '%'))" +
             "or lower(p.productDescription) like lower(concat('%', :search, '%'))")
     Page<Products> findByActiveOrSkuOrProductDescription(@Param("search") String search, Pageable pageable);
 
