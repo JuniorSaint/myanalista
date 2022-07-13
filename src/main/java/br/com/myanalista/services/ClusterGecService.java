@@ -1,19 +1,18 @@
 package br.com.myanalista.services;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-
 import br.com.myanalista.configs.Utils;
+import br.com.myanalista.models.entities.ClusterGec;
 import br.com.myanalista.models.response.ClusterResponse;
+import br.com.myanalista.repositories.ClusterGecRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.myanalista.models.entities.ClusterGec;
-import br.com.myanalista.repositories.ClusterGecRepository;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 @Service
 public class ClusterGecService {

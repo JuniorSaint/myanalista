@@ -11,14 +11,14 @@ import br.com.myanalista.models.response.ProductResponse;
 import br.com.myanalista.models.response.ProductSearchResponse;
 import br.com.myanalista.repositories.CategoryRepository;
 import br.com.myanalista.repositories.ProductRepository;
-import br.com.myanalista.models.response.CategoryMainResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.io.BufferedReader;
 import java.io.FileReader;

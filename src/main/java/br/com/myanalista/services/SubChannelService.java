@@ -1,17 +1,16 @@
 package br.com.myanalista.services;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import br.com.myanalista.models.entities.Channel;
 import br.com.myanalista.models.entities.SubChannel;
 import br.com.myanalista.repositories.ChannelRepository;
 import br.com.myanalista.repositories.SubChannelRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Optional;
 
 @Service
 public class SubChannelService {

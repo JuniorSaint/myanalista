@@ -7,5 +7,4 @@ import br.com.myanalista.models.entities.Calendar;
 
 @Repository
 public interface CalendarRepository extends JpaRepository<Calendar, Long>{
-  
 }

@@ -1,14 +1,14 @@
 package br.com.myanalista.services;
 
+import br.com.myanalista.models.entities.Turnover;
+import br.com.myanalista.repositories.TurnoverRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import br.com.myanalista.models.entities.Turnover;
-import br.com.myanalista.repositories.TurnoverRepository;
 
 @Service
 public class TurnoverService {

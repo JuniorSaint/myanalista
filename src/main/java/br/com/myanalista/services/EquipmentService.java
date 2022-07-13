@@ -1,17 +1,13 @@
 package br.com.myanalista.services;
 
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Optional;
-import java.util.Scanner;
-
 import br.com.myanalista.configs.Utils;
-import br.com.myanalista.exceptions.BadRequestException;
 import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.exceptions.ErrorUploadFileException;
 import br.com.myanalista.models.entities.Distributor;
+import br.com.myanalista.models.entities.Equipment;
 import br.com.myanalista.repositories.DistributorRepository;
+import br.com.myanalista.repositories.EquipmentRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,8 +16,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import br.com.myanalista.models.entities.Equipment;
-import br.com.myanalista.repositories.EquipmentRepository;
+import java.io.File;
+import java.io.IOException;
+import java.util.Optional;
+import java.util.Scanner;
 
 @Service
 public class EquipmentService {

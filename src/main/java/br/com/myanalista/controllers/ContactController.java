@@ -1,24 +1,28 @@
 package br.com.myanalista.controllers;
 
-import br.com.myanalista.models.entities.Contacts;
-import br.com.myanalista.models.entities.Distributor;
-import br.com.myanalista.models.response.ContactSearchResponse;
-import br.com.myanalista.models.response.DistributorSearchResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import br.com.myanalista.models.request.ContactRequestPost;
 import br.com.myanalista.models.request.ContactRequestPut;
 import br.com.myanalista.models.response.ContactResponse;
+import br.com.myanalista.models.response.ContactSearchResponse;
 import br.com.myanalista.services.ContactService;
 import lombok.AllArgsConstructor;
-
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)

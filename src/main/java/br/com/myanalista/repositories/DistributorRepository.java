@@ -1,18 +1,15 @@
 package br.com.myanalista.repositories;
 
-import java.util.List;
-import java.util.Optional;
-
-import br.com.myanalista.models.entities.Products;
-import br.com.myanalista.models.entities.User;
-import org.springframework.data.domain.*;
+import br.com.myanalista.models.entities.Distributor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import br.com.myanalista.models.entities.Distributor;
-import br.com.myanalista.models.response.DistributorSearchResponse;
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface DistributorRepository extends JpaRepository<Distributor, Long> {

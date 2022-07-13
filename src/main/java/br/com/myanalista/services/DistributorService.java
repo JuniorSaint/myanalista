@@ -1,28 +1,26 @@
 package br.com.myanalista.services;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Optional;
-
-import javax.transaction.Transactional;
-
 import br.com.myanalista.configs.Utils;
 import br.com.myanalista.exceptions.EntityNotFoundException;
-import br.com.myanalista.models.entities.Products;
-import br.com.myanalista.models.response.DistributorSearchResponse;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.*;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-
 import br.com.myanalista.models.entities.Distributor;
 import br.com.myanalista.models.request.DistributorRequestPost;
 import br.com.myanalista.models.request.DistributorRequestPut;
 import br.com.myanalista.models.response.DistributorResponse;
+import br.com.myanalista.models.response.DistributorSearchResponse;
 import br.com.myanalista.repositories.DistributorRepository;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Optional;
 
 @Service
 public class DistributorService {

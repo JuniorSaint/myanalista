@@ -4,7 +4,6 @@ import br.com.myanalista.configs.Utils;
 import br.com.myanalista.exceptions.BadRequestException;
 import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.exceptions.NotAuthorizateException;
-import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.entities.User;
 import br.com.myanalista.models.request.ChangePasswordRequest;
 import br.com.myanalista.models.request.LogInRequest;
@@ -12,17 +11,10 @@ import br.com.myanalista.models.request.UserRequestPost;
 import br.com.myanalista.models.request.UserRequestPut;
 import br.com.myanalista.models.response.UserResponse;
 import br.com.myanalista.repositories.UserRepository;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.ExampleMatcher.StringMatcher;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -84,7 +76,6 @@ public class UserService implements UserDetailsService {
         return ResponseEntity.status(HttpStatus.OK)
                 .body("The password was changed with success of the user: " + userUpdate.getEmail());
     }
-
     @Transactional
     public ResponseEntity<UserResponse> update(UserRequestPut userRequestPut) {
         Optional<User> user = repository.findById(userRequestPut.getId());

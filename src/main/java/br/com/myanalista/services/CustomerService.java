@@ -1,22 +1,21 @@
 package br.com.myanalista.services;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Optional;
-
 import br.com.myanalista.configs.Utils;
 import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.exceptions.ErrorUploadFileException;
 import br.com.myanalista.models.entities.*;
+import br.com.myanalista.models.response.CustomerResponse;
 import br.com.myanalista.repositories.*;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.myanalista.models.response.CustomerResponse;
-import org.modelmapper.ModelMapper;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -185,7 +184,6 @@ public class CustomerService {
 
     private boolean ifCustomerExist(String code, Distributor distributor) {
         if (code.isEmpty() || distributor == null) {
-            //
             return true;
         }
         Optional<Customer> response = repository.findCustomerByCodeAndDistributor(code.trim(), distributor);

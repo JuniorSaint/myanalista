@@ -1,16 +1,16 @@
 package br.com.myanalista.services;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Optional;
-
 import br.com.myanalista.exceptions.ErrorUploadFileException;
 import br.com.myanalista.models.entities.*;
 import br.com.myanalista.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 public class SellOutService {

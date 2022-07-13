@@ -1,15 +1,13 @@
 package br.com.myanalista.repositories;
 
-import java.util.Optional;
-
 import br.com.myanalista.models.entities.Distributor;
-import br.com.myanalista.models.response.EquipmentResponse;
+import br.com.myanalista.models.entities.Equipment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import br.com.myanalista.models.entities.Equipment;
+import java.util.Optional;
 
 @Repository
 public interface EquipmentRepository extends JpaRepository<Equipment, Long>{
