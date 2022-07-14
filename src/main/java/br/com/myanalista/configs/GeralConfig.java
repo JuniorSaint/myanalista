@@ -19,4 +19,5 @@ public class GeralConfig {
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     return encoder;
   }
+
 }

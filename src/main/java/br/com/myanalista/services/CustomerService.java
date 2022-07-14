@@ -4,17 +4,22 @@ import br.com.myanalista.configs.Utils;
 import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.exceptions.ErrorUploadFileException;
 import br.com.myanalista.models.entities.*;
+import br.com.myanalista.models.response.CriticizeFieldsResponse;
 import br.com.myanalista.models.response.CustomerResponse;
+import br.com.myanalista.models.response.FieldsCriticizedResponse;
 import br.com.myanalista.repositories.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -44,15 +49,16 @@ public class CustomerService {
             throw new EntityNotFoundException("There isn't customer with id: " + id);
         }
         return mapper.map(customer, CustomerResponse.class);
-
     }
 
     public Page<Customer> findAllWithPage(Pageable pageable) {
         return repository.findAll(pageable);
     }
 
-    public String recordDataToDb(Long id, String path) throws IOException {
+    public ResponseEntity<CriticizeFieldsResponse> recordDataToDb(Long id, String path) throws IOException {
+        CriticizeFieldsResponse sendEmailCriticize = new CriticizeFieldsResponse();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            ArrayList<FieldsCriticizedResponse> criticizeArray = new ArrayList<FieldsCriticizedResponse>();
             String line = br.readLine(); // this first line will be discarted, because is the header.
             line = br.readLine();
             while (line != null) {
@@ -108,6 +114,27 @@ public class CustomerService {
                 int index_50 = line.indexOf(";", index_49 + 1);
                 int index_51 = line.indexOf(";", index_50 + 1);
                 int index_52 = line.indexOf(";", index_51 + 1);
+String cityTest = line.substring(index_8 + 1, index_9).trim();
+String SubChannel = line.substring(index_13 + 1, index_14).trim();
+String Week = line.substring(index_14 + 1, index_15).trim();
+
+                if (line.substring(index_8 + 1, index_9).trim().equals("")) {
+                    criticizeArray.add(FieldsCriticizedResponse.builder().field("Cidade").customerName(line.substring(index_4 + 1, index_5).trim()).build());
+                }
+                if (line.substring(index_13 + 1, index_14).trim() == "") {
+                    criticizeArray.add(FieldsCriticizedResponse.builder().field("Subcanal").customerName(line.substring(index_4 + 1, index_5).trim()).build());
+                }
+                if (line.substring(index_14 + 1, index_15).trim().equals("")) {
+                    criticizeArray.add(FieldsCriticizedResponse.builder().field("Semana").customerName(line.substring(index_4 + 1, index_5).trim()).build());
+                }
+
+                sendEmailCriticize = CriticizeFieldsResponse.builder()
+                        .distributor(repositoryDistributor.findById(id).get().getCompanyName())
+                        .cnpj(repositoryDistributor.findById(id).get().getCnpjCpf())
+                        .criticizes(criticizeArray )
+//                        .criticizes(criticizeArray.stream().map(valeu -> valeu).collect(Collectors.toList()))
+                        .build();
+
 
                 Distributor distri = findDistributor(id);
 
@@ -179,7 +206,7 @@ public class CustomerService {
             throw new ErrorUploadFileException(
                     "Could not store file. Please try again!, " + e);
         }
-        return "ok";
+        return ResponseEntity.status(HttpStatus.OK).body(sendEmailCriticize);
     }
 
     private boolean ifCustomerExist(String code, Distributor distributor) {
@@ -214,9 +241,13 @@ public class CustomerService {
 
 
     private SubChannel findSubChannelBySubChannel(String name) {
-        Optional<SubChannel> response = repositorySubChannel.findSubChannelBysubChannel(name.trim());
-        if (response.isPresent()) {
-            return response.get();
+        try {
+            Optional<SubChannel> response = repositorySubChannel.findSubChannelBysubChannel(name.trim());
+            if (response.isPresent()) {
+                return response.get();
+            }
+        } catch (NullPointerException e) {
+            return null;
         }
         return null;
     }
@@ -225,7 +256,6 @@ public class CustomerService {
         if (codeOrigin.isEmpty() || distributor == null) {
             return null;
         }
-
 
         String[] nameCode = codeOrigin.split("-");
         if (codeOrigin.toString().trim().equals("N/D")) {
