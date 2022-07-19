@@ -1,10 +1,7 @@
 package br.com.myanalista.models.entities;
 
 import br.com.myanalista.models.enums.StatusEmailEnum;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,6 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "senderEmail")
+@Builder
 public class SenderEmail implements Serializable {
     private static final long serialVersionUID = 1L;
 

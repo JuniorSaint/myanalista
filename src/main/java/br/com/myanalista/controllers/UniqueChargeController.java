@@ -24,12 +24,14 @@ import br.com.myanalista.services.SubChannelService;
 import br.com.myanalista.services.TeamsService;
 import br.com.myanalista.services.TurnoverService;
 import br.com.myanalista.services.VisitDayService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 
  @RestController
  @CrossOrigin(origins = "*", maxAge = 60 * 60)
  @RequestMapping("/v1/chargeunique")
  @AllArgsConstructor
+ @Tag(name = "Unique charge", description = "Charge only once the files")
  public class UniqueChargeController {
 
     @Autowired

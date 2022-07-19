@@ -32,7 +32,7 @@ public class EmailController {
     public ResponseEntity<SenderEmail> sendingEmail(@RequestBody @Valid EmailRequest request) {
         try {
             SenderEmail senderEmail = new SenderEmail();
-
+            EmailRequest request1 = request;
             return service.sendEmail(mapper.map(request, SenderEmail.class));
         } catch (Exception e) {
             throw new RuntimeException(e);

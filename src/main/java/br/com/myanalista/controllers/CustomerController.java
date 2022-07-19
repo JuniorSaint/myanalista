@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.myanalista.models.entities.Customer;
 import br.com.myanalista.models.response.CustomerResponse;
 import br.com.myanalista.services.CustomerService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/customer")
 @AllArgsConstructor
+@Tag(name = "Customer", description = "Manager customer")
 public class CustomerController {
     @Autowired
     private CustomerService service;

@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -30,7 +31,6 @@ public class CustomerService {
     private SubChannelRepository repositorySubChannel;
     @Autowired
     private TeamsRepository repositoryTeams;
-
     @Autowired
     private ModelMapper mapper;
     @Autowired
@@ -39,6 +39,8 @@ public class CustomerService {
     private DistributorRepository repositoryDistributor;
     @Autowired
     private ClusterGecRepository repositoryCluster;
+    @Autowired
+    private EmailService emailService;
 
     @Autowired
     private Utils utils;
@@ -57,6 +59,7 @@ public class CustomerService {
 
     public ResponseEntity<CriticizeFieldsResponse> recordDataToDb(Long id, String path) throws IOException {
         CriticizeFieldsResponse sendEmailCriticize = new CriticizeFieldsResponse();
+        Distributor distri = findDistributor(id);
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             ArrayList<FieldsCriticizedResponse> criticizeArray = new ArrayList<FieldsCriticizedResponse>();
             String line = br.readLine(); // this first line will be discarted, because is the header.
@@ -114,9 +117,6 @@ public class CustomerService {
                 int index_50 = line.indexOf(";", index_49 + 1);
                 int index_51 = line.indexOf(";", index_50 + 1);
                 int index_52 = line.indexOf(";", index_51 + 1);
-String cityTest = line.substring(index_8 + 1, index_9).trim();
-String SubChannel = line.substring(index_13 + 1, index_14).trim();
-String Week = line.substring(index_14 + 1, index_15).trim();
 
                 if (line.substring(index_8 + 1, index_9).trim().equals("")) {
                     criticizeArray.add(FieldsCriticizedResponse.builder().field("Cidade").customerName(line.substring(index_4 + 1, index_5).trim()).build());
@@ -132,11 +132,7 @@ String Week = line.substring(index_14 + 1, index_15).trim();
                         .distributor(repositoryDistributor.findById(id).get().getCompanyName())
                         .cnpj(repositoryDistributor.findById(id).get().getCnpjCpf())
                         .criticizes(criticizeArray )
-//                        .criticizes(criticizeArray.stream().map(valeu -> valeu).collect(Collectors.toList()))
                         .build();
-
-
-                Distributor distri = findDistributor(id);
 
                 Boolean isExist = ifCustomerExist(line.substring(0, index_1).trim(), distri);
                 if (!isExist) {
@@ -206,6 +202,14 @@ String Week = line.substring(index_14 + 1, index_15).trim();
             throw new ErrorUploadFileException(
                     "Could not store file. Please try again!, " + e);
         }
+        SenderEmail senderEmail = SenderEmail.builder()
+                .emailTo("junior.garbage@gmail.com")
+                .emailFrom("contato@idip.com.br")
+                .subject("Relatório de carga do cliente: " + distri.getCompanyName())
+                .text("Abaixo Relação de observações encontradas no importe do dia" + LocalDateTime.now()
+                        + "da distribuidora: " + distri.getNickName() + sendEmailCriticize  )
+                .build();
+        emailService.sendEmail(senderEmail);
         return ResponseEntity.status(HttpStatus.OK).body(sendEmailCriticize);
     }
 

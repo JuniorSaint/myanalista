@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.myanalista.models.entities.Equipment;
 import br.com.myanalista.services.EquipmentService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/equipment")
 @AllArgsConstructor
+@Tag(name = "Equipment", description = "Manager equipment")
 public class EquipmentController {
     @Autowired
     private EquipmentService service;

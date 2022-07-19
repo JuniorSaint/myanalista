@@ -1,31 +1,38 @@
 package br.com.myanalista.controllers;
 
-import br.com.myanalista.configs.PlaceToSaveFile;
+import java.io.IOException;
+import java.util.Objects;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
 import br.com.myanalista.exceptions.BadRequestException;
 import br.com.myanalista.exceptions.ErrorUploadFileException;
 import br.com.myanalista.models.request.UploadFileRequest;
 import br.com.myanalista.models.response.CriticizeFieldsResponse;
+import br.com.myanalista.services.AwsService;
 import br.com.myanalista.services.CustomerService;
 import br.com.myanalista.services.EquipmentService;
 import br.com.myanalista.services.LendingService;
 import br.com.myanalista.services.SellOutService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.util.Objects;
 
 @RestController
 @RequestMapping(value = "/v1/upload", produces = {"application/json"})
 @CrossOrigin("*")
 @AllArgsConstructor
+@Tag(name = "Upload File", description = "Manager updaload file daily")
 public class UploadFileDailyController {
 
     @Autowired
-    private PlaceToSaveFile saveFile;
+    private AwsService saveFile;
     @Autowired
     private CustomerService serviceCustomer;
     @Autowired
@@ -38,9 +45,9 @@ public class UploadFileDailyController {
     public ResponseEntity<CriticizeFieldsResponse> uploadFile(@ModelAttribute UploadFileRequest files) throws IOException, InterruptedException {
         try {
             for (MultipartFile uploadedFile : files.getFile()) {
-                String pathFileUpload = String.valueOf(saveFile.saveFile(uploadedFile));
+                String pathFileUpload = String.valueOf(saveFile.uploadFile(uploadedFile));
 
-                if (pathFileUpload.equals("Error to upload file")) {
+                if (pathFileUpload.equals("Error occurred while the file uploading")) {
                     throw new ErrorUploadFileException("There was a problem to upload file try again or call the administrator");
                 }
 

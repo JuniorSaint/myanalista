@@ -8,11 +8,11 @@ public interface CP {
     public static final Long EXPIRATION = 3600l * 24 * 7;  // this value represent time in seconds
     public static final String ROOT = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/";
 
-    public static final String HOST= "smtp.gmail.com";
-    public static final Integer PORT=587;
-    public static final String USER_NAME = "junior.garbage@gmail.com";
-    public static final String PASSWORD = "******************";
-    public static final Boolean AUTH =true;
-    public static final Boolean ENABLE =true;
+
+    public static final String ACCESS_KEY_ID = "AKIAVHMEDDNN5WO6QQZC";
+    public static final String SECRET_ACCESS_KEY = "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";
+    public static final String BUCKET = "myanalista-dev";
+    public static final String REGION = "us-east-2";
+    public static final Boolean STACK_AUTO = false;
 }
 

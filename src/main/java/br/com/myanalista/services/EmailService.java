@@ -11,10 +11,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import javax.mail.internet.MimeMessage;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -31,11 +32,13 @@ public class EmailService {
 
         senderEmail.setSendDateEmail(LocalDateTime.now());
         try {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom(senderEmail.getEmailFrom());
-            message.setTo(senderEmail.getEmailTo());
-            message.setSubject(senderEmail.getSubject());
-            message.setText(senderEmail.getText());
+            MimeMessage message = emailSender.createMimeMessage();
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(message, true);
+
+            mimeMessageHelper.setFrom(senderEmail.getEmailFrom());
+            mimeMessageHelper.setTo(senderEmail.getEmailTo());
+            mimeMessageHelper.setSubject(senderEmail.getSubject());
+            mimeMessageHelper.setText(senderEmail.getText());
             emailSender.send(message);
 
             senderEmail.setStatusEmail(StatusEmailEnum.SENT);

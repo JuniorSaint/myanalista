@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.myanalista.models.response.ClusterResponse;
 import br.com.myanalista.services.ClusterGecService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/cluster")
 @AllArgsConstructor
+@Tag(name = "Cluster", description = "Manager cluster")
 public class ClusterController {
     @Autowired
     private ClusterGecService service;

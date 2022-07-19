@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.myanalista.models.request.LogInRequest;
 import br.com.myanalista.security.jwt.AuthService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/v1")
+@Tag(name = "Auth", description = "To obtain the jwt")
 public class AuthController {
 
     @Autowired

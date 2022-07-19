@@ -23,11 +23,13 @@ import br.com.myanalista.models.request.ProductRequestPost;
 import br.com.myanalista.models.response.ProductResponse;
 import br.com.myanalista.models.response.ProductSearchResponse;
 import br.com.myanalista.services.ProductService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/v1/products")
 @AllArgsConstructor
+@Tag(name = "Product", description = "Manager products")
 public class ProductController {
     @Autowired
     private ProductService service;

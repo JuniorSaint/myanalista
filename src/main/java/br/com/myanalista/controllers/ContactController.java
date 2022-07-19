@@ -22,12 +22,14 @@ import br.com.myanalista.models.request.ContactRequestPut;
 import br.com.myanalista.models.response.ContactResponse;
 import br.com.myanalista.models.response.ContactSearchResponse;
 import br.com.myanalista.services.ContactService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/contacts")
 @AllArgsConstructor
+@Tag(name = "Contact", description = "Manager contact")
 public class ContactController {
     @Autowired
     private ContactService service;

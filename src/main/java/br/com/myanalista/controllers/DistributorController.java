@@ -22,12 +22,14 @@ import br.com.myanalista.models.request.DistributorRequestPut;
 import br.com.myanalista.models.response.DistributorResponse;
 import br.com.myanalista.models.response.DistributorSearchResponse;
 import br.com.myanalista.services.DistributorService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/distributor")
 @AllArgsConstructor
+@Tag(name = "Distributor", description = "Manager distributor")
 public class DistributorController {
     @Autowired
     private DistributorService service;

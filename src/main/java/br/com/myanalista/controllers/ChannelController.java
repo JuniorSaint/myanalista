@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.myanalista.models.response.ChannelResponse;
 import br.com.myanalista.services.ChannelService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/channel")
 @AllArgsConstructor
+@Tag(name = "Channel", description = "Manager channel")
 public class ChannelController {
     @Autowired
     private ChannelService service;

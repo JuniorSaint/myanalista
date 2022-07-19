@@ -23,13 +23,14 @@ import br.com.myanalista.models.request.TeamsRequestPut;
 import br.com.myanalista.models.response.TeamsResponse;
 import br.com.myanalista.models.response.TeamsSearchResponse;
 import br.com.myanalista.services.TeamsService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
 @RequestMapping("/v1/teams")
 @AllArgsConstructor
-
+@Tag(name = "Teams", description = "Manager teams")
 public class TeamController {
     @Autowired
     private TeamsService service;
