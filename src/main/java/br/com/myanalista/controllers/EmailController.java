@@ -6,7 +6,6 @@ import br.com.myanalista.models.request.EmailRequest;
 import br.com.myanalista.services.EmailService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -23,9 +22,7 @@ import java.util.Optional;
 @RequestMapping("/v1/sending-email")
 @AllArgsConstructor
 public class EmailController {
-    @Autowired
     private ModelMapper mapper;
-    @Autowired
     EmailService service;
 
     @PostMapping

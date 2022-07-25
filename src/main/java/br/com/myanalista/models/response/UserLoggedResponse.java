@@ -1,11 +1,8 @@
 package br.com.myanalista.models.response;
 
 import br.com.myanalista.models.entities.Permission;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.util.List;
 
@@ -14,7 +11,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserLoggedResponse {
+public class UserLoggedResponse extends RepresentationModel<UserLoggedResponse> {
   private String email;
   private String password;
   private List<Permission> permissions;

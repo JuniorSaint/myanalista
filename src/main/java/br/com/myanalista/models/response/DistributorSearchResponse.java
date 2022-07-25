@@ -1,17 +1,14 @@
 package br.com.myanalista.models.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
 
 @Builder
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DistributorSearchResponse {
+public class DistributorSearchResponse extends RepresentationModel<DistributorSearchResponse> {
   private Long id;
   private String cnpjCpf;
   private String nickName;

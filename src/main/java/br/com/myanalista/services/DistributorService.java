@@ -8,8 +8,8 @@ import br.com.myanalista.models.request.DistributorRequestPut;
 import br.com.myanalista.models.response.DistributorResponse;
 import br.com.myanalista.models.response.DistributorSearchResponse;
 import br.com.myanalista.repositories.DistributorRepository;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -23,12 +23,10 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class DistributorService {
-    @Autowired
     private DistributorRepository repository;
-    @Autowired
     private ModelMapper mapper;
-    @Autowired
     private Utils utils;
 
     @Transactional

@@ -8,8 +8,8 @@ import br.com.myanalista.models.response.CriticizeFieldsResponse;
 import br.com.myanalista.models.response.CustomerResponse;
 import br.com.myanalista.models.response.FieldsCriticizedResponse;
 import br.com.myanalista.repositories.*;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -24,25 +24,17 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class CustomerService {
-    @Autowired
     private CustomerRepository repository;
-    @Autowired
     private SubChannelRepository repositorySubChannel;
-    @Autowired
     private TeamsRepository repositoryTeams;
-    @Autowired
     private ModelMapper mapper;
-    @Autowired
     private ChannelRepository repositoryChannel;
-    @Autowired
     private DistributorRepository repositoryDistributor;
-    @Autowired
     private ClusterGecRepository repositoryCluster;
-    @Autowired
     private EmailService emailService;
 
-    @Autowired
     private Utils utils;
 
     public CustomerResponse findById(Long id) {

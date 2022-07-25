@@ -4,7 +4,7 @@ import br.com.myanalista.models.entities.Channel;
 import br.com.myanalista.models.entities.SubChannel;
 import br.com.myanalista.repositories.ChannelRepository;
 import br.com.myanalista.repositories.SubChannelRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -13,12 +13,9 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class SubChannelService {
-
-  @Autowired
   private SubChannelRepository repository;
-
-  @Autowired
   private ChannelRepository repositoryChannel;
 
   public void recordDataToDb() throws IOException {

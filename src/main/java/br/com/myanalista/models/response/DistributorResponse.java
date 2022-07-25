@@ -1,23 +1,19 @@
 package br.com.myanalista.models.response;
 
-import java.time.LocalDate;
-import java.util.Set;
-
 import br.com.myanalista.models.entities.Contacts;
 import br.com.myanalista.models.entities.Teams;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
+
+import java.time.LocalDate;
+import java.util.Set;
 
 @AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
-@SuperBuilder
-public class DistributorResponse {
-
+@Builder
+public class DistributorResponse extends RepresentationModel<DistributorResponse> {
     private Long id;
     private String cnpjCpf;
     private String companyType;

@@ -2,7 +2,7 @@ package br.com.myanalista.services;
 
 import br.com.myanalista.models.entities.CityIne;
 import br.com.myanalista.repositories.CityIneRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -10,8 +10,8 @@ import java.io.FileReader;
 import java.io.IOException;
 
 @Service
+@AllArgsConstructor
 public class CityIneService {
-  @Autowired
   private CityIneRepository repository;
 
   public void recordDataToDb() throws IOException {

@@ -7,8 +7,8 @@ import br.com.myanalista.models.request.CategoryRequestPost;
 import br.com.myanalista.models.request.CategoryRequestPut;
 import br.com.myanalista.models.response.CategoryMainResponse;
 import br.com.myanalista.repositories.CategoryRepository;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -24,14 +24,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class CategoryService {
-    @Autowired
     private CategoryRepository repository;
-    @Autowired
     private ModelMapper mapper;
-    @Autowired
     private ProductService serviceProduct;
-    @Autowired
     private Utils utils;
 
     @Transactional

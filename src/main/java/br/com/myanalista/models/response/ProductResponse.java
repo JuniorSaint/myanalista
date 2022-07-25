@@ -1,20 +1,17 @@
 package br.com.myanalista.models.response;
 
-import java.util.List;
-
 import br.com.myanalista.models.entities.Categories;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
+
+import java.util.List;
 
 @AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
-@SuperBuilder
-public class ProductResponse {
+@Builder
+public class ProductResponse extends RepresentationModel<ProductResponse> {
   private Long id;
   private String sku;
   private String productDescription;

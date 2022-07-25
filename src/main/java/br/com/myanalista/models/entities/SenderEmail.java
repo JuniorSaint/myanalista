@@ -1,11 +1,13 @@
 package br.com.myanalista.models.entities;
 
 import br.com.myanalista.models.enums.StatusEmailEnum;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Getter
 @Setter
@@ -14,6 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Table(name = "senderEmail")
 @Builder
+@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class SenderEmail implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -26,6 +29,7 @@ public class SenderEmail implements Serializable {
     private String subject;
     @Lob
     private String text;
-    private LocalDateTime sendDateEmail;
+    private OffsetDateTime sendDateEmail;
+    @Enumerated(EnumType.STRING)
     private StatusEmailEnum statusEmail;
 }

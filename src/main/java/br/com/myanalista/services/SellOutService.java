@@ -3,7 +3,7 @@ package br.com.myanalista.services;
 import br.com.myanalista.exceptions.ErrorUploadFileException;
 import br.com.myanalista.models.entities.*;
 import br.com.myanalista.repositories.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -13,20 +13,14 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class SellOutService {
-    @Autowired
     private SellOutRepository repository;
-    @Autowired
     private CustomerRepository repositoryCustomer;
-    @Autowired
     private TeamsRepository repositoryTeams;
-    @Autowired
     private ClusterGecRepository repositoryCluster;
-    @Autowired
     private SubChannelRepository repositorySub;
-    @Autowired
     private DistributorRepository repositoryDistributor;
-    @Autowired
     private ProductRepository repositoryProduct;
 
     public void recordDataToDb(Long id, String path) throws IOException {

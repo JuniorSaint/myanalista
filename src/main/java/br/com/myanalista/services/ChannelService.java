@@ -1,29 +1,27 @@
 package br.com.myanalista.services;
 
+import br.com.myanalista.configs.Utils;
+import br.com.myanalista.exceptions.EntityNotFoundException;
+import br.com.myanalista.models.entities.Channel;
+import br.com.myanalista.models.response.ChannelResponse;
+import br.com.myanalista.repositories.ChannelRepository;
+import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Optional;
 
-import br.com.myanalista.configs.Utils;
-import br.com.myanalista.exceptions.EntityNotFoundException;
-import br.com.myanalista.models.response.ChannelResponse;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import br.com.myanalista.models.entities.Channel;
-import br.com.myanalista.repositories.ChannelRepository;
-
 @Service
+@AllArgsConstructor
 public class ChannelService {
 
-  @Autowired
   private ChannelRepository repository;
-  @Autowired
   private ModelMapper mapper;
-  @Autowired
   private Utils utils;
 
   public ChannelResponse findById(Long id){

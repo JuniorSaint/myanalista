@@ -4,8 +4,8 @@ import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.models.entities.SenderEmail;
 import br.com.myanalista.models.enums.StatusEmailEnum;
 import br.com.myanalista.repositories.EmailRepository;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -16,21 +16,19 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.mail.internet.MimeMessage;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class EmailService {
-    @Autowired
     private EmailRepository repository;
-    @Autowired
     private JavaMailSender emailSender;
-    @Autowired
     private ModelMapper mapper;
 
     public ResponseEntity<SenderEmail> sendEmail(SenderEmail senderEmail) {
 
-        senderEmail.setSendDateEmail(LocalDateTime.now());
+        senderEmail.setSendDateEmail(OffsetDateTime.now());
         try {
             MimeMessage message = emailSender.createMimeMessage();
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(message, true);

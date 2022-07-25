@@ -1,23 +1,5 @@
 package br.com.myanalista.controllers;
 
-import java.util.NoSuchElementException;
-import java.util.Optional;
-
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.request.ProductRequestPost;
 import br.com.myanalista.models.response.ProductResponse;
@@ -25,15 +7,21 @@ import br.com.myanalista.models.response.ProductSearchResponse;
 import br.com.myanalista.services.ProductService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/products")
 @AllArgsConstructor
 @Tag(name = "Product", description = "Manager products")
 public class ProductController {
-    @Autowired
     private ProductService service;
-
     @GetMapping("/sku")
     public ResponseEntity<ProductResponse> findProductBySku(@RequestParam Optional<Integer> sku) {
         try {

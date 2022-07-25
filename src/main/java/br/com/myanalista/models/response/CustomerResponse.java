@@ -1,15 +1,9 @@
 package br.com.myanalista.models.response;
 
 import br.com.myanalista.models.entities.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import java.util.List;
 
 @Builder
@@ -17,7 +11,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerResponse {
+public class CustomerResponse extends RepresentationModel<CustomerResponse> {
   private Long id;
   private String code;
   private String route;

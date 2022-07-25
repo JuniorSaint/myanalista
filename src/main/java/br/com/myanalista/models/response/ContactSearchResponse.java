@@ -1,17 +1,14 @@
 package br.com.myanalista.models.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
 
 @AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
-@SuperBuilder
-public class ContactSearchResponse {
+@Builder
+public class ContactSearchResponse extends RepresentationModel<ContactSearchResponse> {
   private Long id;
   private String contactDepartament;
   private String contactEmail;

@@ -1,21 +1,18 @@
 package br.com.myanalista.models.response;
 
+import br.com.myanalista.models.entities.Permission;
+import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
+
 import java.time.LocalDate;
 import java.util.List;
-
-import br.com.myanalista.models.entities.Permission;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Builder
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserResponse {
+public class UserResponse extends RepresentationModel<UserResponse> {
   private Long id;
   private String name;
   private String email;

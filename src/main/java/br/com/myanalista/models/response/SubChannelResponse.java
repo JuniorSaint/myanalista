@@ -2,18 +2,15 @@ package br.com.myanalista.models.response;
 
 
 import br.com.myanalista.models.entities.Channel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
 
 @AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
-@SuperBuilder
-public class SubChannelResponse {
+@Builder
+public class SubChannelResponse extends RepresentationModel<SubChannelResponse> {
   private Long id;
   private String code;
   private String subChannel;

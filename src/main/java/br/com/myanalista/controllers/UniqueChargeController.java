@@ -1,31 +1,12 @@
  package br.com.myanalista.controllers;
 
+ import br.com.myanalista.models.response.CustomerResponse;
+ import br.com.myanalista.services.*;
+ import io.swagger.v3.oas.annotations.tags.Tag;
+ import lombok.AllArgsConstructor;
+ import org.springframework.web.bind.annotation.*;
+
  import java.io.IOException;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import br.com.myanalista.models.response.CustomerResponse;
-import br.com.myanalista.services.CalendarService;
-import br.com.myanalista.services.CategoryService;
-import br.com.myanalista.services.ChannelService;
-import br.com.myanalista.services.CityIneService;
-import br.com.myanalista.services.ClusterGecService;
-import br.com.myanalista.services.CustomerService;
-import br.com.myanalista.services.DistributorService;
-import br.com.myanalista.services.NationalHolidayService;
-import br.com.myanalista.services.ProductService;
-import br.com.myanalista.services.SubChannelService;
-import br.com.myanalista.services.TeamsService;
-import br.com.myanalista.services.TurnoverService;
-import br.com.myanalista.services.VisitDayService;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.AllArgsConstructor;
 
  @RestController
  @CrossOrigin(origins = "*", maxAge = 60 * 60)
@@ -33,44 +14,18 @@ import lombok.AllArgsConstructor;
  @AllArgsConstructor
  @Tag(name = "Unique charge", description = "Charge only once the files")
  public class UniqueChargeController {
-
-    @Autowired
     private CityIneService serviceCity;
-
-    @Autowired
     private ClusterGecService serviceCluster;
-
-    @Autowired
     private VisitDayService serviceVisitDay;
-
-    @Autowired
     private CalendarService serviceCalendar;
-
-    @Autowired
     private NationalHolidayService serviceNational;
-
-    @Autowired
     private SubChannelService serviceSub;
-
-    @Autowired
     private CustomerService serviceCustomer;
-
-    @Autowired
     private ChannelService serviceChannel;
-
-    @Autowired
     private TeamsService serviceTeams;
-
-    @Autowired
     private DistributorService serviceDistributor;
-
-    @Autowired
     private ProductService serviceProduct;
-
-    @Autowired
     private TurnoverService serviceTurnover;
-
-    @Autowired
     private CategoryService serviceCategory;
 
     @PostMapping("/cityine")

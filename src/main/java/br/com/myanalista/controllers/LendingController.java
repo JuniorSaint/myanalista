@@ -1,8 +1,9 @@
 package br.com.myanalista.controllers;
 
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import br.com.myanalista.models.entities.Lending;
+import br.com.myanalista.services.LendingService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -11,19 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.myanalista.models.entities.Lending;
-import br.com.myanalista.services.LendingService;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.AllArgsConstructor;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/lending")
 @AllArgsConstructor
 @Tag(name = "Lending", description = "Manager lending")
 public class LendingController {
-    @Autowired
     private LendingService serviceLending;
-
     @GetMapping
     public ResponseEntity<Lending> findProductById(@RequestParam Optional<Long> id) {
         try {

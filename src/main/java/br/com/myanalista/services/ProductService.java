@@ -11,14 +11,15 @@ import br.com.myanalista.models.response.ProductResponse;
 import br.com.myanalista.models.response.ProductSearchResponse;
 import br.com.myanalista.repositories.CategoryRepository;
 import br.com.myanalista.repositories.ProductRepository;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -28,14 +29,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class ProductService {
-    @Autowired
     private ProductRepository repository;
-    @Autowired
     private CategoryRepository repositoryCategory;
-    @Autowired
     private ModelMapper mapper;
-    @Autowired
     private Utils utils;
 
     @Transactional

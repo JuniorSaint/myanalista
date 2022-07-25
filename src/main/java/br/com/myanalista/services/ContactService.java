@@ -1,41 +1,32 @@
 package br.com.myanalista.services;
 
-import java.util.Optional;
-
-import javax.transaction.Transactional;
-
 import br.com.myanalista.configs.Utils;
 import br.com.myanalista.exceptions.EntityNotFoundException;
-import br.com.myanalista.models.entities.Products;
+import br.com.myanalista.models.entities.Contacts;
+import br.com.myanalista.models.entities.Distributor;
+import br.com.myanalista.models.request.ContactRequestPost;
+import br.com.myanalista.models.request.ContactRequestPut;
+import br.com.myanalista.models.response.ContactResponse;
 import br.com.myanalista.models.response.ContactSearchResponse;
+import br.com.myanalista.repositories.ContactRepository;
+import br.com.myanalista.repositories.DistributorRepository;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import br.com.myanalista.models.entities.Contacts;
-import br.com.myanalista.models.entities.Distributor;
-import br.com.myanalista.models.request.ContactRequestPost;
-import br.com.myanalista.models.request.ContactRequestPut;
-import br.com.myanalista.models.response.ContactResponse;
-import br.com.myanalista.repositories.ContactRepository;
-import br.com.myanalista.repositories.DistributorRepository;
-import org.springframework.web.servlet.function.EntityResponse;
+import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class ContactService {
-    @Autowired
     private ContactRepository repository;
-    @Autowired
     private ModelMapper mapper;
-    @Autowired
     private Utils utils;
-    @Autowired
     DistributorRepository repositoryDistributor;
 
     @Transactional

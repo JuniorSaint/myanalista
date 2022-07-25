@@ -1,17 +1,14 @@
 package br.com.myanalista.models.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
 
 @Builder
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class VisitDayResponse {
+public class VisitDayResponse extends RepresentationModel<VisitDayResponse> {
   private Long id;
   private String daysOfWeek;
   private String firstDay;

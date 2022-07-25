@@ -8,8 +8,8 @@ import br.com.myanalista.models.entities.Distributor;
 import br.com.myanalista.models.entities.Equipment;
 import br.com.myanalista.repositories.DistributorRepository;
 import br.com.myanalista.repositories.EquipmentRepository;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -22,14 +22,11 @@ import java.util.Optional;
 import java.util.Scanner;
 
 @Service
+@AllArgsConstructor
 public class EquipmentService {
-    @Autowired
     private EquipmentRepository repository;
-    @Autowired
     private Utils utils;
-    @Autowired
     private DistributorRepository repositoryDistributor;
-    @Autowired
     private ModelMapper mapper;
 
     public ResponseEntity<Page<Equipment>> findAllWithPage(Pageable pageable) {

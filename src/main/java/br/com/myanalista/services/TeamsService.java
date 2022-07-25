@@ -10,13 +10,14 @@ import br.com.myanalista.models.response.TeamsResponse;
 import br.com.myanalista.models.response.TeamsSearchResponse;
 import br.com.myanalista.repositories.DistributorRepository;
 import br.com.myanalista.repositories.TeamsRepository;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -24,16 +25,12 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class TeamsService {
-    @Autowired
     private TeamsRepository repository;
-    @Autowired
     private ModelMapper mapper;
-    @Autowired
     private DistributorRepository repositoryDistributor;
-    @Autowired
     private Utils utils;
-
 
     @Transactional
     public ResponseEntity<TeamsResponse> save(TeamsRequestPost teamsRequest) {

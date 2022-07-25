@@ -1,20 +1,18 @@
 package br.com.myanalista.services;
 
+import br.com.myanalista.models.entities.VisitDay;
+import br.com.myanalista.repositories.VisitDayRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import br.com.myanalista.models.entities.VisitDay;
-import br.com.myanalista.repositories.VisitDayRepository;
-
 @Service
+@AllArgsConstructor
 public class VisitDayService {
-  @Autowired
   private VisitDayRepository repository;
-
   public void recordDataToDb() throws IOException {
 
     String path = "/Volumes/Arquivo/SpringBoot/myanalista/src/main/java/br/com/myanalista/files/imported/DIA_VISITA.csv";

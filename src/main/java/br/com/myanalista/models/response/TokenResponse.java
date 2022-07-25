@@ -1,6 +1,7 @@
 package br.com.myanalista.models.response;
 
 import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.util.Date;
 
@@ -9,11 +10,10 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TokenResponse {
+public class TokenResponse extends RepresentationModel<TokenResponse> {
   private String username;
   private Boolean authenticated;
   private Date created;
   private Date expiration;
   private String accessToken;
-//  private String refreshToken;
 }

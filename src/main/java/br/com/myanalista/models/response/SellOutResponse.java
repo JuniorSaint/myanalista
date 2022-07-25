@@ -1,25 +1,17 @@
 package br.com.myanalista.models.response;
 
+import br.com.myanalista.models.entities.*;
+import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
+
 import java.time.LocalDate;
-
-import br.com.myanalista.models.entities.ClusterGec;
-import br.com.myanalista.models.entities.Customer;
-import br.com.myanalista.models.entities.Products;
-import br.com.myanalista.models.entities.SubChannel;
-import br.com.myanalista.models.entities.Teams;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 
 @AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
-@SuperBuilder
-public class SellOutResponse {
+@Builder
+public class SellOutResponse extends RepresentationModel<SellOutResponse> {
   private Long id;
   private String distributor;
   private LocalDate date;

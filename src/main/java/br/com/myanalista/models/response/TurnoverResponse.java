@@ -1,19 +1,16 @@
 package br.com.myanalista.models.response;
 
-import java.time.LocalDate;
+import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.SuperBuilder;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
-@SuperBuilder
-public class TurnoverResponse {
+@Builder
+public class TurnoverResponse extends RepresentationModel<TurnoverResponse> {
   private Long id;
   private LocalDate calendarDate;
   private String turnoverByCalendar;  

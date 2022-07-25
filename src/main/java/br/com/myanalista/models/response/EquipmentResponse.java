@@ -1,22 +1,15 @@
 package br.com.myanalista.models.response;
 
 import br.com.myanalista.models.entities.Distributor;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.SuperBuilder;
-
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
 
 @AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
-@SuperBuilder
-public class EquipmentResponse {
+@Builder
+public class EquipmentResponse extends RepresentationModel<EquipmentResponse> {
     private Long id;
     private String patrimony;
     private String code;

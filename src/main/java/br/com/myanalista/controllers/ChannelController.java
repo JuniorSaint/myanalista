@@ -1,20 +1,14 @@
 package br.com.myanalista.controllers;
 
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import br.com.myanalista.models.response.ChannelResponse;
 import br.com.myanalista.services.ChannelService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 60 * 60)
@@ -22,7 +16,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Tag(name = "Channel", description = "Manager channel")
 public class ChannelController {
-    @Autowired
     private ChannelService service;
     @GetMapping
     public ChannelResponse findById(@RequestParam Optional<Long> id) {

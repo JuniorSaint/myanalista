@@ -4,6 +4,7 @@ import br.com.myanalista.exceptions.ErrorUploadFileException;
 import br.com.myanalista.models.entities.*;
 import br.com.myanalista.repositories.*;
 import io.jsonwebtoken.io.IOException;
+import lombok.AllArgsConstructor;
 import lombok.Cleanup;
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.poi.ss.usermodel.Cell;
@@ -11,12 +12,12 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.time.LocalDateTime;
@@ -25,20 +26,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class LendingService {
-    @Autowired
     private LendingRepository repository;
-    @Autowired
     private CustomerRepository repositoryCustomer;
-    @Autowired
     private SubChannelRepository repositorySub;
-    @Autowired
     private EquipmentRepository repositoryEquipment;
-    @Autowired
     private TeamsRepository repositoryTeams;
-    @Autowired
     private DistributorRepository repositoryDistributor;
-    @Autowired
     private ClusterGecRepository repositoryCluster;
 
     public ResponseEntity<Lending> findById(Long id) {

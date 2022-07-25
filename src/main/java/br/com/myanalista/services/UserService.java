@@ -1,6 +1,7 @@
 package br.com.myanalista.services;
 
 import br.com.myanalista.configs.Utils;
+import br.com.myanalista.controllers.UserController;
 import br.com.myanalista.exceptions.BadRequestException;
 import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.exceptions.NotAuthorizateException;
@@ -30,6 +31,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @Service
 @Transactional
 public class UserService implements UserDetailsService {
@@ -42,6 +46,7 @@ public class UserService implements UserDetailsService {
     @Autowired
     private Utils utils;
     UserResponse userResponse = new UserResponse();
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<User> users = repository.findByEmail(email);
@@ -62,7 +67,6 @@ public class UserService implements UserDetailsService {
         User userEntity = new User();
         mapper.map(userRequest, userEntity);
         User userCreated = repository.save(userEntity);
-        ;
         return ResponseEntity.status(HttpStatus.CREATED).body(convertEntityToUserResponse(userCreated));
     }
 
@@ -76,6 +80,7 @@ public class UserService implements UserDetailsService {
         return ResponseEntity.status(HttpStatus.OK)
                 .body("The password was changed with success of the user: " + userUpdate.getEmail());
     }
+
     @Transactional
     public ResponseEntity<UserResponse> update(UserRequestPut userRequestPut) {
         Optional<User> user = repository.findById(userRequestPut.getId());
@@ -104,14 +109,17 @@ public class UserService implements UserDetailsService {
         if (response.isEmpty()) {
             throw new EntityNotFoundException("There isn't user with this id: " + id);
         }
+       UserResponse responeUser =  convertEntityToUserResponse(response.get())
+                .add(linkTo(methodOn(UserController.class).findById(id)).withSelfRel());
         return ResponseEntity.status(HttpStatus.ACCEPTED)
-                .body(convertEntityToUserResponse(response.get()));
+                .body(responeUser);
     }
 
     public ResponseEntity<Page<UserResponse>> findAllWithPageSeek(String search, Pageable pageable) {
         Page<User> responses = repository.findByNameOrEmail(search, pageable);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(utils.mapEntityPageIntoDtoPage(responses, UserResponse.class));
     }
+
     public ResponseEntity<Page<UserResponse>> findAllWithPage(String search, Pageable pageable) {
         Page<User> responses = repository.findByNameOrEmail(search, pageable);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(utils.mapEntityPageIntoDtoPage(responses, UserResponse.class));
@@ -134,16 +142,18 @@ public class UserService implements UserDetailsService {
         mapper.map(entity, userResponse);
         return userResponse;
     }
+
     public ResponseEntity<Page<UserResponse>> findAllWithPage(Pageable pageable) {
         Page<User> responses = repository.findAll(pageable);
         return ResponseEntity.status(HttpStatus.ACCEPTED)
                 .body(utils.mapEntityPageIntoDtoPage(responses, UserResponse.class));
     }
 
-    private String encodePassword(String password){
+    private String encodePassword(String password) {
         Map<String, PasswordEncoder> encoders = new HashMap<>();
         encoders.put("pbkdf2", new Pbkdf2PasswordEncoder());
         DelegatingPasswordEncoder passwordEncoder = new DelegatingPasswordEncoder("pbkdf2", encoders);
         passwordEncoder.setDefaultPasswordEncoderForMatches(new Pbkdf2PasswordEncoder());
         return passwordEncoder.encode(password);
-    }}
+    }
+}

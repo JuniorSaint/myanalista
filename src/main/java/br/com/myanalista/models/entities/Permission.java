@@ -1,5 +1,7 @@
 package br.com.myanalista.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -13,6 +15,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Table(name = "permission")
+@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Permission implements GrantedAuthority, Serializable {
     private static final long serialVersionUID = 1L;
 

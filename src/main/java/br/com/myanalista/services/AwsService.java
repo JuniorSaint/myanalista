@@ -6,15 +6,15 @@ import br.com.myanalista.exceptions.ErrorUploadFileException;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
 @Service
+@AllArgsConstructor
 public class AwsService {
-    @Autowired
     private AmazonS3Client awsS3Client;
 
     public String uploadFile(MultipartFile file) {

@@ -4,8 +4,8 @@ import br.com.myanalista.configs.Utils;
 import br.com.myanalista.models.entities.ClusterGec;
 import br.com.myanalista.models.response.ClusterResponse;
 import br.com.myanalista.repositories.ClusterGecRepository;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,14 +15,12 @@ import java.io.FileReader;
 import java.io.IOException;
 
 @Service
+@AllArgsConstructor
 public class ClusterGecService {
-    @Autowired
     private ClusterGecRepository repository;
 
-    @Autowired
     private ModelMapper mapper;
 
-    @Autowired
     private Utils utils;
 
     public Page<ClusterResponse> findAllWithPage(Pageable pageable) {

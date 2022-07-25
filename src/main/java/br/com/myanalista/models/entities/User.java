@@ -1,5 +1,7 @@
 package br.com.myanalista.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -20,6 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class User implements UserDetails, Serializable {
     private static final long serialVersionUID = 1L;
     @Id

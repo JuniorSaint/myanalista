@@ -2,7 +2,7 @@ package br.com.myanalista.services;
 
 import br.com.myanalista.models.entities.Calendar;
 import br.com.myanalista.repositories.CalendarRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 @Service
+@AllArgsConstructor
 public class CalendarService {
-  @Autowired
   private CalendarRepository repository;
 
   public void recordDataToDb() throws IOException {

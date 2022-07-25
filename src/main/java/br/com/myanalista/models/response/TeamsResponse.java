@@ -2,18 +2,15 @@ package br.com.myanalista.models.response;
 
 
 import br.com.myanalista.models.entities.Distributor;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
 
 @Builder
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TeamsResponse {
+public class TeamsResponse extends RepresentationModel<TeamsResponse> {
   private Long id;
   private String memberCode;
   private String fullName;
