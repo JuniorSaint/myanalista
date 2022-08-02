@@ -28,6 +28,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -67,7 +68,10 @@ public class UserService implements UserDetailsService {
         User userEntity = new User();
         mapper.map(userRequest, userEntity);
         User userCreated = repository.save(userEntity);
-        return ResponseEntity.status(HttpStatus.CREATED).body(convertEntityToUserResponse(userCreated));
+        UserResponse responeUser =  convertEntityToUserResponse(userCreated)
+                .add(linkTo(methodOn(UserController.class).findAllUsers()).withRel("List of users"));
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(responeUser);
     }
 
     public ResponseEntity<Object> changePassword(ChangePasswordRequest request) {
@@ -91,7 +95,10 @@ public class UserService implements UserDetailsService {
         User userEntity = new User();
         mapper.map(userRequestPut, userEntity);
         User userUpdate = repository.save(userEntity);
-        return ResponseEntity.status(HttpStatus.OK).body(convertEntityToUserResponse(userUpdate));
+        UserResponse responeUser =  convertEntityToUserResponse(userUpdate)
+                .add(linkTo(methodOn(UserController.class).findAllUsers()).withRel("List of users"));
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(responeUser);
     }
 
     @Transactional
@@ -110,7 +117,7 @@ public class UserService implements UserDetailsService {
             throw new EntityNotFoundException("There isn't user with this id: " + id);
         }
        UserResponse responeUser =  convertEntityToUserResponse(response.get())
-                .add(linkTo(methodOn(UserController.class).findById(id)).withSelfRel());
+               .add(linkTo(methodOn(UserController.class).findAllUsers()).withRel("List of users"));
         return ResponseEntity.status(HttpStatus.ACCEPTED)
                 .body(responeUser);
     }
@@ -120,9 +127,11 @@ public class UserService implements UserDetailsService {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(utils.mapEntityPageIntoDtoPage(responses, UserResponse.class));
     }
 
-    public ResponseEntity<Page<UserResponse>> findAllWithPage(String search, Pageable pageable) {
-        Page<User> responses = repository.findByNameOrEmail(search, pageable);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(utils.mapEntityPageIntoDtoPage(responses, UserResponse.class));
+    public ResponseEntity<List<UserResponse>> findAllListed(){
+        List<User> response = repository.findAll();
+        List<UserResponse> resp = utils.mapListIntoDtoList(response, UserResponse.class);
+        resp.stream().forEach(p -> p.add(linkTo(methodOn(UserController.class).findById(p.getId())).withSelfRel()));
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(resp);
     }
 
     public ResponseEntity<Boolean> validatePassword(LogInRequest logInRequest) {

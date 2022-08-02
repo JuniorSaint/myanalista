@@ -9,6 +9,7 @@ import br.com.myanalista.models.response.CustomerResponse;
 import br.com.myanalista.models.response.FieldsCriticizedResponse;
 import br.com.myanalista.repositories.*;
 import lombok.AllArgsConstructor;
+import org.joda.time.LocalDate;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -123,7 +124,7 @@ public class CustomerService {
                 sendEmailCriticize = CriticizeFieldsResponse.builder()
                         .distributor(repositoryDistributor.findById(id).get().getCompanyName())
                         .cnpj(repositoryDistributor.findById(id).get().getCnpjCpf())
-                        .criticizes(criticizeArray )
+                        .criticizes(criticizeArray)
                         .build();
 
                 Boolean isExist = ifCustomerExist(line.substring(0, index_1).trim(), distri);
@@ -194,12 +195,15 @@ public class CustomerService {
             throw new ErrorUploadFileException(
                     "Could not store file. Please try again!, " + e);
         }
+        String pattern = " dd 'de' MMMM 'de' YYYY ";
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
         SenderEmail senderEmail = SenderEmail.builder()
                 .emailTo("junior.garbage@gmail.com")
                 .emailFrom("contato@idip.com.br")
                 .subject("Relatório de carga do cliente: " + distri.getCompanyName())
-                .text("Abaixo Relação de observações encontradas no importe do dia" + LocalDateTime.now()
-                        + "da distribuidora: " + distri.getNickName() + sendEmailCriticize  )
+                .text(sdf.format(new LocalDate()) +
+                        "Abaixo Relação de observações encontradas no importe do dia"
+                        + "da distribuidora: " + distri.getNickName() + sendEmailCriticize)
                 .build();
         emailService.sendEmail(senderEmail);
         return ResponseEntity.status(HttpStatus.OK).body(sendEmailCriticize);

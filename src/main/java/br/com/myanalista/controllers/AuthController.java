@@ -3,6 +3,7 @@ package br.com.myanalista.controllers;
 import br.com.myanalista.models.request.LogInRequest;
 import br.com.myanalista.security.jwt.AuthService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/v1")
 @Tag(name = "Auth", description = "To obtain the jwt")
+@AllArgsConstructor
 public class AuthController {
     AuthService authServices;
 

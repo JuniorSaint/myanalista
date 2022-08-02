@@ -1,6 +1,5 @@
 package br.com.myanalista.controllers;
 
-import br.com.myanalista.models.entities.Products;
 import br.com.myanalista.models.request.ProductRequestPost;
 import br.com.myanalista.models.response.ProductResponse;
 import br.com.myanalista.models.response.ProductSearchResponse;
@@ -13,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -32,16 +32,16 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Products> findProductById(@RequestParam Optional<Long> id) {
+    public ResponseEntity<ProductResponse> findByIdProduct(@RequestParam Long id) {
         try {
-            return service.findById(id.get());
+            return service.findById(id);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     @PostMapping
-    public ResponseEntity<Products> save(@RequestBody @Valid ProductRequestPost productRequestPost) {
+    public ResponseEntity<ProductResponse> save(@RequestBody @Valid ProductRequestPost productRequestPost) {
         try {
             return service.save(productRequestPost);
         } catch (Exception e) {
@@ -50,7 +50,7 @@ public class ProductController {
     }
 
     @PutMapping
-    public ResponseEntity<Products> update(@RequestBody @Valid ProductRequestPost productRequestPut) {
+    public ResponseEntity<ProductResponse> update(@RequestBody @Valid ProductRequestPost productRequestPut) {
         try {
             return service.update(productRequestPut);
         } catch (Exception e) {
@@ -76,6 +76,15 @@ public class ProductController {
             return service.findAllWithPageSeek(search.get().trim(), pageable);
         } catch (NoSuchElementException e) {
           return service.findAllWithPage(pageable);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<ProductResponse>> findAllListed(){
+        try{
+            return service.findAllListed();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

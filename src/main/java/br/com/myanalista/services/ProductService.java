@@ -1,6 +1,7 @@
 package br.com.myanalista.services;
 
 import br.com.myanalista.configs.Utils;
+import br.com.myanalista.controllers.ProductController;
 import br.com.myanalista.exceptions.BadRequestException;
 import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.models.entities.Categories;
@@ -11,8 +12,8 @@ import br.com.myanalista.models.response.ProductResponse;
 import br.com.myanalista.models.response.ProductSearchResponse;
 import br.com.myanalista.repositories.CategoryRepository;
 import br.com.myanalista.repositories.ProductRepository;
-import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -28,34 +29,46 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
+
 @Service
-@AllArgsConstructor
 public class ProductService {
+    @Autowired
     private ProductRepository repository;
+    @Autowired
     private CategoryRepository repositoryCategory;
+    @Autowired
     private ModelMapper mapper;
+    @Autowired
     private Utils utils;
 
+    ProductResponse productResponse = new ProductResponse();
+    Products productEntity = new Products();
+
     @Transactional
-    public ResponseEntity<Products> save(ProductRequestPost productRequest) {
+    public ResponseEntity<ProductResponse> save(ProductRequestPost productRequest) {
         Optional<Products> product = repository.findByCodeSku(productRequest.getSku());
         if (product.isPresent()) {
             throw new BadRequestException("There is product registered with this sku: " + productRequest.getSku());
         }
-        Products productEntity = new Products();
         mapper.map(productRequest, productEntity);
-        return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(productEntity));
+        ProductResponse response = convertEntityToProductResponse(repository.save(productEntity))
+                .add(linkTo(methodOn(ProductController.class).findAllListed()).withRel("List of users"));
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @Transactional
-    public ResponseEntity<Products> update(ProductRequestPost productRequestPost) {
+    public ResponseEntity<ProductResponse> update(ProductRequestPost productRequestPost) {
         Optional<Products> productsResult = repository.findById(productRequestPost.getId());
         if (!productsResult.isPresent()) {
             throw new EntityNotFoundException("Product not found with id: " + productRequestPost.getId());
         }
-        Products products = new Products();
-        mapper.map(productRequestPost, products);
-        return ResponseEntity.status(HttpStatus.OK).body(repository.save(products));
+        mapper.map(productRequestPost, productEntity);
+        ProductResponse response = convertEntityToProductResponse(repository.save(productEntity))
+                .add(linkTo(methodOn(ProductController.class).findAllListed()).withRel("List of users"));
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @Transactional
@@ -73,17 +86,20 @@ public class ProductService {
         if (product.isEmpty()) {
             throw new EntityNotFoundException("It's not possible find product with Sku: " + sku);
         }
-        ProductResponse productResponse = new ProductResponse();
+
         mapper.map(product.get(), productResponse);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(productResponse);
+              productResponse.add(linkTo(methodOn(ProductController.class).findAllListed()).withRel("List of users"));
+        return ResponseEntity.status(HttpStatus.CREATED).body(productResponse);
     }
 
-    public ResponseEntity<Products> findById(Long id) {
+    public ResponseEntity<ProductResponse> findById(Long id) {
         Optional<Products> product = repository.findById(id);
         if (product.isEmpty()) {
             throw new EntityNotFoundException("It's not possible find product with id: " + id);
         }
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(product.get());
+        ProductResponse response = mapper.map(product, ProductResponse.class)
+                .add(linkTo(methodOn(ProductController.class).findAllListed()).withRel("List of products"));
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(productResponse);
     }
 
     public ResponseEntity<Page<ProductSearchResponse>> findAllWithPage(Pageable pageable) {
@@ -94,6 +110,13 @@ public class ProductService {
     public ResponseEntity<Page<ProductSearchResponse>> findAllWithPageSeek(String search, Pageable pageable) {
         Page<Products> responses = repository.findByActiveOrSkuOrProductDescription(search, pageable);
         return implementedFilterCategoryinList(responses);
+    }
+
+    public ResponseEntity<List<ProductResponse>> findAllListed() {
+        List<Products> products = repository.findAll();
+        List<ProductResponse> responseList = utils.mapListIntoDtoList(products, ProductResponse.class);
+        responseList.stream().forEach(p -> p.add(linkTo(methodOn(ProductController.class).findByIdProduct(p.getId())).withSelfRel()));
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseList);
     }
 
     private ResponseEntity<Page<ProductSearchResponse>> implementedFilterCategoryinList(Page<Products> products) {
@@ -123,7 +146,6 @@ public class ProductService {
             while (line != null) {
 
                 int index_1 = line.indexOf(";");
-                int index_2 = line.indexOf(";", index_1 + 1);
 
                 Products channelResp = Products.builder()
                         .sku(Integer.parseInt(line.substring(0, index_1).trim()))
@@ -149,5 +171,10 @@ public class ProductService {
             return null;
         }
         return category.get();
+    }
+
+    private ProductResponse convertEntityToProductResponse(Products entity) {
+        mapper.map(entity, productResponse);
+        return productResponse;
     }
 }

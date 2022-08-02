@@ -3,6 +3,7 @@ package br.com.myanalista.configs;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -21,6 +22,10 @@ public class Utils {
                 .stream()
                 .map(element -> mapper.map(element, targetClass))
                 .collect(Collectors.toList());
+    }
+
+    public <T> Page<T> convertListIntoPage(List<T> source){
+     return new PageImpl<>(source);
     }
 
 }
