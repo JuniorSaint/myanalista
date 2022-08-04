@@ -11,17 +11,19 @@ import java.text.SimpleDateFormat;
 public class EmailStandard {
     @Autowired
     private EmailService service;
-     String pattern = " dd 'de' MMMM 'de' YYYY ";
-     SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+    String pattern = " dd 'de' MMMM 'de' YYYY ";
+    SimpleDateFormat sdf = new SimpleDateFormat(pattern);
 
     public void senderEmail(CriticizeFieldsResponse criticizeFieldsResponse) {
         SenderEmail senderEmail = SenderEmail.builder()
                 .emailTo("junior.garbage@gmail.com")
                 .emailFrom("contato@idip.com.br")
-                .subject("Relatório de carga do cliente: " + criticizeFieldsResponse.getDistributor())
-                .text(sdf.format(new LocalDate())
-                        + "Abaixo Relação de observações encontradas no importe do dia"
-                        + "CNPF da distribuidora: " + criticizeFieldsResponse.getCnpj()
+                .subject("<div> <strong> Relatório de carga do cliente: </strong> " + criticizeFieldsResponse.getDistributor() + ". </div>")
+                .text("<br>" +
+                        "<div>  <strong>" + sdf.format(new LocalDate()) + "</strong> </div>"
+                        + " <br> <br>"
+                        + "<div> Abaixo Relação de observações encontradas no importe do dia. </div>"
+                        + "<div> <stong> CNPJ da distribuidora:  </strong> " + criticizeFieldsResponse.getCnpj() + ". </div>"
                         + criticizeFieldsResponse.getCriticizes())
                 .build();
         service.sendEmail(senderEmail);
