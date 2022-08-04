@@ -21,9 +21,12 @@ public class EmailStandard {
                 .subject("<div> <strong> Relatório de carga do cliente: </strong> " + criticizeFieldsResponse.getDistributor() + ". </div>")
                 .text("<br>" +
                         "<div>  <strong>" + sdf.format(new LocalDate()) + "</strong> </div>"
-                        + " <br> <br>"
+                        + "<br> <br>"
                         + "<div> Abaixo Relação de observações encontradas no importe do dia. </div>"
                         + "<div> <stong> CNPJ da distribuidora:  </strong> " + criticizeFieldsResponse.getCnpj() + ". </div>"
+                        + "<br>"
+                        + "<div> ----------------------------------------------------------------------- </div>"
+                        + "<br>"
                         + criticizeFieldsResponse.getCriticizes())
                 .build();
         service.sendEmail(senderEmail);
