@@ -16,7 +16,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.mail.internet.MimeMessage;
-import java.time.OffsetDateTime;
 import java.util.Optional;
 
 @Service
@@ -27,8 +26,6 @@ public class EmailService {
     private ModelMapper mapper;
 
     public ResponseEntity<SenderEmail> sendEmail(SenderEmail senderEmail) {
-
-        senderEmail.setSendDateEmail(OffsetDateTime.now());
         try {
             MimeMessage message = emailSender.createMimeMessage();
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(message, true);

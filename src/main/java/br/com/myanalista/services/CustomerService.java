@@ -1,5 +1,6 @@
 package br.com.myanalista.services;
 
+import br.com.myanalista.configs.EmailStandard;
 import br.com.myanalista.configs.Utils;
 import br.com.myanalista.exceptions.EntityNotFoundException;
 import br.com.myanalista.exceptions.ErrorUploadFileException;
@@ -9,7 +10,6 @@ import br.com.myanalista.models.response.CustomerResponse;
 import br.com.myanalista.models.response.FieldsCriticizedResponse;
 import br.com.myanalista.repositories.*;
 import lombok.AllArgsConstructor;
-import org.joda.time.LocalDate;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -35,6 +34,7 @@ public class CustomerService {
     private DistributorRepository repositoryDistributor;
     private ClusterGecRepository repositoryCluster;
     private EmailService emailService;
+    private EmailStandard emailStandard;
 
     private Utils utils;
 
@@ -112,6 +112,7 @@ public class CustomerService {
                 int index_52 = line.indexOf(";", index_51 + 1);
 
                 if (line.substring(index_8 + 1, index_9).trim().equals("")) {
+                    
                     criticizeArray.add(FieldsCriticizedResponse.builder().field("Cidade").customerName(line.substring(index_4 + 1, index_5).trim()).build());
                 }
                 if (line.substring(index_13 + 1, index_14).trim() == "") {
@@ -121,7 +122,7 @@ public class CustomerService {
                     criticizeArray.add(FieldsCriticizedResponse.builder().field("Semana").customerName(line.substring(index_4 + 1, index_5).trim()).build());
                 }
 
-                sendEmailCriticize = CriticizeFieldsResponse.builder()
+                 sendEmailCriticize = CriticizeFieldsResponse.builder()
                         .distributor(repositoryDistributor.findById(id).get().getCompanyName())
                         .cnpj(repositoryDistributor.findById(id).get().getCnpjCpf())
                         .criticizes(criticizeArray)
@@ -195,17 +196,8 @@ public class CustomerService {
             throw new ErrorUploadFileException(
                     "Could not store file. Please try again!, " + e);
         }
-        String pattern = " dd 'de' MMMM 'de' YYYY ";
-        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
-        SenderEmail senderEmail = SenderEmail.builder()
-                .emailTo("junior.garbage@gmail.com")
-                .emailFrom("contato@idip.com.br")
-                .subject("Relatório de carga do cliente: " + distri.getCompanyName())
-                .text(sdf.format(new LocalDate()) +
-                        "Abaixo Relação de observações encontradas no importe do dia"
-                        + "da distribuidora: " + distri.getNickName() + sendEmailCriticize)
-                .build();
-        emailService.sendEmail(senderEmail);
+        emailStandard.senderEmail(sendEmailCriticize);
+
         return ResponseEntity.status(HttpStatus.OK).body(sendEmailCriticize);
     }
 
@@ -300,6 +292,4 @@ public class CustomerService {
         }
         return responseChannel.get();
     }
-
-
 }
